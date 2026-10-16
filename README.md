@@ -17,7 +17,7 @@ The dev server defaults to port 5173. `npm run preview -- --port 4173` serves th
 
 ## Cloudflare Pages
 
-Connect this repository in Cloudflare Pages. Framework: Vite (or None). Build command: `npm run build`. Output directory: `dist`. Use Node 22.12 or newer. No Functions, Worker backend, R2, D1, secrets or runtime environment variables are needed. `public/_headers` supplies a production Content Security Policy and other response headers. Use HTTPS.
+Connect this repository in Cloudflare Pages. Framework: Vite (or None). Build command: `npm run build`. Output directory: `dist`. Use Node 22.12 or newer. No Functions, Worker backend, R2, D1, secrets or runtime environment variables are needed. The Vite build generates `_headers` with a Content Security Policy and other response headers. Use HTTPS.
 
 All application dependencies are bundled; no runtime CDN, fonts, or API calls. Photo/model processing consumes visitor device resources, not cloud compute. Static hosting is intended to fit Cloudflare Pages' free plan; verify current quotas and pricing before deployment. Custom domain registration can cost extra. No deployment or Cloudflare account provisioning is performed by this repository.
 
@@ -70,3 +70,7 @@ Seasonal thumbnail canvases are bounded to fixed preview areas so their intrinsi
 Use `npm run build:preview` for a root-hosted `pages.dev` preview in `dist-preview/`; serve it locally with `npm run preview:pages`. This explicit mode forces noindex, disallow-all robots, no production canonical URL and no sitemap even if SITE_URL is present. It does not alter the production subpath build. See [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md) for upload commands, production-branch checks and access protection. An online preview is publicly reachable unless Cloudflare Access protects it.
 
 After building the preview, `npm run check:preview` validates its indexing policy, asset references and CSP hash. A verified upload ZIP is available locally at `artifacts/lithophane-pages-preview.zip`; generated output is excluded from version control.
+
+## Review and proposed next work
+
+See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md) for the evidence-based product review, confirmed gaps and prioritised feature suggestions. These recommendations are proposed work, not a claim that the features are implemented.

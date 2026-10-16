@@ -69,3 +69,9 @@ Detailed illustrations are bundled as a ~745 KB WebP sheet. Catalogue previews u
 Preview validation completed: seven automated tests, production/preview builds, preview indexing/CSP/asset checks, and root-hosted seasonal browser/export/mobile checks passed. Generated and verified `artifacts/lithophane-pages-preview.zip` for upload. Cloudflare account/project selection and hosted deployment remain outstanding.
 
 Source checkpoint: committed and pushed to `peggleg/lithophane-site`, branch `preview/lithophane`. No production branch, domain, DNS or Cloudflare deployment was changed.
+
+## Review recommendations (proposed, not yet implemented)
+
+See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md). The review re-ran seven tests, the preview build and indexing/CSP checks successfully. Browser probes confirmed unchanged light preview pixels after thickness changes, capped detail on large panels and the ability to export the previous image while its replacement is loading.
+
+Priorities: loading/export state, effective detail and calibrated preview, standard frame interface, real slicer/print validation, committed browser tests/CI, and a simpler photo-or-library entry flow. New feature candidates include optical/mechanical calibration ladders, interchangeable lighting bases, printer build-area checks, settings-only recipes, personalised borders and versioned print packs. Keep these separate from completed features until implemented and verified.
