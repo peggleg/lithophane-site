@@ -1,4 +1,5 @@
 # Cloudflare Pages preview deployment
+Cloudflare Git integration configured for preview/lithophane; production auto-deployments disabled.
 
 ## Prepared preview
 
