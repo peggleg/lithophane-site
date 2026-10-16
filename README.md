@@ -37,8 +37,6 @@ LED Tealight and Bambu Lab Light Kit frames are not designed yet. Confirm the ex
 
 3MF exports contain geometry and units only, not Bambu/Prusa printer profiles or sliced toolpaths. White pixels map to minimum thickness; dark pixels map to maximum. Mesh sampling caps at 241 × 241 to limit memory use; large panels can have coarser sampling than the selected detail. Preview and material estimates are approximations. Photo limit: 20 MB / 24 megapixels. Decode can still be expensive on low-memory phones; the browser's image decoder must first read image dimensions.
 
-The reference https://designerbee.build/tools/lithophane was inaccessible from the development environment (network proxy 403); feature parity with it has not been verified.
-
 The 3MF writer produces uncompressed ZIP entries for simplicity and has no runtime package dependencies. File size is larger than compressed 3MF; mesh limits bound export size.
 
 ## SEO and deployment at imgdrop.app/lithophane/
