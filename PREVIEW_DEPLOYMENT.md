@@ -36,3 +36,5 @@ No public production release, domain attachment, DNS edits, root robots replacem
 ## Current validation evidence
 
 Production and preview builds pass, along with seven automated geometry/SEO tests. `npm run check:preview` verifies noindex, root asset paths, absent sitemap/canonical and the JSON-LD CSP hash. The root-hosted preview passed Chromium checks for all four detailed seasonal designs, STL downloads, reset and mobile layout. The ready-to-upload archive is `artifacts/lithophane-pages-preview.zip` (generated output, excluded from Git). No hosted Cloudflare checks have run because no account/project access is configured.
+
+Source is available on GitHub: https://github.com/peggleg/lithophane-site/tree/preview/lithophane . The repository initially had no commits; the preview branch is now its only populated branch. Verify/set a separate production branch in Pages before enabling automatic deployments; do not let the initial Git connection implicitly publish the preview as production.

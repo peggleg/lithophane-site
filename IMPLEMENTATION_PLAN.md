@@ -34,7 +34,7 @@
 - [ ] Merge scoped security headers and root robots rules without replacing existing domain policies.
 - [ ] Enable appropriate free Cloudflare bot controls and verify search crawler access.
 - [ ] Submit the sitemap after launch and check canonical/social metadata on the live domain.
-- [ ] Verify current Cloudflare plan limits. Nothing is deployed or pushed yet.
+- [ ] Verify current Cloudflare plan limits. Source is pushed to `preview/lithophane`; nothing is deployed.
 
 ## Validation
 
@@ -67,3 +67,5 @@ Detailed illustrations are bundled as a ~745 KB WebP sheet. Catalogue previews u
 - [ ] Deploy a non-production branch preview and validate its hosted behaviour. No Cloudflare credentials or project selection are available in this environment.
 
 Preview validation completed: seven automated tests, production/preview builds, preview indexing/CSP/asset checks, and root-hosted seasonal browser/export/mobile checks passed. Generated and verified `artifacts/lithophane-pages-preview.zip` for upload. Cloudflare account/project selection and hosted deployment remain outstanding.
+
+Source checkpoint: committed and pushed to `peggleg/lithophane-site`, branch `preview/lithophane`. No production branch, domain, DNS or Cloudflare deployment was changed.
