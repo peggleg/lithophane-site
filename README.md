@@ -74,3 +74,8 @@ After building the preview, `npm run check:preview` validates its indexing polic
 ## Review and proposed next work
 
 See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md) for the evidence-based product review, confirmed gaps and prioritised feature suggestions. These recommendations are proposed work, not a claim that the features are implemented.
+
+
+## Cloudflare project setup
+
+The selected new project is `peggleg-lithophane`, using a Direct Upload workflow with `main` reserved for production. After secure account authentication and a project-name/branch check, use `npm run pages:create` and `npm run pages:deploy:preview`. The latter forces `preview/lithophane` and builds the noindex root-hosted preview. See [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md) for credential setup and deployment checks. Creating a project is separate from deploying its site; neither has happened yet.

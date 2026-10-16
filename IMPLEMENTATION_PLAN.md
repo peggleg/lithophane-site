@@ -75,3 +75,13 @@ Source checkpoint: committed and pushed to `peggleg/lithophane-site`, branch `pr
 See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md). The review re-ran seven tests, the preview build and indexing/CSP checks successfully. Browser probes confirmed unchanged light preview pixels after thickness changes, capped detail on large panels and the ability to export the previous image while its replacement is loading.
 
 Priorities: loading/export state, effective detail and calibrated preview, standard frame interface, real slicer/print validation, committed browser tests/CI, and a simpler photo-or-library entry flow. New feature candidates include optical/mechanical calibration ladders, interchangeable lighting bases, printer build-area checks, settings-only recipes, personalised borders and versioned print packs. Keep these separate from completed features until implemented and verified.
+
+
+## Active Cloudflare setup
+
+- Owner chose a new Pages project; proposed name `peggleg-lithophane`.
+- Production branch reserved as `main`; deploy only `preview/lithophane` in this phase.
+- Wrangler 4.151.1 installed and authentication checked: no login available.
+- Secure token/account-ID requirements saved; api.cloudflare.com added to allowed destinations. Values and runtime availability remain pending.
+- Added explicit `pages:create` and `pages:deploy:preview` commands and documented the Direct Upload workflow.
+- Pending: inspect/create the actual project once authenticated, verify production branch, upload preview and validate the hosted site. No live-domain changes.
