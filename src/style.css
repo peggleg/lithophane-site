@@ -23,3 +23,6 @@ body{background-image:radial-gradient(#6d654b0b .65px,transparent .65px);backgro
 .seasonal-art{flex:0 0 auto;height:auto;aspect-ratio:6/5}
 .seasonal-art canvas{object-fit:contain}
 .zoom-buttons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+#preview[data-draggable="true"]{cursor:grab;touch-action:none}
+#preview.dragging{cursor:grabbing}
+#preview:focus-visible{outline:3px solid #294832;outline-offset:4px}

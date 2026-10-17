@@ -1,7 +1,7 @@
 import './style.css';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
-import {drawPhoto,paintBacklight,photoLayout} from './image-processing.js';
+import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.js';
 const $=id=>document.getElementById(id);
 const fields=['width','height','min','max','detail','crop','zoom','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
 let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading=false,renderFrame=0;
@@ -15,12 +15,38 @@ function cropControls(p){
  const horizontal=!!first&&(Math.abs(first.sx-last.sx)>1e-8||Math.abs(first.dx-last.dx)>1e-8);
  const vertical=!!first&&(Math.abs(first.sy-last.sy)>1e-8||Math.abs(first.dy-last.dy)>1e-8);
  $('zoom').disabled=!ready||!cover;$('panx').disabled=!ready||!cover||!horizontal;$('pany').disabled=!ready||!cover||!vertical;
- $('zoom-out').disabled=!ready||!cover||n('zoom')<=25;$('zoom-in').disabled=!ready||!cover||n('zoom')>=400;
+ $('zoom-out').disabled=!ready||!cover||n('zoom')<=100;$('zoom-in').disabled=!ready||!cover||n('zoom')>=400;
  $('reset-crop').disabled=!ready;
  $('zoom-value').value=`${n('zoom')}%`;
  $('panx-value').value=`${n('panx')}%`;$('pany-value').value=`${n('pany')}%`;
- $('crop-help').textContent=!ready?'Choose a photo to adjust its crop.':!cover?'The whole photo is shown. Choose Fill panel (crop) to zoom and reposition.':n('zoom')<100?'Zoomed out to show more of the photo. White margins may appear; position the image with the sliders.':horizontal&&vertical?'Move the sliders to choose which part of the photo fills the panel.':!horizontal&&!vertical?'The photo fits the panel exactly. Zoom out to show more space, or zoom in to crop and reposition.':!horizontal?'Zoom out to keep more of the scene, or zoom in to enable horizontal positioning.':'Zoom out to keep more of the scene, or zoom in to enable vertical positioning.';
+ canvas.dataset.draggable=ready&&cover&&(horizontal||vertical)?'true':'false';
+ $('crop-help').textContent=!ready?'Choose a photo to adjust its crop.':!cover?'The whole photo is shown. Choose Fill panel (crop) to drag and reposition.':horizontal||vertical?'Drag the photo in the preview to reposition it. Movement stops at its edges, keeping the panel filled.':'The photo fits the panel exactly. Enlarge it slightly to create room to drag, or change the panel proportions.';
+
 }
+let drag=null;
+function endDrag(){
+ if(drag&&canvas.hasPointerCapture(drag.id))canvas.releasePointerCapture(drag.id);
+ drag=null;canvas.classList.remove('dragging');
+}
+canvas.addEventListener('pointerdown',event=>{
+ if(event.button!==0||canvas.dataset.draggable!=='true'||!grid)return;
+ const r=canvas.getBoundingClientRect(),layout=photoLayout(image.width,image.height,grid.width/grid.height,adjustments());
+ drag={id:event.pointerId,x:event.clientX,y:event.clientY,panx:n('panx'),pany:n('pany'),sw:layout.sw,sh:layout.sh,imageWidth:image.width,imageHeight:image.height,width:r.width,height:r.height};
+ canvas.setPointerCapture(event.pointerId);canvas.classList.add('dragging');canvas.focus({preventScroll:true});event.preventDefault();cancelExport(false);
+});
+canvas.addEventListener('pointermove',event=>{
+ if(!drag||event.pointerId!==drag.id)return;
+ const p=dragCrop(drag,event.clientX-drag.x,event.clientY-drag.y);
+ $('panx').value=p.panx;$('pany').value=p.pany;render();
+});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,endDrag);
+canvas.addEventListener('keydown',event=>{
+ if(canvas.dataset.draggable!=='true')return;
+ const directions={ArrowLeft:[10,0],ArrowRight:[-10,0],ArrowUp:[0,10],ArrowDown:[0,-10]};
+ const delta=directions[event.key];if(!delta)return;
+ event.preventDefault();cancelExport(false);
+ $('panx').value=Math.max(0,Math.min(100,n('panx')+delta[0]));$('pany').value=Math.max(0,Math.min(100,n('pany')+delta[1]));render();
+});
 function settings(){
  const p={width:n('width'),height:n('height'),min:n('min'),max:n('max')};
  if(![p.width,p.height,p.min,p.max,n('overlap')].every(Number.isFinite)||p.width<20||p.width>300||p.height<20||p.height>300||p.min<0.6||p.min>3||p.max<p.min||p.max>6||n('overlap')<0||n('overlap')>15)throw Error('Use panel sizes of 20–300 mm, minimum thickness 0.6–3 mm, maximum thickness up to 6 mm and at least the minimum, and edge overlap of 0–15 mm.');
@@ -69,11 +95,12 @@ function positionOverlay(){
 function scheduleRender(){cancelAnimationFrame(renderFrame);renderFrame=requestAnimationFrame(render);}
 new ResizeObserver(scheduleRender).observe(canvas.parentElement);
 window.addEventListener('resize',scheduleRender);
-for(const id of fields)$(id).addEventListener('input',()=>{cancelExport(false);render();});
+for(const id of fields)$(id).addEventListener('input',()=>{endDrag();cancelExport(false);render();});
  for(const [id,change]of [['zoom-out',-5],['zoom-in',5]])$(id).onclick=()=>{
-  $('zoom').value=Math.max(25,Math.min(400,n('zoom')+change));cancelExport(false);render();
+  $('zoom').value=Math.max(100,Math.min(400,n('zoom')+change));cancelExport(false);render();
  };
 function beginLoad(){
+ endDrag();
  const token=++loadId;cancelExport(false);loading=true;controlsEnabled(false);$('fit-overlay').hidden=true;
  cropControls(null);
  $('feedback').textContent='Opening photo locally…';return token;
@@ -126,6 +153,7 @@ $('summary').onclick=()=>{
  download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Bambu kit frame planned with cable slit; exact kit pending. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nFrames and licences: https://makerworld.com/en/@peggleg\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
 };
 $('reset').onclick=()=>{
+ endDrag();
  ++loadId;loading=false;cancelExport(false);image?.close();image=null;grid=null;$('photo').value='';
  for(const [id,value]of Object.entries({width:120,height:100,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
  $('invert').checked=false;$('overlay').checked=true;

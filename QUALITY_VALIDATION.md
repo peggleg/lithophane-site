@@ -43,13 +43,15 @@ These are import/geometry checks, not sliced-toolpath or physical-print validati
 
 ## Crop correction
 
-The previous position sliders only selected the excess source area after aspect-ratio fill. A matching photo had no movable excess, and a near-matching photo could have too little horizontal travel to notice. The new 25–400% crop zoom creates a bounded source rectangle and allows both directions. Unavailable axes are disabled with an explanation rather than appearing to do nothing. Whole-photo fit disables crop-only controls; crop reset and new images restore 100% zoom and centred positions.
+The previous position sliders only selected the excess source area after aspect-ratio fill. A matching photo had no movable excess, and a near-matching photo could have too little horizontal travel to notice. The new 100–400% enlargement creates a bounded source rectangle and allows both directions. Unavailable axes are disabled with an explanation rather than appearing to do nothing. Whole-photo fit disables crop-only controls; crop reset and new images restore 100% zoom and centred positions.
 
 Five additional regression tests pass (17 total): matching-aspect panning, in-bounds source rectangles for portrait/landscape/matching photos at all tested zooms and positions, whole-photo-fit invariance, identical source crop arguments in screen/export drawing, and changed relief across a horizontal gradient. Preview/production builds and preview-policy checks pass.
 
 Interactive Chromium checks confirm a 1200 × 1000 photo on a 120 × 100 mm panel disables both axes at 100% zoom with an explanation, enables both at 200%, retains positions while switching between fit/fill, and resets zoom/positions on Reset crop. Harvest Lanterns STL downloads at 200% zoom with horizontal positions 0% and 100% keep all XY coordinates identical while changing 1,806,444 relief coordinates (606,600 triangles each). Thus horizontal movement reaches the exported geometry as well as the preview. Narrow-screen checks cover controls and canvas overflow. Screenshots and gradient fixture remain in ignored artifacts/resolution/.
 
 
-## Zoom-out update
+## Direct crop dragging
 
-Zoom is below the horizontal/vertical crop positions and supports 25–400%, with Zoom out / Zoom in buttons. Values below 100% show more of the source, with white margins where needed; positions remain adjustable. Explicit clipping preserves image proportions and is shared by screen and worker export. Reset returns to 100%. All 19 Node tests pass, including zoom-out bounds, full-source framing, and identical preview/export source rectangles. Chromium checks cover pumpkin framing at 50%, STL download (0.8 mm corner margin at default tonal settings), button limits, reset, and a 390 × 844 mobile viewport without overflow.
+Drag the image directly in the preview to choose the crop. Mouse and pointer/touch input use bounded crop positions, synchronised with the sliders and worker export. Arrow keys provide keyboard positioning. At 100% the panel stays filled; optional enlargement up to 400% creates more movement room. Shrinking below the fill size has been removed so dragging cannot create blank strips. Fit whole photo remains an explicit mode with margins when aspect ratios differ.
+
+All 19 Node tests pass, including drag direction, edge clamping, no movement on a fitted axis and no blank source edges. Chromium checks verify actual pointer dragging (50/50 to 16/25), release outside the canvas clamping to 100/100, arrow-key movement, STL download, reset to 100%, and mouse drag at a 390 × 844 responsive viewport without page overflow. Touch-event handlers are implemented; a physical phone has not been tested. Production/preview builds and preview-policy checks pass.

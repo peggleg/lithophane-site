@@ -4,17 +4,12 @@ export function photoLayout(imageWidth, imageHeight, ratio, { crop = 'cover', pa
   if (crop === 'cover') {
     if (imageRatio > ratio) sw = imageHeight * ratio;
     else sh = imageWidth / ratio;
-    // Below 100%, the view can extend outside the source. Explicit clipping
-    // maps the visible photo into the white canvas without stretching it.
-    const scale = Math.max(.25, Math.min(4, zoom / 100));
+    // Fill mode never exposes blank edges. Whole-photo fit is the explicit
+    // alternative when preserving the complete composition matters more.
+    const scale = Math.max(1, Math.min(4, zoom / 100));
     sw /= scale; sh /= scale;
     sx = (imageWidth - sw) * Math.max(0, Math.min(100, panx)) / 100;
     sy = (imageHeight - sh) * Math.max(0, Math.min(100, pany)) / 100;
-    const left = Math.max(0, sx), top = Math.max(0, sy);
-    const right = Math.min(imageWidth, sx + sw), bottom = Math.min(imageHeight, sy + sh);
-    dx = (left - sx) / sw; dy = (top - sy) / sh;
-    dw = Math.min(1 - dx, (right - left) / sw); dh = Math.min(1 - dy, (bottom - top) / sh);
-    sx = left; sy = top; sw = right - left; sh = bottom - top;
   } else {
     dw = imageRatio > ratio ? 1 : imageRatio / ratio;
     dh = imageRatio > ratio ? ratio / imageRatio : 1;
@@ -58,4 +53,14 @@ export function paintBacklight(pixels, adjustments, min, max) {
     rgba[i] = 255 * light; rgba[i + 1] = 225 * light; rgba[i + 2] = 174 * light; rgba[i + 3] = 255;
   }
   return { darkFraction: dark / (rgba.length / 4), meanThickness: sum / (rgba.length / 4) };
+}
+
+// Pointer movement follows the image, rather than the crop window. Clamp at the
+// source edges so drag, sliders, preview and worker always describe one crop.
+export function dragCrop(start, deltaX, deltaY) {
+  const axis=(position,delta,displaySize,sourceSize,cropSize)=>{
+    const travel=displaySize*(sourceSize/cropSize-1);
+    return travel>1e-6?Math.max(0,Math.min(100,position-delta/travel*100)):position;
+  };
+  return {panx:axis(start.panx,deltaX,start.width,start.imageWidth,start.sw),pany:axis(start.pany,deltaY,start.height,start.imageHeight,start.sh)};
 }
