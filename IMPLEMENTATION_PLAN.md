@@ -1,87 +1,43 @@
 # Implementation plan
 
-## Product direction
-
-- Selected design: **Option 03 — Crafted keepsakes**. Oat/paper backgrounds, forest-green accents, warm lighting, serif headings and a personal, handmade feel. The initial implementation used Option 01; it has now switched to Option 03.
-- Production URL: https://imgdrop.app/lithophane/.
-- Static Cloudflare-compatible app; visitor photos and exports remain on their device. No accounts, backend storage or paid compute required.
-- Frame models are created by Peggleg and published on MakerWorld: https://makerworld.com/en/@peggleg.
-
 ## Implemented
 
-- [x] Browser-local photo controls, custom panel dimensions and approximate backlit preview.
-- [x] Cancellable STL/3MF geometry exports and print-summary download.
-- [x] Edge overlap planning, fit coupon, material estimates, photo quality feedback and reset.
-- [x] Print/safety/privacy/licensing guidance and frame catalogue with honest development status.
-- [x] Subpath-aware SEO, sharing image, structured data, sitemap and root crawler-rule merge proposal.
-- [x] Option 03 visual direction and matching social card/favicon.
-- [x] Detailed seasonal collection: Moonlit Manor, Harvest Lanterns, Christmas Village and Winter Woodland. Replaced the earlier simple procedural silhouettes.
-- [x] Seasonal artwork previews and one-click loading into the same adjustment/export workflow; no visitor content is uploaded or persisted. Curated AI-generated illustration artwork is bundled as a public static site asset.
+- Option 03 — Crafted keepsakes: oat/paper backgrounds, forest-green accents, serif headings and warm artwork.
+- Static browser-local photo controls, custom flat-panel dimensions, crop/fill, brightness, contrast and inversion.
+- Cancellable STL and millimetre 3MF exports, print-summary download, fit coupon, frame overlap planning and approximate material estimates.
+- Seasonal artwork: Moonlit Manor, Harvest Lanterns, Christmas Village and Winter Woodland; public bundled illustrations, no visitor uploads or persistence.
+- Production subpath SEO and a separate root-hosted, noindex Pages preview build.
+- Git-connected Cloudflare Pages preview on `preview/lithophane`; see [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md).
 
-## Next: physical frame and seasonal release work
+## Resolution correction — October 2026
 
-- [ ] Design and prototype LED Tealight and Bambu Lab Light Kit frames, including seasonal variants or interchangeable seasonal panels.
-- [ ] Confirm the exact Bambu kit, panel dimensions, slot/overlap, cable slit and battery access.
-- [ ] Confirm whether 0.2 mm clearance means total or per side; currently the planning control defaults to total and supports either convention.
-- [ ] Test fit, ventilation and temperatures. Mechanical clearance is not thermal spacing.
-- [ ] Publish tested frame models on MakerWorld with real model URLs, hardware lists, assembly instructions and licences.
-- [ ] Enable validated “fit this frame” presets and direct model links. Current seasonal exports are flat panels, not complete lights or guaranteed kit-compatible assemblies.
-- [ ] Add creator-owned real print comparisons. Never retain visitor uploads for this purpose.
+- [x] Separate full-source screen rendering from physical export sampling.
+- [x] Remove the 241-sample cap. Add exact 0.2 mm (default) and 0.1 mm options, retaining 0.5 and 1 mm.
+- [x] Show actual spacing, sample grid, triangle count and output-size estimates before export.
+- [x] Refuse oversized allocations explicitly without changing requested quality.
+- [x] Sample images inside the cancellable worker; share crop/tone processing with preview.
+- [x] Keep fractional luminance and all sampled front vertices; use preallocated mesh arrays and a planar back fan.
+- [x] Encode 3MF in bounded chunks, avoiding huge XML strings and archive copies.
+- [x] Block downloads during image replacement; invalidate stale exports on edits, reset and cancellation.
+- [x] Preserve selected mesh spacing when loading seasonal artwork and warn about limited source resolution.
+- [x] Fix narrow-screen lightbox overflow.
+- [x] Validate full 120 × 100 mm exports and Bambu Studio imports; document evidence in [QUALITY_VALIDATION.md](QUALITY_VALIDATION.md).
 
-## Launch work
+## Remaining product and physical work
 
-- [ ] Integrate the app under `/lithophane/` in the existing imgdrop.app deployment.
-- [ ] Merge scoped security headers and root robots rules without replacing existing domain policies.
-- [ ] Enable appropriate free Cloudflare bot controls and verify search crawler access.
-- [ ] Submit the sitemap after launch and check canonical/social metadata on the live domain.
-- [ ] Verify current Cloudflare plan limits. Source is pushed to `preview/lithophane`; nothing is deployed.
+- [ ] Calibrated thickness-aware lighting, original/adjusted comparisons and a 3D mesh view. Current backlight remains illustrative.
+- [ ] Finalise the Bambu kit and LED tealight envelope, frame opening, overlap, slot depth, ventilation, cable slit and battery access.
+- [ ] Confirm whether 0.2 mm mechanical clearance means total or per side, then prototype and test fit and temperatures.
+- [ ] Publish tested frame models, assembly instructions and licences on MakerWorld. Current exports are flat panels, not complete lamps or validated compatible assemblies.
+- [ ] Print representative panels and compare source, preview, toolpaths and illuminated result. No physical print-quality claim follows from digital validation.
+- [ ] Add repeatable cross-browser/device UI coverage and CI. Node regression checks are committed; interactive browser checks currently require the documented procedure.
+- [ ] Consider the additional features in [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md) separately from this correction.
 
-## Validation
+## Production launch remains separate
 
-Geometry and SEO automated tests pass; production build passes. Browser smoke checks cover photo controls, both exports, fit coupon, print summary, cancellation, invalid input, reset, mobile layout and no upload/external requests. Seasonal checks cover all four motifs, browser exports and narrow layouts. Physical compatibility remains untested until prototypes exist.
+- [ ] Integrate under `/lithophane/` in the existing imgdrop.app deployment.
+- [ ] Merge scoped headers and root robots rules without replacing existing policies.
+- [ ] Verify account-specific bot controls, current plan limits and search crawler access.
+- [ ] Validate live canonical/social metadata and submit the sitemap after launch.
 
-## Documentation rule
-
-Update this plan, README and relevant Markdown documentation alongside every implementation change. Distinguish implemented software, pending physical design, tested behaviour and account/deployment steps.
-
-### Render review
-
-Fixed seasonal thumbnail canvas sizing to keep artwork inside its preview area and prevent overlap with card titles and descriptions. Rechecked the built page in desktop and mobile Chromium.
-
-
-### Detailed seasonal artwork revision
-
-- Replace flat icons with richly shaded grayscale scenes, using identical source artwork for catalogue previews and exported relief panels.
-- Default seasonal designs to fine mesh sampling; retain the existing memory cap and explain that small details need print testing.
-- Preserve browser-local privacy for visitor photos and output files; distinguish public catalogue artwork from visitor content.
-- Digital illustrations are not evidence of physical print quality or lighting-kit compatibility. Test actual prints before release claims.
-
-Detailed illustrations are bundled as a ~745 KB WebP sheet. Catalogue previews use a 6:5 area to show the complete scenes at useful size; all four artwork selections and STL exports passed desktop/mobile browser checks after replacement. Both STL and 3MF continue to use the same studio mesh pipeline.
-
-## Pages preview preparation
-
-- [x] Add separate root-based `build:preview` / `preview:pages` commands, retaining the production `/lithophane/` build.
-- [x] Force preview noindex headers/metadata, disallow-all robots and no canonical/sitemap regardless of SITE_URL.
-- [x] Document verified-branch deployment and protect the existing live domain.
-- [ ] Authenticate to the intended Cloudflare account and identify/verify the Pages project's production branch.
-- [ ] Deploy a non-production branch preview and validate its hosted behaviour. No Cloudflare credentials or project selection are available in this environment.
-
-Preview validation completed: seven automated tests, production/preview builds, preview indexing/CSP/asset checks, and root-hosted seasonal browser/export/mobile checks passed. Generated and verified `artifacts/lithophane-pages-preview.zip` for upload. Cloudflare account/project selection and hosted deployment remain outstanding.
-
-Source checkpoint: committed and pushed to `peggleg/lithophane-site`, branch `preview/lithophane`. No production branch, domain, DNS or Cloudflare deployment was changed.
-
-## Review recommendations (proposed, not yet implemented)
-
-See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md). The review re-ran seven tests, the preview build and indexing/CSP checks successfully. Browser probes confirmed unchanged light preview pixels after thickness changes, capped detail on large panels and the ability to export the previous image while its replacement is loading.
-
-Priorities: loading/export state, effective detail and calibrated preview, standard frame interface, real slicer/print validation, committed browser tests/CI, and a simpler photo-or-library entry flow. New feature candidates include optical/mechanical calibration ladders, interchangeable lighting bases, printer build-area checks, settings-only recipes, personalised borders and versioned print packs. Keep these separate from completed features until implemented and verified.
-
-
-## Active Cloudflare setup
-
-- Owner chose a new Pages project; proposed name `peggleg-lithophane`.
-- Production branch reserved as `main`; deploy only `preview/lithophane` in this phase.
-- Wrangler 4.151.1 installed and authentication checked: no login available.
-- Secure token/account-ID requirements saved; api.cloudflare.com added to allowed destinations. Values and runtime availability remain pending.
-- Added explicit `pages:create` and `pages:deploy:preview` commands and documented the Direct Upload workflow.
-- Pending: inspect/create the actual project once authenticated, verify production branch, upload preview and validate the hosted site. No live-domain changes.
+Update README, this plan and relevant Markdown documentation with implementation changes. Distinguish implemented software, measured digital results, pending physical tests and deployment state.

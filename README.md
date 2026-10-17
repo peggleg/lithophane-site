@@ -10,6 +10,7 @@ Use Node 22.12+ and the existing checkout (cloud tasks are already isolated; no 
 npm ci
 npm run dev
 npm test
+npm run check:resolution
 npm run build
 ```
 
@@ -35,9 +36,9 @@ All application dependencies are bundled; no runtime CDN, fonts, or API calls. P
 
 LED Tealight and Bambu Lab Light Kit frames are not designed yet. Confirm the exact Bambu kit, panel sizes, overlap, slot depth, ventilation, cable slit geometry and battery access. The requested 0.2 mm clearance is provisionally shown as total, with a per-side planning option; the convention needs confirmation before publishing presets. Mechanical clearance is not thermal clearance. Test actual prints and operating temperatures before claiming lighting compatibility. Frame downloads and their licences will be hosted at https://makerworld.com/en/@peggleg.
 
-3MF exports contain geometry and units only, not Bambu/Prusa printer profiles or sliced toolpaths. White pixels map to minimum thickness; dark pixels map to maximum. Mesh sampling caps at 241 × 241 to limit memory use; large panels can have coarser sampling than the selected detail. Preview and material estimates are approximations. Photo limit: 20 MB / 24 megapixels. Decode can still be expensive on low-memory phones; the browser's image decoder must first read image dimensions.
+3MF exports contain geometry and units only, not Bambu/Prusa printer profiles or sliced toolpaths. White pixels map to minimum thickness; dark pixels map to maximum. Mesh spacing defaults to 0.2 mm, with 0.1, 0.5 and 1 mm options. There is no silent sample cap: 120 × 100 mm uses 601 × 501 samples at 0.2 mm or 1201 × 1001 at 0.1 mm. Non-divisible dimensions use a slightly finer uniform spacing so panel dimensions stay exact. An explicit memory-budget error refuses oversized exports without changing settings. Preview and material estimates are approximations. Photo limit: 20 MB / 24 megapixels. Decode can still be expensive on low-memory phones; the browser's image decoder must first read image dimensions.
 
-The 3MF writer produces uncompressed ZIP entries for simplicity and has no runtime package dependencies. File size is larger than compressed 3MF; mesh limits bound export size.
+The 3MF writer produces uncompressed ZIP entries for simplicity and has no runtime package dependencies. File size is larger than compressed 3MF. Chunked XML/ZIP encoding avoids giant intermediate strings; typed mesh arrays and a planar back fan reduce working memory while retaining every front sample. The UI reports exact STL size and a conservative 3MF upper estimate before download.
 
 ## SEO and deployment at imgdrop.app/lithophane/
 
@@ -57,7 +58,7 @@ The selected visual direction is **Option 03 — Crafted keepsakes**: oat/paper 
 
 The seasonal collection contains four detailed grayscale illustrations: Halloween **Moonlit Manor** and **Harvest Lanterns**, and Christmas **Christmas Village** and **Winter Woodland**. The earlier simple procedural silhouettes have been replaced. Preview cards and panel exports use the same quadrant of a shared, locally bundled illustration sheet (`src/assets/seasonal-collection.webp`). These are AI-generated digital illustrations, not photographs of real prints. Public catalogue artwork is retained as a site asset; visitor photos, working previews and generated STL/3MF files are never uploaded or stored by the app.
 
-“Use design” decodes the selected artwork in-browser and loads it into the existing studio. Fine mesh detail is selected, tonal/crop-position controls are reset, and custom panel dimensions are preserved. Users can adjust and export it immediately; the mesh resolution cap still applies, so very fine source details may not survive at every size. The browser downloads a static first-party artwork asset, without sending visitor content anywhere. Selecting a template releases the active photo reference.
+“Use design” decodes the selected artwork in-browser and loads it into the existing studio. The selected mesh spacing and custom panel dimensions are preserved; tonal/crop-position controls are reset. Users can adjust and export immediately. Source-resolution feedback warns when the requested grid exceeds the available image pixels; finer spacing cannot invent missing detail. The browser downloads a static first-party artwork asset, without sending visitor content anywhere. Selecting a template releases the active photo reference.
 
 LED Tealight and Bambu Lab Light Kit frame variants are planned for seasonal designs, but the exported files currently contain **flat panels only**. Do not describe them as complete lamps or validated frame-compatible downloads. Test actual frames, final sizes, thermal clearance, the 0.2 mm mechanical fit convention and Bambu cable slit before enabling compatibility presets or publishing model-specific download links.
 
@@ -67,15 +68,23 @@ Seasonal thumbnail canvases are bounded to fixed preview areas so their intrinsi
 
 ## Preview build (no production release)
 
-Use `npm run build:preview` for a root-hosted `pages.dev` preview in `dist-preview/`; serve it locally with `npm run preview:pages`. This explicit mode forces noindex, disallow-all robots, no production canonical URL and no sitemap even if SITE_URL is present. It does not alter the production subpath build. See [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md) for upload commands, production-branch checks and access protection. An online preview is publicly reachable unless Cloudflare Access protects it.
+Use `npm run build:preview` for a root-hosted `pages.dev` preview in `dist-preview/`; serve it locally with `npm run preview:pages`. This explicit mode forces noindex, disallow-all robots, no production canonical URL and no sitemap even if SITE_URL is present. It does not alter the production subpath build. See [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md) for the Git-connected preview workflow and access protection. An online preview is publicly reachable unless Cloudflare Access protects it.
 
-After building the preview, `npm run check:preview` validates its indexing policy, asset references and CSP hash. A verified upload ZIP is available locally at `artifacts/lithophane-pages-preview.zip`; generated output is excluded from version control.
+After building the preview, `npm run check:preview` validates its indexing policy, asset references and CSP hash. Generated output is excluded from version control. Git pushes to `preview/lithophane` trigger the configured Pages preview build.
 
 ## Review and proposed next work
 
 See [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md) for the evidence-based product review, confirmed gaps and prioritised feature suggestions. These recommendations are proposed work, not a claim that the features are implemented.
 
 
-## Cloudflare project setup
+## Resolution and verification
 
-The selected new project is `peggleg-lithophane`, using a Direct Upload workflow with `main` reserved for production. After secure account authentication and a project-name/branch check, use `npm run pages:create` and `npm run pages:deploy:preview`. The latter forces `preview/lithophane` and builds the noindex root-hosted preview. See [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md) for credential setup and deployment checks. Creating a project is separate from deploying its site; neither has happened yet.
+Screen preview resolution follows the displayed area and device pixel ratio. It draws directly from the full decoded source and never uses the mesh grid. The export worker separately samples the source at the chosen physical spacing, using the same crop and tonal functions. Float32 tones preserve fractional luminance. The backlit preview remains an illustrative tone curve, not a calibrated prediction of filament transmission or a 3D mesh view.
+
+`npm run check:resolution` validates full 120 × 100 mm meshes at 0.2 and 0.1 mm, every directed edge, non-degenerate triangles, volume, all STL coordinates and all 3MF vertex/triangle records. It writes reproducible slicer fixtures under ignored `artifacts/resolution/`. See [QUALITY_VALIDATION.md](QUALITY_VALIDATION.md) for browser and Bambu Studio evidence and remaining physical-print checks.
+
+Export memory estimates include source pixels, sampling buffers, mesh arrays, output buffers and a reserve. The conservative budget is capped at 768 MiB and reduced on devices reporting less memory; unknown devices use 768 MiB. This is a planning limit, not a measurement of free RAM. Browser allocation failures still produce an explicit failure, never a coarser file. Replacement-photo loading disables downloads; settings changes, reset and cancellation invalidate pending workers and bitmap clones.
+
+## Current Cloudflare workflow
+
+The repository is Git-connected to the `lithophane-site` Pages project. Push only to `preview/lithophane` for this work; production auto-deployments are disabled according to the configured setup. No Cloudflare token, Wrangler command, DNS change or custom-domain attachment is needed. Earlier Direct Upload instructions are superseded by [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md).

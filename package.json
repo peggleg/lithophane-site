@@ -12,7 +12,8 @@
     "preview:pages": "vite preview --mode pages-preview --outDir dist-preview --host 0.0.0.0 --port 4175",
     "check:preview": "node scripts/check-preview.mjs",
     "pages:create": "npx --yes wrangler@4.151.1 pages project create peggleg-lithophane --production-branch main",
-    "pages:deploy:preview": "npm run build:preview && npm run check:preview && npx --yes wrangler@4.151.1 pages deploy dist-preview --project-name peggleg-lithophane --branch preview/lithophane"
+    "pages:deploy:preview": "npm run build:preview && npm run check:preview && npx --yes wrangler@4.151.1 pages deploy dist-preview --project-name peggleg-lithophane --branch preview/lithophane",
+    "check:resolution": "node scripts/validate-resolution.mjs"
   },
   "devDependencies": {
     "vite": "8.3.4"

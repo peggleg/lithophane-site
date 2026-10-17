@@ -1,6 +1,6 @@
 # Product and implementation review
 
-Status: recommendations, not an approved implementation scope. This review does not deploy the site or add the proposed features.
+Historical review of the pre-correction prototype. The October 2026 resolution correction now removes the sample cap, reports effective detail and file sizes, separates screen rendering, blocks downloads during replacement loading, and validates Bambu Studio imports. See QUALITY_VALIDATION.md for current evidence. The findings below describe the earlier checkpoint; calibrated lighting, physical testing, cross-browser CI and the other feature proposals remain outstanding.
 
 ## Overall assessment
 
