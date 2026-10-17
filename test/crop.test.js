@@ -3,6 +3,30 @@ import assert from 'node:assert/strict';
 import {photoLayout,drawPhoto,imageTones} from '../src/image-processing.js';
 import {makePanel} from '../src/geometry.js';
 
+test('zoom out retains the full matching photo with positionable margins',()=>{
+ assert.deepEqual(photoLayout(1200,1000,1.2,{zoom:50}),{sx:0,sy:0,sw:1200,sh:1000,dx:.25,dy:.25,dw:.5,dh:.5});
+ const left=photoLayout(1200,1000,1.2,{zoom:50,panx:0,pany:0});
+ const right=photoLayout(1200,1000,1.2,{zoom:50,panx:100,pany:100});
+ assert.equal(left.dx,0);assert.equal(left.dy,0);assert.equal(right.dx,.5);assert.equal(right.dy,.5);
+ const wide=photoLayout(2000,1000,1,{zoom:50});
+ assert.deepEqual(wide,{sx:0,sy:0,sw:2000,sh:1000,dx:0,dy:.25,dw:1,dh:.5});
+});
+
+test('zoom-out clipping preserves proportions and valid source/destination bounds',()=>{
+ for(const [w,h,ratio]of [[2400,1000,1.2],[1000,2400,1.2],[1200,1000,1.2]]){
+  for(const zoom of [25,50,75,95,100])for(const panx of [0,50,100])for(const pany of [0,50,100]){
+   const r=photoLayout(w,h,ratio,{zoom,panx,pany});
+   assert.ok(r.sx>=0&&r.sy>=0&&r.sx+r.sw<=w+1e-8&&r.sy+r.sh<=h+1e-8);
+   assert.ok(r.dx>=0&&r.dy>=0&&r.dx+r.dw<=1+1e-8&&r.dy+r.dh<=1+1e-8);
+   assert.ok(Math.abs(r.sw/r.sh-ratio*r.dw/r.dh)<1e-8);
+  }
+ }
+ const calls=[],context={fillRect(){},drawImage(...args){calls.push(args);}},image={width:1200,height:1000};
+ drawPhoto(context,image,720,600,1.2,{zoom:50});drawPhoto(context,image,601,501,1.2,{zoom:50});
+ assert.deepEqual(calls[0].slice(1,5),calls[1].slice(1,5));
+ assert.deepEqual(calls[0].slice(5),[180,150,360,300]);assert.deepEqual(calls[1].slice(5),[150.25,125.25,300.5,250.5]);
+});
+
 test('matching proportions can pan horizontally and vertically after zooming',()=>{
  const left=photoLayout(1200,1000,1.2,{zoom:200,panx:0,pany:0});
  const right=photoLayout(1200,1000,1.2,{zoom:200,panx:100,pany:100});
@@ -19,7 +43,7 @@ test('crop stays inside landscape, portrait and matching photos at every positio
    const r=photoLayout(w,h,ratio,{zoom,panx,pany});
    assert.ok(r.sx>=0&&r.sy>=0&&r.sx+r.sw<=w+1e-8&&r.sy+r.sh<=h+1e-8);
    assert.ok(Math.abs(r.sw/r.sh-ratio)<1e-8);
-   assert.equal(r.dw,1);assert.equal(r.dh,1);
+   assert.ok(Math.abs(r.dw-1)<1e-12);assert.ok(Math.abs(r.dh-1)<1e-12);
   }
  }
 });

@@ -4,13 +4,17 @@ export function photoLayout(imageWidth, imageHeight, ratio, { crop = 'cover', pa
   if (crop === 'cover') {
     if (imageRatio > ratio) sw = imageHeight * ratio;
     else sh = imageWidth / ratio;
-    // Zoom creates crop room on both axes, including when the photo and panel
-    // have identical proportions. Positions select a point in the valid range;
-    // the source rectangle always stays inside the photo (no empty edges).
-    const scale = Math.max(1, Math.min(4, zoom / 100));
+    // Below 100%, the view can extend outside the source. Explicit clipping
+    // maps the visible photo into the white canvas without stretching it.
+    const scale = Math.max(.25, Math.min(4, zoom / 100));
     sw /= scale; sh /= scale;
     sx = (imageWidth - sw) * Math.max(0, Math.min(100, panx)) / 100;
     sy = (imageHeight - sh) * Math.max(0, Math.min(100, pany)) / 100;
+    const left = Math.max(0, sx), top = Math.max(0, sy);
+    const right = Math.min(imageWidth, sx + sw), bottom = Math.min(imageHeight, sy + sh);
+    dx = (left - sx) / sw; dy = (top - sy) / sh;
+    dw = Math.min(1 - dx, (right - left) / sw); dh = Math.min(1 - dy, (bottom - top) / sh);
+    sx = left; sy = top; sw = right - left; sh = bottom - top;
   } else {
     dw = imageRatio > ratio ? 1 : imageRatio / ratio;
     dh = imageRatio > ratio ? ratio / imageRatio : 1;

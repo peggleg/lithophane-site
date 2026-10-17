@@ -10,14 +10,16 @@ const n=id=>Number($(id).value);
 const adjustments=()=>({crop:$('crop').value,zoom:n('zoom'),panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
 function cropControls(p){
  const ready=!!image&&!loading,cover=$('crop').value==='cover';
- const layout=ready&&p?photoLayout(image.width,image.height,p.width/p.height,adjustments()):null;
- const horizontal=!!layout&&image.width-layout.sw>image.width*1e-9;
- const vertical=!!layout&&image.height-layout.sh>image.height*1e-9;
+ const layoutAt=position=>ready&&p?photoLayout(image.width,image.height,p.width/p.height,{...adjustments(),panx:position,pany:position}):null;
+ const first=layoutAt(0),last=layoutAt(100);
+ const horizontal=!!first&&(Math.abs(first.sx-last.sx)>1e-8||Math.abs(first.dx-last.dx)>1e-8);
+ const vertical=!!first&&(Math.abs(first.sy-last.sy)>1e-8||Math.abs(first.dy-last.dy)>1e-8);
  $('zoom').disabled=!ready||!cover;$('panx').disabled=!ready||!cover||!horizontal;$('pany').disabled=!ready||!cover||!vertical;
+ $('zoom-out').disabled=!ready||!cover||n('zoom')<=25;$('zoom-in').disabled=!ready||!cover||n('zoom')>=400;
  $('reset-crop').disabled=!ready;
  $('zoom-value').value=`${n('zoom')}%`;
  $('panx-value').value=`${n('panx')}%`;$('pany-value').value=`${n('pany')}%`;
- $('crop-help').textContent=!ready?'Choose a photo to adjust its crop.':!cover?'The whole photo is shown. Choose Fill panel (crop) to zoom and reposition.':horizontal&&vertical?'Move the sliders to choose which part of the photo fills the panel.':!horizontal&&!vertical?'The photo already fits the panel exactly. Increase crop zoom to move it horizontally or vertically.':!horizontal?'Increase crop zoom to enable horizontal positioning. Vertical positioning is available.':'Increase crop zoom to enable vertical positioning. Horizontal positioning is available.';
+ $('crop-help').textContent=!ready?'Choose a photo to adjust its crop.':!cover?'The whole photo is shown. Choose Fill panel (crop) to zoom and reposition.':n('zoom')<100?'Zoomed out to show more of the photo. White margins may appear; position the image with the sliders.':horizontal&&vertical?'Move the sliders to choose which part of the photo fills the panel.':!horizontal&&!vertical?'The photo fits the panel exactly. Zoom out to show more space, or zoom in to crop and reposition.':!horizontal?'Zoom out to keep more of the scene, or zoom in to enable horizontal positioning.':'Zoom out to keep more of the scene, or zoom in to enable vertical positioning.';
 }
 function settings(){
  const p={width:n('width'),height:n('height'),min:n('min'),max:n('max')};
@@ -68,6 +70,9 @@ function scheduleRender(){cancelAnimationFrame(renderFrame);renderFrame=requestA
 new ResizeObserver(scheduleRender).observe(canvas.parentElement);
 window.addEventListener('resize',scheduleRender);
 for(const id of fields)$(id).addEventListener('input',()=>{cancelExport(false);render();});
+ for(const [id,change]of [['zoom-out',-5],['zoom-in',5]])$(id).onclick=()=>{
+  $('zoom').value=Math.max(25,Math.min(400,n('zoom')+change));cancelExport(false);render();
+ };
 function beginLoad(){
  const token=++loadId;cancelExport(false);loading=true;controlsEnabled(false);$('fit-overlay').hidden=true;
  cropControls(null);

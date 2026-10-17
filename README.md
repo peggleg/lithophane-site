@@ -25,7 +25,7 @@ All application dependencies are bundled; no runtime CDN, fonts, or API calls. P
 ## Included
 
 - Custom panel dimensions, STL and millimetre 3MF geometry exports.
-- Crop/fill with 100–400% zoom, horizontal/vertical positioning and crop reset; whole-photo fit, brightness, contrast, invert and illustrative backlit preview.
+- Crop/fill with 25–400% zoom, horizontal/vertical positioning and crop reset; whole-photo fit, brightness, contrast, invert and illustrative backlit preview.
 - Planning frame-edge overlay, low-resolution/dark-photo/crop feedback.
 - Approximate solid PLA volume/mass, print guidance and downloadable settings summary.
 - 20 × 20 mm constant maximum-thickness corner coupon; tests slot/corner fit, not full panel dimensions.
@@ -104,3 +104,8 @@ The postcard prototype now uses an 8.8 mm open frame with 11 mm borders and a re
 
 
 The postcard stand is now split into a base plate and keyed press-in LED holder. Route the cable in the open central bypass before pressing the holder into the socket. Joint fit-test pieces and CAD cable-clearance/insertion checks are included. Lantern assembly renders are supplied without changing lantern geometry.
+
+
+## Zoom-out update
+
+Zoom is below the horizontal/vertical crop positions and supports 25–400%, with Zoom out / Zoom in buttons. Values below 100% show more of the source, with white margins where needed; positions remain adjustable. Explicit clipping preserves image proportions and is shared by screen and worker export. Reset returns to 100%. All 19 Node tests pass, including zoom-out bounds, full-source framing, and identical preview/export source rectangles. Chromium checks cover pumpkin framing at 50%, STL download (0.8 mm corner margin at default tonal settings), button limits, reset, and a 390 × 844 mobile viewport without overflow.
