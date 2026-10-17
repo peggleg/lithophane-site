@@ -1,0 +1,4 @@
+preview_parts/
+*.FCBak
+*.blend
+*_assembly_preview.stl

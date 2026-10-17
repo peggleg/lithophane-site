@@ -1,0 +1,162 @@
+{
+  "panel_mm": [
+    105.0,
+    148.0
+  ],
+  "visible_window_mm": [
+    101.4,
+    144.4
+  ],
+  "border_mm": 11.0,
+  "panel_slot_mm": 3.4,
+  "led_recess_mm": [
+    59.6,
+    8.4
+  ],
+  "slide_clearance_mm": 0.4,
+  "parts": [
+    {
+      "part": "postcard_frame",
+      "quantity": 1,
+      "bounds_mm": [
+        123.4,
+        166.4,
+        8.8
+      ],
+      "solid": true,
+      "triangles": 64
+    },
+    {
+      "part": "postcard_top_retainer",
+      "quantity": 1,
+      "bounds_mm": [
+        105.0,
+        8.8,
+        5.4
+      ],
+      "solid": true,
+      "triangles": 28
+    },
+    {
+      "part": "postcard_reflector_hood",
+      "quantity": 1,
+      "bounds_mm": [
+        127.9,
+        170.9,
+        88.8
+      ],
+      "solid": true,
+      "triangles": 164
+    },
+    {
+      "part": "postcard_base",
+      "quantity": 1,
+      "bounds_mm": [
+        180.0,
+        105.0,
+        12.0
+      ],
+      "solid": true,
+      "triangles": 1904
+    },
+    {
+      "part": "postcard_unused_port_cover",
+      "quantity": 1,
+      "bounds_mm": [
+        70.0,
+        70.0,
+        4.3
+      ],
+      "solid": true,
+      "triangles": 28
+    },
+    {
+      "part": "postcard_portrait_spacer",
+      "quantity": 2,
+      "bounds_mm": [
+        21.2,
+        88.8,
+        1.4
+      ],
+      "solid": true,
+      "triangles": 12
+    },
+    {
+      "part": "lantern_side_frame",
+      "quantity": 4,
+      "bounds_mm": [
+        123.4,
+        166.4,
+        8.8
+      ],
+      "solid": true,
+      "triangles": 64
+    },
+    {
+      "part": "lantern_top_retainer",
+      "quantity": 4,
+      "bounds_mm": [
+        105.0,
+        8.8,
+        5.4
+      ],
+      "solid": true,
+      "triangles": 28
+    },
+    {
+      "part": "lantern_base",
+      "quantity": 1,
+      "bounds_mm": [
+        145.0,
+        145.0,
+        12.0
+      ],
+      "solid": true,
+      "triangles": 1964
+    },
+    {
+      "part": "lantern_top_ring",
+      "quantity": 1,
+      "bounds_mm": [
+        145.0,
+        145.0,
+        10.0
+      ],
+      "solid": true,
+      "triangles": 80
+    },
+    {
+      "part": "fit_test_channel",
+      "quantity": 1,
+      "bounds_mm": [
+        20.0,
+        25.0,
+        8.8
+      ],
+      "solid": true,
+      "triangles": 36
+    },
+    {
+      "part": "fit_test_retainer",
+      "quantity": 1,
+      "bounds_mm": [
+        20.0,
+        8.8,
+        5.4
+      ],
+      "solid": true,
+      "triangles": 20
+    },
+    {
+      "part": "fit_test_led_socket",
+      "quantity": 1,
+      "bounds_mm": [
+        70.0,
+        70.0,
+        10.0
+      ],
+      "solid": true,
+      "triangles": 524
+    }
+  ]
+}

@@ -92,3 +92,7 @@ The repository is Git-connected to the `lithophane-site` Pages project. Push onl
 ## Crop controls
 
 In Fill panel mode, zoom above 100% creates room to move the image on both axes, including photos that match the panel proportions. Sliders with no available movement are disabled with a nearby explanation. Fit whole photo shows the full image with centred white margins and disables crop-only controls. Reset crop returns to 100% zoom and centred positioning without changing tones or dimensions; a new photo or seasonal design also resets crop positioning. Preview and worker exports share the same source rectangle. Print summaries include zoom and positions.
+
+## First Bambu LED frame prototypes
+
+Editable A6 postcard and four-sided lantern prototypes are now in [models/bambu-led-frames](models/bambu-led-frames/README.md), with STL, STEP and FreeCAD files. These have 11 mm front borders and pockets for the supplied 59 × 8 mm LED dimensions. This is a CAD checkpoint; physical fit, lighting and thermal checks remain pending, so website compatibility presets stay disabled.

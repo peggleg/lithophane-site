@@ -42,3 +42,13 @@
 - [ ] Validate live canonical/social metadata and submit the sitemap after launch.
 
 Update README, this plan and relevant Markdown documentation with implementation changes. Distinguish implemented software, measured digital results, pending physical tests and deployment state.
+
+## Bambu LED mechanical prototype checkpoint
+
+- [x] Create A6 105 × 148 mm postcard frame for portrait/landscape placement, base LED pocket, reflector hood and sliding panel retainer.
+- [x] Create four-sided lantern from identical side frames, a slotted base and removable slotted top ring.
+- [x] Use 11 mm front borders, Ø59.6 × 8.4 mm LED pockets and open cable exits.
+- [x] Supply STL/STEP/FreeCAD files, small fit-test pieces and CAD assembly interference checks.
+- [ ] Test actual prints, brightness distribution, retention, cable fit and operating temperatures before publishing compatibility claims.
+
+See models/bambu-led-frames/README.md. These prototypes do not enable website frame presets or replace the remaining physical validation tasks.
