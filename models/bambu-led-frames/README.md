@@ -80,3 +80,6 @@ The base and the LED holder are separate STL/STEP parts. The 18 × 13 × 4.8 mm 
 A 5.8 mm-wide central bypass remains clear under the key and mast. The CAD checks verify an uninterrupted 5 × 3 mm cable envelope in the base route, a clear key-body insertion path, closed part meshes and the existing rear-only frame screw access. Fit-test socket/key STLs are supplied: print these together first before the full holder. They are optional calibration pieces, not extra assembly components. Connectors do not need threading through a closed hole: position the wire while the holder is separate, then press the holder into the base.
 
 `postcard-stand-two-piece.png` shows the holder raised above its socket with an illustrative cable laid into the groove. Orange arrows indicate pressing down; do not print the diagram arrows or reference LED/cable.
+
+
+The holder cable relief now breaks fully through the underside of the locating key: it is an open-bottom U-shaped notch, not a closed eyelet. The base retains its groove floor. A dedicated CAD check verifies the entire underside opening is free of material, alongside the assembled cable-clearance test. Updated holder and fit-test-key files supersede the earlier closed-bottom key.

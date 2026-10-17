@@ -64,3 +64,5 @@ for x in [.37,.73]:
  bpy.ops.mesh.primitive_cylinder_add(vertices=24,radius=.008,depth=.12,location=(x,.70,.19));bpy.context.object.data.materials.append(gold)
  bpy.ops.mesh.primitive_cone_add(vertices=24,radius1=0,radius2=.035,depth=.07,location=(x,.70,.095));bpy.context.object.data.materials.append(gold)
 render('postcard-stand-two-piece.png',(2.5,3.6,2.3),(.55,.53,.45),1.85)
+
+render('postcard-holder-open-notch.png',(1.45,2.1,.85),(.55,.70,.22),1.0)

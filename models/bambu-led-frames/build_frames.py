@@ -86,7 +86,10 @@ stand=stand.cut(box(45.85,63.85,3.0,18.3,13.3,6))
 wire_route=box(BASE_W/2-2.9,32,4.8,5.8,BASE_D-31,3.8)
 stand=stand.cut(wire_route).removeSplitter()
 key=box(46,64,3.2,18,13,4.8)
-holder_core=union(box(BASE_W/2-10,63,8,20,15,38),tilted(cradle),key).cut(wire_route).removeSplitter()
+# Holder relief must break through the underside of the key. The base keeps
+# its cable-groove floor, but the removable part must not form a closed eyelet.
+holder_wire_relief=box(BASE_W/2-2.9,32,3.0,5.8,BASE_D-31,5.6)
+holder_core=union(box(BASE_W/2-10,63,8,20,15,38),tilted(cradle),key).cut(holder_wire_relief).removeSplitter()
 # Four shallow sacrificial ribs provide 0.05 mm nominal interference per side.
 # The plain lower key enters first; only the ribs should grip the socket.
 ribs=[]
@@ -100,6 +103,8 @@ press_overlap=press_ribs.common(stand).Volume
 assert abs(holder.common(stand).Volume-press_overlap)<1e-6,'Interference outside intended press ribs'
 cable_envelope=box(BASE_W/2-2.5,32,5.1,5,BASE_D-31,3)
 assert union(stand,holder).common(cable_envelope).Volume<1e-6,'Cable channel is pinched'
+open_bottom=box(BASE_W/2-2.8,63,2.0,5.6,15,6.5)
+assert holder.common(open_bottom).Volume<1e-6,'Holder cable notch is closed underneath'
 for lift in [1,3,5,10,20]:
     assert move(holder_core,0,0,lift).common(stand).Volume<1e-6,'Holder insertion obstructed'
 led_postcard=tilted(Part.makeCylinder(LED_D/2,LED_H,V(0,0,3.8)))

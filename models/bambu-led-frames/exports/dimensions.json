@@ -57,7 +57,7 @@
         75.379
       ],
       "solid": true,
-      "triangles": 1746
+      "triangles": 1742
     },
     {
       "part": "lantern_side_frame",
@@ -156,7 +156,7 @@
         10.8
       ],
       "solid": true,
-      "triangles": 1068
+      "triangles": 1064
     }
   ]
 }
