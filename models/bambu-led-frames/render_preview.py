@@ -7,7 +7,7 @@ def mat(name,color):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);return m
 frame=mat('Forest green prototype',(.12,.24,.19));panel=mat('Placeholder panel',(.82,.72,.49));led=mat('LED reference',(.85,.85,.85));floor=mat('Background',(.84,.82,.77))
 for path in (root/'preview_parts').glob('*.stl'):
- if not ('Lantern' in path.stem or path.stem in ['PostcardBase','PostcardFrame','PostcardRetainer','Reference_Postcard_Panel','Reference_LED_59x8_Postcard']):continue
+ if not ('Lantern' in path.stem or path.stem in ['PostcardBase','PostcardHolder','PostcardFrame','PostcardRetainer','Reference_Postcard_Panel','Reference_LED_59x8_Postcard']):continue
  bpy.ops.wm.stl_import(filepath=str(path));obj=bpy.context.object
  obj.data.materials.clear()
  obj.data.materials.append(led if 'LED' in path.name else panel if 'Panel' in path.name else frame)

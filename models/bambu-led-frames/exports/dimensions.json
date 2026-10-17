@@ -43,10 +43,21 @@
       "bounds_mm": [
         110.0,
         90.0,
-        78.579
+        8.0
       ],
       "solid": true,
-      "triangles": 758
+      "triangles": 76
+    },
+    {
+      "part": "postcard_led_holder",
+      "quantity": 1,
+      "bounds_mm": [
+        66.0,
+        43.345,
+        75.379
+      ],
+      "solid": true,
+      "triangles": 1746
     },
     {
       "part": "lantern_side_frame",
@@ -124,6 +135,28 @@
       ],
       "solid": true,
       "triangles": 524
+    },
+    {
+      "part": "fit_test_stand_socket",
+      "quantity": 1,
+      "bounds_mm": [
+        30.0,
+        27.0,
+        8.0
+      ],
+      "solid": true,
+      "triangles": 60
+    },
+    {
+      "part": "fit_test_stand_key",
+      "quantity": 1,
+      "bounds_mm": [
+        20.0,
+        15.0,
+        10.8
+      ],
+      "solid": true,
+      "triangles": 1068
     }
   ]
 }

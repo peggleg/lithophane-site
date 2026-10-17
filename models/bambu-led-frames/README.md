@@ -13,7 +13,7 @@ Two mechanical prototypes for the owner's 59 mm diameter × 8 mm high LED kit. T
 
 ## Frame 1 — slim postcard frame (revised)
 
-Print one each of postcard_frame, postcard_top_retainer and postcard_base. The earlier deep reflector hood, roof, port cover and portrait spacers are superseded and excluded from the updated model pack.
+Print one each of postcard_frame, postcard_top_retainer, postcard_base and postcard_led_holder. The earlier deep reflector hood, roof, port cover and portrait spacers are superseded and excluded from the updated model pack.
 
 The frame is **8.8 mm deep** with **11 mm assembled front borders**. Its finished outline including the removable top rail is 123.4 × 166.4 mm. The open back has no enclosure or roof. The removable stand is **110 × 90 mm**, with an 8 mm base plate and a raised LED cradle reaching approximately 79 mm above the table.
 
@@ -21,9 +21,9 @@ The frame is **8.8 mm deep** with **11 mm assembled front borders**. Its finishe
 2. Slide a 105 × 148 mm lithophane, at most 3 mm thick, straight down from the top into the side channels. The image faces the front mask; the relief can face the rear LED.
 3. Refit the stepped top rail and insert both screws from the rear into the printed pilot holes. Use 6 mm screws only; the rear clearance bores lead to blind pilots that leave a continuous 2.4 mm front skin. The rail prevents the panel sliding out when the frame is used in landscape orientation. Repeated disassembly may wear printed threads; test the fit before repeated use.
 4. Seat the frame's lower edge in the stand's open-ended slot, centred over the base. The same slot accepts the long edge for landscape placement; the frame overhangs the stand at its ends.
-5. Seat the LED in the angled recess behind the panel. Its emitting face points forward and 30 degrees upward. Route the wire through the cradle's lower 5 mm notch and the base's rear cable groove. The kit itself is gravity-seated; verify retention before moving the assembly.
+5. With the LED holder separate from the base, seat the LED in its angled recess. Lay its wire into the open cradle notch and the base groove, then press the keyed holder down into the base socket until its shoulder rests on the base. Keep the cable in the central bypass, away from the side gripping ribs. Its emitting face points forward and 30 degrees upward. Route the wire through the cradle's lower 5 mm notch and the base's rear cable groove. The kit itself is gravity-seated; verify retention before moving the assembly.
 
-The cradle directs light towards the image without enclosing it. Even illumination and comfortable viewing still require a physical test with the actual kit and filament. No calibrated brightness or operating-temperature claim is made. The angled cradle underside needs local supports in the slicer. The top rail is exported resting on its wide outer top edge, with its locating tongues growing upward, to avoid unsupported tongues.
+The cradle directs light towards the image without enclosing it. Even illumination and comfortable viewing still require a physical test with the actual kit and filament. No calibrated brightness or operating-temperature claim is made. The separate LED holder needs supports beneath the angled cradle; the base plate prints flat. The top rail is exported resting on its wide outer top edge, with its locating tongues growing upward, to avoid unsupported tongues.
 
 The assembled front and the partial-insertion front/rear renders show the actual CAD geometry. The artwork is illustrative; the panel shown in renders is a flat dimensional placeholder, not a newly generated relief or a physical print photograph.
 
@@ -46,7 +46,7 @@ The lantern base/top are approximately 145 × 145 mm. Finished height is approxi
 - dimensions.json: exact part bounds, quantities and closed-solid validation results.
 - ZIP: complete model pack and these notes.
 
-Print frame masks face-down, bases flat and retainers/covers/spacers flat. The lantern top ring is exported upside-down so its receiving slots face up. The postcard stand needs supports beneath its angled cradle; inspect the frame retaining-lip overhangs as well. Inspect supports and fit in the slicer. White material is useful for internal reflection; choose an appropriate material after checking the LED's actual operating temperatures. Keep ventilation open and follow the kit manufacturer's guidance. Never use a flame.
+Print frame masks face-down, bases flat and retainers/covers/spacers flat. The lantern top ring is exported upside-down so its receiving slots face up. The postcard LED holder needs supports beneath its angled cradle; inspect the frame retaining-lip overhangs as well. Inspect supports and fit in the slicer. White material is useful for internal reflection; choose an appropriate material after checking the LED's actual operating temperatures. Keep ventilation open and follow the kit manufacturer's guidance. Never use a flame.
 
 The CAD generator uses FreeCAD 1.1's bundled Python:
 
@@ -60,6 +60,23 @@ Generated outputs go into exports/. All part solids and tessellated meshes are v
 
 Print fit_test_led_socket first and check the actual LED housing and wire exit. Print fit_test_channel and fit_test_retainer to check the revised postcard channel, top-rail tongue and screw pilot. These are optional small test pieces, not additional frame assembly parts.
 
-Both portrait and landscape postcard assemblies, and the lantern assembly, are checked for solid intersections by the generator. STL mesh closure is checked for each of the 10 unique printable/test parts. Assembly STEP/FCStd files contain reference panels and nominal LEDs; print individual part STLs only. The renders use artwork on flat dimensional placeholder panels; they are CAD assembly illustrations, not photographs or predictions of lit print quality.
+Both portrait and landscape postcard assemblies, and the lantern assembly, are checked for solid intersections by the generator. STL mesh closure is checked for each of the 13 unique printable/test parts. Assembly STEP/FCStd files contain reference panels and nominal LEDs; print individual part STLs only. The renders use artwork on flat dimensional placeholder panels; they are CAD assembly illustrations, not photographs or predictions of lit print quality.
 
 Rear-fastener checks verify uninterrupted front material, a clear screw path, 0.4 mm screw-tip clearance to the blind-hole end, and screwdriver access in portrait and landscape. There are no holes or screw heads on the front display face.
+
+## Lantern assembly renders
+
+1. `exports/lantern-1-panel-insertion.png`: slide each A6 panel down through the open top of its side frame, then insert the small retainer. Repeat for all four sides.
+2. `exports/lantern-2-exploded-assembly.png`: place the LED in the central base recess and route its cable through the rear channel; lower each loaded frame into its matching base slot; lower the top ring over their upper edges. Exploded parts remain vertically aligned with their receiving slots. The LED is lifted for visibility.
+3. `exports/lantern-3-assembled.png`: the completed lantern retains its open, ventilated top. The ring captures the loose panel retainers and locates the sides; it is not a carrying handle.
+
+These renders use the existing CAD without changing any printable geometry. Artwork on the flat reference panels illustrates assembly only. Orange arrows are diagram guides, not model parts. Physical fit and lighting remain untested.
+
+
+## Two-piece postcard stand
+
+The base and the LED holder are separate STL/STEP parts. The 18 × 13 × 4.8 mm locating key fits an 18.3 × 13.3 × 5 mm pocket. Four shallow gripping ribs provide 0.05 mm nominal interference per side; the lower plain section guides insertion. The rib interference is intentional and accounted for separately from assembly collisions. Physical press-fit force depends on printer/material tolerances.
+
+A 5.8 mm-wide central bypass remains clear under the key and mast. The CAD checks verify an uninterrupted 5 × 3 mm cable envelope in the base route, a clear key-body insertion path, closed part meshes and the existing rear-only frame screw access. Fit-test socket/key STLs are supplied: print these together first before the full holder. They are optional calibration pieces, not extra assembly components. Connectors do not need threading through a closed hole: position the wire while the holder is separate, then press the holder into the base.
+
+`postcard-stand-two-piece.png` shows the holder raised above its socket with an illustrative cable laid into the groove. Orange arrows indicate pressing down; do not print the diagram arrows or reference LED/cable.

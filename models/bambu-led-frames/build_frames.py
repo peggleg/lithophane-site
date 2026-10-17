@@ -79,10 +79,29 @@ def tilted(shape):
 cradle=Part.makeCylinder(33,12)
 cradle=cradle.cut(Part.makeCylinder(RECESS_D/2,10,V(0,0,3.6)))
 cradle=cradle.cut(box(-2.5,-35,3.6,5,35,10))
-stand=union(box(0,0,0,BASE_W,BASE_D,8),box(BASE_W/2-10,63,8,20,15,38),tilted(cradle))
-# Open-ended frame slot accepts either portrait or landscape lower edge.
+# Two-piece stand: keyed holder presses down after the wire is laid in the groove.
+stand=box(0,0,0,BASE_W,BASE_D,8)
 stand=stand.cut(box(-1,8,2.8,BASE_W+2,T+.4,6))
-stand=stand.cut(box(BASE_W/2-2.5,32,5,5,BASE_D-31,4)).removeSplitter()
+stand=stand.cut(box(45.85,63.85,3.0,18.3,13.3,6))
+wire_route=box(BASE_W/2-2.9,32,4.8,5.8,BASE_D-31,3.8)
+stand=stand.cut(wire_route).removeSplitter()
+key=box(46,64,3.2,18,13,4.8)
+holder_core=union(box(BASE_W/2-10,63,8,20,15,38),tilted(cradle),key).cut(wire_route).removeSplitter()
+# Four shallow sacrificial ribs provide 0.05 mm nominal interference per side.
+# The plain lower key enters first; only the ribs should grip the socket.
+ribs=[]
+for x in [46.2,63.8]:
+    for y in [67,74]:
+        ribs.append(union(Part.makeCone(.2,.4,.6,V(x,y,4.2)),Part.makeCylinder(.4,2.6,V(x,y,4.8))))
+press_ribs=union(*ribs)
+holder=union(holder_core,press_ribs)
+assert holder_core.common(stand).Volume<1e-6,'Key body has unintended interference'
+press_overlap=press_ribs.common(stand).Volume
+assert abs(holder.common(stand).Volume-press_overlap)<1e-6,'Interference outside intended press ribs'
+cable_envelope=box(BASE_W/2-2.5,32,5.1,5,BASE_D-31,3)
+assert union(stand,holder).common(cable_envelope).Volume<1e-6,'Cable channel is pinched'
+for lift in [1,3,5,10,20]:
+    assert move(holder_core,0,0,lift).common(stand).Volume<1e-6,'Holder insertion obstructed'
 led_postcard=tilted(Part.makeCylinder(LED_D/2,LED_H,V(0,0,3.8)))
 
 # Frame 2: four identical A6 sides. Adjacent ends meet at square corners;
@@ -105,11 +124,13 @@ ring=slots(ring,-1,6.4)
 # Long open slots at the top are filled by side channels; leave a vented centre.
 
 parts={
- 'postcard_frame':frame1,'postcard_top_retainer':cap1,'postcard_base':stand,
+ 'postcard_frame':frame1,'postcard_top_retainer':cap1,'postcard_base':stand,'postcard_led_holder':holder,
  'lantern_side_frame':frame,'lantern_top_retainer':cap,'lantern_base':base2,'lantern_top_ring':ring,
  'fit_test_channel':frame1.common(box(0,H-25,-1,20,26,T+2)),
  'fit_test_retainer':cap1.common(box(-1,H-13,-1,21,14,T+2)),
  'fit_test_led_socket':led_base(70,70,10,35,35,10),
+ 'fit_test_stand_socket':stand.common(box(40,58,0,30,27,8)),
+ 'fit_test_stand_key':holder.common(box(42,61,0,26,19,14)),
 }
 counts={'lantern_side_frame':4,'lantern_top_retainer':4}
 doc=App.newDocument('Bambu_LED_A6_Prototypes')
@@ -137,7 +158,7 @@ def upright(shape,width=W):
     s=shape.copy();s.rotate(V(0,0,0),V(1,0,0),90)
     s.rotate(V(0,0,0),V(0,0,1),180)
     s.translate(V((BASE_W+width)/2,8.2,2.8));return s
-postcard_objects=[feature('PostcardBase',stand),feature('PostcardFrame',upright(frame1)),
+postcard_objects=[feature('PostcardBase',stand),feature('PostcardHolder',holder),feature('PostcardFrame',upright(frame1)),
                   feature('PostcardRetainer',upright(cap1)),
                   feature('Reference_LED_59x8_Postcard',led_postcard),
                   feature('Reference_Postcard_Panel',upright(box(9.2,9.2,3.2,PW,PH,3)))]
@@ -164,10 +185,12 @@ Part.export(lantern_objects,str(OUT/'lantern_assembly.step'))
 def landscape(shape):
     s=shape.copy();s.rotate(V(0,0,0),V(0,0,1),90);s.translate(V(H,0,0))
     return upright(s,H)
-landscape_shapes=[stand,landscape(frame1),landscape(cap1),led_postcard,
+landscape_shapes=[stand,holder,landscape(frame1),landscape(cap1),led_postcard,
                   landscape(box(9.2,9.2,3.2,PW,PH,3))]
 for i,a in enumerate(landscape_shapes):
-    for b in landscape_shapes[i+1:]:assert a.common(b).Volume<.001,'Landscape assembly interference'
+    for b in landscape_shapes[i+1:]:
+        allowed=press_overlap if i==0 and b.isSame(holder) else 0
+        assert abs(a.common(b).Volume-allowed)<.001,'Landscape assembly interference'
 Part.makeCompound(landscape_shapes).exportStep(str(OUT/'postcard_landscape_assembly.step'))
 # Verify the panel insertion path with the top retainer removed.
 for lift in [0,40,80,160]:
@@ -183,13 +206,15 @@ for x in [4.5,W-4.5]:
     driver=Part.makeCylinder(3,70,V(x,H-8,T+.001))
     for transform in [upright,landscape]:
         access=transform(driver)
-        for obstacle in [stand,led_postcard,transform(frame1),transform(cap1)]:
+        for obstacle in [stand,holder,led_postcard,transform(frame1),transform(cap1)]:
             assert access.common(obstacle).Volume<1e-6,'Rear screwdriver access obstructed'
 # Check actual assembled fits, not just whether each isolated part is a solid.
 for group in [postcard_objects,lantern_objects]:
     for i,a in enumerate(group):
         for b in group[i+1:]:
-            overlap=a.Shape.common(b.Shape).Volume
+            overlap_shape=a.Shape.common(b.Shape)
+            allowed=press_overlap if {a.Name,b.Name}=={'PostcardBase','PostcardHolder'} else 0
+            overlap=abs(overlap_shape.Volume-allowed)
             assert overlap<.001, 'Assembly interference: %s / %s: %f mm3'%(a.Name,b.Name,overlap)
 for label,group in [('postcard',postcard_objects),('lantern',lantern_objects)]:
     mesh=MeshPart.meshFromShape(Shape=Part.makeCompound([o.Shape for o in group]),LinearDeflection=.15,AngularDeflection=.2,Relative=False)
@@ -200,7 +225,7 @@ for obj in postcard_objects+lantern_objects:
     mesh=MeshPart.meshFromShape(Shape=obj.Shape,LinearDeflection=.15,AngularDeflection=.2,Relative=False)
     mesh.write(str(preview_dir/(obj.Name+'.stl')))
 # Partial insertion view: panel slides vertically down the open side channels.
-for name,shape in [('Insert_Frame',upright(frame1)),('Insert_Base',stand),
+for name,shape in [('Insert_Frame',upright(frame1)),('Insert_Base',stand),('Insert_Holder',holder),
                    ('Insert_Panel',upright(box(9.2,74.2,3.2,PW,PH,3))),
                    ('Insert_Retainer',upright(move(cap1,0,100,0))),
                    ('Insert_LED',led_postcard)]:
@@ -209,6 +234,6 @@ doc.recompute();doc.saveAs(str(OUT/'bambu_led_frames.FCStd'))
 (OUT/'dimensions.json').write_text(json.dumps({'panel_mm':[PW,PH],'visible_window_mm':[W-22,H-22],'border_mm':BORDER,'panel_slot_mm':PANEL_GAP,'led_recess_mm':[RECESS_D,RECESS_H],'slide_clearance_mm':slot_clearance,'parts':records},indent=2))
 with zipfile.ZipFile(OUT/'bambu-led-a6-frame-prototypes.zip','w',zipfile.ZIP_DEFLATED) as archive:
     for p in OUT.iterdir():
-        if p.stem in parts or p.name in ['bambu_led_frames.FCStd','dimensions.json','postcard_assembly.step','postcard_landscape_assembly.step','lantern_assembly.step']:archive.write(p,p.name)
+        if (p.stem in parts and p.suffix.lower() in ['.stl','.step']) or p.name in ['bambu_led_frames.FCStd','dimensions.json','postcard_assembly.step','postcard_landscape_assembly.step','lantern_assembly.step']:archive.write(p,p.name)
     archive.write(HERE/'README.md','README.md')
 print(json.dumps({'output':str(OUT),'parts':len(records),'all_parts_valid_closed_solids':True,'dimensions':records},indent=2))
