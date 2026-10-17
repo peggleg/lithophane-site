@@ -1,11 +1,13 @@
 """Separate Frame V2. Does not regenerate or modify the base, holder or V1."""
 from pathlib import Path
-import hashlib,json,zipfile
+import hashlib,json,zipfile,sys
 import FreeCAD as A,Part,MeshPart
 R=Path(__file__).resolve().parent;O=R/'frame-v2';O.mkdir(exist_ok=True)
 V=A.Vector;W,H,T=123.4,166.4,8.8
 protected_files=[R/'exports'/n for n in ['postcard_base.stl','postcard_base.step','postcard_led_holder.stl','postcard_led_holder.step']]
-before={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in protected_files}
+rail_only='--rail-only' in sys.argv
+if rail_only:protected_files += [O/'postcard_frame_v2.stl',O/'postcard_frame_v2.step',O/'fit_test_frame_v2.stl',O/'fit_test_frame_v2.step']
+before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected_files}
 def box(x,y,z,w,h,d):return Part.makeBox(w,h,d,V(x,y,z))
 def fuse(*parts):
  s=parts[0]
@@ -20,7 +22,8 @@ def prism(points,z,length):
 rails=[];grooves=[]
 for c in [4.5,W-4.5]:
  rails.append(prism([(c-1.8,H-3),(c+1.8,H-3),(c+2.6,H-1.4),(c-2.6,H-1.4)],1.4,6.0))
- grooves.append(prism([(c-2.1,H-3.2),(c+2.1,H-3.2),(c+2.1,H-3),(c+2.9,H-1.4),(c+2.9,H-1.1),(c-2.9,H-1.1),(c-2.9,H-1.4),(c-2.1,H-3)],-1,8.4))
+ # Only the female groove changes: 0.10 mm side/top clearance.
+ grooves.append(prism([(c-1.9,H-3.1),(c+1.9,H-3.1),(c+1.9,H-3),(c+2.7,H-1.4),(c+2.7,H-1.3),(c-2.7,H-1.3),(c-2.7,H-1.4),(c-1.9,H-3)],-1,8.4))
 frame=fuse(body,box(0,H-3,0,W,3,1.2),*rails)
 # Keeper contacts the panel at exactly the original Y=157.4 stop plane. It
 # remains between the rear lips, allowing the cap to slide in from the rear.
@@ -54,7 +57,8 @@ for name,shape in parts.items():
  if 'rail' in name:p.rotate(V(0,0,0),V(1,0,0),180)
  bb=p.BoundBox;p.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
  m=MeshPart.meshFromShape(Shape=p,LinearDeflection=.1,AngularDeflection=.15,Relative=False);assert m.isSolid(),name
- m.write(str(O/(name+'.stl')));p.exportStep(str(O/(name+'.step')))
+ if not rail_only or 'rail' in name:
+  m.write(str(O/(name+'.stl')));p.exportStep(str(O/(name+'.step')))
  obj=doc.addObject('PartDesign::Feature',name);obj.Shape=shape
  bb=p.BoundBox
  bed_faces=[f for f in p.Faces if f.BoundBox.ZLength<1e-7 and abs(f.BoundBox.ZMin)<1e-7]
@@ -68,8 +72,8 @@ for name,s in [('FrameV2',upright(frame)),('RailV2',upright(cap)),('RailV2_Remov
  MeshPart.meshFromShape(Shape=s,LinearDeflection=.1,AngularDeflection=.15,Relative=False).write(str(O/(name+'_preview.stl')))
 doc.recompute();doc.saveAs(str(O/'postcard_frame_v2.FCStd'))
 Part.makeCompound([frame,cap]).exportStep(str(O/'postcard_frame_v2_assembly.step'))
-assert before=={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in protected_files},'Base or LED fitting changed'
-(O/'validation.json').write_text(json.dumps({'image_channel_identical_to_v1':True,'panel_stop_y_mm':157.4,'base_and_led_files_unchanged':True,'rail_slide_direction':'from rear, towards front','lateral_clearance_mm_per_side':.3,'both_parts_face_down':True,'slide_and_panel_paths_checked':True,'lift_capture_checked':True,'parts':meta},indent=2))
+assert before=={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected_files},'Base or LED fitting changed'
+(O/'validation.json').write_text(json.dumps({'image_channel_identical_to_v1':True,'panel_stop_y_mm':157.4,'base_and_led_files_unchanged':True,'rail_slide_direction':'from rear, towards front','main_frame_files_unchanged':rail_only,'lateral_clearance_mm_per_side':.1,'top_clearance_mm':.1,'both_parts_face_down':True,'slide_and_panel_paths_checked':True,'lift_capture_checked':True,'parts':meta},indent=2))
 with zipfile.ZipFile(O/'postcard-frame-v2.zip','w',zipfile.ZIP_DEFLATED) as z:
  for p in O.iterdir():
   if p.suffix.lower() in ['.stl','.step','.fcstd','.json'] and '_preview' not in p.name:z.write(p,p.name)

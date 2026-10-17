@@ -121,3 +121,6 @@ A separate screwless frame and rear-sliding dovetail top rail are available in [
 
 
 Frame V2 print orientation: the frame is exported display-face down and its rail exposed-rear-face down. The rail keeper is flush with that print face, with 959.32 mm² of verified plate contact. Image channel, dovetail clearance, base and LED fitting remain unchanged.
+
+
+V2 loose-rail adjustment: only the top rail female dovetails now use 0.1 mm side/top clearance. The main-frame STL/STEP and frame coupon files are hash-verified unchanged; reprint only the rail or its short fit coupon.
