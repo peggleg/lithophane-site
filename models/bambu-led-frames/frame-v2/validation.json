@@ -1,0 +1,47 @@
+{
+  "image_channel_identical_to_v1": true,
+  "panel_stop_y_mm": 157.4,
+  "base_and_led_files_unchanged": true,
+  "rail_slide_direction": "from rear, towards front",
+  "lateral_clearance_mm_per_side": 0.3,
+  "slide_and_panel_paths_checked": true,
+  "lift_capture_checked": true,
+  "parts": [
+    {
+      "part": "postcard_frame_v2",
+      "bounds_mm": [
+        123.4,
+        166.4,
+        8.8
+      ],
+      "closed": true
+    },
+    {
+      "part": "postcard_top_rail_v2",
+      "bounds_mm": [
+        123.4,
+        7.4,
+        9.0
+      ],
+      "closed": true
+    },
+    {
+      "part": "fit_test_frame_v2",
+      "bounds_mm": [
+        9.0,
+        14.0,
+        8.8
+      ],
+      "closed": true
+    },
+    {
+      "part": "fit_test_rail_v2",
+      "bounds_mm": [
+        9.0,
+        7.4,
+        2.8000000000000114
+      ],
+      "closed": true
+    }
+  ]
+}

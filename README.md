@@ -114,3 +114,7 @@ All 19 Node tests pass, including drag direction, edge clamping, no movement on 
 
 
 Physical-fit adjustment: postcard top-rail tabs are now 5.2 × 3.4 × 8.5 mm with tapered tips, giving 0.4 mm width clearance per side in the unchanged frame pockets. Reprint only the rail or try its small fit coupon first. Rear screw positions are unchanged.
+
+## Postcard Frame V2
+
+A separate screwless frame and rear-sliding dovetail top rail are available in [frame-v2](models/bambu-led-frames/frame-v2/README.md). The image channel is checked against V1 and remains identical. The existing base and LED-holder files are unchanged. V1 remains available; V2 has its own filenames, CAD, ZIP and small fit samples.
