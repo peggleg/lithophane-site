@@ -4,6 +4,7 @@
   "base_and_led_files_unchanged": true,
   "rail_slide_direction": "from rear, towards front",
   "lateral_clearance_mm_per_side": 0.3,
+  "both_parts_face_down": true,
   "slide_and_panel_paths_checked": true,
   "lift_capture_checked": true,
   "parts": [
@@ -14,16 +15,20 @@
         166.4,
         8.8
       ],
-      "closed": true
+      "closed": true,
+      "print_face": "display front down",
+      "bed_contact_mm2": 5891.600000000002
     },
     {
       "part": "postcard_top_rail_v2",
       "bounds_mm": [
         123.4,
-        7.4,
-        9.0
+        9.0,
+        7.400000000000003
       ],
-      "closed": true
+      "closed": true,
+      "print_face": "exposed rear down",
+      "bed_contact_mm2": 959.3200000000002
     },
     {
       "part": "fit_test_frame_v2",
@@ -32,16 +37,20 @@
         14.0,
         8.8
       ],
-      "closed": true
+      "closed": true,
+      "print_face": "display front down",
+      "bed_contact_mm2": 126.0
     },
     {
       "part": "fit_test_rail_v2",
       "bounds_mm": [
         9.0,
-        7.4,
-        2.8000000000000114
+        2.8000000000000114,
+        7.400000000000003
       ],
-      "closed": true
+      "closed": true,
+      "print_face": "exposed rear down",
+      "bed_contact_mm2": 25.200000000000102
     }
   ]
 }

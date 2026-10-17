@@ -118,3 +118,6 @@ Physical-fit adjustment: postcard top-rail tabs are now 5.2 × 3.4 × 8.5 mm wit
 ## Postcard Frame V2
 
 A separate screwless frame and rear-sliding dovetail top rail are available in [frame-v2](models/bambu-led-frames/frame-v2/README.md). The image channel is checked against V1 and remains identical. The existing base and LED-holder files are unchanged. V1 remains available; V2 has its own filenames, CAD, ZIP and small fit samples.
+
+
+Frame V2 print orientation: the frame is exported display-face down and its rail exposed-rear-face down. The rail keeper is flush with that print face, with 959.32 mm² of verified plate contact. Image channel, dovetail clearance, base and LED fitting remain unchanged.
