@@ -21,6 +21,7 @@
 - [x] Block downloads during image replacement; invalidate stale exports on edits, reset and cancellation.
 - [x] Preserve selected mesh spacing when loading seasonal artwork and warn about limited source resolution.
 - [x] Fix narrow-screen lightbox overflow.
+- [x] Add crop zoom and reset, explain/disable axes without crop room, and use identical crop framing in preview and exports.
 - [x] Validate full 120 × 100 mm exports and Bambu Studio imports; document evidence in [QUALITY_VALIDATION.md](QUALITY_VALIDATION.md).
 
 ## Remaining product and physical work

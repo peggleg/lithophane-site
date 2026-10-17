@@ -25,7 +25,7 @@ All application dependencies are bundled; no runtime CDN, fonts, or API calls. P
 ## Included
 
 - Custom panel dimensions, STL and millimetre 3MF geometry exports.
-- Crop/fill or whole-photo fit, crop positioning, brightness, contrast, invert and illustrative backlit preview.
+- Crop/fill with 100–400% zoom, horizontal/vertical positioning and crop reset; whole-photo fit, brightness, contrast, invert and illustrative backlit preview.
 - Planning frame-edge overlay, low-resolution/dark-photo/crop feedback.
 - Approximate solid PLA volume/mass, print guidance and downloadable settings summary.
 - 20 × 20 mm constant maximum-thickness corner coupon; tests slot/corner fit, not full panel dimensions.
@@ -88,3 +88,7 @@ Export memory estimates include source pixels, sampling buffers, mesh arrays, ou
 ## Current Cloudflare workflow
 
 The repository is Git-connected to the `lithophane-site` Pages project. Push only to `preview/lithophane` for this work; production auto-deployments are disabled according to the configured setup. No Cloudflare token, Wrangler command, DNS change or custom-domain attachment is needed. Earlier Direct Upload instructions are superseded by [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md).
+
+## Crop controls
+
+In Fill panel mode, zoom above 100% creates room to move the image on both axes, including photos that match the panel proportions. Sliders with no available movement are disabled with a nearby explanation. Fit whole photo shows the full image with centred white margins and disables crop-only controls. Reset crop returns to 100% zoom and centred positioning without changing tones or dimensions; a new photo or seasonal design also resets crop positioning. Preview and worker exports share the same source rectangle. Print summaries include zoom and positions.

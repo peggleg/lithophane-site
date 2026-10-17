@@ -1,13 +1,24 @@
 import './style.css';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
-import {drawPhoto,paintBacklight} from './image-processing.js';
+import {drawPhoto,paintBacklight,photoLayout} from './image-processing.js';
 const $=id=>document.getElementById(id);
-const fields=['width','height','min','max','detail','crop','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
+const fields=['width','height','min','max','detail','crop','zoom','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
 let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading=false,renderFrame=0;
 const canvas=$('preview'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 const n=id=>Number($(id).value);
-const adjustments=()=>({crop:$('crop').value,panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
+const adjustments=()=>({crop:$('crop').value,zoom:n('zoom'),panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
+function cropControls(p){
+ const ready=!!image&&!loading,cover=$('crop').value==='cover';
+ const layout=ready&&p?photoLayout(image.width,image.height,p.width/p.height,adjustments()):null;
+ const horizontal=!!layout&&image.width-layout.sw>image.width*1e-9;
+ const vertical=!!layout&&image.height-layout.sh>image.height*1e-9;
+ $('zoom').disabled=!ready||!cover;$('panx').disabled=!ready||!cover||!horizontal;$('pany').disabled=!ready||!cover||!vertical;
+ $('reset-crop').disabled=!ready;
+ $('zoom-value').value=`${n('zoom')}%`;
+ $('panx-value').value=`${n('panx')}%`;$('pany-value').value=`${n('pany')}%`;
+ $('crop-help').textContent=!ready?'Choose a photo to adjust its crop.':!cover?'The whole photo is shown. Choose Fill panel (crop) to zoom and reposition.':horizontal&&vertical?'Move the sliders to choose which part of the photo fills the panel.':!horizontal&&!vertical?'The photo already fits the panel exactly. Increase crop zoom to move it horizontally or vertically.':!horizontal?'Increase crop zoom to enable horizontal positioning. Vertical positioning is available.':'Increase crop zoom to enable vertical positioning. Horizontal positioning is available.';
+}
 function settings(){
  const p={width:n('width'),height:n('height'),min:n('min'),max:n('max')};
  if(![p.width,p.height,p.min,p.max,n('overlap')].every(Number.isFinite)||p.width<20||p.width>300||p.height<20||p.height>300||p.min<0.6||p.min>3||p.max<p.min||p.max>6||n('overlap')<0||n('overlap')>15)throw Error('Use panel sizes of 20–300 mm, minimum thickness 0.6–3 mm, maximum thickness up to 6 mm and at least the minimum, and edge overlap of 0–15 mm.');
@@ -17,7 +28,8 @@ function settings(){
 function controlsEnabled(valid){for(const id of ['stl','three-mf','summary','test-fit'])$(id).disabled=!valid||exporting||loading;}
 function render(){
  $('brightness-value').value=$('brightness').value;$('contrast-value').value=$('contrast').value;
- let p;try{p=settings();}catch(e){grid=null;controlsEnabled(false);$('fit-overlay').hidden=true;$('feedback').textContent=e.message;return;}
+ let p;try{p=settings();}catch(e){grid=null;controlsEnabled(false);cropControls(null);$('fit-overlay').hidden=true;$('feedback').textContent=e.message;return;}
+ cropControls(p);
  grid=image?p:null;
  const stl=exportEstimate(p,'stl'),mf=exportEstimate(p,'3mf');
  $('mesh-summary').textContent=`${p.spacingX.toFixed(3)} × ${p.spacingY.toFixed(3)} mm spacing · ${p.cols.toLocaleString()} × ${p.rows.toLocaleString()} samples · ${p.triangles.toLocaleString()} triangles. STL ${(stl.outputBytes/MIB).toFixed(1)} MiB; 3MF up to ${(mf.outputBytes/MIB).toFixed(1)} MiB (uncompressed).`;
@@ -58,6 +70,7 @@ window.addEventListener('resize',scheduleRender);
 for(const id of fields)$(id).addEventListener('input',()=>{cancelExport(false);render();});
 function beginLoad(){
  const token=++loadId;cancelExport(false);loading=true;controlsEnabled(false);$('fit-overlay').hidden=true;
+ cropControls(null);
  $('feedback').textContent='Opening photo locally…';return token;
 }
 function failedLoad(token,message){if(token!==loadId)return;loading=false;render();$('feedback').textContent=message;}
@@ -69,7 +82,7 @@ $('photo').addEventListener('change',async()=>{
   const decoded=await createImageBitmap(file,{imageOrientation:'from-image'});
   if(token!==loadId){decoded.close();return;}
   if(decoded.width*decoded.height>24000000){decoded.close();throw Error('Choose a photo no larger than 24 megapixels.');}
-  image?.close();image=decoded;loading=false;render();
+  image?.close();image=decoded;loading=false;resetCrop();render();
  }catch{failedLoad(token,'This photo could not be opened. Choose a JPEG, PNG or WebP up to 24 megapixels.');}
 });
 function download(bytes,name,type){const url=URL.createObjectURL(bytes instanceof Blob?bytes:new Blob([bytes],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -101,13 +114,15 @@ async function startExport(format,test=false){
  }catch(e){copy?.close();if(token!==exportId)return;cancelExport(false);$('export-status').textContent=`Export failed: ${e.message}`;}
 }
 $('stl').onclick=()=>startExport('stl');$('three-mf').onclick=()=>startExport('3mf');$('test-fit').onclick=()=>startExport('stl',true);$('cancel').onclick=()=>cancelExport();
+function resetCrop(){ $('zoom').value=100;$('panx').value=50;$('pany').value=50; }
+$('reset-crop').onclick=()=>{cancelExport(false);resetCrop();render();};
 $('summary').onclick=()=>{
  if(!grid)return;const p=grid;
- download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Bambu kit frame planned with cable slit; exact kit pending. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nFrames and licences: https://makerworld.com/en/@peggleg\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
+ download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Bambu kit frame planned with cable slit; exact kit pending. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nFrames and licences: https://makerworld.com/en/@peggleg\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
 };
 $('reset').onclick=()=>{
  ++loadId;loading=false;cancelExport(false);image?.close();image=null;grid=null;$('photo').value='';
- for(const [id,value]of Object.entries({width:120,height:100,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
+ for(const [id,value]of Object.entries({width:120,height:100,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
  $('invert').checked=false;$('overlay').checked=true;
  canvas.width=1;canvas.height=1;canvas.style.display='none';$('empty').hidden=false;$('fit-overlay').hidden=true;$('material-estimate').textContent='Add a photo';$('export-status').textContent='Session cleared. Existing downloads stay on your device.';$('feedback').textContent='Everything happens in this browser. No account needed.';render();
 };
@@ -120,7 +135,7 @@ for(const button of document.querySelectorAll('[data-seasonal]'))button.addEvent
   const decoded=await createImageBitmap(art);art.width=1;art.height=1;
   if(token!==loadId){decoded.close();return;}
   image?.close();image=decoded;loading=false;$('photo').value='';
-  $('brightness').value=0;$('contrast').value=0;$('invert').checked=false;$('panx').value=50;$('pany').value=50;
+  $('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
   render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded. Custom panel geometry only; frame fit is not validated.';
   $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
  }catch(e){failedLoad(token,'Could not load seasonal artwork: '+e.message);}
