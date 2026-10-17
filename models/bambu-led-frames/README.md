@@ -83,3 +83,8 @@ A 5.8 mm-wide central bypass remains clear under the key and mast. The CAD check
 
 
 The holder cable relief now breaks fully through the underside of the locating key: it is an open-bottom U-shaped notch, not a closed eyelet. The base retains its groove floor. A dedicated CAD check verifies the entire underside opening is free of material, alongside the assembled cable-clearance test. Updated holder and fit-test-key files supersede the earlier closed-bottom key.
+
+
+## Easier-removal top-rail tabs
+
+After a physical tight-fit/breakage report, both postcard top-rail tabs are reduced from 5.7 × 3.8 × 9 mm to **5.2 × 3.4 × 8.5 mm**, with a 1 mm tapered lead at each tip. Width clearance in the existing 6 mm pockets is now **0.4 mm per side**. Pocket geometry and rear screw centres are unchanged, so the existing frame is reusable. Reprint the top rail (postcard_top_retainer.stl); the updated fit_test_retainer.stl is available for a small trial first. Remove both rear screws fully before withdrawing the rail, and do not force a tight fit.

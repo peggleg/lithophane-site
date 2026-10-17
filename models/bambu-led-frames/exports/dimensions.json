@@ -32,10 +32,10 @@
       "bounds_mm": [
         123.4,
         8.8,
-        12.0
+        11.5
       ],
       "solid": true,
-      "triangles": 756
+      "triangles": 772
     },
     {
       "part": "postcard_base",
@@ -120,10 +120,10 @@
       "bounds_mm": [
         20.0,
         8.8,
-        12.0
+        11.5
       ],
       "solid": true,
-      "triangles": 392
+      "triangles": 400
     },
     {
       "part": "fit_test_led_socket",

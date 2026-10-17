@@ -65,11 +65,20 @@ for x in [1.5,W-7.5]:
     frame1=frame1.cut(box(x,H-12,3.2,6,H,4.0))
     frame1=frame1.cut(Part.makeCylinder(1.6,3,V(x+3,H-8,7.0)))
     frame1=frame1.cut(Part.makeCylinder(1.3,T-FRONT_SKIN+1,V(x+3,H-8,FRONT_SKIN)))
+# Easier-removal top-rail tabs: 0.4 mm clearance per side in the existing
+# 6 mm pockets, plus a 1 mm tapered lead. Screw centres remain unchanged.
+TAB_WIDTH,TAB_DEPTH,TAB_LENGTH=5.2,3.4,8.5
+def rail_tab(centre):
+    def outline(y,width,depth):
+        x=centre-width/2;z=5.1-depth/2
+        points=[V(x,y,z),V(x+width,y,z),V(x+width,y,z+depth),V(x,y,z+depth),V(x,y,z)]
+        return Part.makePolygon(points)
+    lead=Part.makeLoft([outline(H-3-TAB_LENGTH,TAB_WIDTH-.6,TAB_DEPTH-.6),outline(H-2-TAB_LENGTH,TAB_WIDTH,TAB_DEPTH)],True)
+    return union(lead,box(centre-TAB_WIDTH/2,H-2-TAB_LENGTH,5.1-TAB_DEPTH/2,TAB_WIDTH,TAB_LENGTH-1,TAB_DEPTH))
 cap1=union(box(0,H-3,0,W,3,T),
            box(9.2,157.4,3.2,PW,6,3),
            box(12.2,157.4,6.2,PW-6,6,2.4),
-           box(1.65,H-12,3.2,5.7,9,3.8),
-           box(W-7.35,H-12,3.2,5.7,9,3.8))
+           rail_tab(4.5),rail_tab(W-4.5))
 for x in [4.5,W-4.5]:cap1=cap1.cut(Part.makeCylinder(1.3,T-FRONT_SKIN+1,V(x,H-8,FRONT_SKIN)))
 frame1=frame1.removeSplitter();cap1=cap1.removeSplitter()
 # LED faces forward and 30 degrees upward from a raised rear cradle.
@@ -200,6 +209,13 @@ Part.makeCompound(landscape_shapes).exportStep(str(OUT/'postcard_landscape_assem
 # Verify the panel insertion path with the top retainer removed.
 for lift in [0,40,80,160]:
     assert frame1.common(box(9.2,9.2+lift,3.2,PW,PH,3)).Volume<.001,'Panel insertion interference'
+# Tab envelope must remain a clearance fit in the existing printed frame.
+assert (6-TAB_WIDTH)/2>=.399999,'Tab width clearance too small'
+assert TAB_DEPTH<=3.4 and TAB_LENGTH<=8.5,'Tab dimensions regressed'
+for centre in [4.5,W-4.5]:
+    pocket=box(centre-3,H-12,3.2,6,9,4.0)
+    tab=rail_tab(centre)
+    assert tab.cut(pocket).Volume<1e-6,'Tab exceeds existing pocket'
 # Regression checks for the display face and rear-only fastener access.
 expected_skin=frame.common(box(-1,-1,0,W+2,H-2,FRONT_SKIN-.01))
 assert expected_skin.cut(frame1).Volume<1e-6,'Front mask was pierced'
