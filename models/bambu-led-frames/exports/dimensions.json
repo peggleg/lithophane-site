@@ -24,7 +24,7 @@
         8.8
       ],
       "solid": true,
-      "triangles": 1456
+      "triangles": 1448
     },
     {
       "part": "postcard_top_retainer",
@@ -101,7 +101,7 @@
         8.8
       ],
       "solid": true,
-      "triangles": 732
+      "triangles": 728
     },
     {
       "part": "fit_test_retainer",

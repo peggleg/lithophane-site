@@ -58,16 +58,19 @@ cap=keeper()
 # Frame 1 revision: open slim frame, no hood or roof.
 BASE_W, BASE_D = 110, 90
 frame1=frame.common(box(-1,-1,-1,W+2,H-2,T+2))
-# Two removable keeper tongues, captured by small M3 screws for landscape use.
+# Rear-only M3 x 6 mm access. Keep 2.4 mm of uninterrupted front skin.
+SCREW_LENGTH=6.0
+FRONT_SKIN=2.4
 for x in [1.5,W-7.5]:
-    frame1=frame1.cut(box(x,H-12,3.2,6,H,5.4))
-    frame1=frame1.cut(Part.makeCylinder(1.6,T+2,V(x+3,H-8,-1)))
+    frame1=frame1.cut(box(x,H-12,3.2,6,H,4.0))
+    frame1=frame1.cut(Part.makeCylinder(1.6,3,V(x+3,H-8,7.0)))
+    frame1=frame1.cut(Part.makeCylinder(1.3,T-FRONT_SKIN+1,V(x+3,H-8,FRONT_SKIN)))
 cap1=union(box(0,H-3,0,W,3,T),
            box(9.2,157.4,3.2,PW,6,3),
            box(12.2,157.4,6.2,PW-6,6,2.4),
-           box(1.65,H-12,3.2,5.7,9,5.2),
-           box(W-7.35,H-12,3.2,5.7,9,5.2))
-for x in [4.5,W-4.5]:cap1=cap1.cut(Part.makeCylinder(1.3,10,V(x,H-8,-1)))
+           box(1.65,H-12,3.2,5.7,9,3.8),
+           box(W-7.35,H-12,3.2,5.7,9,3.8))
+for x in [4.5,W-4.5]:cap1=cap1.cut(Part.makeCylinder(1.3,T-FRONT_SKIN+1,V(x,H-8,FRONT_SKIN)))
 frame1=frame1.removeSplitter();cap1=cap1.removeSplitter()
 # LED faces forward and 30 degrees upward from a raised rear cradle.
 def tilted(shape):
@@ -169,6 +172,19 @@ Part.makeCompound(landscape_shapes).exportStep(str(OUT/'postcard_landscape_assem
 # Verify the panel insertion path with the top retainer removed.
 for lift in [0,40,80,160]:
     assert frame1.common(box(9.2,9.2+lift,3.2,PW,PH,3)).Volume<.001,'Panel insertion interference'
+# Regression checks for the display face and rear-only fastener access.
+expected_skin=frame.common(box(-1,-1,0,W+2,H-2,FRONT_SKIN-.01))
+assert expected_skin.cut(frame1).Volume<1e-6,'Front mask was pierced'
+assert box(0,H-3,0,W,3,FRONT_SKIN-.01).cut(cap1).Volume<1e-6,'Top rail front was pierced'
+assert T-SCREW_LENGTH>FRONT_SKIN,'Screw tip would exceed blind-hole depth'
+for x in [4.5,W-4.5]:
+    axis=Part.makeCylinder(1.2,T-FRONT_SKIN+1,V(x,H-8,FRONT_SKIN+.001))
+    assert union(frame1,cap1).common(axis).Volume<1e-6,'Rear screw path obstructed'
+    driver=Part.makeCylinder(3,70,V(x,H-8,T+.001))
+    for transform in [upright,landscape]:
+        access=transform(driver)
+        for obstacle in [stand,led_postcard,transform(frame1),transform(cap1)]:
+            assert access.common(obstacle).Volume<1e-6,'Rear screwdriver access obstructed'
 # Check actual assembled fits, not just whether each isolated part is a solid.
 for group in [postcard_objects,lantern_objects]:
     for i,a in enumerate(group):

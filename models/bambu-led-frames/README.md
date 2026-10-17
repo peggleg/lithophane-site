@@ -7,7 +7,7 @@ Two mechanical prototypes for the owner's 59 mm diameter × 8 mm high LED kit. T
 - A6 postcard panel: **105 × 148 mm**, maximum thickness **3.0 mm** recommended.
 - Front border: **11 mm**; visible aperture **101.4 × 144.4 mm**.
 - Panel cavity: 105.4 mm wide, 148.4 mm high, 3.4 mm deep. About 2 mm of each image edge is hidden.
-- Slide the panel into the open top of the U channel. Fit the removable top retainer behind the front mask. The postcard frame has a separate top rail secured by two M3 × 8 mm screws into 2.6 mm pilot holes; the lantern uses its existing loose retainer captured by the top ring.
+- Slide the panel into the open top of the U channel. Fit the removable top retainer behind the front mask. The postcard frame has a separate top rail secured by two M3 × 6 mm screws into 2.6 mm pilot holes; the lantern uses its existing loose retainer captured by the top ring.
 - Retainer and sliding fits are deliberately loose prototypes. Actual printer tolerances vary; test a short channel/retainer section before committing to full parts. Do not force or glue the LED into its pocket.
 - LED recess: **Ø59.6 × 8.4 mm**, with finger access and a 5 mm open cable escape. No screw positions or connector size have been assumed.
 
@@ -17,9 +17,9 @@ Print one each of postcard_frame, postcard_top_retainer and postcard_base. The e
 
 The frame is **8.8 mm deep** with **11 mm assembled front borders**. Its finished outline including the removable top rail is 123.4 × 166.4 mm. The open back has no enclosure or roof. The removable stand is **110 × 90 mm**, with an 8 mm base plate and a raised LED cradle reaching approximately 79 mm above the table.
 
-1. Remove the top rail and its two M3 × 8 mm screws (additional hardware, not assumed to be included with the LED kit).
+1. From the rear, remove the top rail’s two M3 × 6 mm screws (additional hardware, not assumed to be included with the LED kit).
 2. Slide a 105 × 148 mm lithophane, at most 3 mm thick, straight down from the top into the side channels. The image faces the front mask; the relief can face the rear LED.
-3. Refit the stepped top rail and tighten the two screws gently into the printed pilot holes. The rail prevents the panel sliding out when the frame is used in landscape orientation. Repeated disassembly may wear printed threads; test the fit before repeated use.
+3. Refit the stepped top rail and insert both screws from the rear into the printed pilot holes. Use 6 mm screws only; the rear clearance bores lead to blind pilots that leave a continuous 2.4 mm front skin. The rail prevents the panel sliding out when the frame is used in landscape orientation. Repeated disassembly may wear printed threads; test the fit before repeated use.
 4. Seat the frame's lower edge in the stand's open-ended slot, centred over the base. The same slot accepts the long edge for landscape placement; the frame overhangs the stand at its ends.
 5. Seat the LED in the angled recess behind the panel. Its emitting face points forward and 30 degrees upward. Route the wire through the cradle's lower 5 mm notch and the base's rear cable groove. The kit itself is gravity-seated; verify retention before moving the assembly.
 
@@ -61,3 +61,5 @@ Generated outputs go into exports/. All part solids and tessellated meshes are v
 Print fit_test_led_socket first and check the actual LED housing and wire exit. Print fit_test_channel and fit_test_retainer to check the revised postcard channel, top-rail tongue and screw pilot. These are optional small test pieces, not additional frame assembly parts.
 
 Both portrait and landscape postcard assemblies, and the lantern assembly, are checked for solid intersections by the generator. STL mesh closure is checked for each of the 10 unique printable/test parts. Assembly STEP/FCStd files contain reference panels and nominal LEDs; print individual part STLs only. The renders use artwork on flat dimensional placeholder panels; they are CAD assembly illustrations, not photographs or predictions of lit print quality.
+
+Rear-fastener checks verify uninterrupted front material, a clear screw path, 0.4 mm screw-tip clearance to the blind-hole end, and screwdriver access in portrait and landscape. There are no holes or screw heads on the front display face.
