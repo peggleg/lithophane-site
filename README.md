@@ -96,3 +96,8 @@ In Fill panel mode, zoom above 100% creates room to move the image on both axes,
 ## First Bambu LED frame prototypes
 
 Editable A6 postcard and four-sided lantern prototypes are now in [models/bambu-led-frames](models/bambu-led-frames/README.md), with STL, STEP and FreeCAD files. These have 11 mm front borders and pockets for the supplied 59 × 8 mm LED dimensions. This is a CAD checkpoint; physical fit, lighting and thermal checks remain pending, so website compatibility presets stay disabled.
+
+
+## Slim postcard frame revision
+
+The postcard prototype now uses an 8.8 mm open frame with 11 mm borders and a removable 110 × 90 mm stand with a raised, angled LED cradle. The deep hood and roof are superseded. A top-loading panel channel and removable rail use two M3 × 8 mm screws for retention in either orientation. Updated STL/STEP/FreeCAD files and insertion renders are in models/bambu-led-frames/. Digital checks cover panel insertion and assembly clearances; physical fit and illumination remain pending. The lantern geometry is unchanged.

@@ -36,7 +36,7 @@ def panel_frame():
     return union(front,walls,lips)
 
 def keeper():
-    # Loose sliding top stop. Top ring (lantern) or hood (postcard) captures it.
+    # Lantern sliding top stop; the top ring captures it.
     return union(box(0,0,0,PW,8.8,3),box(3,0,3,PW-6,8.8,2.4))
 
 def led_base(width,depth,thickness,ledx,ledy,top):
@@ -55,29 +55,32 @@ def led_base(width,depth,thickness,ledx,ledy,top):
 
 frame=panel_frame()
 cap=keeper()
-# Frame 1: rear sleeve surrounds the panel frame; 80 mm lightwell behind it.
-# Two perpendicular 64 mm light ports permit portrait/landscape rotation.
-HW, HH, DEPTH = W+4.5,H+4.5,88.8
-hood=box(-2.25,-2.25,0,HW,HH,DEPTH)
-hood=hood.cut(box(.75,.75,-1,W-1.5,H-1.5,DEPTH-1))
-hood=hood.cut(box(-FIT,-FIT,-1,W+2*FIT,H+2*FIT,10.2))
-hood=hood.cut(box(W/2-32,-3,18,64,5,64))
-hood=hood.cut(box(-3,H/2-32,18,5,64,64))
-for y in [12,H-15]:
-    for x in [W/2-32,W/2+8]:
-        hood=hood.cut(box(x,y,DEPTH-3,24,3,5))
-hood=hood.removeSplitter()
-# One plug closes the unused side/bottom light port. Print flat flange down.
-port_cover=union(box(0,0,0,70,70,1.5),box(3.2,3.2,1.5,63.6,63.6,2.8))
-# Shallow locating tray supports the entire lightwell; spacers centre portrait use.
-BASE_W,BASE_D=180,105
-tray_w=HH+.6
-tray_d=DEPTH+.6
-tray_x=(BASE_W-tray_w)/2
-tray_y=7.7
-base1=led_base(BASE_W,BASE_D,12,90,57.7,10.5)
-base1=base1.cut(box(tray_x,tray_y,10.5,tray_w,tray_d,3)).removeSplitter()
-spacer=box(0,0,0,(HH-HW)/2-.3,DEPTH,1.4)
+# Frame 1 revision: open slim frame, no hood or roof.
+BASE_W, BASE_D = 110, 90
+frame1=frame.common(box(-1,-1,-1,W+2,H-2,T+2))
+# Two removable keeper tongues, captured by small M3 screws for landscape use.
+for x in [1.5,W-7.5]:
+    frame1=frame1.cut(box(x,H-12,3.2,6,H,5.4))
+    frame1=frame1.cut(Part.makeCylinder(1.6,T+2,V(x+3,H-8,-1)))
+cap1=union(box(0,H-3,0,W,3,T),
+           box(9.2,157.4,3.2,PW,6,3),
+           box(12.2,157.4,6.2,PW-6,6,2.4),
+           box(1.65,H-12,3.2,5.7,9,5.2),
+           box(W-7.35,H-12,3.2,5.7,9,5.2))
+for x in [4.5,W-4.5]:cap1=cap1.cut(Part.makeCylinder(1.3,10,V(x,H-8,-1)))
+frame1=frame1.removeSplitter();cap1=cap1.removeSplitter()
+# LED faces forward and 30 degrees upward from a raised rear cradle.
+def tilted(shape):
+    s=shape.copy();s.rotate(V(0,0,0),V(1,0,0),60)
+    s.translate(V(BASE_W/2,65,44));return s
+cradle=Part.makeCylinder(33,12)
+cradle=cradle.cut(Part.makeCylinder(RECESS_D/2,10,V(0,0,3.6)))
+cradle=cradle.cut(box(-2.5,-35,3.6,5,35,10))
+stand=union(box(0,0,0,BASE_W,BASE_D,8),box(BASE_W/2-10,63,8,20,15,38),tilted(cradle))
+# Open-ended frame slot accepts either portrait or landscape lower edge.
+stand=stand.cut(box(-1,8,2.8,BASE_W+2,T+.4,6))
+stand=stand.cut(box(BASE_W/2-2.5,32,5,5,BASE_D-31,4)).removeSplitter()
+led_postcard=tilted(Part.makeCylinder(LED_D/2,LED_H,V(0,0,3.8)))
 
 # Frame 2: four identical A6 sides. Adjacent ends meet at square corners;
 # the base and top ring locate each side independently, avoiding printed hinges.
@@ -99,14 +102,13 @@ ring=slots(ring,-1,6.4)
 # Long open slots at the top are filled by side channels; leave a vented centre.
 
 parts={
- 'postcard_frame':frame,'postcard_top_retainer':cap,'postcard_reflector_hood':hood,
- 'postcard_base':base1,'postcard_unused_port_cover':port_cover,'postcard_portrait_spacer':spacer,
+ 'postcard_frame':frame1,'postcard_top_retainer':cap1,'postcard_base':stand,
  'lantern_side_frame':frame,'lantern_top_retainer':cap,'lantern_base':base2,'lantern_top_ring':ring,
- 'fit_test_channel':frame.common(box(0,H-25,-1,20,26,T+2)),
- 'fit_test_retainer':cap.common(box(-1,-1,-1,21,11,8)),
+ 'fit_test_channel':frame1.common(box(0,H-25,-1,20,26,T+2)),
+ 'fit_test_retainer':cap1.common(box(-1,H-13,-1,21,14,T+2)),
  'fit_test_led_socket':led_base(70,70,10,35,35,10),
 }
-counts={'postcard_portrait_spacer':2,'lantern_side_frame':4,'lantern_top_retainer':4}
+counts={'lantern_side_frame':4,'lantern_top_retainer':4}
 doc=App.newDocument('Bambu_LED_A6_Prototypes')
 
 def feature(name,shape):
@@ -117,8 +119,7 @@ def feature(name,shape):
 for name,shape in parts.items():
     assert shape.isValid() and len(shape.Solids)==1 and shape.Volume>0,name
     printed=shape.copy()
-    # Hood prints rear face down; its side ports require supports.
-    if name=='postcard_reflector_hood':printed.rotate(V(0,0,0),V(1,0,0),180)
+    if name in ['postcard_top_retainer','fit_test_retainer']:printed.rotate(V(0,0,0),V(1,0,0),-90)
     if name=='lantern_top_ring':printed.rotate(V(0,0,0),V(1,0,0),180)
     bb=printed.BoundBox;printed.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
     mesh=MeshPart.meshFromShape(Shape=printed,LinearDeflection=.12,AngularDeflection=.15,Relative=False)
@@ -128,23 +129,15 @@ for name,shape in parts.items():
     bb=printed.BoundBox
     records.append({'part':name,'quantity':counts.get(name,1),'bounds_mm':[round(bb.XLength,3),round(bb.YLength,3),round(bb.ZLength,3)],'solid':True,'triangles':mesh.CountFacets})
 
-# Assembled portrait frame: image plane X/Z, lightwell behind it in Y.
-def upright(shape, width=W):
+# Assembled postcard frame: front faces -Y, open rear exposes the LED cradle.
+def upright(shape,width=W):
     s=shape.copy();s.rotate(V(0,0,0),V(1,0,0),90)
-    # Model depth Z becomes -Y; front face points towards viewer (+Y).
     s.rotate(V(0,0,0),V(0,0,1),180)
-    s.translate(V((BASE_W+width)/2,tray_y+.3,12.75))
-    return s
-postcard_objects=[feature('PostcardBase',base1),feature('PostcardFrame',upright(frame)),feature('PostcardHood',upright(hood)),feature('PostcardRetainer',upright(move(cap,9.2,PH+9.2,3.2)))]
-# A nominal kit envelope for clearance illustration, not a printable LED model.
-led1=feature('Reference_LED_59x8_Postcard',Part.makeCylinder(LED_D/2,LED_H,V(90,57.7,2.1)))
-led1.addProperty('App::PropertyString','Note');led1.Note='REFERENCE ONLY — do not print. Physical kit not included.'
-postcard_objects.append(led1)
-cover=port_cover.copy();cover.rotate(V(0,0,0),V(0,1,0),90);cover.translate(V(-3.75,H/2-35,85))
-postcard_objects.append(feature('PostcardUnusedPortCover',upright(cover)))
-for x in [tray_x+.2,BASE_W-tray_x-.2-spacer.BoundBox.XLength]:
-    postcard_objects.append(feature('PortraitSpacer',move(spacer,x,tray_y+.3,10.5)))
-postcard_objects.append(feature('Reference_Postcard_Panel',upright(box(9.2,9.2,3.2,PW,PH,3))))
+    s.translate(V((BASE_W+width)/2,8.2,2.8));return s
+postcard_objects=[feature('PostcardBase',stand),feature('PostcardFrame',upright(frame1)),
+                  feature('PostcardRetainer',upright(cap1)),
+                  feature('Reference_LED_59x8_Postcard',led_postcard),
+                  feature('Reference_Postcard_Panel',upright(box(9.2,9.2,3.2,PW,PH,3)))]
 Part.export(postcard_objects,str(OUT/'postcard_assembly.step'))
 
 lantern_objects=[feature('LanternBase',move(base2,230))]
@@ -164,16 +157,18 @@ led2=feature('Reference_LED_59x8_Lantern',Part.makeCylinder(LED_D/2,LED_H,V(230+
 led2.addProperty('App::PropertyString','Note');led2.Note='REFERENCE ONLY — do not print.'
 lantern_objects.append(led2)
 Part.export(lantern_objects,str(OUT/'lantern_assembly.step'))
-# Landscape rotates the same frame and hood; the cover moves to the other port.
+# Same frame rotated 90 degrees, in the same removable base slot.
 def landscape(shape):
     s=shape.copy();s.rotate(V(0,0,0),V(0,0,1),90);s.translate(V(H,0,0))
     return upright(s,H)
-landscape_cover=port_cover.copy();landscape_cover.rotate(V(0,0,0),V(1,0,0),-90)
-landscape_cover.translate(V(W/2-35,-3.75,85))
-landscape_shapes=[base1,landscape(frame),landscape(hood),landscape(move(cap,9.2,PH+9.2,3.2)),landscape(landscape_cover)]
+landscape_shapes=[stand,landscape(frame1),landscape(cap1),led_postcard,
+                  landscape(box(9.2,9.2,3.2,PW,PH,3))]
 for i,a in enumerate(landscape_shapes):
     for b in landscape_shapes[i+1:]:assert a.common(b).Volume<.001,'Landscape assembly interference'
 Part.makeCompound(landscape_shapes).exportStep(str(OUT/'postcard_landscape_assembly.step'))
+# Verify the panel insertion path with the top retainer removed.
+for lift in [0,40,80,160]:
+    assert frame1.common(box(9.2,9.2+lift,3.2,PW,PH,3)).Volume<.001,'Panel insertion interference'
 # Check actual assembled fits, not just whether each isolated part is a solid.
 for group in [postcard_objects,lantern_objects]:
     for i,a in enumerate(group):
@@ -188,10 +183,16 @@ preview_dir.mkdir(exist_ok=True)
 for obj in postcard_objects+lantern_objects:
     mesh=MeshPart.meshFromShape(Shape=obj.Shape,LinearDeflection=.15,AngularDeflection=.2,Relative=False)
     mesh.write(str(preview_dir/(obj.Name+'.stl')))
+# Partial insertion view: panel slides vertically down the open side channels.
+for name,shape in [('Insert_Frame',upright(frame1)),('Insert_Base',stand),
+                   ('Insert_Panel',upright(box(9.2,74.2,3.2,PW,PH,3))),
+                   ('Insert_Retainer',upright(move(cap1,0,100,0))),
+                   ('Insert_LED',led_postcard)]:
+    MeshPart.meshFromShape(Shape=shape,LinearDeflection=.15,AngularDeflection=.2,Relative=False).write(str(preview_dir/(name+'.stl')))
 doc.recompute();doc.saveAs(str(OUT/'bambu_led_frames.FCStd'))
 (OUT/'dimensions.json').write_text(json.dumps({'panel_mm':[PW,PH],'visible_window_mm':[W-22,H-22],'border_mm':BORDER,'panel_slot_mm':PANEL_GAP,'led_recess_mm':[RECESS_D,RECESS_H],'slide_clearance_mm':slot_clearance,'parts':records},indent=2))
 with zipfile.ZipFile(OUT/'bambu-led-a6-frame-prototypes.zip','w',zipfile.ZIP_DEFLATED) as archive:
     for p in OUT.iterdir():
-        if p.suffix.lower() in ['.stl','.step','.fcstd','.json'] and '_assembly_preview' not in p.name:archive.write(p,p.name)
+        if p.stem in parts or p.name in ['bambu_led_frames.FCStd','dimensions.json','postcard_assembly.step','postcard_landscape_assembly.step','lantern_assembly.step']:archive.write(p,p.name)
     archive.write(HERE/'README.md','README.md')
 print(json.dumps({'output':str(OUT),'parts':len(records),'all_parts_valid_closed_solids':True,'dimensions':records},indent=2))
