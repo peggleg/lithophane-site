@@ -28,3 +28,5 @@ body{background-image:radial-gradient(#6d654b0b .65px,transparent .65px);backgro
 #preview:focus-visible{outline:3px solid #294832;outline-offset:4px}
 
 .orientation{display:flex;gap:6px;margin:12px 0}.orientation button{flex:1;border-radius:6px;padding:10px 5px;background:#e5e9dc;color:#294832;font-size:11px}.orientation button[aria-pressed="true"]{background:#294832;color:white}.seasonal-art{aspect-ratio:105/148}
+
+dialog{max-width:460px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:12px;padding:24px;background:#fffdf9;color:#352d25}dialog::backdrop{background:#352d2577}dialog h2{font-size:27px}#save-name{width:100%;margin:8px 0}

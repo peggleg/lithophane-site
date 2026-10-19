@@ -1,4 +1,5 @@
 import './style.css';
+import {exportFilename,chooseSaveTarget} from './export-save.js';
 import {postcardSize,FRAME_URL} from './postcards.js';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
@@ -6,6 +7,7 @@ import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.
 const $=id=>document.getElementById(id);
 const fields=['width','height','min','max','detail','crop','zoom','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
 let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading=false,renderFrame=0;
+let source={name:'My lithophane',custom:false};
 const canvas=$('preview'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 const n=id=>Number($(id).value);
 const adjustments=()=>({crop:$('crop').value,zoom:n('zoom'),panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
@@ -60,6 +62,7 @@ function render(){
  $('brightness-value').value=$('brightness').value;$('contrast-value').value=$('contrast').value;
  let p;try{p=settings();}catch(e){grid=null;controlsEnabled(false);cropControls(null);$('fit-overlay').hidden=true;$('feedback').textContent=e.message;return;}
  cropControls(p);
+ $('export-name').textContent=image?`Export name: ${exportFilename(source.name,p,'stl')}`:'';
  grid=image?p:null;
  const stl=exportEstimate(p,'stl'),mf=exportEstimate(p,'3mf');
  $('mesh-summary').textContent=`${p.spacingX.toFixed(3)} × ${p.spacingY.toFixed(3)} mm spacing · ${p.cols.toLocaleString()} × ${p.rows.toLocaleString()} samples · ${p.triangles.toLocaleString()} triangles. STL ${(stl.outputBytes/MIB).toFixed(1)} MiB; 3MF up to ${(mf.outputBytes/MIB).toFixed(1)} MiB (uncompressed).`;
@@ -111,7 +114,7 @@ function beginLoad(){
  $('feedback').textContent='Opening photo locally…';return token;
 }
 function failedLoad(token,message){if(token!==loadId)return;loading=false;render();$('feedback').textContent=message;}
-$('photo').addEventListener('change',async()=>{
+$('photo').addEventListener('input',async()=>{
  const file=$('photo').files[0];if(!file)return;
  const token=beginLoad();
  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20*1024*1024){failedLoad(token,'Choose a JPEG, PNG or WebP photo under 20 MB.');$('photo').value='';return;}
@@ -119,10 +122,17 @@ $('photo').addEventListener('change',async()=>{
   const decoded=await createImageBitmap(file,{imageOrientation:'from-image'});
   if(token!==loadId){decoded.close();return;}
   if(decoded.width*decoded.height>24000000){decoded.close();throw Error('Choose a photo no larger than 24 megapixels.');}
-  image?.close();image=decoded;loading=false;resetCrop();render();
+  image?.close();image=decoded;source={name:file.name,custom:true};loading=false;resetCrop();render();
  }catch{failedLoad(token,'This photo could not be opened. Choose a JPEG, PNG or WebP up to 24 megapixels.');}
 });
 function download(bytes,name,type){const url=URL.createObjectURL(bytes instanceof Blob?bytes:new Blob([bytes],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function askExportName(name){
+ return new Promise(resolve=>{
+  const dialog=$('save-dialog'),input=$('save-name');input.value=name.replace(/\.(jpe?g|png|webp)$/i,'');
+  dialog.addEventListener('close',()=>resolve(dialog.returnValue==='save'?input.value:null),{once:true});
+  dialog.returnValue='cancel';dialog.showModal();input.focus();input.select();
+ });
+}
 function cancelExport(report=true){
  const wasExporting=exporting;++exportId;worker?.terminate();worker=null;exporting=false;
  if(wasExporting)$('export-status').textContent=report?'Export cancelled.':'Settings or photo changed; the previous export was cancelled.';
@@ -136,30 +146,47 @@ async function startExport(format,test=false){
  try{
   assertExportBudget(panel,format,budget,test?0:image.width*image.height);
   if(!test&&typeof OffscreenCanvas==='undefined')throw Error('This browser does not support local image export. Try a current browser with OffscreenCanvas support.');
+  if(source.custom)$('export-status').textContent='Choose a file name and save destination.';
+  const destination=await chooseSaveTarget({name:test?`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-corner-test`:source.name,panel,format,custom:source.custom,picker:typeof window.showSaveFilePicker==='function'?window.showSaveFilePicker.bind(window):null,askName:askExportName});
+  if(token!==exportId)return;
+  if(!destination){$('export-status').textContent='Save cancelled.';return;}
   exporting=true;controlsEnabled(false);$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Building your file locally at the selected spacing…';
   if(!test)copy=await createImageBitmap(image);
   if(token!==exportId){copy?.close();return;}
   const job=new Worker(new URL('./export-worker.js',import.meta.url),{type:'module'});worker=job;
-  job.onmessage=({data})=>{
+  job.onmessage=async({data})=>{
    if(token!==exportId)return;
    if(data.progress!==undefined)$('progress').value=data.progress;
    if(data.error){cancelExport(false);$('export-status').textContent=`Export failed: ${data.error}`;}
-   if(data.blob){download(data.blob,test?'peggleg-corner-test-fit.stl':`peggleg-panel-${panel.width}x${panel.height}-${panel.detail}mm.${format}`);cancelExport(false);$('export-status').textContent='File generated at the selected spacing. Check your browser downloads.';}
+   if(data.blob){
+    let writable;
+    try{
+     if(destination.handle){
+      writable=await destination.handle.createWritable();
+      if(token!==exportId){await writable.abort();return;}
+      await writable.write(data.blob);
+      if(token!==exportId){await writable.abort();return;}
+      await writable.close();
+     }else download(data.blob,destination.filename,'application/octet-stream');
+     if(token!==exportId)return;
+     cancelExport(false);$('export-status').textContent=destination.handle?'Saved to your chosen location.':`Downloaded ${destination.filename}. Check your browser downloads.`;
+    }catch(e){if(writable)await writable.abort().catch(()=>{});if(token===exportId){cancelExport(false);$('export-status').textContent=`Could not save file: ${e.message}`;}}
+   }
   };
   job.onerror=()=>{if(token!==exportId)return;cancelExport(false);$('export-status').textContent='Export failed at the requested quality. The browser may have run out of memory. No lower-resolution file was generated; try another device or deliberately choose a smaller panel or wider spacing.';};
   job.postMessage({panel,format,image:copy,adjustments:photoAdjustments,budget},copy?[copy]:[]);copy=null;
- }catch(e){copy?.close();if(token!==exportId)return;cancelExport(false);$('export-status').textContent=`Export failed: ${e.message}`;}
+ }catch(e){copy?.close();if(token!==exportId)return;cancelExport(false);$('export-status').textContent=e.name==='AbortError'?'Save cancelled.':`Export failed: ${e.message}`;}
 }
 $('stl').onclick=()=>startExport('stl');$('three-mf').onclick=()=>startExport('3mf');$('test-fit').onclick=()=>startExport('stl',true);$('cancel').onclick=()=>cancelExport();
 function resetCrop(){ $('zoom').value=100;$('panx').value=50;$('pany').value=50; }
 $('reset-crop').onclick=()=>{cancelExport(false);resetCrop();render();};
 $('summary').onclick=()=>{
  if(!grid)return;const p=grid;
- download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
+ download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
 };
 $('reset').onclick=()=>{
  endDrag();
- ++loadId;loading=false;cancelExport(false);image?.close();image=null;grid=null;$('photo').value='';
+ ++loadId;loading=false;cancelExport(false);image?.close();image=null;source={name:'My lithophane',custom:false};grid=null;$('photo').value='';if($('save-dialog').open)$('save-dialog').close('cancel');
  for(const [id,value]of Object.entries({width:105,height:148,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
  $('invert').checked=false;$('overlay').checked=true;$('frame').value='postcard';
  canvas.width=1;canvas.height=1;canvas.style.display='none';$('empty').hidden=false;$('fit-overlay').hidden=true;$('material-estimate').textContent='Add a photo';$('export-status').textContent='Session cleared. Existing downloads stay on your device.';$('feedback').textContent='Everything happens in this browser. No account needed.';render();
@@ -173,7 +200,7 @@ for(const button of document.querySelectorAll('[data-seasonal]'))button.addEvent
   const art=await drawSeasonal(document.createElement('canvas'),button.dataset.seasonal);
   const decoded=await createImageBitmap(art);art.width=1;art.height=1;
   if(token!==loadId){decoded.close();return;}
-  image?.close();image=decoded;loading=false;$('photo').value='';
+  image?.close();image=decoded;source={name:seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name,custom:false};loading=false;$('photo').value='';
   applyPostcard('portrait');$('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
   render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded at 105 × 148 mm, maximum thickness 3 mm. Switch to landscape if needed.';
   $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
