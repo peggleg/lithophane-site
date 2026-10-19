@@ -1,4 +1,5 @@
 import './style.css';
+import {postcardSize,FRAME_URL} from './postcards.js';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
 import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.js';
@@ -55,6 +56,7 @@ function settings(){
 }
 function controlsEnabled(valid){for(const id of ['stl','three-mf','summary','test-fit'])$(id).disabled=!valid||exporting||loading;}
 function render(){
+ for(const b of document.querySelectorAll('[data-orientation]')){const size=postcardSize(b.dataset.orientation);b.setAttribute('aria-pressed',String(n('width')===size.width&&n('height')===size.height));}
  $('brightness-value').value=$('brightness').value;$('contrast-value').value=$('contrast').value;
  let p;try{p=settings();}catch(e){grid=null;controlsEnabled(false);cropControls(null);$('fit-overlay').hidden=true;$('feedback').textContent=e.message;return;}
  cropControls(p);
@@ -63,7 +65,7 @@ function render(){
  $('mesh-summary').textContent=`${p.spacingX.toFixed(3)} × ${p.spacingY.toFixed(3)} mm spacing · ${p.cols.toLocaleString()} × ${p.rows.toLocaleString()} samples · ${p.triangles.toLocaleString()} triangles. STL ${(stl.outputBytes/MIB).toFixed(1)} MiB; 3MF up to ${(mf.outputBytes/MIB).toFixed(1)} MiB (uncompressed).`;
  $('panel-estimate').textContent=`${p.width} × ${p.height} mm`;
  const allowance=$('clearance').value==='side'?0.4:0.2;
- $('fit-summary').textContent=`Planning opening: ${(p.width+allowance).toFixed(1)} × ${(p.height+allowance).toFixed(1)} mm. Visible photo: ${(p.width-2*n('overlap')).toFixed(1)} × ${(p.height-2*n('overlap')).toFixed(1)} mm. This does not resize the panel. Final frame dimensions and clearance convention remain unconfirmed.`;
+ $('fit-summary').textContent=`Planning opening: ${(p.width+allowance).toFixed(1)} × ${(p.height+allowance).toFixed(1)} mm. Visible photo: ${(p.width-2*n('overlap')).toFixed(1)} × ${(p.height-2*n('overlap')).toFixed(1)} mm. This does not resize the panel. Postcard frame limit: 105 × 148 × 3 mm, or 148 × 105 × 3 mm.`;
  controlsEnabled(!!image);
  if(!image||loading)return;
  const lightbox=canvas.parentElement,style=getComputedStyle(lightbox);
@@ -95,7 +97,10 @@ function positionOverlay(){
 function scheduleRender(){cancelAnimationFrame(renderFrame);renderFrame=requestAnimationFrame(render);}
 new ResizeObserver(scheduleRender).observe(canvas.parentElement);
 window.addEventListener('resize',scheduleRender);
-for(const id of fields)$(id).addEventListener('input',()=>{endDrag();cancelExport(false);render();});
+for(const id of fields)$(id).addEventListener('input',()=>{endDrag();cancelExport(false);if(['width','height','max'].includes(id))$('frame').value='custom';render();});
+function applyPostcard(orientation){for(const [key,value]of Object.entries(postcardSize(orientation)))$(key).value=value;$('frame').value='postcard';}
+for(const button of document.querySelectorAll('[data-orientation]'))button.onclick=()=>{endDrag();cancelExport(false);applyPostcard(button.dataset.orientation);resetCrop();render();};
+$('frame').onchange=()=>{endDrag();cancelExport(false);if($('frame').value==='postcard'){applyPostcard(n('width')>n('height')?'landscape':'portrait');resetCrop();}render();};
  for(const [id,change]of [['zoom-out',-5],['zoom-in',5]])$(id).onclick=()=>{
   $('zoom').value=Math.max(100,Math.min(400,n('zoom')+change));cancelExport(false);render();
  };
@@ -150,17 +155,18 @@ function resetCrop(){ $('zoom').value=100;$('panx').value=50;$('pany').value=50;
 $('reset-crop').onclick=()=>{cancelExport(false);resetCrop();render();};
 $('summary').onclick=()=>{
  if(!grid)return;const p=grid;
- download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Bambu kit frame planned with cable slit; exact kit pending. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nFrames and licences: https://makerworld.com/en/@peggleg\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
+ download(`PEGGLEG LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,'peggleg-print-summary.txt','text/plain');
 };
 $('reset').onclick=()=>{
  endDrag();
  ++loadId;loading=false;cancelExport(false);image?.close();image=null;grid=null;$('photo').value='';
- for(const [id,value]of Object.entries({width:120,height:100,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
- $('invert').checked=false;$('overlay').checked=true;
+ for(const [id,value]of Object.entries({width:105,height:148,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
+ $('invert').checked=false;$('overlay').checked=true;$('frame').value='postcard';
  canvas.width=1;canvas.height=1;canvas.style.display='none';$('empty').hidden=false;$('fit-overlay').hidden=true;$('material-estimate').textContent='Add a photo';$('export-status').textContent='Session cleared. Existing downloads stay on your device.';$('feedback').textContent='Everything happens in this browser. No account needed.';render();
 };
 window.addEventListener('pagehide',()=>{$('reset').click();cancelAnimationFrame(renderFrame);});
 render();
+$('seasonal-collections').innerHTML=['Halloween','Christmas','Easter'].map(season=>`<h3>${season}</h3><div class="seasonal-grid">${seasonalDesigns.filter(d=>d.season===season).map(d=>`<article class="seasonal-card"><div class="seasonal-art"><canvas data-seasonal-preview="${d.id}" role="img" aria-label="${d.description}"></canvas></div><span class="tag">${season.toUpperCase()} · 105 × 148 × 3 MM MAX</span><h3>${d.name}</h3><p>${d.description}</p><button data-seasonal="${d.id}">Use ${d.name} ↗</button></article>`).join('')}</div>`).join('');
 for(const button of document.querySelectorAll('[data-seasonal]'))button.addEventListener('click',async()=>{
  const token=beginLoad();
  try{
@@ -168,8 +174,8 @@ for(const button of document.querySelectorAll('[data-seasonal]'))button.addEvent
   const decoded=await createImageBitmap(art);art.width=1;art.height=1;
   if(token!==loadId){decoded.close();return;}
   image?.close();image=decoded;loading=false;$('photo').value='';
-  $('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
-  render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded. Custom panel geometry only; frame fit is not validated.';
+  applyPostcard('portrait');$('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
+  render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded at 105 × 148 mm, maximum thickness 3 mm. Switch to landscape if needed.';
   $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
  }catch(e){failedLoad(token,'Could not load seasonal artwork: '+e.message);}
 });
