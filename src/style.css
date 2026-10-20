@@ -30,3 +30,13 @@ body{background-image:radial-gradient(#6d654b0b .65px,transparent .65px);backgro
 .orientation{display:flex;gap:6px;margin:12px 0}.orientation button{flex:1;border-radius:6px;padding:10px 5px;background:#e5e9dc;color:#294832;font-size:11px}.orientation button[aria-pressed="true"]{background:#294832;color:white}.seasonal-art{aspect-ratio:105/148}
 
 dialog{max-width:460px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:12px;padding:24px;background:#fffdf9;color:#352d25}dialog::backdrop{background:#352d2577}dialog h2{font-size:27px}#save-name{width:100%;margin:8px 0}
+
+/* One active collection keeps the samples section compact as holidays grow. */
+.holiday-buttons,.sample-filters{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}
+.holiday-buttons button,.sample-filters button{background:#e5e9dc;color:var(--accent);border:1px solid var(--line)}
+.holiday-buttons button[aria-pressed="true"],.sample-filters button[aria-pressed="true"]{background:var(--accent);color:white;border-color:var(--accent)}
+.holiday-mobile{display:none}
+.collection-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+.collection-heading h3{margin:0;font-size:28px}.collection-heading p{margin:8px 0 0}.collection-heading>p{flex-shrink:0;font-size:12px;color:#52644a}
+.seasonal-card{min-width:0}.seasonal-art{aspect-ratio:105/148;background:#eee8de}
+@media(max-width:650px){.holiday-buttons{display:none}.holiday-mobile{display:block;margin-top:24px}.collection-heading{align-items:start;flex-direction:column;gap:4px}.seasonal-grid{grid-template-columns:minmax(0,1fr)}.holiday-mobile select{font-size:16px}}

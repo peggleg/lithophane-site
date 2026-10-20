@@ -1,3 +1,4 @@
+import {mountSampleGallery} from './sample-gallery.js';
 import './style.css';
 import {exportFilename,chooseSaveTarget} from './export-save.js';
 import {postcardSize,FRAME_URL} from './postcards.js';
@@ -193,8 +194,7 @@ $('reset').onclick=()=>{
 };
 window.addEventListener('pagehide',()=>{$('reset').click();cancelAnimationFrame(renderFrame);});
 render();
-$('seasonal-collections').innerHTML=['Halloween','Christmas','Easter'].map(season=>`<h3>${season}</h3><div class="seasonal-grid">${seasonalDesigns.filter(d=>d.season===season).map(d=>`<article class="seasonal-card"><div class="seasonal-art"><canvas data-seasonal-preview="${d.id}" role="img" aria-label="${d.description}"></canvas></div><span class="tag">${season.toUpperCase()} · 105 × 148 × 3 MM MAX</span><h3>${d.name}</h3><p>${d.description}</p><button data-seasonal="${d.id}">Use ${d.name} ↗</button></article>`).join('')}</div>`).join('');
-for(const button of document.querySelectorAll('[data-seasonal]'))button.addEventListener('click',async()=>{
+mountSampleGallery($('seasonal-collections'),{drawArtwork:drawSeasonal,onUse:async(button)=>{
  const token=beginLoad();
  try{
   const art=await drawSeasonal(document.createElement('canvas'),button.dataset.seasonal);
@@ -205,10 +205,4 @@ for(const button of document.querySelectorAll('[data-seasonal]'))button.addEvent
   render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded at 105 × 148 mm, maximum thickness 3 mm. Switch to landscape if needed.';
   $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
  }catch(e){failedLoad(token,'Could not load seasonal artwork: '+e.message);}
-});
-for(const thumbnail of document.querySelectorAll('[data-seasonal-preview]')){
- drawSeasonal(thumbnail,thumbnail.dataset.seasonalPreview).then(()=>{thumbnail.dataset.ready='true';}).catch(()=>{
-  const message=document.createElement('p');message.textContent='Artwork preview unavailable. Please reload to retry.';
-  thumbnail.parentElement.replaceChildren(message);
- });
-}
+}});

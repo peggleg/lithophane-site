@@ -124,3 +124,9 @@ Frame V2 print orientation: the frame is exported display-face down and its rail
 
 
 V2 loose-rail adjustment: only the top rail female dovetails now use 0.1 mm side/top clearance. The main-frame STL/STEP and frame coupon files are hash-verified unchanged; reprint only the rail or its short fit coupon.
+
+### Compact samples gallery
+
+The seasonal section shows one holiday at a time, starting with Christmas. Desktop holiday buttons wrap; phones use a labelled dropdown. The gallery uses four, two or one columns according to viewport width and contains artwork without cropping. Switching collections retains the selector controls and resets the orientation filter to All. Orientation filters appear only for collections containing landscape artwork. Existing artwork defaults to portrait; collection names and samples are derived from catalogue data. New holidays remain deferred until the preview layout is accepted.
+
+Gallery data and filtering regression cases run with `npm test`. DOM checks also covered buttons, dropdown selection, delegated sample actions, eight temporary holiday labels and orientation reset. Browser visual and touch checks were unavailable in the implementation session.
