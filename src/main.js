@@ -1,7 +1,7 @@
 import {mountSampleGallery} from './sample-gallery.js';
 import './style.css';
 import {exportFilename,chooseSaveTarget} from './export-save.js';
-import {postcardSize,FRAME_URL} from './postcards.js';
+import {postcardSize,sampleSize,FRAME_URL} from './postcards.js';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
 import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.js';
@@ -201,8 +201,9 @@ mountSampleGallery($('seasonal-collections'),{drawArtwork:drawSeasonal,onUse:asy
   const decoded=await createImageBitmap(art);art.width=1;art.height=1;
   if(token!==loadId){decoded.close();return;}
   image?.close();image=decoded;source={name:seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name,custom:false};loading=false;$('photo').value='';
-  applyPostcard('portrait');$('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
-  render();$('export-status').textContent=seasonalDesigns.find(d=>d.id===button.dataset.seasonal).name+' loaded at 105 × 148 mm, maximum thickness 3 mm. Switch to landscape if needed.';
+  const design=seasonalDesigns.find(d=>d.id===button.dataset.seasonal);
+  applyPostcard(design.orientation);$('brightness').value=0;$('contrast').value=0;$('invert').checked=false;resetCrop();
+  render();$('export-status').textContent=`${design.name} loaded at ${sampleSize(design).width} × ${sampleSize(design).height} mm, maximum thickness 3 mm.`;
   $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
  }catch(e){failedLoad(token,'Could not load seasonal artwork: '+e.message);}
 }});

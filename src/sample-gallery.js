@@ -3,7 +3,12 @@ import {seasonalDesigns} from './postcards.js';
 const descriptions={
  Christmas:'Snowy villages, woodland moments and festive traditions.',
  Easter:'Spring flowers, decorated eggs and garden visitors.',
- Halloween:'Moonlit cottages, glowing pumpkins and a little midnight magic.'
+ Halloween:'Moonlit cottages, glowing pumpkins and a little midnight magic.',
+ 'Valentine’s Day':'Lovebirds, roses and quiet moments together.',
+ 'New Year 2027':'Midnight wishes, sparkling celebrations and a bright start to 2027.',
+ 'Mother’s Day':'Flowers, garden moments and a little love for Mum.',
+ 'Father’s Day':'Woodland adventures, favourite pastimes and moments with Dad.',
+ Thanksgiving:'Autumn harvests, welcoming homes and time to give thanks.'
 };
 export function sampleCollections(designs=seasonalDesigns){
  const names=[...new Set(designs.map(d=>d.season))];
