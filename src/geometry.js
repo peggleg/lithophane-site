@@ -41,7 +41,7 @@ export function makePanel({ width, height, min, max, cols, rows, tones }) {
 }
 export function stlBytes({vertices:v,faces:f}) {
   const out=new Uint8Array(84+f.length/3*50), d=new DataView(out.buffer);
-  out.set(new TextEncoder().encode('Peggleg lithophane; dimensions in mm'));
+  out.set(new TextEncoder().encode('Lithophane; dimensions in mm'));
   d.setUint32(80,f.length/3,true);
   for(let i=0;i<f.length;i+=3) {
     const a=f[i]*3,b=f[i+1]*3,c=f[i+2]*3,o=84+i/3*50;
@@ -56,7 +56,7 @@ export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
   const model=[];let chunk='';
   const write=text=>{chunk+=text;if(chunk.length>=65536){model.push(strToU8(chunk));chunk='';}};
   const coordinate=n=>Number(n.toFixed(6)).toString();
-  write('<?xml version="1.0" encoding="UTF-8"?><model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Title">Peggleg lithophane panel</metadata><resources><object id="1" type="model"><mesh><vertices>');
+  write('<?xml version="1.0" encoding="UTF-8"?><model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Title">Lithophane panel</metadata><resources><object id="1" type="model"><mesh><vertices>');
   for(let i=0;i<v.length;i+=3){
     write(`<vertex x="${coordinate(v[i])}" y="${coordinate(v[i+1])}" z="${coordinate(v[i+2])}"/>`);
     if(i%300000===0)progress(55+15*i/v.length);

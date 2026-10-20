@@ -1,4 +1,4 @@
-# Peggleg Lithophane Studio
+# Design Studio
 
 A static, browser-only photo-to-lithophane app. Photos, previews and generated models are held in tab memory and downloaded directly; there are no upload endpoints, analytics, accounts, cookies or persistent browser storage. Export runs in a cancellable Web Worker. Downloads remain on the visitor's device. Reset clears application references; immediate physical memory erasure is controlled by the browser.
 

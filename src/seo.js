@@ -1,4 +1,4 @@
-export const title='Free Lithophane Maker · Photo to STL & 3MF | Peggleg';
+export const title='Free Lithophane Maker · Photo to STL & 3MF | Design Studio';
 export const description='Turn photos into 3D-printable lithophanes with free STL and 3MF downloads. Adjust crop, brightness and size privately in your browser. No uploads or account needed.';
 export function siteOrigin(value){
  if(!value)return '';
@@ -8,7 +8,7 @@ export function siteOrigin(value){
 }
 export function seoAssets(value){
  const url=siteOrigin(value);
- const schema=JSON.stringify({'@context':'https://schema.org','@type':'WebApplication',name:'Peggleg Lithophane Studio',description,applicationCategory:'DesignApplication',operatingSystem:'Any modern browser',browserRequirements:'JavaScript and Web Workers required',isAccessibleForFree:true,offers:{'@type':'Offer',price:'0',priceCurrency:'GBP'},creator:{'@type':'Person',name:'Peggleg',sameAs:'https://makerworld.com/en/@peggleg'},...(url?{url}:{}),featureList:['Photo to STL and 3MF','Custom panel dimensions','Crop, brightness, contrast and invert','Browser-local processing without photo uploads']});
+ const schema=JSON.stringify({'@context':'https://schema.org','@type':'WebApplication',name:'Design Studio',description,applicationCategory:'DesignApplication',operatingSystem:'Any modern browser',browserRequirements:'JavaScript and Web Workers required',isAccessibleForFree:true,offers:{'@type':'Offer',price:'0',priceCurrency:'GBP'},...(url?{url}:{}),featureList:['Photo to STL and 3MF','Custom panel dimensions','Crop, brightness, contrast and invert','Browser-local processing without photo uploads']});
  // These are cooperative crawler preferences, not access controls.
  const bots=['GPTBot','ClaudeBot','CCBot','Google-Extended','Bytespider','Amazonbot'];
  const robots=url?`# Search indexing allowed. Selected AI training crawlers are asked not to crawl.\nUser-agent: *\nAllow: /\n\n${bots.map(bot=>`User-agent: ${bot}\nDisallow: ${new URL(url).pathname}\n`).join('\n')}\nSitemap: ${url}sitemap.xml\n`:'# Preview build: configure SITE_URL for the production deployment.\nUser-agent: *\nDisallow: /\n';
@@ -18,7 +18,7 @@ export function seoAssets(value){
 export function seoHead(a){
  const tag=(name,content)=>({tag:'meta',attrs:{name,content},injectTo:'head'});
  const og=(property,content)=>({tag:'meta',attrs:{property,content},injectTo:'head'});
- const tags=[tag('description',description),tag('robots',a.url?'index, follow, max-image-preview:large':'noindex, nofollow'),tag('theme-color','#faf7f1'),og('og:type','website'),og('og:locale','en_GB'),og('og:site_name','Peggleg Lithophane Studio'),og('og:title',title),og('og:description',description),tag('twitter:card','summary_large_image'),tag('twitter:title',title),tag('twitter:description',description),{tag:'link',attrs:{rel:'icon',type:'image/svg+xml',href:(a.url?new URL(a.url).pathname:'/')+'favicon.svg'},injectTo:'head'},{tag:'script',attrs:{type:'application/ld+json'},children:a.schema,injectTo:'head'}];
- if(a.url)tags.push({tag:'link',attrs:{rel:'canonical',href:a.url},injectTo:'head'},og('og:url',a.url),og('og:image',a.url+'social-card.png'),og('og:image:width','1200'),og('og:image:height','630'),og('og:image:alt','Peggleg Lithophane Studio — turn your photos into light. Free STL and 3MF downloads, processed on your device.'),tag('twitter:image',a.url+'social-card.png'),tag('twitter:image:alt','Peggleg Lithophane Studio. Free photo to STL and 3MF, with no photo uploads.'));
+ const tags=[tag('description',description),tag('robots',a.url?'index, follow, max-image-preview:large':'noindex, nofollow'),tag('theme-color','#faf7f1'),og('og:type','website'),og('og:locale','en_GB'),og('og:site_name','Design Studio'),og('og:title',title),og('og:description',description),tag('twitter:card','summary_large_image'),tag('twitter:title',title),tag('twitter:description',description),{tag:'link',attrs:{rel:'icon',type:'image/svg+xml',href:(a.url?new URL(a.url).pathname:'/')+'favicon.svg'},injectTo:'head'},{tag:'script',attrs:{type:'application/ld+json'},children:a.schema,injectTo:'head'}];
+ if(a.url)tags.push({tag:'link',attrs:{rel:'canonical',href:a.url},injectTo:'head'},og('og:url',a.url),og('og:image',a.url+'social-card.png'),og('og:image:width','1200'),og('og:image:height','630'),og('og:image:alt','Design Studio — turn your photos into light. Free STL and 3MF downloads, processed on your device.'),tag('twitter:image',a.url+'social-card.png'),tag('twitter:image:alt','Design Studio. Free photo to STL and 3MF, with no photo uploads.'));
  return tags;
 }
