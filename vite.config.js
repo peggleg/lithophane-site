@@ -4,17 +4,19 @@ import {seoAssets,seoHead} from './src/seo.js';
 
 export default defineConfig(({mode})=>{
  const env=loadEnv(mode,process.cwd(),'SITE_');
- const assets=seoAssets(mode==='pages-preview'?'':(process.env.SITE_URL??env.SITE_URL??''));
+ const siteUrl=mode==='pages-preview'?'':(process.env.SITE_URL??env.SITE_URL??'');
+ const pages=Object.fromEntries(['home','lithophane','fan'].map(key=>[key,seoAssets(siteUrl,key)]));
+ const assets=pages.home;
  if(mode==='production'&&!assets.url)console.warn('SITE_URL is unset: building a noindex preview. Set the production HTTPS origin to enable the canonical URL and sitemap.');
- const schemaHash=createHash('sha256').update(assets.schema).digest('base64');
+ const schemaHashes=Object.values(pages).map(p=>"'sha256-"+createHash('sha256').update(p.schema).digest('base64')+"'").join(' ');
  const base=assets.url?new URL(assets.url).pathname:'/';
- return {base,build:{rollupOptions:{input:{main:"index.html",fan:"folding-fan/index.html"}}},plugins:[{
+ return {base,build:{rollupOptions:{input:{home:"index.html",lithophane:"lithophane/index.html",fan:"folding-fan/index.html"}}},plugins:[{
   name:'static-site-seo',
-  transformIndexHtml(html,ctx){if(ctx.path.includes("folding-fan"))return [];return {tags:seoHead(assets)};},
+  transformIndexHtml(html,ctx){const page=ctx.path.includes("folding-fan/")?"fan":ctx.path.includes("lithophane/")?"lithophane":"home";return {tags:seoHead(pages[page])};},
   generateBundle(){
    this.emitFile({type:'asset',fileName:'robots.txt',source:assets.robots});
    if(assets.sitemap)this.emitFile({type:'asset',fileName:'sitemap.xml',source:assets.sitemap});
-   this.emitFile({type:'asset',fileName:'_headers',source:`${base}*\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-${schemaHash}'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; worker-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'\n  Referrer-Policy: no-referrer\n  X-Content-Type-Options: nosniff\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n${assets.url?'':'  X-Robots-Tag: noindex, nofollow\n'}`});
+   this.emitFile({type:'asset',fileName:'_headers',source:`${base}*\n  Content-Security-Policy: default-src 'self'; script-src 'self' ${schemaHashes}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; worker-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'\n  Referrer-Policy: no-referrer\n  X-Content-Type-Options: nosniff\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n${assets.url?'':'  X-Robots-Tag: noindex, nofollow\n'}`});
   }
  }]};
 });

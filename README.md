@@ -2,6 +2,14 @@
 
 A static, browser-only photo-to-lithophane app. Photos, previews and generated models are held in tab memory and downloaded directly; there are no upload endpoints, analytics, accounts, cookies or persistent browser storage. Export runs in a cancellable Web Worker. Downloads remain on the visitor's device. Reset clears application references; immediate physical memory erasure is controlled by the browser.
 
+## Studio homepage and routes
+
+The site entry now shows a Design Studio homepage with active Lithophane and Folding Fan cards, plus clearly labelled Nameplates and Keyrings concepts. Those upcoming generators are not implemented. The existing flat generator is at `lithophane/`; the fan stays at `folding-fan/`. Both link back to the homepage. The flat generator’s controls, gallery, processing and downloads are preserved.
+
+Routes are relative to the configured `SITE_URL` mount. On the preview they are `/`, `/lithophane/`, and `/folding-fan/`. With the current production mount they are `/lithophane/`, `/lithophane/lithophane/`, and `/lithophane/folding-fan/`. This changes the bundle’s entry page, not the domain hosting configuration. Production release remains separate. Each page has its own title, canonical and schema; the sitemap lists all three. All preview pages remain noindex.
+
+Homepage illustrations are digital previews and original SVG concepts. They do not depict validated physical prints. Verification includes 35 tests, both builds, per-page CSP hashes and asset checks, browser navigation and STL/3MF downloads, 390px layouts, and the production subpath. Main lithophane source differs from its former location only by navigation links.
+
 ## Develop
 
 Use Node 22.12+ and the existing checkout (cloud tasks are already isolated; no worktree needed).
