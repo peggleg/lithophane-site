@@ -8,9 +8,9 @@ export default defineConfig(({mode})=>{
  if(mode==='production'&&!assets.url)console.warn('SITE_URL is unset: building a noindex preview. Set the production HTTPS origin to enable the canonical URL and sitemap.');
  const schemaHash=createHash('sha256').update(assets.schema).digest('base64');
  const base=assets.url?new URL(assets.url).pathname:'/';
- return {base,plugins:[{
+ return {base,build:{rollupOptions:{input:{main:"index.html",fan:"folding-fan/index.html"}}},plugins:[{
   name:'static-site-seo',
-  transformIndexHtml(){return {tags:seoHead(assets)};},
+  transformIndexHtml(html,ctx){if(ctx.path.includes("folding-fan"))return [];return {tags:seoHead(assets)};},
   generateBundle(){
    this.emitFile({type:'asset',fileName:'robots.txt',source:assets.robots});
    if(assets.sitemap)this.emitFile({type:'asset',fileName:'sitemap.xml',source:assets.sitemap});
