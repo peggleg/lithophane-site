@@ -1,11 +1,7 @@
 import './theme.css';
-const key='design-studio-theme',media=matchMedia('(prefers-color-scheme: dark)'),root=document.documentElement;
-const label=document.createElement('label');label.className='theme-control';label.append('Theme ');
-const select=document.createElement('select');select.setAttribute('aria-label','Colour theme');
-for(const [value,text]of [['system','System'],['light','Light'],['dark','Dark']]){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);}
-select.value=root.dataset.themePreference||'system';label.append(select);document.querySelector('header')?.append(label);
-function apply(preference){if(!['light','dark','system'].includes(preference))preference='system';root.dataset.themePreference=preference;root.dataset.theme=preference==='dark'||preference==='system'&&media.matches?'dark':'light';select.value=preference;}
-select.addEventListener('change',()=>{apply(select.value);try{localStorage.setItem(key,select.value);}catch{}});
-media.addEventListener('change',()=>{if(root.dataset.themePreference==='system')apply('system');});
-window.addEventListener('storage',e=>{if(e.key===key)apply(e.newValue||'system');});
-apply(select.value);
+const key='design-studio-theme',root=document.documentElement;
+const toggle=document.createElement('button');toggle.className='theme-control quiet';toggle.type='button';document.querySelector('header')?.append(toggle);
+function apply(value){const theme=value==='dark'?'dark':'light';root.dataset.theme=root.dataset.themePreference=theme;toggle.textContent=theme==='dark'?'Dark':'Light';toggle.setAttribute('aria-label','Dark theme');toggle.setAttribute('aria-pressed',String(theme==='dark'));}
+toggle.onclick=()=>{apply(root.dataset.theme==='dark'?'light':'dark');try{localStorage.setItem(key,root.dataset.theme);}catch{}};
+window.addEventListener('storage',e=>{if(e.key===key)apply(e.newValue);});apply(root.dataset.theme);
+const nav=document.querySelector('header nav');if(nav){const button=document.createElement('button');button.className='nav-toggle quiet';button.textContent='Menu';button.setAttribute('aria-expanded','false');nav.id='site-navigation';button.setAttribute('aria-controls',nav.id);nav.before(button);button.onclick=()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);};nav.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('is-open');button.setAttribute('aria-expanded','false');button.focus();}});}

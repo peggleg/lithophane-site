@@ -24,3 +24,6 @@
 :root:not([data-theme=dark]){--muted:#6b604f}
 .caption,.privacy,.breadcrumb,.estimate small,.fixed small,.hero-art small,.home-tools .section-title>p,.collection-heading>p{color:var(--muted)}
 :root[data-theme=light] #empty{color:var(--muted)}
+header{padding:16px 5%;gap:20px}header .brand span{display:none}header nav{gap:18px;max-width:none;margin-left:auto;align-items:center}header nav a{white-space:nowrap}.theme-control{margin:0;padding:8px 14px;font-size:12px}.nav-toggle{display:none}
+@media(max-width:760px){header{position:relative;align-items:center;flex-wrap:wrap;padding:14px 20px;gap:12px}header .brand{margin-right:auto;font-size:23px}.nav-toggle{display:block;padding:8px 14px}header nav{display:none;order:5;width:100%;max-width:none;justify-content:start;flex-wrap:wrap;margin:0;padding-top:10px;gap:16px;font-size:13px}header nav.is-open{display:flex}.theme-control{margin:0}}
+header nav a[aria-current=page]{text-decoration:underline;text-underline-offset:5px}

@@ -1,3 +1,4 @@
+import {outline,ringHoleX} from './symbols.js';
 import opentype from 'opentype.js';
 
 import {textDefaults,validateTextSettings} from './text-settings.js';
@@ -23,7 +24,8 @@ export function generateTextModel(module,fontBuffer,input){
   const text=[p.line1,p.line2].filter(Boolean).join(' '),bad=[...new Set([...text].filter(c=>c!==' '&&(!/^[\u0020-\u024F\u1E00-\u1EFF\u2000-\u206F]$/.test(c)||font.charToGlyphIndex(c)===0)))];
   if(bad.length)throw Error('This font does not support: '+bad.join(' ')+'. Use Latin letters, numbers and available punctuation.');
   let region;
-  if(p.kind==='keyring'&&p.shape==='circle')region=own(C.circle(p.width/2,96));
+  if(p.kind==='keyring'&&['heart','star','cloud'].includes(p.shape))region=own(new C([outline(p.shape,p.width,p.height)],'EvenOdd'));
+  else if(p.kind==='keyring'&&p.shape==='circle')region=own(C.circle(p.width/2,96));
   else if(p.kind==='keyring'&&p.shape==='capsule'){
    const r=p.height/2,core=own(C.square([Math.max(.01,p.width-p.height),p.height],true));
    if(p.width<p.height)throw Error('Capsule width must be at least its height.');
@@ -31,8 +33,8 @@ export function generateTextModel(module,fontBuffer,input){
   }else{const r=Math.min(4,p.height/5);const core=own(C.square([p.width-2*r,p.height-2*r],true));region=own(core.offset(r,'Round',2,48));}
   let holeX=null,available=own(region.offset(-3,'Round'));
   if(p.kind==='keyring'){
-   holeX=-p.width/2+3+p.hole/2;const hole=own(C.circle(p.hole/2,64).translate([holeX,0]));region=own(region.subtract(hole));
-   const allowed=own(C.square([p.width-(p.hole+9),p.height],true).translate([(p.hole+3)/2,0]));available=own(available.intersect(allowed));
+   holeX=ringHoleX(p);const hole=own(C.circle(p.hole/2,64).translate([holeX,0]));region=own(region.subtract(hole));
+   available=own(available.subtract(own(C.circle(p.hole/2+3,64).translate([holeX,0]))));
   }
   const raw=[],lines=[p.line1,p.line2].filter(Boolean);
   for(let i=0;i<lines.length;i++){
@@ -43,14 +45,17 @@ export function generateTextModel(module,fontBuffer,input){
    const b=bounds(contours),shift=p.align==='left'?0:p.align==='right'?-(b.maxX-b.minX):-(b.maxX-b.minX)/2;
    raw.push(...contours.map(c=>c.map(([x,y])=>[x-b.minX+shift,y])));
   }
-  const b=bounds(raw),baseText=own(new C(raw,'NonZero')),centred=own(baseText.translate([-(b.minX+b.maxX)/2,-(b.minY+b.maxY)/2]));
   let lettering=null,scale=1;
+  if(raw.length){
+  const b=bounds(raw),baseText=own(new C(raw,'NonZero')),centred=own(baseText.translate([-(b.minX+b.maxX)/2,-(b.minY+b.maxY)/2]));
   for(let attempt=0;attempt<70;attempt++){
    const candidate=own(centred.scale(scale));const shifted=own(candidate.translate([p.kind==='keyring'?(p.hole+3)/2:0,0]));const outside=own(shifted.subtract(available));
    if(outside.area()<.00001){lettering=shifted;break;}scale*=.94;
   }
   if(!lettering||p.size*scale<5)throw Error('Text would be too small. Shorten it, use one line or enlarge the design. Minimum fitted font size is 5 mm.');
   const details=lettering.decompose();for(const part of details){own(part);const core=own(part.offset(-.2));if(core.isEmpty())throw Error('A text feature is thinner than the 0.4 mm starting assumption. Increase the size or choose a bolder font.');}
+  }else lettering=own(region.subtract(region));
+  for(const symbol of p.symbols){const decoration=own(new C([outline(symbol.type,symbol.size,symbol.size)],'EvenOdd').translate([symbol.x,symbol.y]));if(own(decoration.subtract(available)).area()>.00001)throw Error('Move the symbol further inside the tag.');lettering=own(lettering.add(decoration));}
   const plate=own(region.extrude(p.base)),relief=own(lettering.extrude(p.relief+.02).translate([0,0,p.mode==='raised'?p.base-.02:p.base-p.relief]));
   const solid=own(p.mode==='raised'?plate.add(relief):plate.subtract(relief));
   const toMesh=m=>{if(m.isEmpty()||m.status()!=='NoError'||m.volume()<=0)throw Error('Could not create a valid solid. Adjust the text or dimensions.');const mesh=m.getMesh(),v=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<v.length/3;i++)for(let j=0;j<3;j++)v[i*3+j]=mesh.vertProperties[i*mesh.numProp+j];return {vertices:v,faces:new Uint32Array(mesh.triVerts)};};

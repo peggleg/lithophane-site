@@ -1,16 +1,19 @@
+import {createSymbolEditor} from './symbol-editor.js';
 import './theme.js';
 import './text-studio.css';
 import {textDefaults} from './text-settings.js';
 import {createTextPreview} from './text-preview.js';
 const $=id=>document.getElementById(id),kind=document.body.dataset.generator,defaults=textDefaults[kind];
 const fields=['line1','line2','font','width','height','base','relief','size','mode','align',...(kind==='keyring'?['shape','hole']:['stand'])];
+let editor=null;
 let worker=null,timer=null,model=null,generation=0,preview=null,busy=false;
 try{preview=createTextPreview($('model-canvas'));}catch{$('model-preview').textContent='Interactive preview needs WebGL. You can still generate and download your design.';}
-function settings(){const result={...defaults};for(const id of fields)result[id]=$(id).type==='checkbox'?$(id).checked:$(id).type==='number'?Number($(id).value):$(id).value;return result;}
+function settings(){const result={...defaults};for(const id of fields)result[id]=$(id).type==='checkbox'?$(id).checked:$(id).type==='number'?Number($(id).value):$(id).value;if(kind==='keyring'&&result.shape==='circle')result.height=result.width;result.symbols=editor?.get()||[];return result;}
 function enable(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=!model||busy;}
 function stop(report=false){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('progress').hidden=true;$('cancel').hidden=true;if(report)$('export-status').textContent='Cancelled. Change a setting to rebuild your design.';enable();}
 function fail(message){model=null;preview?.setModel(null);$('feedback').textContent=message;$('dimensions').textContent='—';$('fitted-size').textContent='—';$('part-count').textContent='—';stop();}
 function generate(){
+ try{editor?.refresh();}catch(e){fail(e.message);return;}
  const token=++generation;stop();model=null;enable();preview?.setModel(null);$('feedback').textContent='Preparing your design…';for(const id of ['dimensions','fitted-size','part-count'])$(id).textContent='—';
  if(kind==='keyring'){$('height').disabled=$('shape').value==='circle';if($('height').disabled)$('height').value=$('width').value;}
  timer=setTimeout(()=>{busy=true;enable();$('progress').hidden=false;$('progress').value=5;$('cancel').hidden=false;
@@ -29,4 +32,5 @@ $('reset-view').onclick=()=>preview?.reset();$('top-view').onclick=()=>preview?.
 $('stl').onclick=()=>start('stl');$('three-mf').onclick=()=>start('3mf');$('print-guide').onclick=()=>start('guide');
 $('cancel').onclick=()=>{++generation;stop(true);};
 function reset(){for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
-$('reset').onclick=reset;window.addEventListener('pagehide',()=>{++generation;stop();preview?.dispose();model=null;});reset();
+if(kind==='keyring')editor=createSymbolEditor(settings,generate);
+$('reset').onclick=()=>{editor?.reset();reset();};window.addEventListener('pagehide',()=>{++generation;stop();preview?.dispose();model=null;});reset();

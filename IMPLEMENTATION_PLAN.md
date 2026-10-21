@@ -78,3 +78,7 @@ Frame V2 print orientation: the frame is exported display-face down and its rail
 
 
 V2 loose-rail adjustment: only the top rail female dovetails now use 0.1 mm side/top clearance. The main-frame STL/STEP and frame coupon files are hash-verified unchanged; reprint only the rail or its short fit coupon.
+
+## Design Studio redesign
+
+Conversational project copy, compact navigation (mobile Menu button without chevrons), and a remembered Light/Dark toggle. Light is the default. Nameplates and keyrings offer 12 locally bundled Noto/Nunito font faces. Keyrings support heart, star and cloud outlines plus up to eight heart, star, cloud, flower or plus symbols. The top-down symbol editor supports pointer/touch dragging, arrow-key positioning (Shift for larger steps), resizing and removal. Geometry validates placement inside the outline with 3 mm edge/hole clearance. Existing generators, exports and sample collections remain available. Physical print quality still requires testing.
