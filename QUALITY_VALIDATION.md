@@ -58,6 +58,9 @@ All 19 Node tests pass, including drag direction, edge clamping, no movement on 
 
 ## Design Studio redesign
 
-Automated regression suite: 48 passing tests, including outline solids, raised/recessed decorations, symbol-only tags, safe symbol placement across all six outlines, 12 font choices and Light/Dark persistence. Existing photo/fan/sample/export regressions remain green. Production and preview builds, preview CSP/indexing checks and full-resolution STL/3MF geometry checks pass.
+Automated regression suite: 49 passing tests, including outline solids, raised/recessed decorations, symbol-only tags, safe symbol placement across all six outlines, 12 font choices and Light/Dark persistence. Existing photo/fan/sample/export regressions remain green. Production and preview builds, preview CSP/indexing checks and full-resolution STL/3MF geometry checks pass.
 
 Browser validation uses `npm run test:browser` against `npm run preview:pages` (or set `STUDIO_URL` to a deployed preview). Install Playwright Chromium with `npx playwright install chromium`, or set `CHROMIUM_PATH` to a system Chromium executable. It checks all 12 actual font workers, mouse and real CDP touch dragging, keyboard movement, resizing, heart/star/cloud geometry, STL and 3MF downloads, theme persistence and all five routes at desktop/mobile widths. The tests use software WebGL when needed. Physical print quality remains unverified.
+
+### Keyring outline correction
+Shape selection now starts with suitable dimensions: rounded/capsule 70 × 25, circle 50 × 50, heart 60 × 55, star 60 × 60 and cloud 70 × 45 mm. The previous shape selection retained the thin rectangular dimensions, squashing the heart and preventing other outlines from fitting the default text. Regression coverage now selects every outline directly from a fresh page with unchanged EXPLORE text, adds a symbol and downloads both STL and 3MF. Individual desktop and mobile top-view screenshots support visual review.

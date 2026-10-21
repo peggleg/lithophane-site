@@ -1,7 +1,7 @@
 import {createSymbolEditor} from './symbol-editor.js';
 import './theme.js';
 import './text-studio.css';
-import {textDefaults} from './text-settings.js';
+import {textDefaults,keyringShapeSizes} from './text-settings.js';
 import {createTextPreview} from './text-preview.js';
 const $=id=>document.getElementById(id),kind=document.body.dataset.generator,defaults=textDefaults[kind];
 const fields=['line1','line2','font','width','height','base','relief','size','mode','align',...(kind==='keyring'?['shape','hole']:['stand'])];
@@ -24,7 +24,7 @@ function generate(){
 }
 function download(chunks,name,type){const url=URL.createObjectURL(new Blob(chunks,{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(format){if(!model||busy)return;stop();busy=true;enable();$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Preparing download locally…';const current=model;worker=new Worker(new URL('./text-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.error){stop();$('export-status').textContent=data.error;}if(data.progress)$('progress').value=data.progress;if(data.chunks){const extension=format==='guide'?'txt':format==='3mf'?'3mf':current.parts.length>1?'zip':'stl';download(data.chunks,`${kind}-${current.width}x${current.height}.${extension}`,extension==='zip'?'application/zip':extension==='txt'?'text/plain':extension==='3mf'?'model/3mf':'model/stl');stop();$('export-status').textContent='Downloaded. Inspect the toolpaths and print guide before printing.';}};worker.onerror=()=>{stop();$('export-status').textContent='Download failed. Please try again.';};worker.postMessage({action:'export',model:current,format});}
-fields.forEach(id=>$(id).addEventListener('input',generate));
+fields.forEach(id=>$(id).addEventListener('input',()=>{if(id==='shape'){const [width,height]=keyringShapeSizes[$('shape').value];$('width').value=width;$('height').value=height;}generate();}));
 function colours(){preview?.setColours({base:$('base-colour').value,text:$('text-colour').value});}
 for(const id of ['base-colour','text-colour'])$(id).addEventListener('input',colours);
 $('parts-view').addEventListener('change',()=>preview?.setParts($('parts-view').checked));$('parts-view').parentElement.hidden=kind!=='nameplate';

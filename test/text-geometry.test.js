@@ -1,3 +1,4 @@
+import {keyringShapeSizes} from '../src/text-settings.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,3 +20,5 @@ test('decorated outlines produce watertight raised and recessed exports',()=>{fo
 
 test('symbol-only keyrings remain printable',()=>{const r=model({...textDefaults.keyring,line1:'',line2:'',symbols:[{type:'heart',x:12,y:0,size:6}]});checkMesh(r.parts[0].mesh);});
 test('all five symbol motifs produce closed raised and recessed solids',()=>{for(const type of ['heart','star','cloud','flower','plus'])for(const mode of ['raised','recessed']){const r=model({...textDefaults.keyring,line1:'A',mode,symbols:[{type,x:15,y:0,size:6}]});checkMesh(r.parts[0].mesh);}});
+
+test('every outline renders the unchanged default words at its selected starting size',()=>{for(const [shape,[width,height]]of Object.entries(keyringShapeSizes)){const r=model({...textDefaults.keyring,shape,width,height});assert.ok(r.fontSize>=5,shape);checkMesh(r.parts[0].mesh);}});

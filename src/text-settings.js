@@ -16,3 +16,5 @@ export function validateTextSettings(input){
  p.symbols=(input.symbols||[]).map(symbol=>fitSymbol(symbol,p));
  return p;
 }
+
+export const keyringShapeSizes={rounded:[70,25],capsule:[70,25],circle:[50,50],heart:[60,55],star:[60,60],cloud:[70,45]};
