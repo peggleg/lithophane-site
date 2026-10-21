@@ -58,9 +58,16 @@ All 19 Node tests pass, including drag direction, edge clamping, no movement on 
 
 ## Design Studio redesign
 
-Automated regression suite: 49 passing tests, including outline solids, raised/recessed decorations, symbol-only tags, safe symbol placement across all six outlines, 12 font choices and Light/Dark persistence. Existing photo/fan/sample/export regressions remain green. Production and preview builds, preview CSP/indexing checks and full-resolution STL/3MF geometry checks pass.
+Automated regression suite: 52 passing tests, including outline solids, raised/recessed decorations, symbol-only tags, safe symbol placement across all six outlines, 12 font choices and Light/Dark persistence. Existing photo/fan/sample/export regressions remain green. Production and preview builds, preview CSP/indexing checks and full-resolution STL/3MF geometry checks pass.
 
 Browser validation uses `npm run test:browser` against `npm run preview:pages` (or set `STUDIO_URL` to a deployed preview). Install Playwright Chromium with `npx playwright install chromium`, or set `CHROMIUM_PATH` to a system Chromium executable. It checks all 12 actual font workers, mouse and real CDP touch dragging, keyboard movement, resizing, heart/star/cloud geometry, STL and 3MF downloads, theme persistence and all five routes at desktop/mobile widths. The tests use software WebGL when needed. Physical print quality remains unverified.
 
 ### Keyring outline correction
 Shape selection now starts with suitable dimensions: rounded/capsule 70 × 25, circle 50 × 50, heart 60 × 55, star 60 × 60 and cloud 70 × 45 mm. The previous shape selection retained the thin rectangular dimensions, squashing the heart and preventing other outlines from fitting the default text. Regression coverage now selects every outline directly from a fresh page with unchanged EXPLORE text, adds a symbol and downloads both STL and 3MF. Individual desktop and mobile top-view screenshots support visual review.
+
+### Top ring holes and shared symbol editor
+All six keyring outlines now place the through-hole at the top with 3 mm of surrounding material. The hole is centred where possible; the heart uses an upper lobe so it clears the notch. Lettering and symbols avoid the actual two-dimensional hole position. Both keyrings and nameplates have a symbol dropdown (heart, star, cloud, flower, plus), with mouse/touch dragging, arrow-key positioning, resizing and removal. Nameplates have edge clearance without a ring-hole exclusion. Tests cover each actual top through-hole, all motifs in raised/recessed nameplates with and without stands, and both browser export formats.
+
+Overlapping symbol/letter combinations are simplified at 0.0001 mm before export to remove microscopic Boolean slivers; mesh checks cover all five motifs in both relief modes.
+
+Updated the home-page keyring illustration to show top holes; removed the misplaced decorative metal ring. The illustration remains separate from generated models.

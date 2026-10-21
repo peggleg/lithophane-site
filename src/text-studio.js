@@ -32,5 +32,5 @@ $('reset-view').onclick=()=>preview?.reset();$('top-view').onclick=()=>preview?.
 $('stl').onclick=()=>start('stl');$('three-mf').onclick=()=>start('3mf');$('print-guide').onclick=()=>start('guide');
 $('cancel').onclick=()=>{++generation;stop(true);};
 function reset(){for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
-if(kind==='keyring')editor=createSymbolEditor(settings,generate);
+editor=createSymbolEditor(settings,generate);
 $('reset').onclick=()=>{editor?.reset();reset();};window.addEventListener('pagehide',()=>{++generation;stop();preview?.dispose();model=null;});reset();

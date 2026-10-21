@@ -1,5 +1,9 @@
 const outlines=new Map(),holes=new Map(),radii=new Map();
-function dimensions(p){if(![p.width,p.height,p.hole].every(Number.isFinite)||p.width<35||p.width>100||p.height<20||p.height>65||p.hole<3||p.hole>8)throw Error('Use 35–100 mm width, 20–65 mm height and a 3–8 mm ring hole.');}
+function dimensions(p){
+ const plate=p.kind==='nameplate',minWidth=plate?60:35,maxWidth=plate?240:100,minHeight=plate?25:20,maxHeight=plate?120:65;
+ if(![p.width,p.height].every(Number.isFinite)||p.width<minWidth||p.width>maxWidth||p.height<minHeight||p.height>maxHeight)throw Error(`Use ${minWidth}–${maxWidth} mm width and ${minHeight}–${maxHeight} mm height.`);
+ if(!plate&&(!Number.isFinite(p.hole)||p.hole<3||p.hole>8))throw Error('Use a 3–8 mm ring hole.');
+}
 function symbolRadius(s){const key=[s.type,s.size].join();if(!radii.has(key))radii.set(key,Math.max(...outline(s.type,s.size,s.size).map(([x,y])=>Math.hypot(x,y)))+3);return radii.get(key);}
 export function outline(shape,width,height){
  const key=[shape,width,height].join();if(outlines.has(key))return outlines.get(key);
@@ -20,15 +24,16 @@ export function outline(shape,width,height){
  outlines.set(key,fitted);return fitted;
 }
 function inside(x,y,polygon){let yes=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){const [a,b]=polygon[i],[c,d]=polygon[j];if((b>y)!==(d>y)&&x<(c-a)*(y-b)/(d-b)+a)yes=!yes;}return yes;}
+function insideBody(x,y,p){
+ if(['heart','star','cloud','circle'].includes(p.shape))return inside(x,y,outline(p.shape,p.width,p.height));
+ if(p.shape==='capsule'){const core=(p.width-p.height)/2;return Math.hypot(Math.max(0,Math.abs(x)-core),y)<=p.height/2;}
+ const r=Math.min(4,p.height/5);return Math.hypot(Math.max(0,Math.abs(x)-(p.width/2-r)),Math.max(0,Math.abs(y)-(p.height/2-r)))<=r;
+}
 export function symbolSafe(symbol,p){
- const radius=symbolRadius(symbol),x=symbol.x,y=symbol.y,holeX=ringHoleX(p);
- if(Math.hypot(x-holeX,y)<radius+p.hole/2)return false;
- const polygon=outline(p.shape,p.width,p.height);
- for(let i=0;i<48;i++){const t=i/48*Math.PI*2,px=x+radius*Math.cos(t),py=y+radius*Math.sin(t);
- if(['heart','star','cloud','circle'].includes(p.shape)){if(!inside(px,py,polygon))return false;}
- else if(p.shape==='capsule'){const core=(p.width-p.height)/2;if(Math.hypot(Math.max(0,Math.abs(px)-core),py)>p.height/2)return false;}
- else {const r=Math.min(4,p.height/5);if(Math.hypot(Math.max(0,Math.abs(px)-(p.width/2-r)),Math.max(0,Math.abs(py)-(p.height/2-r)))>r)return false;}
- }return true;
+ const radius=symbolRadius(symbol),x=symbol.x,y=symbol.y;
+ if(p.kind!=='nameplate'){const hole=ringHole(p);if(Math.hypot(x-hole.x,y-hole.y)<radius+p.hole/2)return false;}
+ for(let i=0;i<64;i++){const t=i/64*Math.PI*2;if(!insideBody(x+radius*Math.cos(t),y+radius*Math.sin(t),p))return false;}
+ return true;
 }
 export function fitSymbol(input,p){
  dimensions(p);
@@ -41,11 +46,16 @@ export function fitSymbol(input,p){
  throw Error('This symbol needs more room. Reduce its size or enlarge the tag.');
 }
 
-export function ringHoleX(p){
+// Search from the top downward; prefer the centre at each height. Hearts use
+// an upper lobe where the central notch cannot provide the required material.
+export function ringHole(p){
  dimensions(p);
- if(!['heart','star','cloud'].includes(p.shape))return -p.width/2+3+p.hole/2;
  const key=[p.shape,p.width,p.height,p.hole].join();if(holes.has(key))return holes.get(key);
- const polygon=outline(p.shape,p.width,p.height),r=p.hole/2+3;
- for(let x=-p.width/2+r;x<p.width/2-r;x+=.25){let safe=true;for(let i=0;i<64;i++){const t=i/64*Math.PI*2;if(!inside(x+r*Math.cos(t),r*Math.sin(t),polygon)){safe=false;break;}}if(safe){holes.set(key,x);return x;}}
- throw Error('Enlarge this outline to leave room around the ring hole.');
+ const r=p.hole/2+3;
+ for(let y=p.height/2-r;y>0;y-=.25)for(let step=0;step<=p.width;step++){
+  const x=(step%2?-1:1)*Math.ceil(step/2)*.5;
+  let safe=true;for(let i=0;i<96;i++){const t=i/96*Math.PI*2;if(!insideBody(x+r*Math.cos(t),y+r*Math.sin(t),p)){safe=false;break;}}
+  if(safe){const hole={x,y};holes.set(key,hole);return hole;}
+ }
+ throw Error('Enlarge this outline to leave room for a hole at the top.');
 }

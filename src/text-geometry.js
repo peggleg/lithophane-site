@@ -1,4 +1,4 @@
-import {outline,ringHoleX} from './symbols.js';
+import {outline,ringHole} from './symbols.js';
 import opentype from 'opentype.js';
 
 import {textDefaults,validateTextSettings} from './text-settings.js';
@@ -31,10 +31,10 @@ export function generateTextModel(module,fontBuffer,input){
    if(p.width<p.height)throw Error('Capsule width must be at least its height.');
    region=own(C.union([core,own(C.circle(r,64).translate([-(p.width-p.height)/2,0])),own(C.circle(r,64).translate([(p.width-p.height)/2,0]))]));
   }else{const r=Math.min(4,p.height/5);const core=own(C.square([p.width-2*r,p.height-2*r],true));region=own(core.offset(r,'Round',2,48));}
-  let holeX=null,available=own(region.offset(-3,'Round'));
+  let holeX=null,holeY=null,available=own(region.offset(-3,'Round'));
   if(p.kind==='keyring'){
-   holeX=ringHoleX(p);const hole=own(C.circle(p.hole/2,64).translate([holeX,0]));region=own(region.subtract(hole));
-   available=own(available.subtract(own(C.circle(p.hole/2+3,64).translate([holeX,0]))));
+   ({x:holeX,y:holeY}=ringHole(p));const hole=own(C.circle(p.hole/2,64).translate([holeX,holeY]));region=own(region.subtract(hole));
+   available=own(available.subtract(own(C.circle(p.hole/2+3,64).translate([holeX,holeY]))));
   }
   const raw=[],lines=[p.line1,p.line2].filter(Boolean);
   for(let i=0;i<lines.length;i++){
@@ -49,7 +49,7 @@ export function generateTextModel(module,fontBuffer,input){
   if(raw.length){
   const b=bounds(raw),baseText=own(new C(raw,'NonZero')),centred=own(baseText.translate([-(b.minX+b.maxX)/2,-(b.minY+b.maxY)/2]));
   for(let attempt=0;attempt<70;attempt++){
-   const candidate=own(centred.scale(scale));const shifted=own(candidate.translate([p.kind==='keyring'?(p.hole+3)/2:0,0]));const outside=own(shifted.subtract(available));
+   const candidate=own(centred.scale(scale));const shifted=own(candidate.translate([0,p.kind==='keyring'?-2:0]));const outside=own(shifted.subtract(available));
    if(outside.area()<.00001){lettering=shifted;break;}scale*=.94;
   }
   if(!lettering||p.size*scale<5)throw Error('Text would be too small. Shorten it, use one line or enlarge the design. Minimum fitted font size is 5 mm.');
@@ -57,7 +57,9 @@ export function generateTextModel(module,fontBuffer,input){
   }else lettering=own(region.subtract(region));
   for(const symbol of p.symbols){const decoration=own(new C([outline(symbol.type,symbol.size,symbol.size)],'EvenOdd').translate([symbol.x,symbol.y]));if(own(decoration.subtract(available)).area()>.00001)throw Error('Move the symbol further inside the tag.');lettering=own(lettering.add(decoration));}
   const plate=own(region.extrude(p.base)),relief=own(lettering.extrude(p.relief+.02).translate([0,0,p.mode==='raised'?p.base-.02:p.base-p.relief]));
-  const solid=own(p.mode==='raised'?plate.add(relief):plate.subtract(relief));
+  const combined=own(p.mode==='raised'?plate.add(relief):plate.subtract(relief));
+  // Remove sub-micron slivers where draggable symbols meet letter outlines before Float32 export.
+  const solid=p.symbols.length?own(combined.simplify(.0001)):combined;
   const toMesh=m=>{if(m.isEmpty()||m.status()!=='NoError'||m.volume()<=0)throw Error('Could not create a valid solid. Adjust the text or dimensions.');const mesh=m.getMesh(),v=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<v.length/3;i++)for(let j=0;j<3;j++)v[i*3+j]=mesh.vertProperties[i*mesh.numProp+j];return {vertices:v,faces:new Uint32Array(mesh.triVerts)};};
   const parts=[{name:p.kind,mesh:toMesh(solid),x:0}];
   if(p.kind==='nameplate'&&p.stand){
@@ -65,6 +67,6 @@ export function generateTextModel(module,fontBuffer,input){
    parts.push({name:'desk-stand',mesh:toMesh(stand(p.width*.7)),x:p.width/2+p.width*.35+15});
    parts.push({name:'stand-fit-test',mesh:toMesh(stand(20)),x:p.width/2+p.width*.7+45});
   }
-  return {parts,settings:p,fontSize:+(p.size*scale).toFixed(2),width:p.width,height:p.height,holeX,warnings:['Start with a 0.4 mm nozzle and 0.2 mm layers; inspect small details in your slicer.',p.kind==='nameplate'&&p.stand?'Stand fit and small-letter quality require physical testing.':'Small-letter quality and tag strength require physical testing.']};
+  return {parts,settings:p,fontSize:+(p.size*scale).toFixed(2),width:p.width,height:p.height,holeX,holeY,warnings:['Start with a 0.4 mm nozzle and 0.2 mm layers; inspect small details in your slicer.',p.kind==='nameplate'&&p.stand?'Stand fit and small-letter quality require physical testing.':'Small-letter quality and tag strength require physical testing.']};
  }finally{for(let i=owned.length-1;i>=0;i--)owned[i].delete();}
 }

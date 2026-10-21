@@ -4,7 +4,7 @@ export const textDefaults={nameplate:{kind:'nameplate',line1:'MAKE IT YOURS',lin
 export function validateTextSettings(input){
  const p={...input,line1:String(input.line1??'').normalize('NFC').trim(),line2:String(input.line2??'').normalize('NFC').trim()};
  if(!['nameplate','keyring'].includes(p.kind)||!Object.hasOwn(fonts,p.font)||!['raised','recessed'].includes(p.mode)||!['left','center','right'].includes(p.align)||!['rounded','capsule','circle','heart','star','cloud'].includes(p.shape))throw Error('Choose valid text and shape options.');
- if(!p.line1&&!p.line2&&!(p.kind==='keyring'&&input.symbols?.length))throw Error('Enter at least one line of text.');
+ if(!p.line1&&!p.line2&&!input.symbols?.length)throw Error('Enter at least one line of text.');
  if([...p.line1,...p.line2].length>60||/[\r\n\t]/.test(p.line1+p.line2))throw Error('Use up to 60 characters across the two lines, without tabs or line breaks.');
  const key=p.kind==='keyring';
  for(const field of ['width','height','base','relief','size','hole'])if(!Number.isFinite(p[field]))throw Error('Enter finite dimensions.');

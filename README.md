@@ -142,7 +142,7 @@ Gallery data and filtering regression cases run with `npm test`. DOM checks also
 
 ## Nameplates, keyrings and themes
 
-Both text generators support two lines, three bundled fonts, alignment, automatic fitting, and raised/recessed lettering. They use OpenType.js outlines and Manifold WASM solid operations in cancellable workers. The rotatable Three.js preview uses the same meshes as exports. Those dependencies load only on text-generator pages. Nameplates optionally include an upright stand and slot-fit coupon. Keyrings offer rounded rectangles, capsules and circles with a hole; the metal ring is separate. STL is a single solid, or a parts ZIP when a stand is included. 3MF contains named millimetre objects arranged alongside one another. Raised-text colour changes are explained in the guide, never embedded as printer instructions or filament assignments.
+Both text generators support two lines, 12 bundled font choices, alignment, automatic fitting, and raised/recessed lettering. They use OpenType.js outlines and Manifold WASM solid operations in cancellable workers. The rotatable Three.js preview uses the same meshes as exports. Those dependencies load only on text-generator pages. Nameplates optionally include an upright stand and slot-fit coupon. Keyrings offer rounded rectangles, capsules, circles, hearts, stars and clouds with a top hole; the metal ring is separate. STL is a single solid, or a parts ZIP when a stand is included. 3MF contains named millimetre objects arranged alongside one another. Raised-text colour changes are explained in the guide, never embedded as printer instructions or filament assignments.
 
 System/Light/Dark is available on all pages. An early inline boot script prevents a light flash; its CSP hash is included alongside page-schema hashes. Only the theme choice persists. The CSP permits local WebAssembly compilation (`wasm-unsafe-eval`) without permitting general JavaScript `unsafe-eval`. Preview/model lighting and filament colours are independent of page theme. Storage failures fall back to System and session-only switching.
 
@@ -156,3 +156,8 @@ Conversational project copy, compact navigation (mobile Menu button without chev
 
 ### Keyring outline correction
 Shape selection now starts with suitable dimensions: rounded/capsule 70 × 25, circle 50 × 50, heart 60 × 55, star 60 × 60 and cloud 70 × 45 mm. The previous shape selection retained the thin rectangular dimensions, squashing the heart and preventing other outlines from fitting the default text. Regression coverage now selects every outline directly from a fresh page with unchanged EXPLORE text, adds a symbol and downloads both STL and 3MF. Individual top-view screenshots support visual review.
+
+### Top ring holes and shared symbol editor
+All six keyring outlines now place the through-hole at the top with 3 mm of surrounding material. The hole is centred where possible; the heart uses an upper lobe so it clears the notch. Lettering and symbols avoid the actual two-dimensional hole position. Both keyrings and nameplates have a symbol dropdown (heart, star, cloud, flower, plus), with mouse/touch dragging, arrow-key positioning, resizing and removal. Nameplates have edge clearance without a ring-hole exclusion. Tests cover each actual top through-hole, all motifs in raised/recessed nameplates with and without stands, and both browser export formats.
+
+Updated the home-page keyring illustration to show top holes; removed the misplaced decorative metal ring. The illustration remains separate from generated models.
