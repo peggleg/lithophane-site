@@ -17,5 +17,10 @@
   },
   "devDependencies": {
     "vite": "8.3.4"
+  },
+  "dependencies": {
+    "manifold-3d": "3.5.4",
+    "opentype.js": "2.0.0",
+    "three": "0.186.1"
   }
 }

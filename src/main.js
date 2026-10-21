@@ -1,3 +1,4 @@
+import './theme.js';
 import {mountSampleGallery} from './sample-gallery.js';
 import './style.css';
 import {exportFilename,chooseSaveTarget} from './export-save.js';

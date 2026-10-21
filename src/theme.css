@@ -1,0 +1,26 @@
+:root{--surface:#fffdf9;--surface-alt:#f2eee5;--page:#f7f3e9;--ink:#352d25;--muted:#786c5d;--button-ink:#fff;--field:#fffdf9;--soft:#eee5d7;color-scheme:light}
+.theme-control{display:flex;align-items:center;gap:7px;font-size:11px;margin:0 0 0 18px;flex-shrink:0}.theme-control select{width:auto;padding:7px 9px;margin:0;font-size:11px;background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:5px}
+:root[data-theme=dark]{--page:#1c211e;--surface:#272e29;--surface-alt:#222924;--ink:#f1eee5;--muted:#c4c8bd;--accent:#b1cca4;--line:#5a665c;--button-ink:#17251b;--field:#303a33;--soft:#394639;color-scheme:dark;background:var(--page);color:var(--ink)}
+:root[data-theme=dark] body{background-color:var(--page);background-image:radial-gradient(#ffffff08 .65px,transparent .65px);color:var(--ink)}
+:root[data-theme=dark] h1 em{color:var(--accent)}
+:root[data-theme=dark] .eyebrow,:root[data-theme=dark] .tag,:root[data-theme=dark] .status{color:#b8d1ad}
+:root[data-theme=dark] .caption,:root[data-theme=dark] .privacy,:root[data-theme=dark] .breadcrumb,:root[data-theme=dark] .estimate small,:root[data-theme=dark] .fixed small,:root[data-theme=dark] .home-tools .section-title>p,:root[data-theme=dark] .upcoming-note,:root[data-theme=dark] .collection-heading>p{color:var(--muted)}
+:root[data-theme=dark] .hero,:root[data-theme=dark] .home-hero{background:radial-gradient(ellipse at 85% 65%,#5e754733,transparent 65%)}
+:root[data-theme=dark] .studio,:root[data-theme=dark] .fan-studio,:root[data-theme=dark] .text-studio,:root[data-theme=dark] .tool-card,:root[data-theme=dark] .fan-sample-card,:root[data-theme=dark] .seasonal-card,:root[data-theme=dark] .choices a,:root[data-theme=dark] dialog{background:var(--surface);color:var(--ink)}
+:root[data-theme=dark] .controls,:root[data-theme=dark] #feedback,:root[data-theme=dark] .guide,:root[data-theme=dark] .fan-guide,:root[data-theme=dark] .home-guide,:root[data-theme=dark] .text-guide,:root[data-theme=dark] .gallery-placeholder,:root[data-theme=dark] .seasonal-notice,:root[data-theme=dark] .text-notice{background:var(--surface-alt);color:var(--ink)}
+:root[data-theme=dark] input:not([type=range]):not([type=checkbox]):not([type=file]):not([type=color]),:root[data-theme=dark] select{background:var(--field);color:var(--ink);border-color:var(--line)}
+:root[data-theme=dark] button,:root[data-theme=dark] .button,:root[data-theme=dark] .hero .button{background:var(--accent);color:var(--button-ink)}
+:root[data-theme=dark] .quiet{background:transparent;color:var(--ink);border-color:var(--line)}
+:root[data-theme=dark] .secondary,:root[data-theme=dark] .view-tabs,:root[data-theme=dark] .holiday-buttons button,:root[data-theme=dark] .sample-filters button,:root[data-theme=dark] .orientation button{background:var(--soft);color:var(--ink)}
+:root[data-theme=dark] .view-tabs button{background:transparent;color:var(--ink)}
+:root[data-theme=dark] button[aria-pressed=true]{background:var(--accent);color:var(--button-ink)}
+:root[data-theme=dark] .choices span,:root[data-theme=dark] #sample-status{color:var(--accent)}
+:root[data-theme=dark] .status.soon{color:#d8c4a9}
+:root[data-theme=dark] a:focus-visible,:root[data-theme=dark] button:focus-visible,:root[data-theme=dark] input:focus-visible,:root[data-theme=dark] select:focus-visible{outline-color:#d8c4a9}
+@media(max-width:1000px){header{flex-wrap:wrap;gap:16px}.theme-control{margin-left:auto}}
+@media(max-width:650px){.theme-control{margin-left:0}header{gap:14px}.theme-control select{padding:7px}header nav{margin-left:auto}}
+
+:root[data-theme=dark] .home-steps article>span{color:var(--accent)}
+:root:not([data-theme=dark]){--muted:#6b604f}
+.caption,.privacy,.breadcrumb,.estimate small,.fixed small,.hero-art small,.home-tools .section-title>p,.collection-heading>p{color:var(--muted)}
+:root[data-theme=light] #empty{color:var(--muted)}

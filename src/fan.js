@@ -1,3 +1,4 @@
+import './theme.js';
 import './fan.css';
 import {fanSamples,drawFanSample} from './fan-samples.js';
 import {defaults,validateFan,stackHeight,outline,bladeAngle,instructions} from './fan-geometry.js';
