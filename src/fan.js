@@ -1,4 +1,5 @@
 import './fan.css';
+import {drawSeasonal} from './seasonal.js';
 import {defaults,validateFan,stackHeight,outline,bladeAngle,instructions} from './fan-geometry.js';
 const $=id=>document.getElementById(id),preview=$('preview'),ctx=preview.getContext('2d'),sample=document.createElement('canvas'),sc=sample.getContext('2d',{willReadFrequently:true});
 let image=null,photo=null,view='open',worker=null,loadId=0,busy=false;
@@ -21,7 +22,7 @@ function prepare(p){
  }sc.putImageData(pixels,0,0);photo={width,height,cols,rows,tones};
 }
 function path(c,points){c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();}
-function draw(c,p,mode,hasPhoto){
+function draw(c,p,mode,hasPhoto,texture=sample){
  const W=c.canvas.width,H=c.canvas.height;c.clearRect(0,0,W,H);const poly=outline(p),bounds=2*p.length*Math.sin(p.angle*Math.PI/360),s=Math.min(W*.88/bounds,H*.76/(p.length+8));
  const background=c.createRadialGradient(W/2,H*.4,10,W/2,H*.5,W*.6);background.addColorStop(0,'#fff3dd');background.addColorStop(1,'#e5dbcb');c.fillStyle=background;c.fillRect(0,0,W,H);
  if(mode==='parts'){
@@ -44,7 +45,7 @@ function draw(c,p,mode,hasPhoto){
   const a=bladeAngle(p,i);c.save();if(mode==='parts'){c.translate((i-(p.count-1)/2)*4,0);}
   c.rotate(-a);path(c,poly);c.fillStyle='#fafaf8';c.fill();
   c.save();c.clip();c.rotate(a);
-  if(hasPhoto){c.save();c.scale(1,-1);c.drawImage(sample,-bounds/2,-p.length,bounds,p.length+6);c.restore();}
+  if(hasPhoto){c.save();c.scale(1,-1);c.drawImage(texture,-bounds/2,-p.length,bounds,p.length+6);c.restore();}
   else{c.fillStyle='#cfba91';c.beginPath();c.moveTo(-bounds/2,45);c.lineTo(-70,80);c.lineTo(-30,62);c.lineTo(15,132);c.lineTo(80,68);c.lineTo(bounds/2,90);c.lineTo(bounds/2,0);c.lineTo(-bounds/2,0);c.fill();}
   c.restore();path(c,poly);c.strokeStyle='#fff';c.lineWidth=1.2;c.stroke();
   c.fillStyle='#f5f5f2';c.beginPath();c.moveTo(-6,0);c.lineTo(-7,30);c.quadraticCurveTo(0,38,7,30);c.lineTo(6,0);c.fill();
@@ -60,7 +61,7 @@ $('photo').onchange=async()=>{const token=++loadId;cancel();const file=$('photo'
  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20*1024*1024){$('feedback').textContent='Choose a JPEG, PNG or WebP under 20 MB.';return;}
  try{const decoded=await createImageBitmap(file,{imageOrientation:'from-image'});if(token!==loadId){decoded.close();return;}if(decoded.width*decoded.height>24000000){decoded.close();throw Error('Choose an image under 24 megapixels.');}image?.close?.();image=decoded;render();}catch(e){$('feedback').textContent=e.message;}
 };
-function demo(){++loadId;cancel();image?.close?.();const d=document.createElement('canvas');d.width=1000;d.height=600;const c=d.getContext('2d'),g=c.createLinearGradient(0,0,0,600);g.addColorStop(0,'#e6e6e6');g.addColorStop(1,'#fff');c.fillStyle=g;c.fillRect(0,0,1000,600);c.fillStyle='#aaa';c.beginPath();c.moveTo(0,410);c.lineTo(260,240);c.lineTo(370,330);c.lineTo(540,65);c.lineTo(760,330);c.lineTo(1000,220);c.lineTo(1000,600);c.lineTo(0,600);c.fill();c.fillStyle='#f5f5f5';c.beginPath();c.moveTo(455,200);c.lineTo(540,65);c.lineTo(650,215);c.lineTo(553,165);c.lineTo(520,205);c.lineTo(500,160);c.fill();for(let i=0;i<65;i++){const x=i*17,y=380+Math.sin(i*1.7)*35;c.fillStyle=i%2?'#666':'#888';c.beginPath();c.moveTo(x,y-50);c.lineTo(x-17,y+30);c.lineTo(x+17,y+30);c.fill();}c.fillStyle='#d8d8d8';c.fillRect(0,470,1000,130);for(let y=490;y<600;y+=12){c.strokeStyle='#aaa';c.beginPath();c.moveTo(0,y);c.lineTo(1000,y+Math.sin(y)*4);c.stroke();}image=d;render();}
+async function demo(){const token=++loadId;cancel();$('feedback').textContent='Loading sample landscape…';try{const art=await drawSeasonal(document.createElement('canvas'),'father-lake');if(token!==loadId)return;image?.close?.();image=art;$('photo').value='';render();}catch(e){$('feedback').textContent='Sample unavailable: '+e.message;}}
 $('demo').onclick=demo;
 function download(bytes,name,type){const url=URL.createObjectURL(new Blob([bytes],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(format){cancel();let p;try{p=settings();}catch(e){$('export-status').textContent=e.message;return;}if(!photo&&format!=='test')return;busy=true;enable();$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Building parts locally…';worker=new Worker(new URL('./fan-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.progress)$('progress').value=data.progress;if(data.error){cancel();$('export-status').textContent=`Export failed: ${data.error}`;}if(data.bytes){download(data.bytes,format==='test'?'fan-pivot-test.zip':`folding-fan-${p.count}-blades.${format==='3mf'?'3mf':'zip'}`,format==='3mf'?'model/3mf':'application/zip');cancel();$('export-status').textContent='Downloaded. Read the included assembly instructions; fit remains provisional.';}};worker.onerror=()=>{cancel();$('export-status').textContent='Export failed. Try again with fewer blades.';};worker.postMessage({settings:p,photo,format});}
@@ -68,3 +69,5 @@ $('zip').onclick=()=>start('zip');$('three-mf').onclick=()=>start('3mf');$('test
 $('reset').onclick=()=>{++loadId;cancel();image?.close?.();image=null;photo=null;$('photo').value='';for(const [id,val]of Object.entries({...defaults,panx:50,pany:50,brightness:0,contrast:0,crop:'cover'})){if(id==='stand')$('stand').checked=val;else $(id).value=val;}$('invert').checked=false;$('backlit').checked=true;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));$('export-status').textContent='Session cleared.';render();};
 window.addEventListener('pagehide',()=>{++loadId;cancel();image?.close?.();image=null;photo=null;sample.width=1;preview.width=1;});
 draw($('hero').getContext('2d'),defaults,'open',false);render();
+
+drawSeasonal(document.createElement('canvas'),'father-lake').then(art=>draw($('hero').getContext('2d'),defaults,'open',true,art)).catch(()=>{});

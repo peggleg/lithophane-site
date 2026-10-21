@@ -1,5 +1,6 @@
 import {stlBytes} from './geometry.js';
-import {zipSync,strToU8} from './zip.js';
+import {zipParts,strToU8} from './zip.js';
+function zipSync(files){const parts=zipParts(files),bytes=new Uint8Array(parts.reduce((n,p)=>n+p.length,0));let offset=0;for(const part of parts){bytes.set(part,offset);offset+=part.length;}return bytes;}
 export const defaults={count:11,length:155,angle:150,stand:true};
 export function validateFan(p){
  if(![9,11,13].includes(p.count)||!Number.isFinite(p.length)||p.length<100||p.length>180||!Number.isFinite(p.angle)||p.angle<120||p.angle>160)throw Error('Choose 9, 11 or 13 blades, 100–180 mm length and 120–160° opening.');
