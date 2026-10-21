@@ -49,7 +49,7 @@ export function generateTextModel(module,fontBuffer,input){
   if(raw.length){
   const b=bounds(raw),baseText=own(new C(raw,'NonZero')),centred=own(baseText.translate([-(b.minX+b.maxX)/2,-(b.minY+b.maxY)/2]));
   for(let attempt=0;attempt<70;attempt++){
-   const candidate=own(centred.scale(scale));const shifted=own(candidate.translate([0,p.kind==='keyring'?-2:0]));const outside=own(shifted.subtract(available));
+   const candidate=own(centred.scale(scale));const shifted=own(candidate.translate(p.kind==='keyring'?(['rounded','capsule'].includes(p.shape)?[(p.hole+3)/2,0]:[0,-2]):[0,0]));const outside=own(shifted.subtract(available));
    if(outside.area()<.00001){lettering=shifted;break;}scale*=.94;
   }
   if(!lettering||p.size*scale<5)throw Error('Text would be too small. Shorten it, use one line or enlarge the design. Minimum fitted font size is 5 mm.');

@@ -50,6 +50,7 @@ export function fitSymbol(input,p){
 // an upper lobe where the central notch cannot provide the required material.
 export function ringHole(p){
  dimensions(p);
+ if(['rounded','capsule'].includes(p.shape))return {x:-p.width/2+3+p.hole/2,y:0};
  const key=[p.shape,p.width,p.height,p.hole].join();if(holes.has(key))return holes.get(key);
  const r=p.hole/2+3;
  for(let y=p.height/2-r;y>0;y-=.25)for(let step=0;step<=p.width;step++){
