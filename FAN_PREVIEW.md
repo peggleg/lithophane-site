@@ -9,3 +9,7 @@ Downloads include numbered STL files, printable coarse-thread pivot hardware, op
 Verification: 32 automated tests, preview and production builds, preview indexing checks and existing 0.2/0.1 mm resolution regression pass. Chromium checks cover fan views, sample and photo input, crop adjustments, all three downloads, cancel, reset, invalid sizes and 390px layout; current panel sample STL/3MF exports and reset also pass. ZIP integrity and 19-object millimetre 3MF were parsed independently. Physical three-blade and pivot prototypes remain required.
 
 Push only to `preview/lithophane`; the existing Cloudflare Pages Git integration handles deployment. Do not invoke the obsolete Direct Upload scripts. The branch alias is https://preview-lithophane.lithophane-site.pages.dev/folding-fan/ . Confirm a successful check for the current commit before treating it as deployed.
+
+## Nature sample collection
+
+Twelve original AI-generated grayscale nature scenes are available only on the fan page. Three locally bundled WebP atlases supply four panoramic cells each. Thumbnail previews and generated parts use the same source cell. Selecting a sample preserves fan dimensions, resets photo adjustments and opens the assembled preview; reset cancels pending loads. The first sample also supplies the hero and sample shortcut. No changes are made to the main lithophane page or its seasonal catalogue.

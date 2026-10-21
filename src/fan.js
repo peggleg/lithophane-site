@@ -1,5 +1,5 @@
 import './fan.css';
-import {drawSeasonal} from './seasonal.js';
+import {fanSamples,drawFanSample} from './fan-samples.js';
 import {defaults,validateFan,stackHeight,outline,bladeAngle,instructions} from './fan-geometry.js';
 const $=id=>document.getElementById(id),preview=$('preview'),ctx=preview.getContext('2d'),sample=document.createElement('canvas'),sc=sample.getContext('2d',{willReadFrequently:true});
 let image=null,photo=null,view='open',worker=null,loadId=0,busy=false,loading=false;
@@ -59,15 +59,40 @@ fields.forEach(id=>$(id).addEventListener('input',()=>{cancel();render();}));
 for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>{view=button.dataset.view;document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render();};
 $('photo').onchange=async()=>{const token=++loadId;cancel();loading=false;const file=$('photo').files[0];if(!file)return;
  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20*1024*1024){$('feedback').textContent='Choose a JPEG, PNG or WebP under 20 MB.';return;}
- loading=true;enable();try{const decoded=await createImageBitmap(file,{imageOrientation:'from-image'});if(token!==loadId){decoded.close();return;}if(decoded.width*decoded.height>24000000){decoded.close();throw Error('Choose an image under 24 megapixels.');}image?.close?.();image=decoded;loading=false;render();}catch(e){if(token!==loadId)return;loading=false;enable();$('feedback').textContent=e.message;}
+ loading=true;enable();try{const decoded=await createImageBitmap(file,{imageOrientation:'from-image'});if(token!==loadId){decoded.close();return;}if(decoded.width*decoded.height>24000000){decoded.close();throw Error('Choose an image under 24 megapixels.');}image?.close?.();image=decoded;loading=false;document.querySelectorAll('[data-fan-sample]').forEach(b=>b.setAttribute('aria-pressed','false'));render();}catch(e){if(token!==loadId)return;loading=false;enable();$('feedback').textContent=e.message;}
 };
-async function demo(){const token=++loadId;cancel();loading=true;enable();$('feedback').textContent='Loading sample landscape…';try{const art=await drawSeasonal(document.createElement('canvas'),'father-lake');if(token!==loadId)return;image?.close?.();image=art;loading=false;$('photo').value='';render();}catch(e){if(token!==loadId)return;loading=false;enable();$('feedback').textContent='Sample unavailable: '+e.message;}}
-$('demo').onclick=demo;
+async function useSample(id){
+ const design=fanSamples.find(d=>d.id===id);if(!design)return;
+ const token=++loadId;cancel();loading=true;enable();$('feedback').textContent=`Loading ${design.name}…`;
+ $('sample-status').textContent=`Loading ${design.name}…`;
+ try{
+  const art=await drawFanSample(document.createElement('canvas'),id);if(token!==loadId)return;
+  image?.close?.();image=art;loading=false;$('photo').value='';
+  for(const [field,value]of Object.entries({panx:50,pany:50,brightness:0,contrast:0,crop:'cover'}))$(field).value=value;
+  $('invert').checked=false;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));
+  render();$('export-status').textContent=`${design.name} loaded. Adjust the crop and tones, then export your fan.`;
+  $('sample-status').textContent=`${design.name} loaded in the studio.`;
+  document.querySelectorAll('[data-fan-sample]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.fanSample===id)));
+  $('studio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ }catch(e){if(token!==loadId)return;loading=false;enable();$('feedback').textContent='Sample unavailable: '+e.message;$('sample-status').textContent='Sample unavailable. Please try again.';}
+}
+$('demo').onclick=()=>useSample(fanSamples[0].id);
+const gallery=$('fan-samples');
+for(const design of fanSamples){
+ const card=document.createElement('article');card.className='fan-sample-card';
+ const canvas=document.createElement('canvas');canvas.width=600;canvas.height=384;canvas.setAttribute('role','img');canvas.setAttribute('aria-label',design.description);
+ const heading=document.createElement('h3');heading.textContent=design.name;
+ const description=document.createElement('p');description.textContent=design.description;
+ const button=document.createElement('button');button.type='button';button.dataset.fanSample=design.id;button.textContent='Use '+design.name+' ↗';button.setAttribute('aria-pressed','false');button.onclick=()=>useSample(design.id);
+ card.append(canvas,heading,description,button);gallery.append(card);
+ drawFanSample(document.createElement('canvas'),design.id).then(art=>draw(canvas.getContext('2d'),defaults,'open',true,art)).catch(()=>{const warning=document.createElement('p');warning.textContent='Preview unavailable. Use the button to retry.';canvas.replaceWith(warning);});
+}
+
 function download(bytes,name,type){const url=URL.createObjectURL(new Blob([bytes],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(format){cancel();let p;try{p=settings();}catch(e){$('export-status').textContent=e.message;return;}if(!photo&&format!=='test')return;busy=true;enable();$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Building parts locally…';worker=new Worker(new URL('./fan-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.progress)$('progress').value=data.progress;if(data.error){cancel();$('export-status').textContent=`Export failed: ${data.error}`;}if(data.bytes){download(data.bytes,format==='test'?'fan-pivot-test.zip':`folding-fan-${p.count}-blades.${format==='3mf'?'3mf':'zip'}`,format==='3mf'?'model/3mf':'application/zip');cancel();$('export-status').textContent='Downloaded. Read the included assembly instructions; fit remains provisional.';}};worker.onerror=()=>{cancel();$('export-status').textContent='Export failed. Try again with fewer blades.';};worker.postMessage({settings:p,photo,format});}
 $('zip').onclick=()=>start('zip');$('three-mf').onclick=()=>start('3mf');$('test-fit').onclick=()=>start('test');$('cancel').onclick=()=>{cancel();$('export-status').textContent='Export cancelled.';};$('summary').onclick=()=>{try{download(instructions(settings()),'fan-assembly.txt','text/plain');}catch(e){$('export-status').textContent=e.message;}};
-$('reset').onclick=()=>{++loadId;cancel();image?.close?.();image=null;photo=null;loading=false;$('photo').value='';for(const [id,val]of Object.entries({...defaults,panx:50,pany:50,brightness:0,contrast:0,crop:'cover'})){if(id==='stand')$('stand').checked=val;else $(id).value=val;}$('invert').checked=false;$('backlit').checked=true;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));$('export-status').textContent='Session cleared.';render();};
+$('reset').onclick=()=>{++loadId;cancel();image?.close?.();image=null;photo=null;loading=false;$('photo').value='';for(const [id,val]of Object.entries({...defaults,panx:50,pany:50,brightness:0,contrast:0,crop:'cover'})){if(id==='stand')$('stand').checked=val;else $(id).value=val;}$('invert').checked=false;$('backlit').checked=true;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));$('export-status').textContent='Session cleared.';$('sample-status').textContent='';document.querySelectorAll('[data-fan-sample]').forEach(b=>b.setAttribute('aria-pressed','false'));render();};
 window.addEventListener('pagehide',()=>{++loadId;cancel();image?.close?.();image=null;photo=null;sample.width=1;preview.width=1;});
 draw($('hero').getContext('2d'),defaults,'open',false);render();
 
-drawSeasonal(document.createElement('canvas'),'father-lake').then(art=>draw($('hero').getContext('2d'),defaults,'open',true,art)).catch(()=>{});
+drawFanSample(document.createElement('canvas'),fanSamples[0].id).then(art=>draw($('hero').getContext('2d'),defaults,'open',true,art)).catch(()=>{});
