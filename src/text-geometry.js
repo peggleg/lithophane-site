@@ -3,7 +3,7 @@ import opentype from 'opentype.js';
 
 import {textDefaults,validateTextSettings} from './text-settings.js';
 export {textDefaults,validateTextSettings} from './text-settings.js';
-function flattenPath(commands){
+export function flattenPath(commands){
  const contours=[];let path=[],pos=[0,0];
  const put=(x,y)=>{path.push([x,-y]);pos=[x,y];};
  for(const c of commands){

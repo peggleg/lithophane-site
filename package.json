@@ -14,7 +14,8 @@
     "pages:create": "npx --yes wrangler@4.151.1 pages project create peggleg-lithophane --production-branch main",
     "pages:deploy:preview": "npm run build:preview && npm run check:preview && npx --yes wrangler@4.151.1 pages deploy dist-preview --project-name peggleg-lithophane --branch preview/lithophane",
     "check:resolution": "node scripts/validate-resolution.mjs",
-    "test:browser": "node scripts/check-studio-browser.mjs"
+    "test:browser": "node scripts/check-studio-browser.mjs",
+    "test:clickers": "node scripts/check-clicker-browser.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
