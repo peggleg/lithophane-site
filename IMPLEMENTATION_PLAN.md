@@ -105,3 +105,13 @@ Caps taper from 21.5 mm to 18.8 mm with rounded corners and hollow skirts. Autom
 
 
 Letter Charms support 1–12 buttons; Number Pad 1–9; Daisy Chain exactly 5; Pocket Pebble exactly 1. Pocket Arcade, Christmas Clicks and Cloud Cluster support 1–5. Pocket Pebble batch downloads support 1–64 characters, including an A–Z preset. All lettering accepts printable punctuation such as !"£$%. Removed Name Bar and Symbol Strip presets are unavailable.
+
+## Resizable Japandi desk collection
+
+`/desk/` generates storage drawers, pen pots and sorting trays locally. Width, depth, height, wall/floor thickness, compartments, drawer count (1–4) and per-side drawer clearance are adjustable. Smooth, Soft Fluted and Slatted finishes change the exported solids; Ivory/Sand, Sage/Cream and Charcoal/Wood palettes affect the preview only.
+
+Each finished part is measured in its supplied printing orientation and must remain within 170 × 170 × 170 mm for the A1 mini’s 180 mm build volume. Invalid or oversized settings block generation and downloads. Brims, supports and slicer exclusions still need checking. Parts may require multiple plates; 3MF is not printer-bed packing.
+
+Print the drawer case on its closed back, open front upwards, so its shelves print vertically. Print drawers, pots and trays bottom-down and open-side-up. STL ZIP and millimetre 3MF contain separate named parts; the guide lists their print sizes and orientation. The assembled preview includes an open-drawer view and a view of printing orientations. Physical fit, strength and surface quality are untested.
+
+Validation: 73 unit tests pass, including eight desk geometry tests for connected/closed/oriented meshes, actual part sizes at the 170 mm limit, resized geometry, dividers, floors, finish changes, assembly dimensions and case/drawer collision checks at 0.2 mm clearance. `npm run test:desk` covers all three items and finishes, resizing, all downloads, invalid settings, palettes, reset/cancellation, mobile and touch. `npm run test:navigation` checks all seven pages at desktop/tablet/mobile sizes in both themes. Production and preview builds plus seven-page CSP/indexing checks pass.

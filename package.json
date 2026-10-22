@@ -18,7 +18,8 @@
     "test:clickers": "node scripts/check-clicker-browser.mjs",
     "test:fan": "node scripts/check-fan-crop-browser.mjs",
     "test:pebble-batch": "node scripts/check-pebble-batch-browser.mjs",
-    "test:navigation": "node scripts/check-navigation-browser.mjs"
+    "test:navigation": "node scripts/check-navigation-browser.mjs",
+    "test:desk": "node scripts/check-desk-browser.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
