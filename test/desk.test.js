@@ -43,3 +43,14 @@ test('drawer feet seat in matching pockets while a final unit retains a solid sm
  }
  assert.throws(()=>build({wall:1.8}),/2.4/);assert.throws(()=>build({stackTop:'unknown'}));
 });
+
+test('square and round bins have flush flat lids, closed floors and collision-free swing',()=>{
+ for(const shape of ['square','round'])for(const finish of ['smooth','fluted','slatted'])for(const width of [50,110,170]){
+  const m=build({kind:'bin',shape,finish,width,depth:width,height:100});assert.equal(m.parts.length,3);m.parts.forEach(check);
+  const body=restore(m.parts[0]),rawRim=restore(m.parts[1]),rim=rawRim.rotate([180,0,0]).translate(m.parts[1].assembly),lid=restore(m.parts[2]);
+  assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[2].assembly[2]+4,100);
+  for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.translate([0,0,-2]).rotate([angle,0,0]).translate([0,0,98]);for(const stationary of [body,rim]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
+  assert.equal(Object.keys(unzip(deskStlZip(m))).length,4);assert.match(deskGuide(m),/Glue ONLY/);[body,rawRim,rim,lid].forEach(s=>s.delete());
+ }
+});
+test('round pen pots retain circular footprint and closed connected divided geometry',()=>{for(const finish of ['smooth','fluted','slatted'])for(const width of [80,170]){const m=build({kind:'pot',shape:'round',finish,width,depth:50,columns:2,rows:2});assert.equal(m.depth,width);check(m.parts[0]);const s=restore(m.parts[0]),b=s.boundingBox();assert.ok(Math.abs((b.max[0]-b.min[0])-(b.max[1]-b.min[1]))<.05);s.delete();}});
