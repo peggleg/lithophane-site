@@ -6,20 +6,21 @@ export const clickerPresets={
  gamepad:{count:4,capShape:'rounded',palette:'arcade',keyring:false,keys:[...'ABXY'].map(value=>({type:'text',value}))},
  bloom:{count:5,capShape:'rounded',palette:'pastel',keyring:true,keys:['flower','heart','star','cloud','plus'].map(value=>({type:'symbol',value}))},
  pebble:{palette:'candy',keyring:true,count:1,capShape:'rounded',keys:[{type:'symbol',value:'heart'}]},
- namebar:{palette:'forest',keyring:true,count:3,capShape:'rounded',keys:[...'SAM'].map(value=>({type:'text',value}))},
- symbols:{palette:'candy',keyring:true,count:5,capShape:'rounded',keys:['heart','star','cloud','flower','plus'].map(value=>({type:'symbol',value}))},
  numbers:{palette:'arcade',keyring:false,count:4,capShape:'rounded',keys:[...'1234'].map(value=>({type:'text',value}))},
  cloud:{palette:'pastel',keyring:false,count:4,capShape:'rounded',keys:[{type:'symbol',value:'heart'},{type:'symbol',value:'star'},{type:'text',value:'B'},{type:'text',value:'7'}]}
 };
+export function clickerCountRange(design){return design==='charm'?{min:1,max:12}:design==='numbers'?{min:1,max:9}:design==='bloom'?{min:5,max:5}:design==='pebble'?{min:1,max:1}:{min:1,max:5};}
+export const isClickerCharacter=value=>/^[\p{L}\p{N}\p{P}\p{S}]$/u.test(value);
 export function validateClickerSettings(input){
  const p={...clickerDefaults,...input};
- if(!Object.hasOwn(clickerPresets,p.design)||p.capShape!=='rounded'||!Number.isInteger(p.count)||p.count<1||p.count>5)throw Error('Choose a design, 1–5 buttons and square keycaps.');
- if(p.design==='pebble'&&p.count!==1)throw Error('Pocket Pebble has one button. Choose a bar or cluster for multiple buttons.');
+ if(!Object.hasOwn(clickerPresets,p.design)||p.capShape!=='rounded')throw Error('Choose an available design and square keycaps.');
+ const {min,max}=clickerCountRange(p.design);
+ if(!Number.isInteger(p.count)||p.count<min||p.count>max)throw Error(min===max?`This design has exactly ${min} buttons.`:`Choose ${min}–${max} buttons for this design.`);
  for(const [field,min,max]of [['floor',1.6,3.2],['pitch',24,28],['cutout',13.8,14.8],['cavity',8,20],['wall',2,4],['socketClearance',0,.4],['stemWidth',5.6,7],['stemHeight',3,5]])if(!Number.isFinite(p[field])||p[field]<min||p[field]>max)throw Error(`Use ${min}–${max} mm for ${field}.`);
  if(typeof p.keyring!=='boolean'||!['candy','pastel','arcade','forest','christmas','spooky','custom'].includes(p.palette))throw Error('Choose a valid palette and keyring option.');
  if(p.stemWidth-(4+p.socketClearance)<1.4)throw Error('The stem connector needs at least 0.7 mm of wall around its socket. Increase connector width or reduce socket clearance.');
  if(!Array.isArray(p.keys)||p.keys.length!==p.count)throw Error('Give each button a letter, number, symbol or blank face.');
- p.keys=p.keys.map(key=>{if(!key||!['text','symbol','blank'].includes(key.type))throw Error('Choose a valid button marking.');const value=String(key.value??'').normalize('NFC');if(key.type==='text'&&(!/^[\p{L}\p{N}]$/u.test(value)))throw Error('Use one letter or number on each button.');if(key.type==='symbol'&&!Object.hasOwn(symbolNames,value))throw Error('Choose a symbol from the list.');if(key.colour!==undefined&&!/^#[0-9a-f]{6}$/i.test(key.colour))throw Error('Choose a valid key colour.');return {type:key.type,value:key.type==='blank'?'':value,...(key.colour?{colour:key.colour}:{})};});
+ p.keys=p.keys.map(key=>{if(!key||!['text','symbol','blank'].includes(key.type))throw Error('Choose a valid button marking.');const value=String(key.value??'').normalize('NFC');if(key.type==='text'&&!isClickerCharacter(value))throw Error('Use one printable letter, number or punctuation character on each button.');if(key.type==='symbol'&&!Object.hasOwn(symbolNames,value))throw Error('Choose a symbol from the list.');if(key.colour!==undefined&&!/^#[0-9a-f]{6}$/i.test(key.colour))throw Error('Choose a valid key colour.');return {type:key.type,value:key.type==='blank'?'':value,...(key.colour?{colour:key.colour}:{})};});
  return p;
 }
 export function clickerPositions(p){

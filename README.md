@@ -167,7 +167,7 @@ Rounded rectangles and capsules use a left-side ring hole. Circles, hearts, star
 
 ## Mechanical clickers
 
-Nine presets offer 1–5 buttons, 12 fonts and ten symbol collections with twelve choices each, including Christmas. Each download contains only one closed base and one cap per button, plus a text guide. There are no separate decks, inserts or fit-test models.
+Seven presets offer up to 12 buttons, 12 fonts and ten symbol collections with twelve choices each, including Christmas. Each download contains only one closed base and one cap per button, plus a text guide. There are no separate decks, inserts or fit-test models.
 
 The default base is 15.8 mm high with a 1.8 mm floor, 9 mm blind square pockets and 5 mm upper wells. Dry-fit switches first. Glue the fixed lower housing sides to the pocket walls, or its stationary flange to the surrounding ledge. Keep adhesive off moving stems, seams, contacts and caps. Let it cure before adding the caps. Actual switch fit needs physical verification.
 
@@ -178,3 +178,5 @@ Caps taper from 21.5 mm to 18.8 mm with rounded corners and hollow skirts. Autom
 The open fan preview supports bounded mouse/touch dragging, arrow-key positioning (Shift for larger steps), 100–400% zoom and a photo-position reset. Fit whole photo remains centered. Preview and exported blade relief share the same cropped image. Samples reset the crop. Run `CHROMIUM_PATH=/usr/bin/chromium npm run test:fan` to check mouse, touch, keyboard, crop modes, reset and STL export.
 
 Clicker symbols: 120 distinct choices across Everyday Favourites, Cute & Cosmic, Sports Club, Fruit Salad, Halloween, Christmas, Animal Friends, Great Outdoors, Snack Time, and Hobbies & Adventures. Every collection contains 12 symbols. A starter set uses its first five choices; each button can then use any symbol from the collection. Catalogue integrity and closed-cap geometry are covered by automated tests.
+
+Clicker design limits: Letter Charms accepts 1–12 buttons, Number Pad 1–9, Daisy Chain exactly 5, and Pocket Pebble exactly 1. Name Bar and Symbol Strip have been removed. Lettering accepts individual printable letters, numbers and punctuation, including `!"£$%`; whitespace and unsupported font glyphs remain explicit errors. Count limits apply to both UI controls and generated exports. Punctuation geometry is checked in all 12 bundled fonts.
