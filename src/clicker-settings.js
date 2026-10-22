@@ -1,5 +1,5 @@
 import {symbolNames} from './clicker-symbols.js';
-export const clickerDefaults={kind:'clicker',design:'charm',count:3,capShape:'rounded',font:'rounded',palette:'candy',keyring:true,floor:2,deckClearance:-.05,pitch:23,cutout:14.1,plate:1.5,cavity:16,wall:2.4,socketClearance:.15,stemWidth:5.8,stemHeight:4,keys:[...'JOY'].map(value=>({type:'text',value}))};
+export const clickerDefaults={kind:'clicker',design:'charm',count:3,capShape:'rounded',font:'rounded',palette:'candy',keyring:true,floor:1.8,pitch:24,cutout:14.1,cavity:9,wall:2.4,socketClearance:.15,stemWidth:5.8,stemHeight:4,keys:[...'JOY'].map(value=>({type:'text',value}))};
 export const clickerPresets={
  christmas:{count:5,capShape:'rounded',palette:'christmas',keyring:true,keys:['tree','snowflake','present','bauble','gingerbread'].map(value=>({type:'symbol',value}))},
  charm:{count:3,capShape:'rounded',palette:'candy',keyring:true,keys:[...'JOY'].map(value=>({type:'text',value}))},
@@ -15,7 +15,7 @@ export function validateClickerSettings(input){
  const p={...clickerDefaults,...input};
  if(!Object.hasOwn(clickerPresets,p.design)||p.capShape!=='rounded'||!Number.isInteger(p.count)||p.count<1||p.count>5)throw Error('Choose a design, 1–5 buttons and square keycaps.');
  if(p.design==='pebble'&&p.count!==1)throw Error('Pocket Pebble has one button. Choose a bar or cluster for multiple buttons.');
- for(const [field,min,max]of [['floor',1.6,3.2],['deckClearance',-.15,.35],['pitch',22,28],['cutout',13.8,14.8],['plate',1.2,2.2],['cavity',14,20],['wall',2,4],['socketClearance',0,.4],['stemWidth',5.6,7],['stemHeight',3,5]])if(!Number.isFinite(p[field])||p[field]<min||p[field]>max)throw Error(`Use ${min}–${max} mm for ${field}.`);
+ for(const [field,min,max]of [['floor',1.6,3.2],['pitch',24,28],['cutout',13.8,14.8],['cavity',8,20],['wall',2,4],['socketClearance',0,.4],['stemWidth',5.6,7],['stemHeight',3,5]])if(!Number.isFinite(p[field])||p[field]<min||p[field]>max)throw Error(`Use ${min}–${max} mm for ${field}.`);
  if(typeof p.keyring!=='boolean'||!['candy','pastel','arcade','forest','christmas','spooky','custom'].includes(p.palette))throw Error('Choose a valid palette and keyring option.');
  if(p.stemWidth-(4+p.socketClearance)<1.4)throw Error('The stem connector needs at least 0.7 mm of wall around its socket. Increase connector width or reduce socket clearance.');
  if(!Array.isArray(p.keys)||p.keys.length!==p.count)throw Error('Give each button a letter, number, symbol or blank face.');

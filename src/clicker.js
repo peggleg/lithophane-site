@@ -4,7 +4,7 @@ import './clicker.css';
 import {fonts} from './font-catalogue.js';
 import {clickerDefaults,clickerPresets,clickerPalettes} from './clicker-settings.js';
 import {createClickerPreview} from './clicker-preview.js';
-const $=id=>document.getElementById(id),fitFields=['floor','deckClearance','pitch','cutout','plate','cavity','wall','socketClearance','stemWidth','stemHeight'];
+const $=id=>document.getElementById(id),fitFields=['floor','pitch','cutout','cavity','wall','socketClearance','stemWidth','stemHeight'];
 let state=structuredClone(clickerDefaults),selected=0,model=null,worker=null,timer=null,generation=0,busy=false,preview=null;
 try{preview=createClickerPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. You can still generate and download the parts.';}
 for(const [value,{label}]of Object.entries(fonts)){const option=document.createElement('option');option.value=value;option.textContent=label;$('font').append(option);}
@@ -22,7 +22,7 @@ function downloads(){for(const id of ['stl','three-mf','print-guide','try-button
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('progress').hidden=true;$('cancel').hidden=true;downloads();}
 function generate(){const token=++generation;stop();model=null;preview?.setModel(null);downloads();$('feedback').textContent='Preparing your clicker…';$('export-status').textContent='';$('dimensions').textContent='—';$('part-count').textContent='—';
  timer=setTimeout(()=>{busy=true;downloads();$('progress').hidden=false;$('progress').value=15;$('cancel').hidden=false;worker=new Worker(new URL('./clicker-worker.js',import.meta.url),{type:'module'});
- worker.onmessage=({data})=>{if(token!==generation)return;if(data.progress)$('progress').value=data.progress;if(data.error){stop();$('feedback').textContent=data.error;return;}if(data.model){model=data.model;stop();preview?.setModel(model);preview?.select(selected);$('dimensions').textContent=`${model.width} × ${model.height} × ${model.baseHeight} mm`;$('part-count').textContent=model.parts.length;$('feedback').textContent='Design ready. Print the closed tray, deck and socket fit tests first. Fit and travel are provisional.';}};
+ worker.onmessage=({data})=>{if(token!==generation)return;if(data.progress)$('progress').value=data.progress;if(data.error){stop();$('feedback').textContent=data.error;return;}if(data.model){model=data.model;stop();preview?.setModel(model);preview?.select(selected);$('dimensions').textContent=`${model.width} × ${model.height} × ${model.baseHeight} mm`;$('part-count').textContent=model.parts.length;$('feedback').textContent='Design ready. One base and one cap per button. Glue switches into the built-in pockets; keep stems free. Fit remains provisional.';}};
  worker.onerror=()=>{if(token===generation){stop();$('feedback').textContent='Could not prepare the clicker. Change a setting to retry.';}};worker.postMessage({action:'generate',settings:state});},200);
 }
 $('palette').oninput=()=>{state.palette=$('palette').value;colours();buttons();editor();};

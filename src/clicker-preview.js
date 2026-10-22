@@ -15,7 +15,7 @@ export function createClickerPreview(canvas){
  function paint(){clear();if(!model){render();return;}
   for(const part of model.parts){if(!partsView&&(part.role==='test'||openTray&&part.role!=='base'))continue;const indexed=new THREE.BufferGeometry();indexed.setAttribute('position',new THREE.BufferAttribute(part.mesh.vertices,3));indexed.setIndex(new THREE.BufferAttribute(part.mesh.faces,1));const geometry=indexed.toNonIndexed();indexed.dispose();geometry.computeVertexNormals();
    const palette=clickerPalettes[colours.palette],base=palette?.base||colours.base,trim=palette?.trim||colours.cap,cap=colours.keyColours?.[part.key]||palette?.caps[(part.key||0)%palette.caps.length]||colours.cap,ink=palette?.ink||colours.mark;
-   const pos=geometry.getAttribute('position'),rgb=new Float32Array(pos.count*3),normal=new THREE.Color(['base','deck'].includes(part.role)?base:part.role==='test'?'#a49c8d':trim),accent=new THREE.Color(cap),mark=new THREE.Color(ink);
+   const pos=geometry.getAttribute('position'),rgb=new Float32Array(pos.count*3),normal=new THREE.Color(part.role==='base'?base:cap),accent=new THREE.Color(cap),mark=new THREE.Color(ink);
    for(let i=0;i<pos.count;i+=3){const raised=part.role==='cap'&&[0,1,2].some(k=>pos.getZ(i+k)>model.capTop+.01),face=part.role==='cap'&&[0,1,2].some(k=>pos.getZ(i+k)>model.capShoulderTop+.01);const c=raised?mark:face?accent:normal;for(let j=0;j<3;j++)rgb.set([c.r,c.g,c.b],(i+j)*3);}
    geometry.setAttribute('color',new THREE.BufferAttribute(rgb,3));const object=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({vertexColors:true,roughness:.8}));object.position.fromArray(partsView?[part.x||0,0,0]:part.assembly||[0,0,0]);object.userData.key=part.key;group.add(object);
   }
