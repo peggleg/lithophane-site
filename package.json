@@ -19,7 +19,8 @@
     "test:fan": "node scripts/check-fan-crop-browser.mjs",
     "test:pebble-batch": "node scripts/check-pebble-batch-browser.mjs",
     "test:navigation": "node scripts/check-navigation-browser.mjs",
-    "test:desk": "node scripts/check-desk-browser.mjs"
+    "test:desk": "node scripts/check-desk-browser.mjs",
+    "test:filament": "node scripts/check-filament-browser.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1",

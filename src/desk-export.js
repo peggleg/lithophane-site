@@ -1,7 +1,8 @@
+import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
-export function deskGuide(model){const p=model.settings;return `DESIGN STUDIO — JAPANDI DESK COLLECTION
+export function deskGuide(model){const p=model.settings;return `${filamentReport(model.parts)}\nDESIGN STUDIO — JAPANDI DESK COLLECTION
 ${p.kind}; ${p.finish} finish;${p.kind==='drawers'?` ${p.stackTop==='pockets'?'locating-pocket':'smooth final'} top;`:''} requested size ${p.width} × ${p.depth} × ${p.height} mm (width × depth × height).
 
 A1 MINI PRINTING

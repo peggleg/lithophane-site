@@ -111,3 +111,6 @@ Stackable drawer units: both top variants include four integral 1.2 mm feet with
 
 
 Desk bins and round pen pots: square/round bins export three parts (closed body, removable bearing rim, flat flush swing lid). Integral 2 mm pivot pins seat on raised body pads; the rim encloses them. Glue the stationary rim/body joint only. Bearing clearance is 0.25 mm radial and lid gap 0.6 mm per side. Round pots use one diameter and real radial fluted/slatted detailing. All finished parts remain within 170 mm per print axis. Collision checks cover ±90° lid travel; physical fit, glue durability and balance still require print testing. Inspect pin supports in the slicer.
+
+
+All generators show estimated filament in grams. Mesh-based tools sum enclosed triangle-mesh volumes at PLA density 1.24 g/cm³ and 100% infill, with per-part breakdowns in the UI and print guides; millimetre 3MF includes the total in Description metadata. Lithophanes retain their photo-based panel estimate and now show corner-test weight too. Pocket Pebble batches can be estimated before download and include all bases/caps in their guide. These solid-PLA estimates exclude supports, brim, purge and waste; the slicer remains authoritative for the selected material and print settings. Run `npm run test:filament` for cross-generator browser checks.
