@@ -33,3 +33,13 @@ test('punctuation and currency markings produce closed caps in every bundled fon
  for(const [font,{file}]of Object.entries(fonts)){const bytes=fs.readFileSync(new URL('../src/fonts/'+file+'.ttf',import.meta.url)),buffer=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),model=generateClickerModel(module,buffer,{...clickerDefaults,font,count:5,keys:[...'!"£$%'].map(value=>({type:'text',value}))});for(const part of model.parts)checkMesh(part.mesh);}
  for(const value of [' ','\n','AB'])assert.throws(()=>build({keys:[{type:'text',value}]}));
 });
+
+test('alphabet batches contain 26 independent bases and caps in both download formats',async()=>{
+ const {generatePebbleBatch}=await import('../src/clicker-batch.js');
+ const {pebbleBatchCharacters}=await import('../src/clicker-settings.js');
+ const batch=generatePebbleBatch(module,font,{...clickerDefaults,font:'sans'},'ABCDEFGHIJKLMNOPQRSTUVWXYZ');assert.equal(batch.parts.length,52);assert.equal(batch.parts.filter(p=>p.role==='base').length,26);assert.equal(batch.parts.filter(p=>p.role==='cap').length,26);assert.equal(new Set(batch.parts.map(p=>p.name)).size,52);
+ for(const part of batch.parts)checkMesh(part.mesh);
+ const files=unzip(clickerStlZip(batch)),mf=unzip(solid3mf(batch)),xml=new TextDecoder().decode(mf['3D/3dmodel.model']);assert.equal(Object.keys(files).filter(n=>n.endsWith('.stl')).length,52);assert.ok(files['pebble-01-A/base.stl']);assert.ok(files['pebble-26-Z/cap.stl']);assert.equal((xml.match(/<object /g)||[]).length,52);assert.ok(batch.parts.some(p=>p.y>0));assert.match(clickerGuide(batch),/26 separate Pocket Pebbles/);
+ const repeated=generatePebbleBatch(module,font,{...clickerDefaults,font:'sans'},'A A\n!');assert.equal(repeated.parts.length,6);assert.equal(new Set(repeated.parts.map(p=>p.name)).size,6);assert.match(repeated.parts[4].name,/u21/);
+ assert.deepEqual(pebbleBatchCharacters('A B\nC'),['A','B','C']);for(const text of ['',' '.repeat(4),'A'.repeat(65),'A\u0000'])assert.throws(()=>pebbleBatchCharacters(text));
+});

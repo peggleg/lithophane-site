@@ -2,7 +2,7 @@ import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
 export function clickerGuide(model){const p=model.settings;return `DESIGN STUDIO — GLUE-IN MECHANICAL CLICKER PROTOTYPE
-PRINTED PARTS
+${model.batchCount?`BATCH: ${model.batchCount} separate Pocket Pebbles (${model.parts.length} printed pieces).\nCharacters: ${model.batchCharacters.join(' ')}\nEach named folder contains one base and one cap. Duplicate characters are preserved. Arrange the 3MF objects or split them across print plates in your slicer.\n`:''}PRINTED PARTS
 One base plus one cap per button (${p.count+1} printed pieces). No separate deck, insert or fit-test pieces.
 Base height ${model.baseHeight} mm. Closed floor ${p.floor} mm. Blind switch pockets ${p.cutout} mm square and ${p.cavity} mm deep. Individual upper wells hide the switch sides.
 

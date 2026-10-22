@@ -39,3 +39,10 @@ export const clickerPalettes={
  arcade:{base:'#29334d',trim:'#20263a',caps:['#ea6a87','#e8bf4f','#6fcba5','#7a9feb','#bb8ddd'],ink:'#fff9ec'},
  forest:{base:'#526c4b',trim:'#e7e3ce',caps:['#f4eddb'],ink:'#294832'}
 };
+
+export function pebbleBatchCharacters(text){
+ const characters=[...String(text).normalize('NFC').replace(/\s/gu,'')];
+ if(!characters.length||characters.length>64)throw Error('Enter 1–64 characters for your batch. Spaces and line breaks are separators.');
+ if(characters.some(c=>!isClickerCharacter(c)))throw Error('Use printable letters, numbers or punctuation for your batch.');
+ return characters;
+}
