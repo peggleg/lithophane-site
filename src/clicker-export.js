@@ -3,7 +3,7 @@ import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
 export function clickerGuide(model){const p=model.settings;return `DESIGN STUDIO — GLUE-IN MECHANICAL CLICKER PROTOTYPE
 ${model.batchCount?`BATCH: ${model.batchCount} separate Pocket Pebbles (${model.parts.length} printed pieces).\nCharacters: ${model.batchCharacters.join(' ')}\nEach named folder contains one base and one cap. Duplicate characters are preserved. Arrange the 3MF objects or split them across print plates in your slicer.\n`:''}PRINTED PARTS
-One base plus one cap per button (${p.count+1} printed pieces). No separate deck, insert or fit-test pieces.
+${model.batchCount?`Each pebble has one base and one cap; this batch contains ${model.parts.length} printed pieces.`:`One base plus one cap per button (${p.count+1} printed pieces).`} No separate deck, insert or fit-test pieces.
 Base height ${model.baseHeight} mm. Closed floor ${p.floor} mm. Blind switch pockets ${p.cutout} mm square and ${p.cavity} mm deep. Individual upper wells hide the switch sides.
 
 GLUE AND ASSEMBLY
@@ -16,7 +16,7 @@ Square caps taper from 21.5 mm to 18.8 mm with rounded corners, a hollow skirt a
 Socket cross length ${4+p.socketClearance} mm; cross thickness ${1.1+p.socketClearance} mm; insertion ${p.stemHeight} mm. Switch bodies, pins and boxed stems vary. This prototype is NOT fit-tested. Start with a single-button design and check your actual switch before committing to a longer base.
 
 FILES
-STL ZIP: clicker-base.stl, one named keycap STL per button, and this guide. Millimetre 3MF contains the same printable objects. Preview switches are excluded. Colours are illustrative and do not assign filament. No switch or chain is included.
+STL ZIP: ${model.batchCount?'one numbered folder per pebble, each containing base.stl and cap.stl, plus this guide':'clicker-base.stl, one named keycap STL per button, and this guide'}. Millimetre 3MF contains the same printable objects. Preview switches are excluded. Colours are illustrative and do not assign filament. No switch or chain is included.
 Your lettering and models stay in your browser.
 `;}
 export function clickerStlZip(model){const files={'PRINT-GUIDE.txt':strToU8(clickerGuide(model))};for(const part of model.parts)files[part.name+'.stl']=stlBytes(part.mesh);return zipParts(files);}
