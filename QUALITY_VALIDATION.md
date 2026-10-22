@@ -90,3 +90,7 @@ Closed-base checkpoint: all 62 automated tests, the clicker browser suite, the e
 ### Fan photo positioning
 
 The open fan preview supports bounded mouse/touch dragging, arrow-key positioning (Shift for larger steps), 100–400% zoom and a photo-position reset. Fit whole photo remains centered. Preview and exported blade relief share the same cropped image. Samples reset the crop. Run `CHROMIUM_PATH=/usr/bin/chromium npm run test:fan` to check mouse, touch, keyboard, crop modes, reset and STL export.
+
+### Square clicker covers
+
+All nine clicker designs now use square caps with rounded corners. Round and heart cap outlines have been removed; these remain available as face symbols. Each exported cap has a 20.5 mm square roof, a continuous 8.5 mm hollow skirt and a 17.5 mm internal cavity around the nominal 16 mm switch housing. The case rim overlaps the skirt at rest. Coverage and collision tests check square switch corners, hollow cavities and 0–4 mm press travel, alongside the existing closed-floor and deck tests. Switch dimensions and fit still require a physical coupon test.

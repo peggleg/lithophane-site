@@ -3,17 +3,17 @@ export const clickerDefaults={kind:'clicker',design:'charm',count:3,capShape:'ro
 export const clickerPresets={
  christmas:{count:5,capShape:'rounded',palette:'christmas',keyring:true,keys:['tree','snowflake','present','bauble','gingerbread'].map(value=>({type:'symbol',value}))},
  charm:{count:3,capShape:'rounded',palette:'candy',keyring:true,keys:[...'JOY'].map(value=>({type:'text',value}))},
- gamepad:{count:4,capShape:'circle',palette:'arcade',keyring:false,keys:[...'ABXY'].map(value=>({type:'text',value}))},
- bloom:{count:5,capShape:'circle',palette:'pastel',keyring:true,keys:['flower','heart','star','cloud','plus'].map(value=>({type:'symbol',value}))},
- pebble:{palette:'candy',keyring:true,count:1,capShape:'circle',keys:[{type:'symbol',value:'heart'}]},
+ gamepad:{count:4,capShape:'rounded',palette:'arcade',keyring:false,keys:[...'ABXY'].map(value=>({type:'text',value}))},
+ bloom:{count:5,capShape:'rounded',palette:'pastel',keyring:true,keys:['flower','heart','star','cloud','plus'].map(value=>({type:'symbol',value}))},
+ pebble:{palette:'candy',keyring:true,count:1,capShape:'rounded',keys:[{type:'symbol',value:'heart'}]},
  namebar:{palette:'forest',keyring:true,count:3,capShape:'rounded',keys:[...'SAM'].map(value=>({type:'text',value}))},
  symbols:{palette:'candy',keyring:true,count:5,capShape:'rounded',keys:['heart','star','cloud','flower','plus'].map(value=>({type:'symbol',value}))},
  numbers:{palette:'arcade',keyring:false,count:4,capShape:'rounded',keys:[...'1234'].map(value=>({type:'text',value}))},
- cloud:{palette:'pastel',keyring:false,count:4,capShape:'circle',keys:[{type:'symbol',value:'heart'},{type:'symbol',value:'star'},{type:'text',value:'B'},{type:'text',value:'7'}]}
+ cloud:{palette:'pastel',keyring:false,count:4,capShape:'rounded',keys:[{type:'symbol',value:'heart'},{type:'symbol',value:'star'},{type:'text',value:'B'},{type:'text',value:'7'}]}
 };
 export function validateClickerSettings(input){
  const p={...clickerDefaults,...input};
- if(!Object.hasOwn(clickerPresets,p.design)||!['rounded','circle','heart'].includes(p.capShape)||!Number.isInteger(p.count)||p.count<1||p.count>5)throw Error('Choose a design, 1–5 buttons and a valid keycap shape.');
+ if(!Object.hasOwn(clickerPresets,p.design)||p.capShape!=='rounded'||!Number.isInteger(p.count)||p.count<1||p.count>5)throw Error('Choose a design, 1–5 buttons and square keycaps.');
  if(p.design==='pebble'&&p.count!==1)throw Error('Pocket Pebble has one button. Choose a bar or cluster for multiple buttons.');
  for(const [field,min,max]of [['floor',1.6,3.2],['deckClearance',-.15,.35],['pitch',22,28],['cutout',13.8,14.8],['plate',1.2,2.2],['cavity',14,20],['wall',2,4],['socketClearance',0,.4],['stemWidth',5.6,7],['stemHeight',3,5]])if(!Number.isFinite(p[field])||p[field]<min||p[field]>max)throw Error(`Use ${min}–${max} mm for ${field}.`);
  if(typeof p.keyring!=='boolean'||!['candy','pastel','arcade','forest','christmas','spooky','custom'].includes(p.palette))throw Error('Choose a valid palette and keyring option.');
