@@ -10,7 +10,7 @@ try{
  for(const kind of ['drawers','pot','tray']){
   await page.selectOption('#kind',kind);await ready();
   for(const finish of ['smooth','fluted','slatted']){
-   await page.selectOption('#finish',finish);await ready();assert.equal(Number(await page.locator('#part-count').textContent()),kind==='drawers'?3:1);assert.match(await page.locator('#bed-status').textContent(),/Every part fits/);
+   await page.selectOption('#finish',finish);await ready();assert.equal(Number(await page.locator('#part-count').textContent()),kind==='drawers'?3:kind==='tray'?5:1);assert.match(await page.locator('#bed-status').textContent(),/Every part fits/);
    await page.locator('#model-preview').screenshot({path:`artifacts/desk-${kind}-${finish}.png`});
    const promise=page.waitForEvent('download');await page.click('#stl');const file=await promise;assert.equal(await file.failure(),null);const bytes=await fs.readFile(await file.path());assert.equal(bytes.readUInt32LE(0),0x04034b50);assert.ok(bytes.includes(Buffer.from(kind==='drawers'?'drawer-case.stl':kind==='pot'?'pen-pot.stl':'sorting-tray.stl')));
   }
@@ -19,6 +19,9 @@ try{
   for(const id of ['three-mf','print-guide']){const promise=page.waitForEvent('download');await page.click('#'+id);const file=await promise;assert.equal(await file.failure(),null);assert.ok((await fs.stat(await file.path())).size>100);}
   await page.locator('#parts-view').check();await page.locator('#model-preview').screenshot({path:`artifacts/desk-${kind}-printing.png`});await page.locator('#parts-view').uncheck();
  }
+ await page.selectOption('#kind','tray');await ready();assert.equal(await page.locator('#trayLayout').inputValue(),'boxes');assert.equal(await page.locator('#part-count').textContent(),'5');
+ await page.selectOption('#columns','3');await ready();assert.equal(await page.locator('#part-count').textContent(),'7');await page.fill('#box-clearance','0.6');await ready();
+ await page.selectOption('#trayLayout','fixed');await ready();assert.equal(await page.locator('#part-count').textContent(),'1');await page.selectOption('#trayLayout','open');await ready();assert.equal(await page.locator('#compartment-grid').isVisible(),false);await page.selectOption('#trayLayout','boxes');await ready();assert.equal(await page.locator('#part-count').textContent(),'7');await page.locator('#model-preview').screenshot({path:'artifacts/tray-removable-boxes.png'});
  await page.selectOption('#kind','drawers');await ready();await page.selectOption('#drawers','4');await page.fill('#height','170');await ready();assert.equal(await page.locator('#part-count').textContent(),'5');await page.locator('#open-drawers').check();await page.locator('#model-preview').screenshot({path:'artifacts/desk-four-drawers-open.png'});await page.locator('#open-drawers').uncheck();
  const before=await page.locator('#model-preview').screenshot();await page.selectOption('#palette','charcoal');assert.notDeepEqual(await page.locator('#model-preview').screenshot(),before);
  await page.fill('#width','171');assert.equal(await page.locator('#stl').isDisabled(),true);assert.match(await page.locator('#feedback').textContent(),/170/);await page.fill('#width','170');await ready();

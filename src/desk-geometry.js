@@ -21,12 +21,12 @@ export function generateDeskModel(module,input){
   if(!frontOnly)for(let y=-d/2+10;y<=d/2-10;y+=step){feature(-w/2+.25,y,true);feature(w/2-.25,y,true);}
   return features.length?own(M.union([solid,...features])):solid;
  }
- function container(w,d,h,frontOnly=false){
+ function container(w,d,h,frontOnly=false,divisions=true){
   const r=Math.min(9,w/5,d/5),outer=round(w,d,r),inside=round(w-2*p.wall,d-2*p.wall,Math.max(1,r-p.wall));
   let solid=own(own(outer.extrude(h)).subtract(own(inside.extrude(h).translate([0,0,p.wall]))));
   const partitions=[];
-  for(let i=1;i<p.columns;i++)partitions.push(own(own(C.square([p.wall,d],true).translate([(i/p.columns-.5)*(w-2*p.wall),0])).intersect(inside)));
-  for(let i=1;i<p.rows;i++)partitions.push(own(own(C.square([w,p.wall],true).translate([0,(i/p.rows-.5)*(d-2*p.wall)])).intersect(inside)));
+  for(let i=1;i<(divisions?p.columns:1);i++)partitions.push(own(own(C.square([p.wall,d],true).translate([(i/p.columns-.5)*(w-2*p.wall),0])).intersect(inside)));
+  for(let i=1;i<(divisions?p.rows:1);i++)partitions.push(own(own(C.square([w,p.wall],true).translate([0,(i/p.rows-.5)*(d-2*p.wall)])).intersect(inside)));
   if(partitions.length)solid=own(solid.add(own(own(C.union(partitions)).extrude(h-p.wall).translate([0,0,p.wall]))));
   solid=ribs(solid,w,d,h,frontOnly);
   if(frontOnly){const notch=own(round(Math.min(26,w/3),14,4).extrude(p.wall+6).rotate([90,0,0]).translate([0,-d/2+p.wall+2,h+1]));solid=own(solid.subtract(notch));}
@@ -45,7 +45,18 @@ export function generateDeskModel(module,input){
   }else{
    // Reserve space for the surface detail so the requested footprint includes it.
    const inset=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
-   add(p.kind==='pot'?'pen-pot':'sorting-tray',p.kind,container(p.width-2*inset,p.depth-2*inset,p.height),[0,0,0]);
+   const w=p.width-2*inset,d=p.depth-2*inset;
+   add(p.kind==='pot'?'pen-pot':'sorting-tray',p.kind,container(w,d,p.height,false,p.kind!=='tray'||p.trayLayout==='fixed'),[0,0,0]);
+   if(p.kind==='tray'&&p.trayLayout==='boxes'){
+    const inner=round(w-2*p.wall,d-2*p.wall,Math.max(1,Math.min(9,w/5,d/5)-p.wall)),safe=own(inner.offset(-p.clearance)),cw=(w-2*p.wall)/p.columns,cd=(d-2*p.wall)/p.rows,bh=p.height-p.wall-.8;
+    for(let row=0;row<p.rows;row++)for(let col=0;col<p.columns;col++){
+     const x=(col-(p.columns-1)/2)*cw,y=(row-(p.rows-1)/2)*cd;
+     const profile=own(own(own(round(cw-2*p.clearance,cd-2*p.clearance,3).translate([x,y])).intersect(safe)).translate([-x,-y])),inside=own(profile.offset(-p.wall));
+     if(inside.isEmpty())throw Error('The inner boxes are too small for this wall thickness.');
+     const solid=own(own(profile.extrude(bh)).subtract(own(inside.extrude(bh).translate([0,0,p.wall]))));
+     add(`inner-box-${row+1}-${col+1}`,'inner-box',solid,[x,y,p.wall]);
+    }
+   }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
   return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,prototype:true};
