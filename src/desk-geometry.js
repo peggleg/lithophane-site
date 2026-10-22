@@ -1,4 +1,4 @@
-import {validateDeskSettings,trayCells} from './desk-settings.js';
+import {validateDeskSettings,trayCells,drawerStacking} from './desk-settings.js';
 export function generateDeskModel(module,input){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
@@ -34,14 +34,23 @@ export function generateDeskModel(module,input){
  }
  try{
   if(p.kind==='drawers'){
-   const r=2*p.wall,outer=round(p.width,p.height,r),inner=round(p.width-2*p.wall,p.height-2*p.wall,.5);
+   const stack=drawerStacking(p),bodyHeight=p.height-stack.footHeight;
+   const r=2*p.wall,outer=round(p.width,bodyHeight,r),inner=round(p.width-2*p.wall,bodyHeight-2*p.wall,.5);
    let shell=own(own(outer.extrude(p.depth)).subtract(own(inner.extrude(p.depth+.1).translate([0,0,p.wall]))));
-   const slot=(p.height-(p.drawers+1)*p.wall)/p.drawers;
-   for(let i=1;i<p.drawers;i++){const y=-p.height/2+p.wall+i*slot+(i-.5)*p.wall;shell=own(shell.add(box(p.width-2*p.wall+.02,p.wall,p.depth-p.wall,0,y,p.wall)));}
-   add('drawer-case','case',shell,[0,p.depth/2,p.height/2],[Math.PI/2,0,0]);
+   const slot=(bodyHeight-(p.drawers+1)*p.wall)/p.drawers;
+   for(let i=1;i<p.drawers;i++){const y=-bodyHeight/2+p.wall+i*slot+(i-.5)*p.wall;shell=own(shell.add(box(p.width-2*p.wall+.02,p.wall,p.depth-p.wall,0,y,p.wall)));}
+   for(const [x,y]of stack.positions){
+    const z=p.depth/2-y,full=own(round(stack.footWidth,stack.footHeight+.02,.4).translate([x,-bodyHeight/2-stack.footHeight/2+.01])),edge=own(round(stack.footWidth,.04,.01).translate([x,-bodyHeight/2+.005]));
+    const foot=own(M.hull([own(edge.extrude(.02).translate([0,0,z-stack.footDepth/2])),own(full.extrude(stack.footDepth-2*stack.footHeight).translate([0,0,z-stack.footDepth/2+stack.footHeight])),own(edge.extrude(.02).translate([0,0,z+stack.footDepth/2-.02]))]));
+    shell=own(shell.add(foot));
+    if(p.stackTop==='pockets'){
+     const pocket=own(round(stack.footWidth+2*stack.clearance,stack.footDepth+2*stack.clearance,.5).extrude(stack.pocketDepth+.02).rotate([90,0,0]).translate([x,bodyHeight/2+.01,z]));shell=own(shell.subtract(pocket));
+    }
+   }
+   add('drawer-case','case',shell,[0,p.depth/2,stack.footHeight+bodyHeight/2],[Math.PI/2,0,0]);
    const detail=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
    const dw=p.width-2*p.wall-2*p.clearance,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
-   for(let i=0;i<p.drawers;i++)add(`drawer-${i+1}`,'drawer',container(dw,dd,dh,true),[0,-p.depth/2+detail+dd/2,p.wall+i*(slot+p.wall)+p.clearance]);
+   for(let i=0;i<p.drawers;i++)add(`drawer-${i+1}`,'drawer',container(dw,dd,dh,true),[0,-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
   }else{
    // Reserve space for the surface detail so the requested footprint includes it.
    const inset=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
@@ -60,6 +69,6 @@ export function generateDeskModel(module,input){
    }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
-  return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,prototype:true};
+  return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }

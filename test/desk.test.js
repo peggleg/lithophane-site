@@ -31,3 +31,15 @@ test('full-width pen boxes and smaller inserts auto-size with tray dimensions an
  const small=build({kind:'tray',trayLayout:'pens',width:120,depth:100,columns:2,rows:1}),large=build({kind:'tray',trayLayout:'pens',width:170,depth:140,columns:2,rows:1});assert.ok(Math.abs(large.parts[1].usableSize[0]-small.parts[1].usableSize[0]-50)<.01);assert.ok(Math.abs(large.parts[1].usableSize[1]-small.parts[1].usableSize[1]-20)<.01);assert.ok(large.parts[2].printSize[0]>small.parts[2].printSize[0]);
  for(const penShare of [35,65]){const m=build({kind:'tray',trayLayout:'pens',width:170,depth:170,columns:4,rows:2,penShare});assert.equal(m.parts.length,10);m.parts.forEach(check);}
 });
+
+test('drawer feet seat in matching pockets while a final unit retains a solid smooth top',()=>{
+ const assembled=m=>{const p=m.parts[0],a=restore(p),b=a.rotate([90,0,0]),c=b.translate(p.assembly);a.delete();b.delete();return c;};
+ for(const [width,depth,height]of [[70,65,90],[140,130,100],[170,170,170]]){
+  const lower=build({width,depth,height,stackTop:'pockets'}),support=assembled(lower);check(lower.parts[0]);assert.ok(lower.parts[0].printSize.every(d=>d<=170));
+  for(const stackTop of ['pockets','smooth']){const upper=build({width,depth,height:100,stackTop}),raw=assembled(upper),pose=raw.translate([0,0,height-upper.stacking.footHeight]),hit=pose.intersect(support);assert.ok(hit.volume()<.0001,'matching feet seat without collision');const shifted=pose.translate([2,0,0]),blocked=shifted.intersect(support);assert.ok(blocked.volume()>.1,'pockets actually resist lateral movement');for(const p of upper.parts)check(p);for(const o of [raw,pose,hit,shifted,blocked])o.delete();}
+  const smooth=assembled(build({width,depth,height,stackTop:'smooth'})),pocketSlice=support.slice(height-.5),skin=support.slice(height-1.8),top=smooth.slice(height-.5),feet=support.slice(.3);
+  for(const [x,y]of lower.stacking.positions){const patch=module.CrossSection.square([2,2],true).translate([x,y]),empty=patch.intersect(pocketSlice),closed=patch.intersect(skin),flat=patch.intersect(top),foot=patch.intersect(feet);assert.ok(empty.area()<.001);assert.ok(closed.area()>3.99,'pockets retain a closed roof skin');assert.ok(flat.area()>3.99,'final top is smooth and solid');assert.ok(foot.area()>3.99,'four feet exist under the case');for(const o of [patch,empty,closed,flat,foot])o.delete();}
+  for(const o of [support,smooth,pocketSlice,skin,top,feet])o.delete();
+ }
+ assert.throws(()=>build({wall:1.8}),/2.4/);assert.throws(()=>build({stackTop:'unknown'}));
+});
