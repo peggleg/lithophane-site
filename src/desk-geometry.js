@@ -1,4 +1,4 @@
-import {validateDeskSettings} from './desk-settings.js';
+import {validateDeskSettings,trayCells} from './desk-settings.js';
 export function generateDeskModel(module,input){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
@@ -47,14 +47,15 @@ export function generateDeskModel(module,input){
    const inset=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
    const w=p.width-2*inset,d=p.depth-2*inset;
    add(p.kind==='pot'?'pen-pot':'sorting-tray',p.kind,container(w,d,p.height,false,p.kind!=='tray'||p.trayLayout==='fixed'),[0,0,0]);
-   if(p.kind==='tray'&&p.trayLayout==='boxes'){
-    const inner=round(w-2*p.wall,d-2*p.wall,Math.max(1,Math.min(9,w/5,d/5)-p.wall)),safe=own(inner.offset(-p.clearance)),cw=(w-2*p.wall)/p.columns,cd=(d-2*p.wall)/p.rows,bh=p.height-p.wall-.8;
-    for(let row=0;row<p.rows;row++)for(let col=0;col<p.columns;col++){
-     const x=(col-(p.columns-1)/2)*cw,y=(row-(p.rows-1)/2)*cd;
+   if(p.kind==='tray'&&['boxes','pens'].includes(p.trayLayout)){
+    const inner=round(w-2*p.wall,d-2*p.wall,Math.max(1,Math.min(9,w/5,d/5)-p.wall)),safe=own(inner.offset(-p.clearance)),bh=p.height-p.wall-.8;
+    for(const cell of trayCells(p)){
+     const {x,y,width:cw,depth:cd}=cell;
      const profile=own(own(own(round(cw-2*p.clearance,cd-2*p.clearance,3).translate([x,y])).intersect(safe)).translate([-x,-y])),inside=own(profile.offset(-p.wall));
      if(inside.isEmpty())throw Error('The inner boxes are too small for this wall thickness.');
      const solid=own(own(profile.extrude(bh)).subtract(own(inside.extrude(bh).translate([0,0,p.wall]))));
-     add(`inner-box-${row+1}-${col+1}`,'inner-box',solid,[x,y,p.wall]);
+     add(cell.name,'inner-box',solid,[x,y,p.wall]);
+     const bounds=inside.bounds();parts.at(-1).usableSize=[bounds.max[0]-bounds.min[0],bounds.max[1]-bounds.min[1],bh-p.wall].map(v=>+v.toFixed(2));
     }
    }
   }
