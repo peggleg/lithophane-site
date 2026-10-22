@@ -1,4 +1,4 @@
-import {symbolNames} from '../src/clicker-symbols.js';
+import {symbolNames,symbolCollections} from '../src/clicker-symbols.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -20,3 +20,5 @@ test('all collection symbols generate printable square caps',()=>{for(const valu
 test('ZIP and 3MF contain exactly the base and caps, with no decks or fit-test pieces',()=>{for(const count of [1,3,5]){const m=build({...clickerDefaults,count,keys:Array.from({length:count},()=>({type:'text',value:'A'}))}),files=unzip(clickerStlZip(m)),mf=unzip(solid3mf(m)),xml=new TextDecoder().decode(mf['3D/3dmodel.model']);assert.equal(Object.keys(files).filter(n=>n.endsWith('.stl')).length,count+1);assert.equal((xml.match(/<object /g)||[]).length,count+1);assert.doesNotMatch(xml,/switch-deck|fit-test|switch-proxy/);assert.match(clickerGuide(m),/GLUE AND ASSEMBLY/);assert.match(clickerGuide(m),/Do not glue the cap/);assert.match(clickerGuide(m),/NOT fit-tested/);}});
 test('fit settings change the integral pocket and socket geometry',()=>{const narrow=build({socketClearance:0}),wide=build({socketClearance:.3});assert.ok(checkMesh(narrow.parts[1].mesh)>checkMesh(wide.parts[1].mesh));const deep=build({cavity:12}),shallow=build({cavity:8});assert.equal(deep.baseHeight-shallow.baseHeight,4);assert.ok(checkMesh(build({floor:3}).parts[0].mesh)>checkMesh(build({floor:1.6}).parts[0].mesh));});
 test('unsafe dimensions, removed cap outlines and unsupported markings fail',()=>{for(const p of [{capShape:'circle'},{capShape:'heart'},{floor:0},{pitch:22},{cavity:0},{count:6},{keys:[{type:'symbol',value:'invalid'}]},{keys:[{type:'text',value:'AB'}]}])assert.throws(()=>build(p));assert.throws(()=>build({keys:[{type:'text',value:'猫'}]}),/does not support/);});
+
+test('ten collections each contain twelve distinct named and unique symbols',()=>{assert.equal(Object.keys(symbolCollections).length,10);const symbols=Object.values(symbolCollections).flatMap(c=>c.symbols);assert.equal(symbols.length,120);assert.equal(new Set(symbols).size,120);for(const collection of Object.values(symbolCollections)){assert.equal(collection.symbols.length,12);for(const symbol of collection.symbols)assert.ok(symbolNames[symbol]);}});
