@@ -9,7 +9,7 @@ export function siteOrigin(value){
 export const pageInfo={
  home:{path:'',title:'Design Studio · Personalised 3D-Printable Creations',description:'Choose a lithophane or folding fan, personalise it with your photos and download STL or 3MF files. Create personalised nameplates, keyrings and mechanical clickers too.'},
  lithophane:{path:'lithophane/',title,description},
- clickers:{path:'clickers/',title:'Personalised Mechanical Clicker Generator · Design Studio',description:'Design 1–5 button mechanical clickers with letters, numbers and symbols. Download printed bases, keycaps and fit tests for a provisional MX-style switch fit.'},
+ clickers:{path:'clickers/',title:'Personalised Mechanical Clicker Generator · Design Studio',description:'Design colourful closed-base clicker charms with letters, numbers and themed symbols, including Christmas. Download solid-bottom trays, switch decks, keycaps and fit tests for a provisional MX-style switch fit.'},
  nameplates:{path:'nameplates/',title:'Personalised Nameplate Generator · Design Studio',description:'Create a two-line printable nameplate with raised or recessed lettering and an optional printable desk stand. Download STL parts or 3MF, processed locally.'},
  keyrings:{path:'keyrings/',title:'Custom Keyring Generator · Design Studio',description:'Make rounded, capsule or circular text keyrings with raised or recessed lettering and a ring hole. Generate STL and 3MF files locally in your browser.'},
  fan:{path:'folding-fan/',title:'Folding Fan Generator · Lithophane Studio',description:'Create a printable folding lithophane fan from a photo or twelve nature samples. Download numbered STL parts and multipart 3MF, with printable pivot parts.'}
