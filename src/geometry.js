@@ -1,4 +1,4 @@
-import {profileFiles} from './print-profile.js';
+import {projectMetadata,profileFiles} from './print-profile.js';
 import { zipParts, strToU8 } from './zip.js';
 import { gridCounts } from './resolution.js';
 
@@ -57,7 +57,7 @@ export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
   const model=[];let chunk='';
   const write=text=>{chunk+=text;if(chunk.length>=65536){model.push(strToU8(chunk));chunk='';}};
   const coordinate=n=>Number(n.toFixed(6)).toString();
-  write('<?xml version="1.0" encoding="UTF-8"?><model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Title">Lithophane panel</metadata><resources><object id="1" type="model"><mesh><vertices>');
+  write(`<?xml version="1.0" encoding="UTF-8"?><model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02">${projectMetadata}<metadata name="Title">Lithophane panel</metadata><resources><object id="1" type="model"><mesh><vertices>`);
   for(let i=0;i<v.length;i+=3){
     write(`<vertex x="${coordinate(v[i])}" y="${coordinate(v[i+1])}" z="${coordinate(v[i+2])}"/>`);
     if(i%300000===0)progress(55+15*i/v.length);
@@ -70,7 +70,7 @@ export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
   write('</triangles></mesh></object></resources><build><item objectid="1"/></build></model>');
   if(chunk)model.push(strToU8(chunk));
   return zipParts({...profileFiles('lithophane'),
-    '[Content_Types].xml':strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="config" ContentType="application/json"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>'),
+    '[Content_Types].xml':strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="config" ContentType="application/json"/><Default Extension="txt" ContentType="text/plain"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>'),
     '_rels/.rels':strToU8('<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>'),
     '3D/3dmodel.model':model
   });

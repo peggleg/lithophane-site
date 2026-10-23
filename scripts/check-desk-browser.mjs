@@ -20,7 +20,7 @@ try{
   await page.locator('#parts-view').check();await page.locator('#model-preview').screenshot({path:`artifacts/desk-${kind}-printing.png`});await page.locator('#parts-view').uncheck();
  }
  for(const kind of ['bin','pot'])for(const shape of ['square','round']){
-  await page.selectOption('#kind',kind);await ready();await page.selectOption('#shape',shape);await ready();
+  await page.selectOption('#kind',kind);await ready();if(kind==='bin'){assert.equal(await page.inputValue('#finish'),'smooth');assert.equal(await page.inputValue('#wall'),'1.8');}await page.selectOption('#shape',shape);await ready();
   assert.equal(await page.locator('#part-count').textContent(),kind==='bin'?'3':'1');
   await page.fill('#width','150');await ready();if(kind==='bin'||shape==='round'){assert.equal(await page.locator('#depth-field').isVisible(),false);assert.match(await page.locator('#dimensions').textContent(),/150 × 150/);}
   if(kind==='bin'){const before=await page.locator('#model-preview').screenshot();await page.locator('#open-lid').check();assert.notDeepEqual(await page.locator('#model-preview').screenshot(),before);await page.locator('#model-preview').screenshot({path:`artifacts/bin-${shape}-open.png`});await page.locator('#open-lid').uncheck();}

@@ -89,3 +89,5 @@ test('standalone sorting boxes and pen trays are single closed resizable parts w
  }
  const small=build({kind:'box',width:25,depth:25,height:12,finish:'smooth'});check(small.parts[0]);assert.throws(()=>build({kind:'box',width:24}),/25/);
 });
+
+test('bins start smooth with thinner walls while drawer structure retains its default',()=>{const m=build({kind:'bin'});assert.equal(m.settings.finish,'smooth');assert.equal(m.settings.wall,1.8);assert.equal(m.parts.length,3);m.parts.forEach(check);assert.equal(deskDefaults.wall,2.4);assert.equal(deskDefaults.finish,'fluted');});

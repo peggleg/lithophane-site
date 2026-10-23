@@ -7,3 +7,5 @@ Apply this policy to current generators and every future addition:
 - Every other generator, including future additions: 3 top and 3 bottom layers.
 
 Use `src/print-profile.js` as the shared source. Pass the generator kind to profile, export, filament estimate and display helpers; do not hard-code a universal skin-layer count. Keep UI, guides, 3MF settings, ZIP sidecars and estimates consistent. Confirm profile coverage in tests when adding a generator.
+
+3MF must be a complete recognised Bambu Studio project, not a generic geometry archive with an ignored JSON attachment. Keep the A1 mini/0.4 mm/PLA starting profile explicit in UI and guides. Set minimum shell thickness to zero so it does not silently increase the requested skin-layer count. For export changes, run `npm run test:bambu-import` against the actual slicer (set `BAMBU_STUDIO_PATH`); archive JSON assertions alone do not prove import compatibility.
