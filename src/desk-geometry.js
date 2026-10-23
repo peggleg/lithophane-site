@@ -1,4 +1,4 @@
-import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish} from './desk-settings.js';
+import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray} from './desk-settings.js';
 export function generateDeskModel(module,input){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
@@ -51,6 +51,7 @@ export function generateDeskModel(module,input){
   const envelope=frontOnly?own(C.square([w,d+2*depth],true)):outline(w+2*depth,d+2*depth),core=own(outline(w,d).offset(-.3)),band=own(envelope.subtract(core)),clip=own(band.extrude(h));
   const detail=own(own(M.union(features)).intersect(clip));return own(solid.add(detail));
  }
+ function hollowBox(profile,h){const inner=own(profile.offset(-p.wall));if(inner.isEmpty())throw Error('The tray is too small for this wall thickness.');return own(own(profile.extrude(h)).subtract(own(inner.extrude(h).translate([0,0,p.wall]))));}
  function container(w,d,h,frontOnly=false,divisions=true){
   const r=Math.min(9,w/5,d/5),outer=outline(w,d),inside=circular?own(C.circle(w/2-p.wall,128).rotate(360/256)):round(w-2*p.wall,d-2*p.wall,Math.max(1,r-p.wall));
   let solid=own(own(outer.extrude(h)).subtract(own(inside.extrude(h).translate([0,0,p.wall]))));
@@ -104,6 +105,10 @@ export function generateDeskModel(module,input){
    // Store the actual pivot for the assembled preview.
    add('flat-swing-lid','lid',lid,[0,0,h]);
    parts.at(-1).pivot=[0,0,2];
+  }else if(standaloneTray(p)){
+   const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,profile=round(w,d,3),inner=own(profile.offset(-p.wall));
+   add(p.kind==='box'?'standalone-sorting-box':'standalone-pen-tray',p.kind,ribs(hollowBox(profile,p.height),w,d,p.height),[0,0,0]);
+   const bounds=inner.bounds();parts.at(-1).usableSize=[bounds.max[0]-bounds.min[0],bounds.max[1]-bounds.min[1],p.height-p.wall].map(v=>+v.toFixed(2));
   }else{
    // Reserve space for the surface detail so the requested footprint includes it.
    const inset=finishInset(p);
@@ -115,7 +120,7 @@ export function generateDeskModel(module,input){
      const {x,y,width:cw,depth:cd}=cell;
      const profile=own(own(own(round(cw-2*p.clearance,cd-2*p.clearance,3).translate([x,y])).intersect(safe)).translate([-x,-y])),inside=own(profile.offset(-p.wall));
      if(inside.isEmpty())throw Error('The inner boxes are too small for this wall thickness.');
-     const solid=own(own(profile.extrude(bh)).subtract(own(inside.extrude(bh).translate([0,0,p.wall]))));
+     const solid=hollowBox(profile,bh);
      add(cell.name,'inner-box',solid,[x,y,p.wall]);
      const bounds=inside.bounds();parts.at(-1).usableSize=[bounds.max[0]-bounds.min[0],bounds.max[1]-bounds.min[1],bh-p.wall].map(v=>+v.toFixed(2));
     }

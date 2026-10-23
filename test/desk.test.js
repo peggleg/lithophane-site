@@ -82,3 +82,10 @@ test('adjustable surface detail respects extreme depth, spacing and finished A1 
  for(const p of [{detailDepth:3},{detailDepth:NaN},{detailSpacing:0},{detailSpacing:15}])assert.throws(()=>build({...p,finish:'ribbed'}));
  const a=build({kind:'pot',shape:'round',finish:'ribbed',detailDepth:.6}),b=build({kind:'pot',shape:'round',finish:'ribbed',detailDepth:2.4}),c=build({kind:'pot',shape:'round',finish:'ribbed',detailSpacing:12});assert.notEqual(a.parts[0].mesh.faces.length,b.parts[0].mesh.faces.length);assert.notEqual(b.parts[0].mesh.faces.length,c.parts[0].mesh.faces.length);
 });
+
+test('standalone sorting boxes and pen trays are single closed resizable parts with insert-style floors',()=>{
+ for(const kind of ['box','pen-tray'])for(const finish of ['smooth','fluted','slatted','ribbed','scalloped','wave'])for(const [width,depth,height]of [[40,35,15],[170,100,35]]){
+  const m=build({kind,finish,width,depth,height,columns:4,rows:3});assert.equal(m.parts.length,1);check(m.parts[0]);assert.equal(m.settings.columns,1);assert.equal(m.settings.rows,1);assert.ok(m.parts[0].usableSize[0]>=18);assert.ok(m.parts[0].usableSize[1]>=18);const solid=restore(m.parts[0]),floor=solid.slice(1),top=solid.slice(height-.2),probe=module.CrossSection.square([1,1],true),hit=top.intersect(probe);assert.ok(floor.area()>top.area()*1.5);assert.equal(hit.area(),0);[solid,floor,top,probe,hit].forEach(o=>o.delete());assert.match(deskGuide(m),/No outer sorting tray/);assert.equal(Object.keys(unzip(deskStlZip(m))).filter(n=>n.endsWith('.stl')).length,1);
+ }
+ const small=build({kind:'box',width:25,depth:25,height:12,finish:'smooth'});check(small.parts[0]);assert.throws(()=>build({kind:'box',width:24}),/25/);
+});
