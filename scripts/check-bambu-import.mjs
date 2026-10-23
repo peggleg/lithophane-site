@@ -1,4 +1,5 @@
-// Integration check against the real Bambu Studio importer, without process overrides.
+// CLI archive-import check, without process overrides.
+// This bypasses desktop preset inheritance: also run check-bambu-desktop.py.
 // BAMBU_STUDIO_PATH=/path/to/bin/bambu-studio npm run test:bambu-import
 // A GUI-capable runtime (e.g. DISPLAY=:99 under Xvfb) and its shared libraries are required.
 import fs from 'node:fs/promises';
@@ -27,5 +28,5 @@ for(const [kind,chunks] of fixtures){
  assert.equal(actual.filament_settings_id[0],'Generic PLA @BBL A1M');
  assert.equal(actual.curr_bed_type,'Textured PEI Plate');
  assert.match(actual.machine_start_gcode,/machine: A1 mini/,'must retain real machine instructions, not generic G28 defaults');
- console.log(`${kind}: Bambu import retained the complete A1 mini project and ${actual.top_shell_layers}/${actual.bottom_shell_layers} skin layers.`);
+ console.log(`${kind}: CLI read retained the A1 mini project and ${actual.top_shell_layers}/${actual.bottom_shell_layers} skin layers.`);
 }

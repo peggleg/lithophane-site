@@ -10,6 +10,10 @@ export const printProfileImport='3MF is a Bambu Studio project for an A1 mini wi
 // Bambu Studio only reads project_settings.config for its recognised project format.
 // The compatibility marker is required by its importer; Generator identifies our authoring app.
 export const projectMetadata='<metadata name="Application">BambuStudio-02.08.02.61</metadata><metadata name="BambuStudio:3mfVersion">1</metadata><metadata name="Generator">Design Studio</metadata><metadata name="Designer">Design Studio</metadata>';
-export const projectProfile=kind=>({...a1MiniPla,...printProfile(kind)});
+// The desktop preset loader restores inherited defaults for keys absent from this delta list.
+// CLI export-settings does not exercise that step. Keep every intentional process override here.
+export const projectProfile=kind=>({...a1MiniPla,...printProfile(kind),different_settings_to_system:[
+ [...Object.keys(printProfile(kind)),'layer_height','initial_layer_print_height','brim_type','enable_support'].join(';'),'',''
+]});
 export const profileFiles=kind=>({'Metadata/project_settings.config':strToU8(JSON.stringify(projectProfile(kind),null,2)),'Metadata/PROFILE-LICENSE.txt':strToU8(presetLicense.notice+'\n\n'+presetLicense.license)});
 export const profileSidecar=kind=>strToU8(JSON.stringify(printProfile(kind),null,2));

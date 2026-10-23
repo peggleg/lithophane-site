@@ -27,6 +27,24 @@ npm run test:bambu-import
 node scripts/benchmark-bin.mjs
 ```
 
-The import integration check launches Bambu Studio independently for lithophane, fan, keyring, nameplate, clicker, desk and future-generator exports, without preset overrides. It checks the **effective imported settings**, including 4/4 photo, 2/2 text and 3/3 other skin layers, minimum thickness, actual printer start instructions and bed/material selection. Artifacts/logs are written under `artifacts/` (ignored by Git). The bin benchmark generates the original geometry and two smooth variants, imports/slices all parts and saves effective settings, G-code and comparison JSON. No Bambu UI interaction or physical printing was validated in this environment; the official import/slicing engine was exercised.
+The import integration check launches Bambu Studio independently for lithophane, fan, keyring, nameplate, clicker, desk and future-generator exports, without preset overrides. It checks the **effective imported settings**, including 4/4 photo, 2/2 text and 3/3 other skin layers, minimum thickness, actual printer start instructions and bed/material selection. Artifacts/logs are written under `artifacts/` (ignored by Git). The bin benchmark generates the original geometry and two smooth variants, imports/slices all parts and saves effective settings, G-code and comparison JSON. The initial check exercised only the official CLI import/slicing engine. It did not exercise desktop preset inheritance; see the follow-up below. No physical printing was validated.
 
 The site's filament figure remains an approximate surface-shell estimate, not a live slicer result. For the new bin it is about 157.3 g versus the slicer's 164.8 g; slicing, purge and other process choices can differ. Always use the actual sliced requirement before printing.
+
+## Follow-up: desktop preset inheritance
+
+The user supplied a newly exported bin that still opened as 15% grid and 5 top layers in **Bambu Studio 2.8.2.61**, using Open Project. Reproduced that exact outcome in the official desktop application, then saved the project through the GUI and inspected its effective settings. The source archive contained 8% gyroid and 3/3 skins; the desktop-saved project contained 15% grid and 5/3 skins.
+
+`PresetBundle::load_config_file` splits `different_settings_to_system` by process/filament/printer, and `PresetCollection::load_external_preset` restores inherited system values for every key not listed as different. Our exported delta list was empty. The CLI bypasses this merge, so its successful import was insufficient evidence of desktop compatibility.
+
+`projectProfile(kind)` now marks every intentional process override, including the per-generator skin-layer counts, zero minimum shell thickness, layer height, brim and support settings. The corrected uploaded file was opened and saved in the actual desktop GUI; its saved settings retained **8% gyroid, 2 walls, 3/3 skins and zero minimum shell thickness**, with the geometry unchanged.
+
+To exercise this desktop-specific path, install Python `python-xlib` and Pillow, start an isolated Linux/X11 Bambu Studio GUI with a test `--datadir`, complete setup and select Prepare. Generate fixtures with `npm run test:bambu-import`, then run:
+
+```
+python scripts/check-bambu-desktop.py
+```
+
+The driver opens each exported fixture with Ctrl+O and saves it with Ctrl+Shift+S through the GUI, then checks the desktop-written project. It waits for project loading to finish and records screenshots and effective settings in `artifacts/bambu-desktop/`. Use an isolated test instance; this driver opens and saves projects in that instance.
+
+Desktop verification passed for lithophane, fan, keyring, nameplate, clicker, desk and the future-generator fallback. A fresh bin 3MF downloaded through Chromium from the built preview also passed the desktop round trip: 8% gyroid, 2 wall loops, 3/3 skins and zero minimum shell thickness. All 96 unit tests passed.
