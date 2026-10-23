@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import init from 'manifold-3d/manifold';
 import {generateDeskModel} from '../src/desk-geometry.js';
 import {deskDefaults,deskPresets,validateDeskSettings} from '../src/desk-settings.js';
-import {openworkCells} from '../src/desk-openwork.js';
+import {openworkCells,drawerOpenworkPanel} from '../src/desk-openwork.js';
 const module=await init();module.setup();
 const build=p=>generateDeskModel(module,{...deskDefaults,...deskPresets[p.kind||'drawers'],...p});
 const restore=part=>new module.Manifold(new module.Mesh({numProp:3,vertProperties:part.mesh.vertices,triVerts:part.mesh.faces}));
@@ -24,9 +24,9 @@ test('drawer pull surrounds, cases and clearances survive all patterns and place
   const drawer=restore(m.parts[1]),raw=restore(m.parts[0]),r=raw.rotate([90,0,0]),shell=r.translate(m.parts[0].assembly),posed=drawer.translate(m.parts[1].assembly),overlap=posed.intersect(shell);assert.ok(overlap.volume()<.001,'drawer clears case');[drawer,raw,r,shell,posed,overlap].forEach(x=>x.delete());
  }
 });
-test('resizing fits only whole cells within frames and keeps material below the pull',()=>{
+test('organiser resizing fits complete cells inside frames',()=>{
  for(const openwork of patterns)for(const openingSize of [4,10,20])for(const width of [25,80,170]){
-  const p={...deskDefaults,openwork,openingSize},cells=openworkCells(width,70,p,{pull:true});
+  const p={...deskDefaults,openwork,openingSize},cells=openworkCells(width,70,p);
   for(const c of cells){assert.ok(c.x-c.width/2>=-width/2+9-1e-6);assert.ok(c.x+c.width/2<=width/2-9+1e-6);assert.ok(c.z-c.height/2>=p.wall+4);assert.ok(c.z+c.height/2<=70-4);}
  }
  const m=build({kind:'box',width:25,depth:25,height:12,openwork:'honeycomb',openingSize:20});closed(m.parts[0]);
@@ -43,3 +43,7 @@ test('maximum footprint and dense cells remain closed across surface styles',()=
 test('every openwork and surface-style combination generates a valid part',()=>{for(const finish of ['smooth','fluted','slatted','ribbed','scalloped','wave'])for(const openwork of patterns){const m=build({kind:'box',width:90,depth:70,height:50,finish,openwork,openingSize:10,openworkFaces:'front-sides'});m.parts.forEach(closed);}});
 
 test('hidden opening-size inputs do not block solid walls or closed bins',()=>{for(const p of [{openwork:'none'},{kind:'bin',openwork:'honeycomb'},{kind:'pot',shape:'round',openwork:'slots'}]){const result=validateDeskSettings({...p,openingSize:3});assert.equal(result.openwork,'none');assert.equal(result.openingSize,10);}});
+
+test('drawer pattern fields cover the full panel, centred vertically, with a local pull mask',()=>{for(const openwork of patterns)for(const height of [20,44,90]){const p={...deskDefaults,openwork},b=drawerOpenworkPanel(130,height,p),cells=openworkCells(130,height,p,{pull:true});assert.ok(cells.length);assert.ok(Math.min(...cells.map(c=>c.z-c.height/2))<=b.bottom+1e-6);assert.ok(Math.max(...cells.map(c=>c.z+c.height/2))>=b.top-1e-6);assert.ok(Math.min(...cells.map(c=>c.x-c.width/2))<=-65+b.frame+1e-6);assert.ok(Math.max(...cells.map(c=>c.x+c.width/2))>=65-b.frame-1e-6);assert.equal(b.frame,2.4);assert.ok(b.pullBottom>=height-9);}});
+
+test('slots and arches span the drawer panel while diamonds use a staggered lattice',()=>{for(const openwork of ['slots','arches']){const p={...deskDefaults,openwork},panel=drawerOpenworkPanel(130,44,p),cells=openworkCells(130,44,p,{pull:true});assert.equal(new Set(cells.map(c=>c.row)).size,1);for(const c of cells)assert.equal(c.height,panel.top-panel.bottom);}const p={...deskDefaults,openwork:'diamond'},cells=openworkCells(130,44,p,{pull:true}),a=cells.find(c=>c.row===0),b=cells.find(c=>c.row===1);assert.notEqual(a.x,b.x);assert.ok(Math.abs(a.z-b.z)<p.openingSize);});

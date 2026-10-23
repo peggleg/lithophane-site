@@ -13,6 +13,7 @@ try{
   await page.locator('#model-preview').screenshot({path:`artifacts/openwork-${pattern}.png`});
   assert.match(await page.locator('#bed-status').textContent(),/Every part fits/);
  }
+ const drawerDownload=page.waitForEvent('download');await page.click('#three-mf');await fs.mkdir('artifacts/openwork-bambu',{recursive:true});await (await drawerDownload).saveAs('artifacts/openwork-bambu/drawer-front.3mf');
  await page.selectOption('#kind','box');await ready();await page.fill('#height','60');await ready();
  await page.fill('#openingSize','4');await ready();await page.fill('#openingSize','20');await ready();
  await fs.mkdir('artifacts/openwork-bambu',{recursive:true});
