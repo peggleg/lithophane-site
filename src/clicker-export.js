@@ -1,3 +1,4 @@
+import {profileSidecar,printProfileImport} from './print-profile.js';
 import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
@@ -17,7 +18,8 @@ Square caps taper from 21.5 mm to 18.8 mm with rounded corners, a hollow skirt a
 Socket cross length ${4+p.socketClearance} mm; cross thickness ${1.1+p.socketClearance} mm; insertion ${p.stemHeight} mm. Switch bodies, pins and boxed stems vary. This prototype is NOT fit-tested. Start with a single-button design and check your actual switch before committing to a longer base.
 
 FILES
-STL ZIP: ${model.batchCount?'one numbered folder per pebble, each containing base.stl and cap.stl, plus this guide':'clicker-base.stl, one named keycap STL per button, and this guide'}. Millimetre 3MF contains the same printable objects. Preview switches are excluded. Colours are illustrative and do not assign filament. No switch or chain is included.
+STL ZIP: ${model.batchCount?'one numbered folder per pebble, each containing base.stl and cap.stl, plus this guide and PRINT-SETTINGS.json':'clicker-base.stl, one named keycap STL per button, this guide and PRINT-SETTINGS.json'}. Millimetre 3MF contains the same printable objects. Preview switches are excluded. Colours are illustrative and do not assign filament. No switch or chain is included.
+${printProfileImport}
 Your lettering and models stay in your browser.
 `;}
-export function clickerStlZip(model){const files={'PRINT-GUIDE.txt':strToU8(clickerGuide(model))};for(const part of model.parts)files[part.name+'.stl']=stlBytes(part.mesh);return zipParts(files);}
+export function clickerStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar(),'PRINT-GUIDE.txt':strToU8(clickerGuide(model))};for(const part of model.parts)files[part.name+'.stl']=stlBytes(part.mesh);return zipParts(files);}

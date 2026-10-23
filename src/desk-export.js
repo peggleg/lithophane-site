@@ -1,3 +1,4 @@
+import {profileSidecar,printProfileImport} from './print-profile.js';
 import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
@@ -17,7 +18,7 @@ PROTOTYPE
 Dimensions and closed meshes are checked digitally. Drawer and removable-box fit, surface finish, strength and stability have not been validated with physical prints.
 
 FILES
-One named STL per part and this guide in the ZIP. Millimetre 3MF contains the same parts in their printing orientations. No printer settings, supports or filament assignments are embedded.
+One named STL per part, this guide and PRINT-SETTINGS.json in the ZIP. Millimetre 3MF contains the same parts in their printing orientations. ${printProfileImport}
 All dimensions and models stay in your browser; the site saves only your theme preference.
 `;}
-export function deskStlZip(model){const files={'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}
+export function deskStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar(),'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}

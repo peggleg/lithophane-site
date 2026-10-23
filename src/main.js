@@ -1,4 +1,4 @@
-import {filamentAssumptions} from './filament.js';
+import {filamentAssumptions,panelGrams} from './filament.js';
 import './theme.js';
 import {mountSampleGallery} from './sample-gallery.js';
 import './style.css';
@@ -69,7 +69,7 @@ function render(){
  grid=image?p:null;
  const stl=exportEstimate(p,'stl'),mf=exportEstimate(p,'3mf');
  $('mesh-summary').textContent=`${p.spacingX.toFixed(3)} × ${p.spacingY.toFixed(3)} mm spacing · ${p.cols.toLocaleString()} × ${p.rows.toLocaleString()} samples · ${p.triangles.toLocaleString()} triangles. STL ${(stl.outputBytes/MIB).toFixed(1)} MiB; 3MF up to ${(mf.outputBytes/MIB).toFixed(1)} MiB (uncompressed).`;
- $('corner-filament').textContent=`Corner test estimated filament: ${(20*20*p.max*1.24/1000).toFixed(1)} g (solid PLA).`;
+ $('corner-filament').textContent=`Corner test estimated filament: ${panelGrams(20,20,p.max).toFixed(1)} g (8% gyroid, 2 walls).`;
  $('panel-estimate').textContent=`${p.width} × ${p.height} mm`;
  const allowance=$('clearance').value==='side'?0.4:0.2;
  $('fit-summary').textContent=`Planning opening: ${(p.width+allowance).toFixed(1)} × ${(p.height+allowance).toFixed(1)} mm. Visible photo: ${(p.width-2*n('overlap')).toFixed(1)} × ${(p.height-2*n('overlap')).toFixed(1)} mm. This does not resize the panel. Postcard frame limit: 105 × 148 × 3 mm, or 148 × 105 × 3 mm.`;
@@ -85,8 +85,8 @@ function render(){
  const pixels=ctx.getImageData(0,0,size.width,size.height);
  const stats=paintBacklight(pixels,adjustments(),p.min,p.max);ctx.putImageData(pixels,0,0);
  canvas.style.display='block';$('empty').hidden=true;
- const volume=p.width*p.height*stats.meanThickness;
- $('material-estimate').textContent=`~${(volume*1.24/1000).toFixed(1)} g · ${(volume/1000).toFixed(1)} cm³`;
+ const grams=panelGrams(p.width,p.height,stats.meanThickness),volume=grams/1.24*1000;
+ $('material-estimate').textContent=`~${grams.toFixed(1)} g · ${(volume/1000).toFixed(1)} cm³`;
  const messages=[];
  if(layout.sw<p.cols*layout.dw||layout.sh<p.rows*layout.dh)messages.push(`Source detail is limited: ${Math.round(layout.sw)} × ${Math.round(layout.sh)} photo pixels in use. Finer mesh spacing cannot create missing image detail.`);
  if(stats.darkFraction>0.35)messages.push('Many dark areas may obscure detail; try increasing brightness.');
@@ -186,7 +186,7 @@ function resetCrop(){ $('zoom').value=100;$('panx').value=50;$('pany').value=50;
 $('reset-crop').onclick=()=>{cancelExport(false);resetCrop();render();};
 $('summary').onclick=()=>{
  if(!grid)return;const p=grid;
- download(`LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${filamentAssumptions}\nCorner fit test: ${(20*20*p.max*1.24/1000).toFixed(1)} g solid PLA.\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; solid panel; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Test the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
+ download(`LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${filamentAssumptions}\nCorner fit test: ${panelGrams(20,20,p.max).toFixed(1)} g PLA at the default settings.\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; 8% gyroid sparse infill; 2 wall loops; 4 top and bottom layers; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Thin photo areas may be filled by the shells. Gyroid can affect backlit image quality; test transmission and the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
 };
 $('reset').onclick=()=>{
  endDrag();

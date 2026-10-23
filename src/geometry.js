@@ -1,3 +1,4 @@
+import {profileFiles} from './print-profile.js';
 import { zipParts, strToU8 } from './zip.js';
 import { gridCounts } from './resolution.js';
 
@@ -68,8 +69,8 @@ export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
   }
   write('</triangles></mesh></object></resources><build><item objectid="1"/></build></model>');
   if(chunk)model.push(strToU8(chunk));
-  return zipParts({
-    '[Content_Types].xml':strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>'),
+  return zipParts({...profileFiles(),
+    '[Content_Types].xml':strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="config" ContentType="application/json"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>'),
     '_rels/.rels':strToU8('<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>'),
     '3D/3dmodel.model':model
   });
