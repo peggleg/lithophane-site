@@ -24,7 +24,8 @@
     "test:qr-drawers": "node scripts/check-qr-drawers-browser.mjs",
     "test:desk-details": "node scripts/check-desk-details-browser.mjs",
     "test:standalone-trays": "node scripts/check-standalone-trays-browser.mjs",
-    "test:bambu-import": "node scripts/check-bambu-import.mjs"
+    "test:bambu-import": "node scripts/check-bambu-import.mjs",
+    "test:openwork": "node scripts/check-openwork-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

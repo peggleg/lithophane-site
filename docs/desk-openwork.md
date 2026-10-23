@@ -1,0 +1,14 @@
+# Desk openwork
+
+Surface style (renamed from Japandi finish) remains independent of Openwork pattern. Patterns: honeycomb, diamond lattice, vertical slots, rounded windows, arch windows and woven grid. Woven grid includes alternating tall/wide apertures and 0.4 mm raised strips. Opening widths are adjustable from 4–20 mm; tall cells shorten for low walls while retaining complete profiles.
+
+Placement is front only or front and both sides. Applies to removable drawers, square pen pots, sorting-tray exteriors and standalone sorting/pen trays. Drawer cases and removable inner boxes are unaffected; round pots and swing-lid bins keep solid walls and display that restriction. Floors, back walls, corner frames, top rails and pull surrounds stay solid. Complete cells are omitted if they cannot fit inside the frame. Narrow/low walls can have no cells. Minimum connecting web is 2.4 mm; frame is at least 4 mm or twice wall thickness, with 9 mm corner clearance. Woven side relief is included when reserving drawer clearance and finished footprints. Every actual exported part remains checked against the 170 mm design limit.
+
+The existing shared print profile and its desktop override list are unchanged: 8% gyroid, 2 wall loops, desk 3/3 top/bottom layers, zero minimum shell thickness. Supports remain off in the starting project; guides ask users to inspect bridging/support needs. Physical strength and print quality are not established by mesh or slicing checks.
+
+Validation:
+
+- Full existing unit suite plus new mesh tests for connectivity, watertight edges, non-degenerate triangles, protected floors/backs, placement, drawer-case collision, resize limits and invalid settings. All 36 surface-style/openwork combinations checked, plus dense patterns at the 170 mm limit.
+- `npm run test:openwork`: all six patterns, placement and opening-size controls, STL/3MF/guide downloads, restricted items, invalidation and mobile overflow. Existing desk browser suite also covers unchanged items.
+- Official Bambu Studio 02.08.02.61 sliced all six 90 × 70 × 50 mm sample organisers (10 mm openings, smooth surface, front and sides) successfully, with no slicer warnings in result.json. This is digital slicing evidence, not a guarantee of support-free physical printing.
+- A fresh openwork 3MF downloaded through Chromium was opened and saved through the actual Bambu desktop GUI. The desktop-written file retained 8% gyroid, 2 walls, 3/3 skins and zero minimum shell thickness. Existing CLI import checks retained each other generator's layer exceptions. Logs, screenshots and desktop-written projects are under `artifacts/openwork-*` and are excluded from Git.

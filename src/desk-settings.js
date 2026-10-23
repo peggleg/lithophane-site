@@ -1,15 +1,19 @@
 export const deskPresets={box:{width:60,depth:60,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},'pen-tray':{width:160,depth:55,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},bin:{width:110,depth:110,height:140,drawers:2,columns:1,rows:1,wall:1.8,finish:'smooth'},drawers:{width:140,depth:130,height:100,drawers:2,columns:1,rows:1},pot:{width:80,depth:80,height:100,drawers:2,columns:1,rows:1},tray:{width:150,depth:100,height:25,drawers:2,columns:2,rows:2}};
-export const deskDefaults={kind:'drawers',drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
+export const deskDefaults={kind:'drawers',openwork:'none',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
 export const deskPalettes={ivory:{body:'#eee6d7',detail:'#cbb798'},sage:{body:'#8c9b81',detail:'#eee5d3'},charcoal:{body:'#414441',detail:'#b38c62'},walnut:{body:'#72533e',detail:'#d7c4a5'},sand:{body:'#d9ccb4',detail:'#efe7d7'}};
 export function validateDeskSettings(input){
  const p={...deskDefaults,...input};
+ if(!['none','honeycomb','diamond','slots','windows','arches','woven'].includes(p.openwork))throw Error('Choose an available openwork pattern.');
+ if(!['front','front-sides'].includes(p.openworkFaces))throw Error('Choose front only or front and sides.');
+ if(!openworkAvailable(p))p.openwork='none';
+ if(!Number.isFinite(p.openingSize)||p.openingSize<4||p.openingSize>20){if(p.openwork!=='none')throw Error('Use 4–20 mm for opening size.');p.openingSize=10;}
  if(standaloneTray(p)){p.columns=1;p.rows=1;}
  if(!['square','round'].includes(p.shape))throw Error('Choose a square or round outline.');
  if(p.kind==='bin'||p.kind==='pot'&&p.shape==='round')p.depth=p.width;
  if(p.kind==='bin'&&p.height<50)throw Error('Desk bins need at least 50 mm height.');
  if(!['pockets','smooth'].includes(p.stackTop))throw Error('Choose locating pockets or a smooth final top.');
  if(!['boxes','pens','fixed','open'].includes(p.trayLayout))throw Error('Choose removable boxes, a pen layout, fixed dividers or an open tray.');
- if(!Object.hasOwn(deskPresets,p.kind)||!['smooth','fluted','slatted','ribbed','scalloped','wave'].includes(p.finish)||!Object.hasOwn(deskPalettes,p.palette))throw Error('Choose an available desk item, finish and palette.');
+ if(!Object.hasOwn(deskPresets,p.kind)||!['smooth','fluted','slatted','ribbed','scalloped','wave'].includes(p.finish)||!Object.hasOwn(deskPalettes,p.palette))throw Error('Choose an available desk item, surface style and palette.');
  for(const [id,min,max]of [['width',standaloneTray(p)?25:40,170],['depth',standaloneTray(p)?25:40,170],['height',12,170],['wall',1.8,4],['clearance',.2,.8],['penShare',25,65],['detailDepth',.6,2.4],['detailSpacing',4,14]])if(!Number.isFinite(p[id])||p[id]<min||p[id]>max)throw Error(`Use ${min}–${max} mm for ${id}. Every part must fit within 170 × 170 × 170 mm.`);
  for(const [id,max]of [['drawerColumns',4],['drawers',4],['columns',4],['rows',3]])if(!Number.isInteger(p[id])||p[id]<1||p[id]>max)throw Error(`Choose 1–${max} for ${id}.`);
  if(p.kind==='drawers'&&p.wall<2.4)throw Error('Stackable drawer cases need at least 2.4 mm walls to retain material below the locating pockets.');
@@ -32,6 +36,8 @@ export function trayCells(p){
 export function drawerStacking(p){return {footHeight:1.2,pocketDepth:1.4,clearance:.3,footWidth:10,footDepth:12,positions:[-1,1].flatMap(x=>[-1,1].map(y=>[x*(p.width/2-14),y*(p.depth/2-16)]))};}
 
 export const adjustableFinish=p=>['ribbed','scalloped','wave'].includes(p.finish);
-export const finishInset=p=>adjustableFinish(p)?p.detailDepth:p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
+export const finishInset=p=>Math.max(p.openwork==='woven'?.4:0,adjustableFinish(p)?p.detailDepth:p.finish==='fluted'?.55:p.finish==='slatted'?.4:0);
 
 export const standaloneTray=p=>['box','pen-tray'].includes(p.kind);
+
+export const openworkAvailable=p=>p.kind!=='bin'&&!(p.kind==='pot'&&p.shape==='round');

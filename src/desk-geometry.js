@@ -1,3 +1,4 @@
+import {carveOpenwork} from './desk-openwork.js';
 import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray} from './desk-settings.js';
 export function generateDeskModel(module,input){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
@@ -7,9 +8,9 @@ export function generateDeskModel(module,input){
  const outline=(w,d)=>circular?own(C.circle(w/2,128).rotate(360/256)):round(w,d);
  const parts=[];
  function add(name,role,solid,assembly,rotation=[0,0,0]){
-  const prepared=adjustableFinish(p)?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
+  const repair=adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
   const bounds=clean.boundingBox(),size=bounds.max.map((v,i)=>v-bounds.min[i]);if(size.some(v=>v>170.001))throw Error('A finished part exceeds the 170 mm A1 mini design limit. Reduce its dimensions.');
-  let mesh=clean.getMesh();if(adjustableFinish(p)){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=repaired.getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
+  let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=repaired.getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
   parts.push({name,role,bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
  }
  function ribs(solid,w,d,h,frontOnly=false){
@@ -60,6 +61,7 @@ export function generateDeskModel(module,input){
   for(let i=1;i<(divisions?p.rows:1);i++)partitions.push(own(own(C.square([w,p.wall],true).translate([0,(i/p.rows-.5)*(d-2*p.wall)])).intersect(circular?own(inside.offset(.1)):inside)));
   if(partitions.length)solid=own(solid.add(own(own(C.union(partitions)).extrude(h-p.wall+.02).translate([0,0,p.wall-.02]))));
   solid=ribs(solid,w,d,h,frontOnly);
+  solid=carveOpenwork(module,own,solid,w,d,h,p,{pull:frontOnly});
   if(frontOnly){const notch=own(round(Math.min(26,w/3),14,4).extrude(p.wall+6).rotate([90,0,0]).translate([0,-d/2+p.wall+2,h+1]));solid=own(solid.subtract(notch));}
   return solid;
  }
@@ -82,7 +84,8 @@ export function generateDeskModel(module,input){
    }
    add('drawer-case','case',shell,[0,p.depth/2,stack.footHeight+bodyHeight/2],[Math.PI/2,0,0]);
    const detail=finishInset(p);
-   const dw=slotWidth-2*p.clearance,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
+   const sideDetail=p.openwork==='woven'&&p.openworkFaces==='front-sides'?.4:0;
+   const dw=slotWidth-2*p.clearance-2*sideDetail,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
    for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++)add(p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,'drawer',container(dw,dd,dh,true),[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
   }else if(p.kind==='bin'){
    const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,h=p.height-4;
@@ -107,7 +110,7 @@ export function generateDeskModel(module,input){
    parts.at(-1).pivot=[0,0,2];
   }else if(standaloneTray(p)){
    const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,profile=round(w,d,3),inner=own(profile.offset(-p.wall));
-   add(p.kind==='box'?'standalone-sorting-box':'standalone-pen-tray',p.kind,ribs(hollowBox(profile,p.height),w,d,p.height),[0,0,0]);
+   add(p.kind==='box'?'standalone-sorting-box':'standalone-pen-tray',p.kind,carveOpenwork(module,own,ribs(hollowBox(profile,p.height),w,d,p.height),w,d,p.height,p),[0,0,0]);
    const bounds=inner.bounds();parts.at(-1).usableSize=[bounds.max[0]-bounds.min[0],bounds.max[1]-bounds.min[1],p.height-p.wall].map(v=>+v.toFixed(2));
   }else{
    // Reserve space for the surface detail so the requested footprint includes it.
