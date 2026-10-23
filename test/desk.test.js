@@ -54,3 +54,13 @@ test('square and round bins have flush flat lids, closed floors and collision-fr
  }
 });
 test('round pen pots retain circular footprint and closed connected divided geometry',()=>{for(const finish of ['smooth','fluted','slatted'])for(const width of [80,170]){const m=build({kind:'pot',shape:'round',finish,width,depth:50,columns:2,rows:2});assert.equal(m.depth,width);check(m.parts[0]);const s=restore(m.parts[0]),b=s.boundingBox();assert.ok(Math.abs((b.max[0]-b.min[0])-(b.max[1]-b.min[1]))<.05);s.delete();}});
+
+test('side-by-side drawers have separate closed parts and clear their case, dividers and neighbors',()=>{
+ for(const drawerColumns of [2,3,4])for(const drawers of [1,2,4])for(const finish of ['smooth','fluted','slatted']){
+  const m=build({drawerColumns,drawers,finish,width:170,depth:130,height:170,columns:1,rows:1,clearance:.2});assert.equal(m.parts.length,1+drawers*drawerColumns);m.parts.forEach(check);
+  const raw=restore(m.parts[0]),shell=raw.rotate([90,0,0]).translate(m.parts[0].assembly),placed=[];
+  for(const part of m.parts.slice(1)){const d=restore(part),closed=d.translate(part.assembly);for(const pull of [0,40]){const moved=d.translate([part.assembly[0],part.assembly[1]-pull,part.assembly[2]]),hit=moved.intersect(shell);assert.ok(hit.volume()<.001,`${drawerColumns} columns ${drawers} rows ${finish}: case collision`);hit.delete();for(const other of placed){const overlap=moved.intersect(other);assert.ok(overlap.volume()<.001,'adjacent drawer clearance');overlap.delete();}moved.delete();}placed.push(closed);d.delete();}
+  placed.forEach(s=>s.delete());raw.delete();shell.delete();assert.match(deskGuide(m),new RegExp(`${drawers} drawer rows × ${drawerColumns} drawer columns`));assert.equal(Object.keys(unzip(deskStlZip(m))).length,m.parts.length+1);
+ }
+ assert.throws(()=>build({drawerColumns:4,width:70}),/18 mm/);assert.throws(()=>build({drawerColumns:5}),/1–4/);
+});

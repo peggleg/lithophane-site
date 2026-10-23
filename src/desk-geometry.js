@@ -42,6 +42,8 @@ export function generateDeskModel(module,input){
    let shell=own(own(outer.extrude(p.depth)).subtract(own(inner.extrude(p.depth+.1).translate([0,0,p.wall]))));
    const slot=(bodyHeight-(p.drawers+1)*p.wall)/p.drawers;
    for(let i=1;i<p.drawers;i++){const y=-bodyHeight/2+p.wall+i*slot+(i-.5)*p.wall;shell=own(shell.add(box(p.width-2*p.wall+.02,p.wall,p.depth-p.wall,0,y,p.wall)));}
+   const slotWidth=(p.width-(p.drawerColumns+1)*p.wall)/p.drawerColumns;
+   for(let col=1;col<p.drawerColumns;col++)shell=own(shell.add(box(p.wall,bodyHeight-2*p.wall+.02,p.depth-p.wall,-p.width/2+p.wall+col*slotWidth+(col-.5)*p.wall,0,p.wall)));
    for(const [x,y]of stack.positions){
     const z=p.depth/2-y,full=own(round(stack.footWidth,stack.footHeight+.02,.4).translate([x,-bodyHeight/2-stack.footHeight/2+.01])),edge=own(round(stack.footWidth,.04,.01).translate([x,-bodyHeight/2+.005]));
     const foot=own(M.hull([own(edge.extrude(.02).translate([0,0,z-stack.footDepth/2])),own(full.extrude(stack.footDepth-2*stack.footHeight).translate([0,0,z-stack.footDepth/2+stack.footHeight])),own(edge.extrude(.02).translate([0,0,z+stack.footDepth/2-.02]))]));
@@ -52,8 +54,8 @@ export function generateDeskModel(module,input){
    }
    add('drawer-case','case',shell,[0,p.depth/2,stack.footHeight+bodyHeight/2],[Math.PI/2,0,0]);
    const detail=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0;
-   const dw=p.width-2*p.wall-2*p.clearance,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
-   for(let i=0;i<p.drawers;i++)add(`drawer-${i+1}`,'drawer',container(dw,dd,dh,true),[0,-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
+   const dw=slotWidth-2*p.clearance,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
+   for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++)add(p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,'drawer',container(dw,dd,dh,true),[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
   }else if(p.kind==='bin'){
    const inset=p.finish==='fluted'?.55:p.finish==='slatted'?.4:0,w=p.width-2*inset,d=p.depth-2*inset,h=p.height-4;
    const outer=outline(w,d),opening=own(outer.offset(-p.wall-.6)),lidProfile=own(opening.offset(-.6));

@@ -1,3 +1,4 @@
+import {encodeKeyringQR} from './qr-code.js';
 import {outline,ringHole} from './symbols.js';
 import opentype from 'opentype.js';
 
@@ -36,6 +37,17 @@ export function generateTextModel(module,fontBuffer,input){
    ({x:holeX,y:holeY}=ringHole(p));const hole=own(C.circle(p.hole/2,64).translate([holeX,holeY]));region=own(region.subtract(hole));
    available=own(available.subtract(own(C.circle(p.hole/2+3,64).translate([holeX,holeY]))));
   }
+  let qr=null;
+  if(p.qrEnabled){
+   const code=encodeKeyringQR(p.qrText),modules=code.size+8,minimum=modules*.8;
+   let best={size:0,x:0,y:0};
+   const preferred=['rounded','capsule'].includes(p.shape)?[(p.hole+3)/2,0]:[0,-4];
+   const centres=[preferred,[0,0]];for(const x of [-.2,-.1,0,.1,.2])for(const y of [-.2,-.1,0,.1,.2])centres.push([x*p.width,y*p.height]);
+   for(const [x,y]of centres){let low=0,high=Math.min(p.width,p.height)-6;for(let step=0;step<9;step++){const size=(low+high)/2,patch=own(C.square([size,size],true).translate([x,y]));if(own(patch.subtract(available)).area()<.000001)low=size;else high=size;}if(low>best.size)best={size:low,x,y};}
+   const pitch=Math.floor(best.size/modules*100)/100;
+   if(pitch<.8)throw Error(`This QR code needs at least ${minimum.toFixed(1)} mm of clear square space, including its quiet border. Enlarge the tag, choose a rounded rectangle, or shorten the QR text. Minimum module size is 0.8 mm.`);
+   qr={...code,pitch,x:best.x,y:best.y,side:modules*pitch};
+  }
   const raw=[],lines=[p.line1,p.line2].filter(Boolean);
   for(let i=0;i<lines.length;i++){
    const commands=[];let pen=0;const glyphs=[...lines[i]].map(c=>font.charToGlyph(c));
@@ -55,6 +67,13 @@ export function generateTextModel(module,fontBuffer,input){
   if(!lettering||p.size*scale<5)throw Error('Text would be too small. Shorten it, use one line or enlarge the design. Minimum fitted font size is 5 mm.');
   const details=lettering.decompose();for(const part of details){own(part);const core=own(part.offset(-.2));if(core.isEmpty())throw Error('A text feature is thinner than the 0.4 mm starting assumption. Increase the size or choose a bolder font.');}
   }else lettering=own(region.subtract(region));
+  if(qr){
+   const runs=[];for(let row=0;row<qr.size;row++)for(let col=0;col<qr.size;col++)if(qr.data[row*qr.size+col]){const first=col;while(col+1<qr.size&&qr.data[row*qr.size+col+1])col++;const count=col-first+1;
+    // Microscopic gaps prevent diagonal modules from creating non-manifold edges.
+    runs.push(own(C.square([count*qr.pitch-.02,qr.pitch-.02],true).translate([qr.x+(first+count/2-qr.size/2)*qr.pitch,qr.y+(qr.size/2-row-.5)*qr.pitch])));
+   }
+   lettering=own(C.union(runs));
+  }
   for(const symbol of p.symbols){const decoration=own(new C([outline(symbol.type,symbol.size,symbol.size)],'EvenOdd').translate([symbol.x,symbol.y]));if(own(decoration.subtract(available)).area()>.00001)throw Error('Move the symbol further inside the tag.');lettering=own(lettering.add(decoration));}
   const plate=own(region.extrude(p.base)),relief=own(lettering.extrude(p.relief+.02).translate([0,0,p.mode==='raised'?p.base-.02:p.base-p.relief]));
   const combined=own(p.mode==='raised'?plate.add(relief):plate.subtract(relief));
@@ -67,6 +86,6 @@ export function generateTextModel(module,fontBuffer,input){
    parts.push({name:'desk-stand',mesh:toMesh(stand(p.width*.7)),x:p.width/2+p.width*.35+15});
    parts.push({name:'stand-fit-test',mesh:toMesh(stand(20)),x:p.width/2+p.width*.7+45});
   }
-  return {parts,settings:p,fontSize:+(p.size*scale).toFixed(2),width:p.width,height:p.height,holeX,holeY,warnings:['Start with a 0.4 mm nozzle and 0.2 mm layers; inspect small details in your slicer.',p.kind==='nameplate'&&p.stand?'Stand fit and small-letter quality require physical testing.':'Small-letter quality and tag strength require physical testing.']};
+  return {parts,settings:p,...(qr?{qr:{text:qr.text,size:qr.size,pitch:qr.pitch,x:qr.x,y:qr.y,side:qr.side,quiet:4}}:{}),fontSize:+(p.size*scale).toFixed(2),width:p.width,height:p.height,holeX,holeY,warnings:[...(qr?['Use a light base and dark QR modules with a slicer colour change. Four blank modules surround the code. Scan a physical print before use.']:[]),'Start with a 0.4 mm nozzle and 0.2 mm layers; inspect small details in your slicer.',p.kind==='nameplate'&&p.stand?'Stand fit and small-letter quality require physical testing.':'Small-letter quality and tag strength require physical testing.']};
  }finally{for(let i=owned.length-1;i>=0;i--)owned[i].delete();}
 }
