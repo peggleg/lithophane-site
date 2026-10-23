@@ -21,7 +21,8 @@
     "test:navigation": "node scripts/check-navigation-browser.mjs",
     "test:desk": "node scripts/check-desk-browser.mjs",
     "test:filament": "node scripts/check-filament-browser.mjs",
-    "test:qr-drawers": "node scripts/check-qr-drawers-browser.mjs"
+    "test:qr-drawers": "node scripts/check-qr-drawers-browser.mjs",
+    "test:desk-details": "node scripts/check-desk-details-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

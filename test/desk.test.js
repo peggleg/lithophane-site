@@ -64,3 +64,21 @@ test('side-by-side drawers have separate closed parts and clear their case, divi
  }
  assert.throws(()=>build({drawerColumns:4,width:70}),/18 mm/);assert.throws(()=>build({drawerColumns:5}),/1–4/);
 });
+
+test('deep ribs, scallops and waves create closed A1 mini parts with smooth cavities and fitted inserts',()=>{
+ for(const finish of ['ribbed','scalloped','wave'])for(const kind of ['drawers','pot','tray','bin'])for(const shape of kind==='pot'||kind==='bin'?['square','round']:['square']){
+  const m=build({kind,shape,finish,width:120,depth:100,height:kind==='tray'?30:100,trayLayout:'pens',columns:2,rows:1});m.parts.forEach(p=>{try{check(p);}catch(e){throw new Error(`${finish} ${kind} ${shape} ${p.name}: ${e.message}`,{cause:e});}});
+  assert.match(deskGuide(m),/projection 1.6 mm; spacing 8 mm/);
+  if(kind==='drawers'){const raw=restore(m.parts[0]),shell=raw.rotate([90,0,0]).translate(m.parts[0].assembly);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(shell);assert.ok(hit.volume()<.001,'decorated drawer clears case');[d,pose,hit].forEach(o=>o.delete());}raw.delete();shell.delete();}
+  if(kind==='tray'){const tray=restore(m.parts[0]);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(tray);assert.ok(hit.volume()<.001,'auto-sized inserts clear decorated tray');[d,pose,hit].forEach(o=>o.delete());}tray.delete();}
+  if(kind==='bin'){const body=restore(m.parts[0]),raw=restore(m.parts[1]),rim=raw.rotate([180,0,0]).translate(m.parts[1].assembly),lid=restore(m.parts[2]);for(const angle of [-90,0,90]){const pose=lid.translate([0,0,-2]).rotate([angle,0,0]).translate([0,0,m.height-2]);for(const other of [body,rim]){const hit=pose.intersect(other);assert.ok(hit.volume()<.001,'decorated bin retains free lid travel');hit.delete();}pose.delete();}[body,raw,rim,lid].forEach(o=>o.delete());}
+  if(kind==='pot'||kind==='bin'){const s=restore(m.parts[0]),slice=s.slice(10),small=module.CrossSection.square([10,10],true).translate([m.width/4,0]),hit=slice.intersect(small);assert.ok(hit.area()<.001,'interior remains hollow');[s,slice,small,hit].forEach(o=>o.delete());}
+ }
+});
+test('adjustable surface detail respects extreme depth, spacing and finished A1 mini dimensions',()=>{
+ for(const finish of ['ribbed','scalloped','wave'])for(const shape of ['square','round'])for(const [width,detailDepth,detailSpacing]of [[40,.6,14],[170,2.4,4]]){
+  const m=build({kind:'pot',shape,finish,width,depth:width,height:80,columns:1,rows:1,detailDepth,detailSpacing});m.parts.forEach(check);assert.ok(m.parts[0].printSize[0]<=width+.001);assert.ok(m.parts[0].printSize[1]<=width+.001);
+ }
+ for(const p of [{detailDepth:3},{detailDepth:NaN},{detailSpacing:0},{detailSpacing:15}])assert.throws(()=>build({...p,finish:'ribbed'}));
+ const a=build({kind:'pot',shape:'round',finish:'ribbed',detailDepth:.6}),b=build({kind:'pot',shape:'round',finish:'ribbed',detailDepth:2.4}),c=build({kind:'pot',shape:'round',finish:'ribbed',detailSpacing:12});assert.notEqual(a.parts[0].mesh.faces.length,b.parts[0].mesh.faces.length);assert.notEqual(b.parts[0].mesh.faces.length,c.parts[0].mesh.faces.length);
+});
