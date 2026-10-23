@@ -1,4 +1,4 @@
-import {filamentAssumptions,panelGrams} from './filament.js';
+import {filamentAssumptionsFor,panelGrams} from './filament.js';
 import './theme.js';
 import {mountSampleGallery} from './sample-gallery.js';
 import './style.css';
@@ -7,6 +7,7 @@ import {postcardSize,sampleSize,FRAME_URL} from './postcards.js';
 import {drawSeasonal,seasonalDesigns} from './seasonal.js';
 import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,MIB,DEFAULT_DETAIL} from './resolution.js';
 import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.js';
+const filamentAssumptions=filamentAssumptionsFor('lithophane');
 const $=id=>document.getElementById(id);
 const fields=['width','height','min','max','detail','crop','zoom','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
 let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading=false,renderFrame=0;

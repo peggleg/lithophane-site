@@ -3,7 +3,7 @@ import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
-export function clickerGuide(model){const p=model.settings;return `${filamentReport(model.parts)}\nDESIGN STUDIO — GLUE-IN MECHANICAL CLICKER PROTOTYPE
+export function clickerGuide(model){const p=model.settings;return `${filamentReport(model.parts,'clicker')}\nDESIGN STUDIO — GLUE-IN MECHANICAL CLICKER PROTOTYPE
 ${model.batchCount?`BATCH: ${model.batchCount} separate Pocket Pebbles (${model.parts.length} printed pieces).\nCharacters: ${model.batchCharacters.join(' ')}\nEach named folder contains one base and one cap. Duplicate characters are preserved. Arrange the 3MF objects or split them across print plates in your slicer.\n`:''}PRINTED PARTS
 ${model.batchCount?`Each pebble has one base and one cap; this batch contains ${model.parts.length} printed pieces.`:`One base plus one cap per button (${p.count+1} printed pieces).`} No separate deck, insert or fit-test pieces.
 Base height ${model.baseHeight} mm. Closed floor ${p.floor} mm. Blind switch pockets ${p.cutout} mm square and ${p.cavity} mm deep. Individual upper wells hide the switch sides.
@@ -22,4 +22,4 @@ STL ZIP: ${model.batchCount?'one numbered folder per pebble, each containing bas
 ${printProfileImport}
 Your lettering and models stay in your browser.
 `;}
-export function clickerStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar(),'PRINT-GUIDE.txt':strToU8(clickerGuide(model))};for(const part of model.parts)files[part.name+'.stl']=stlBytes(part.mesh);return zipParts(files);}
+export function clickerStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar('clicker'),'PRINT-GUIDE.txt':strToU8(clickerGuide(model))};for(const part of model.parts)files[part.name+'.stl']=stlBytes(part.mesh);return zipParts(files);}

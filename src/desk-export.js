@@ -3,7 +3,7 @@ import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
-export function deskGuide(model){const p=model.settings;return `${filamentReport(model.parts)}\nDESIGN STUDIO — JAPANDI DESK COLLECTION
+export function deskGuide(model){const p=model.settings;return `${filamentReport(model.parts,'desk')}\nDESIGN STUDIO — JAPANDI DESK COLLECTION
 ${p.kind}; ${p.finish} finish;${p.kind==='drawers'?` ${p.stackTop==='pockets'?'locating-pocket':'smooth final'} top;`:''} requested size ${p.width} × ${p.depth} × ${p.height} mm (width × depth × height).
 
 A1 MINI PRINTING
@@ -21,4 +21,4 @@ FILES
 One named STL per part, this guide and PRINT-SETTINGS.json in the ZIP. Millimetre 3MF contains the same parts in their printing orientations. ${printProfileImport}
 All dimensions and models stay in your browser; the site saves only your theme preference.
 `;}
-export function deskStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar(),'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}
+export function deskStlZip(model){const files={'PRINT-SETTINGS.json':profileSidecar('desk'),'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}

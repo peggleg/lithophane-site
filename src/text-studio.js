@@ -8,7 +8,7 @@ const $=id=>document.getElementById(id),kind=document.body.dataset.generator,def
 const fields=['line1','line2','font','width','height','base','relief','size','mode','align',...(kind==='keyring'?['shape','hole','qrEnabled','qrText']:['stand'])];
 let editor=null;
 let worker=null,timer=null,model=null,generation=0,preview=null,busy=false;
-const filamentDisplay=createFilamentDisplay($('feedback'));
+const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate',kind);
 try{preview=createTextPreview($('model-canvas'));}catch{$('model-preview').textContent='Interactive preview needs WebGL. You can still generate and download your design.';}
 function settings(){const result={...defaults};for(const id of fields)result[id]=$(id).type==='checkbox'?$(id).checked:$(id).type==='number'?Number($(id).value):$(id).value;if(kind==='keyring'&&result.shape==='circle')result.height=result.width;result.symbols=editor?.get()||[];return result;}
 function enable(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=!model||busy;}

@@ -4,7 +4,7 @@ import './desk.css';
 import {deskDefaults,deskPresets,validateDeskSettings} from './desk-settings.js';
 import {createDeskPreview} from './desk-preview.js';
 const $=id=>document.getElementById(id),fields=['width','depth','height','wall','clearance','penShare','drawers','drawerColumns','columns','rows'];let state={...deskDefaults},model=null,worker=null,timer=null,generation=0,busy=false,preview;
-const filamentDisplay=createFilamentDisplay($('feedback'));
+const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','desk');
 try{preview=createDeskPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. You can still generate and download your desk item.';}
 function controls(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=busy||!model;}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('cancel').hidden=true;$('progress').hidden=true;controls();}

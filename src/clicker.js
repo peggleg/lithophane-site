@@ -7,8 +7,8 @@ import {clickerDefaults,clickerPresets,clickerPalettes,clickerCountRange,isClick
 import {createClickerPreview} from './clicker-preview.js';
 const $=id=>document.getElementById(id),fitFields=['floor','pitch','cutout','cavity','wall','socketClearance','stemWidth','stemHeight'];
 let state=structuredClone(clickerDefaults),selected=0,model=null,worker=null,timer=null,generation=0,busy=false,preview=null;
-const filamentDisplay=createFilamentDisplay($('feedback')),batchFilamentDisplay=createFilamentDisplay($('batch-status'),'batch-filament-estimate');
-const batchEstimateButton=document.createElement('button');batchEstimateButton.id='batch-filament';batchEstimateButton.className='quiet';batchEstimateButton.textContent='Estimate batch filament';$('batch-filament-estimate').after(batchEstimateButton);batchEstimateButton.onclick=()=>exportFile('estimate',true);
+const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','clicker'),batchFilamentDisplay=createFilamentDisplay($('batch-status'),'batch-filament-estimate','clicker');
+const batchEstimateButton=document.createElement('button');batchEstimateButton.id='batch-filament';batchEstimateButton.className='quiet';batchEstimateButton.textContent='Estimate batch filament';$('batch-filament-estimate','clicker').after(batchEstimateButton);batchEstimateButton.onclick=()=>exportFile('estimate',true);
 try{preview=createClickerPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. You can still generate and download the parts.';}
 for(const [value,{label}]of Object.entries(symbolCollections)){const option=document.createElement('option');option.value=value;option.textContent=label+' · 12 symbols';$('symbol-set').append(option);}
 for(const [value,{label}]of Object.entries(fonts)){const option=document.createElement('option');option.value=value;option.textContent=label;$('font').append(option);}

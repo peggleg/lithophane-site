@@ -16,5 +16,7 @@ test('fan estimate includes blades, guards, pivot, washers and optional stands i
 test('8% infill is applied only after shell material and thin parts are capped at solid volume',async()=>{
  const {plasticVolume,panelGrams,filamentAssumptions}=await import('../src/filament.js');
  assert.equal(plasticVolume(100,20),26.4);assert.equal(plasticVolume(100,200),100);assert.equal(plasticVolume(100,0),8);
- assert.equal(panelGrams(100,100,1),12.4);assert.ok(panelGrams(100,100,3)<37.2);assert.ok(panelGrams(100,100,3)>37.2*.08);assert.match(filamentAssumptions,/2 wall loops/);assert.match(filamentAssumptions,/4 top and 4 bottom/);
+ assert.equal(panelGrams(100,100,1),12.4);assert.ok(panelGrams(100,100,3)<37.2);assert.ok(panelGrams(100,100,3)>37.2*.08);assert.match(filamentAssumptions,/2 wall loops/);assert.match(filamentAssumptions,/3 top and 3 bottom/);
 });
+
+test('skin-layer profiles change weight estimates without changing model volume or photo defaults',async()=>{const {meshMaterial,filamentAssumptionsFor}=await import('../src/filament.js'),{makePanel}=await import('../src/geometry.js');const mesh=makePanel({width:40,height:40,min:5,max:5,cols:2,rows:2,tones:new Float32Array(4)}),a=meshMaterial(mesh,'keyring'),b=meshMaterial(mesh,'desk'),c=meshMaterial(mesh,'fan');assert.equal(a.volume,b.volume);assert.equal(b.volume,c.volume);assert.ok(a.plastic<b.plastic);assert.ok(b.plastic<c.plastic);assert.deepEqual(meshMaterial(mesh,'future-tool'),b);assert.equal(filamentAssumptionsFor('lithophane'),filamentAssumptionsFor('fan'));});

@@ -5,7 +5,7 @@ import {drawPhoto,photoLayout,dragCrop} from './image-processing.js';
 import {fanSamples,drawFanSample} from './fan-samples.js';
 import {defaults,validateFan,stackHeight,outline,bladeAngle,instructions,makeFan} from './fan-geometry.js';
 const $=id=>document.getElementById(id),preview=$('preview'),ctx=preview.getContext('2d'),sample=document.createElement('canvas'),sc=sample.getContext('2d',{willReadFrequently:true});
-const filamentDisplay=createFilamentDisplay($('feedback'));let filamentWorker=null,filamentTimer=null,filamentWeights=null;
+const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','fan');let filamentWorker=null,filamentTimer=null,filamentWeights=null;
 function estimateFilament(p){clearTimeout(filamentTimer);filamentWorker?.terminate();filamentDisplay.clear();filamentWeights=null;const currentPhoto=photo;filamentTimer=setTimeout(()=>{filamentWorker=new Worker(new URL('./fan-worker.js',import.meta.url),{type:'module'});filamentWorker.onmessage=({data})=>{if(data.progress)return;if(data.filament){filamentWeights=data.filament;filamentDisplay.weights(data.filament);}filamentWorker?.terminate();filamentWorker=null;};filamentWorker.postMessage({settings:p,photo:currentPhoto,format:'estimate'});},250);}
 let image=null,photo=null,view='open',worker=null,loadId=0,busy=false,loading=false;
 const fields=['count','length','angle','stand','crop','zoom','panx','pany','brightness','contrast','invert','backlit'];
