@@ -1,0 +1,14 @@
+# Removable drawer colour sheets
+
+For desk drawers with any openwork pattern, **Drawer cutout backing** offers:
+
+- **Plain cutouts — no sheet slots** (default). Existing plain meshes are unchanged, including corner rounding; a direct comparison with the deployed baseline confirmed identical meshes for all six patterns.
+- **Slots + removable 1 mm colour sheets**. Each drawer gains integral top-loading guides and separate, flat printable sheets. Front-only openwork gets one sheet per drawer; front-and-sides gets three. Sheets auto-size for the drawer dimensions, rows/columns, wall thickness and fit clearance. Front sheets follow the finger notch. The chosen preview colour applies to the sheets and does not assign filament in the slicer; each named sheet can be printed in a different colour.
+
+The inset mode uses tighter drawer-corner rounding to accommodate flat sheets and guides. Slots are 1 mm plus twice the selected fit clearance, with 1.2 mm retaining lips. The guides consume a little internal space. Cutouts are clipped to a shared coverage envelope so the selected sheets cover the real openings. With the drawer removed, lower the front sheet in from above, then any side sheets; lift vertically to replace them. No glue or forced flexing is required. Closed drawers and their sheets fit the existing case. Moving the drawer in the assembled preview also moves its sheets. Parts view lays every sheet flat, matching STL/3MF export orientation.
+
+All parts stay within 170 mm. Sheets remain under the existing desk profile: 8% gyroid, two wall loops and 3 top/3 bottom layers, A1 mini/0.4 mm nozzle, 0.2 mm layers, Generic PLA and textured PEI. A 1 mm sheet has five layers; overlapping skin layers make it solid without changing the embedded profile. Sheets are included in part counts, downloads, guides and filament estimates. Existing coaster/photo/text profiles are unchanged.
+
+Checks cover all six patterns, front and side layouts, both clearance limits, multiple drawer sizes/rows/columns, all six finishes, connected closed geometry, complete sheet insertion/removal paths, actual opening coverage and case clearance along drawer travel. Browser checks cover mode changes, colour preview, independent sheet exports, non-drawer exclusion, mobile layout and reset. Actual browser 3MF is verified through Bambu Studio 2.8.2.61 CLI import and desktop Open Project / Save Project, alongside the shared profile import checks. Physical thin-sheet adhesion, retention, sliding fit and durability still need a test print.
+
+A sheet extracted from the actual browser download sliced as exactly five 0.2 mm layers (1.0 mm total) in Bambu Studio 2.8.2.61, with solid internal fill and the unchanged desk process settings. This verifies toolpath generation, not physical print fit. Kits with guides/sheets use a `colour-sheets` filename suffix to distinguish them from plain-cutout kits.

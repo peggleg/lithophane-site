@@ -1,3 +1,4 @@
+import {drawerInsertActive,drawerInsertLayout} from './drawer-inserts.js';
 // Drawer fronts use a centred repeating field, clipped to a slim rounded frame
 // and the actual pull surround. Organiser walls retain their complete cells.
 export function openworkCells(width,height,p,{pull=false}={}){
@@ -42,7 +43,7 @@ export function carveOpenwork(module,own,solid,w,d,h,p,{pull=false}={}){
    panel=own(rounded(width-2*b.frame,ph,Math.min(6,ph/2-.01,(width-2*b.frame)/2-.01)).translate([0,(b.bottom+b.top)/2]));
    grip=own(rounded(b.pullWidth,14+2*b.frame,Math.min(4+b.frame,6)).translate([0,h+1]));
   }
-  function trim(profile){if(!fullFront)return profile;const clipped=own(own(profile.intersect(panel)).subtract(grip)),pieces=clipped.decompose().map(own),kept=pieces.filter(c=>c.area()>=1);return own(C.union(kept));}
+  function trim(profile){if(pull&&drawerInsertActive(p)){const s=drawerInsertLayout(w,d,h,p).find(s=>s.side===side);if(s){const centre=side===0?s.centre:side*s.centre,coverage=own(C.square([Math.max(.1,s.width-1.2),Math.max(.1,s.height-.4)],true).translate([centre,(s.bottom+s.top)/2]));profile=own(profile.intersect(coverage));}}if(!fullFront)return profile;const clipped=own(own(profile.intersect(panel)).subtract(grip)),pieces=clipped.decompose().map(own),kept=pieces.filter(c=>c.area()>=1);return own(C.union(kept));}
 
   const profiles=cells.map(cell=>{
    const {width:a,height:b,row,col}=cell;let shape;

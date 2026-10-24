@@ -87,3 +87,7 @@ Bins now have two printable parts: the body with a built-in rim and the lid. The
 ## Monstera plant holder
 
 Monstera coasters now have engraved branching veins and a suggested elongated leaf proportion. A plant-display holder joins the stacking tray and upright rack on `/coasters/`, with a styled pot, keyed socket plate and removable stems for 4–6 leaves. Reference leaves appear only in the assembled preview; download the matching coaster set separately. Every part retains the A1 mini limit. Coasters keep 5/5 skins, holders keep 3/3, and both retain 8% gyroid with two walls. See `docs/monstera-coasters.md` for fit, assembly and physical validation limits.
+
+## Optional drawer colour sheets
+
+Openwork drawers can now include top-loading guides and separate 1 mm printable colour sheets. Plain cutouts remain the default, without guides or slots, and match the previous meshes exactly. Front/front-and-sides selection controls which sheets are supplied; every sheet follows its drawer's dimensions and is printed flat. Preview colour is independent of the existing body palette. Desk profiles remain 8% gyroid, two walls and 3/3 layers; thin sheets become solid through skin overlap. See `docs/drawer-colour-sheets.md` for assembly and validation details.

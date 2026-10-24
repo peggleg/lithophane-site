@@ -1,3 +1,4 @@
+import {drawerInsertActive,drawerCornerRadius,drawerInsertLayout,addDrawerInsertRails,drawerSheetSolid} from './drawer-inserts.js';
 import {isCoaster,makeCoasters} from './desk-coasters.js';
 import {isStorage,makeStorage} from './desk-storage.js';
 import {makeScrewContainer} from './desk-screw.js';
@@ -11,9 +12,9 @@ export function generateDeskModel(module,input,fontBuffer){
  const outline=(w,d)=>circular?own(C.circle(w/2,128).rotate(360/256)):round(w,d);
  const parts=[];
  function add(name,role,solid,assembly,rotation=[0,0,0]){
-  const repair=p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
+  const repair=drawerInsertActive(p)||p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
   const bounds=clean.boundingBox(),size=bounds.max.map((v,i)=>v-bounds.min[i]);if(size.some(v=>v>170.001))throw Error('A finished part exceeds the 170 mm A1 mini design limit. Reduce its dimensions.');
-  let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=(['bin','coaster-plant'].includes(p.kind)?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
+  let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=((drawerInsertActive(p)||['bin','coaster-plant'].includes(p.kind))?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
   parts.push({name,role,bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
  }
  function ribs(solid,w,d,h,frontOnly=false){
@@ -57,7 +58,7 @@ export function generateDeskModel(module,input,fontBuffer){
  }
  function hollowBox(profile,h){const inner=own(profile.offset(-p.wall));if(inner.isEmpty())throw Error('The tray is too small for this wall thickness.');return own(own(profile.extrude(h)).subtract(own(inner.extrude(h).translate([0,0,p.wall]))));}
  function container(w,d,h,frontOnly=false,divisions=true){
-  const r=Math.min(9,w/5,d/5),outer=outline(w,d),inside=circular?own(C.circle(w/2-p.wall,128).rotate(360/256)):round(w-2*p.wall,d-2*p.wall,Math.max(1,r-p.wall));
+  const r=frontOnly?drawerCornerRadius(w,d,p):Math.min(9,w/5,d/5),outer=frontOnly&&drawerInsertActive(p)?round(w,d,r):outline(w,d),inside=circular?own(C.circle(w/2-p.wall,128).rotate(360/256)):round(w-2*p.wall,d-2*p.wall,Math.max(1,r-p.wall));
   let solid=own(own(outer.extrude(h)).subtract(own(inside.extrude(h).translate([0,0,p.wall]))));
   const partitions=[];
   for(let i=1;i<(divisions?p.columns:1);i++)partitions.push(own(own(C.square([p.wall,d],true).translate([(i/p.columns-.5)*(w-2*p.wall),0])).intersect(circular?own(inside.offset(.1)):inside)));
@@ -94,7 +95,16 @@ export function generateDeskModel(module,input,fontBuffer){
    const detail=finishInset(p);
    const sideDetail=p.openwork==='woven'&&p.openworkFaces==='front-sides'?.4:0;
    const dw=slotWidth-2*p.clearance-2*sideDetail,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
-   for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++)add(p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,'drawer',container(dw,dd,dh,true),[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
+   for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++){
+    const name=p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,assembly=[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance];
+    const drawer=addDrawerInsertRails(module,own,container(dw,dd,dh,true),dw,dd,dh,p,{box});add(name,'drawer',drawer,assembly);
+    for(const sheet of drawerInsertLayout(dw,dd,dh,p)){
+     const solid=drawerSheetSolid(module,own,sheet,dw,dh,p);let position,rotation;
+     if(sheet.side===0){position=[sheet.centre,-dd/2+sheet.normal+.5,sheet.bottom];rotation=[Math.PI/2,0,0];}
+     else{position=[sheet.side*(dw/2-sheet.normal-.5),sheet.centre,sheet.side===1?sheet.top:sheet.bottom];rotation=[0,sheet.side*Math.PI/2,0];}
+     add(`${name}-colour-sheet-${sheet.name}`,'drawer-sheet',solid,position.map((v,a)=>v+assembly[a]),rotation);parts.at(-1).insertFit={...sheet,drawer:name};
+    }
+   }
   }else if(p.kind==='bin'){
    const fit=binDimensions(p),w=fit.width,d=w,pivotZ=p.height-fit.pivot;
    const outer=outline(w,d),opening=own(outer.offset(-fit.rimWall)),lidProfile=own(opening.offset(-fit.lidGap));

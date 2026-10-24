@@ -1,13 +1,14 @@
 import {isCoaster,validateCoaster} from './desk-coasters.js';
 import {isStorage,storageLayout} from './desk-storage.js';
 export const deskPresets={'coaster-plant':{width:100,depth:125,height:4.4,columns:1,rows:1,coasterShape:'monstera',finish:'fluted'},coaster:{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},'coaster-tray':{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},'coaster-rack':{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},storage:{width:150,depth:110,height:40,columns:3,rows:2},'storage-pots':{width:150,depth:110,height:40,columns:3,rows:2},screw:{width:70,depth:70,height:65,columns:1,rows:1,finish:'fluted'},box:{width:60,depth:60,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},'pen-tray':{width:160,depth:55,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},bin:{width:110,depth:110,height:140,drawers:2,columns:1,rows:1,wall:1.8,finish:'smooth'},drawers:{width:140,depth:130,height:100,drawers:2,columns:1,rows:1},pot:{width:80,depth:80,height:100,drawers:2,columns:1,rows:1},tray:{width:150,depth:100,height:25,drawers:2,columns:2,rows:2}};
-export const deskDefaults={kind:'drawers',coasterShape:'round',coasterSurface:'recessed',coasterRim:1.2,leafBacking:'backed',coasterCount:4,lidText:'',storageLid:'lift',columnShares:'',rowShares:'',openwork:'none',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
+export const deskDefaults={kind:'drawers',coasterShape:'round',coasterSurface:'recessed',coasterRim:1.2,leafBacking:'backed',coasterCount:4,lidText:'',storageLid:'lift',columnShares:'',rowShares:'',openwork:'none',drawerInserts:'none',sheetColour:'#68bfc7',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
 export const deskPalettes={ivory:{body:'#eee6d7',detail:'#cbb798'},sage:{body:'#8c9b81',detail:'#eee5d3'},charcoal:{body:'#414441',detail:'#b38c62'},walnut:{body:'#72533e',detail:'#d7c4a5'},sand:{body:'#d9ccb4',detail:'#efe7d7'}};
 export function validateDeskSettings(input){
  const p={...deskDefaults,...input};
  if(!['none','honeycomb','diamond','slots','windows','arches','woven'].includes(p.openwork))throw Error('Choose an available openwork pattern.');
  if(!['front','front-sides'].includes(p.openworkFaces))throw Error('Choose front only or front and sides.');
  if(!openworkAvailable(p))p.openwork='none';
+ if(p.kind!=='drawers'||p.openwork==='none')p.drawerInserts='none';else if(!['none','sheet'].includes(p.drawerInserts))throw Error('Choose plain cutouts or removable colour sheets.');
  if(!Number.isFinite(p.openingSize)||p.openingSize<4||p.openingSize>20){if(p.openwork!=='none')throw Error('Use 4–20 mm for opening size.');p.openingSize=10;}
  if(standaloneTray(p)){p.columns=1;p.rows=1;}
  if(!['square','round'].includes(p.shape))throw Error('Choose a square or round outline.');
