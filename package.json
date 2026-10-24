@@ -29,7 +29,9 @@
     "test:desk-fit": "node scripts/check-desk-fit-browser.mjs",
     "test:screw-containers": "node scripts/check-desk-screw-browser.mjs",
     "test:compartment-storage": "node scripts/check-desk-storage-browser.mjs",
-    "test:coasters": "node scripts/check-desk-coasters-browser.mjs"
+    "test:coasters": "node scripts/check-desk-coasters-browser.mjs",
+    "test:lantern": "node scripts/check-lantern-browser.mjs",
+    "test:lantern-lifecycle": "node scripts/check-lantern-lifecycle-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

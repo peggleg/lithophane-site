@@ -75,3 +75,7 @@ Digital checks cover connected solids, backing coverage, all outlines, surfaces 
 ## Coaster page and site naming
 
 Coasters and their two holder types now live at `/coasters/`, with their own homepage card, menu link, page metadata and reset defaults. `/desk/` lists storage and desk items only. Both pages reuse the same geometry/export engine; print profiles are unchanged (coasters 5/5, holders and desk items 3/3). All eight pages include one shared note about A1 mini starting designs, custom-size checks and splitting larger sets across plates. The former decorative collection name has been removed from page copy, metadata and filenames.
+
+## Four-postcard lantern
+
+The lithophane Fit menu now includes a four-photo lantern using the existing postcard frame CAD. Each 105 × 148 mm panel has its own image and crop. The assembled preview shows frame geometry and photo placement; the grey LED is reference-only. Frame-only and complete STL/3MF ZIP downloads include assembly guidance and material estimates. Extract the ZIP before opening each 3MF as a separate project: panels retain 4/4 layers; frame parts retain 3/3. Both retain 8% gyroid and 2 walls. Actual downloaded projects passed Bambu Studio 2.8.2.61 CLI import and desktop Open/Save round trips. See `docs/lantern-studio.md` for geometry, profile and browser verification. Physical LED/panel fit and thermal/light testing remain required.

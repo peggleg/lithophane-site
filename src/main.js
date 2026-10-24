@@ -14,6 +14,9 @@ let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading
 let source={name:'My lithophane',custom:false};
 const canvas=$('preview'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 const n=id=>Number($(id).value);
+let lanternUI=null,lanternMount=null,lanternReset=0;
+function layoutMode(){const on=$('frame').value==='lantern';for(const id of ['upload-label','single-panel-controls','single-photo-controls','single-workspace'])$(id).hidden=on;$('lantern-studio').hidden=!on;$('studio').classList.toggle('lantern-mode',on);if(on&&!lanternMount){const resetAtStart=lanternReset;lanternMount=import('./lantern-studio.js').then(m=>m.mountLantern($('lantern-studio'),{currentPhoto:async()=>{const current=image,name=source.name,config={...adjustments()};return current&&!loading?{image:await createImageBitmap(current),name,adjustments:config}:null;}})).then(ui=>{lanternUI=ui;if(resetAtStart!==lanternReset)ui.reset();if($('frame').value!=='lantern')ui.pause();return ui;}).catch(e=>{$('lantern-studio').textContent='Could not open the lantern studio: '+e.message;lanternMount=null;});}if(!on)lanternUI?.pause();}
+
 const adjustments=()=>({crop:$('crop').value,zoom:n('zoom'),panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
 function cropControls(p){
  const ready=!!image&&!loading,cover=$('crop').value==='cover';
@@ -106,9 +109,9 @@ function scheduleRender(){cancelAnimationFrame(renderFrame);renderFrame=requestA
 new ResizeObserver(scheduleRender).observe(canvas.parentElement);
 window.addEventListener('resize',scheduleRender);
 for(const id of fields)$(id).addEventListener('input',()=>{endDrag();cancelExport(false);if(['width','height','max'].includes(id))$('frame').value='custom';render();});
-function applyPostcard(orientation){for(const [key,value]of Object.entries(postcardSize(orientation)))$(key).value=value;$('frame').value='postcard';}
+function applyPostcard(orientation){for(const [key,value]of Object.entries(postcardSize(orientation)))$(key).value=value;$('frame').value='postcard';layoutMode();}
 for(const button of document.querySelectorAll('[data-orientation]'))button.onclick=()=>{endDrag();cancelExport(false);applyPostcard(button.dataset.orientation);resetCrop();render();};
-$('frame').onchange=()=>{endDrag();cancelExport(false);if($('frame').value==='postcard'){applyPostcard(n('width')>n('height')?'landscape':'portrait');resetCrop();}render();};
+$('frame').onchange=()=>{endDrag();cancelExport(false);if($('frame').value==='postcard'){applyPostcard(n('width')>n('height')?'landscape':'portrait');resetCrop();}layoutMode();render();};
  for(const [id,change]of [['zoom-out',-5],['zoom-in',5]])$(id).onclick=()=>{
   $('zoom').value=Math.max(100,Math.min(400,n('zoom')+change));cancelExport(false);render();
  };
@@ -190,13 +193,15 @@ $('summary').onclick=()=>{
  download(`LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${filamentAssumptions}\nCorner fit test: ${panelGrams(20,20,p.max).toFixed(1)} g PLA at the default settings.\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; 8% gyroid sparse infill; 2 wall loops; 4 top and bottom layers; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Thin photo areas may be filled by the shells. Gyroid can affect backlit image quality; test transmission and the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
 };
 $('reset').onclick=()=>{
+ ++lanternReset;lanternUI?.reset();
  endDrag();
  ++loadId;loading=false;cancelExport(false);image?.close();image=null;source={name:'My lithophane',custom:false};grid=null;$('photo').value='';if($('save-dialog').open)$('save-dialog').close('cancel');
  for(const [id,value]of Object.entries({width:105,height:148,min:0.8,max:3,detail:DEFAULT_DETAIL,crop:'cover',zoom:100,panx:50,pany:50,brightness:0,contrast:0,overlap:3,clearance:'total'}))$(id).value=value;
- $('invert').checked=false;$('overlay').checked=true;$('frame').value='postcard';
+ $('invert').checked=false;$('overlay').checked=true;$('frame').value='postcard';layoutMode();
  canvas.width=1;canvas.height=1;canvas.style.display='none';$('empty').hidden=false;$('fit-overlay').hidden=true;$('material-estimate').textContent='Add a photo';$('export-status').textContent='Session cleared. Existing downloads stay on your device.';$('feedback').textContent='Everything happens in this browser. No account needed.';render();
 };
-window.addEventListener('pagehide',()=>{$('reset').click();cancelAnimationFrame(renderFrame);});
+window.addEventListener('pagehide',()=>{$('reset').click();lanternUI?.dispose();cancelAnimationFrame(renderFrame);});
+$('choose-lantern').onclick=()=>{cancelExport(false);$('frame').value='lantern';layoutMode();$('studio').scrollIntoView({behavior:'smooth'});};
 render();
 mountSampleGallery($('seasonal-collections'),{drawArtwork:drawSeasonal,onUse:async(button)=>{
  const token=beginLoad();
