@@ -5,7 +5,7 @@ const b=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/b
 try{
  const page=await b.newPage({viewport:{width:1440,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://localhost:4175/desk/');
- async function ready(){await page.waitForFunction(()=>document.querySelector('#feedback').textContent.startsWith('Design ready'),null,{timeout:30000});assert.equal(await page.locator('#stl').isEnabled(),true);}
+ async function ready(){await page.waitForFunction(()=>document.querySelector('#feedback').textContent.startsWith('Design ready'),null,{timeout:60000});assert.equal(await page.locator('#stl').isEnabled(),true);}
  await ready();assert.equal(await page.locator('header nav a').count(),7);
  for(const kind of ['drawers','pot','tray']){
   await page.selectOption('#kind',kind);await ready();

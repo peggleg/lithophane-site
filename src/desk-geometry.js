@@ -1,10 +1,11 @@
+import {makeScrewContainer} from './desk-screw.js';
 import {carveOpenwork} from './desk-openwork.js';
 import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray,binDimensions} from './desk-settings.js';
-export function generateDeskModel(module,input){
+export function generateDeskModel(module,input,fontBuffer){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
  const box=(w,d,h,x=0,y=0,z=0)=>own(own(C.square([w,d],true)).extrude(h).translate([x,y,z]));
- const circular=['pot','bin'].includes(p.kind)&&p.shape==='round';
+ const circular=['pot','bin','screw'].includes(p.kind)&&p.shape==='round';
  const outline=(w,d)=>circular?own(C.circle(w/2,128).rotate(360/256)):round(w,d);
  const parts=[];
  function add(name,role,solid,assembly,rotation=[0,0,0]){
@@ -65,8 +66,10 @@ export function generateDeskModel(module,input){
   if(frontOnly){const notch=own(round(Math.min(26,w/3),14,4).extrude(p.wall+6).rotate([90,0,0]).translate([0,-d/2+p.wall+2,h+1]));solid=own(solid.subtract(notch));}
   return solid;
  }
+ let screwFit;
  try{
-  if(p.kind==='drawers'){
+  if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
+  else if(p.kind==='drawers'){
    const stack=drawerStacking(p),bodyHeight=p.height-stack.footHeight;
    const r=2*p.wall,outer=round(p.width,bodyHeight,r),inner=round(p.width-2*p.wall,bodyHeight-2*p.wall,.5);
    let shell=own(own(outer.extrude(p.depth)).subtract(own(inner.extrude(p.depth+.1).translate([0,0,p.wall]))));
@@ -131,6 +134,6 @@ export function generateDeskModel(module,input){
    }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
-  return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
+  return {settings:p,parts,...(screwFit?{screwFit}:{}),width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }

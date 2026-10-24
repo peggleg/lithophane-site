@@ -1,5 +1,5 @@
-export const deskPresets={box:{width:60,depth:60,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},'pen-tray':{width:160,depth:55,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},bin:{width:110,depth:110,height:140,drawers:2,columns:1,rows:1,wall:1.8,finish:'smooth'},drawers:{width:140,depth:130,height:100,drawers:2,columns:1,rows:1},pot:{width:80,depth:80,height:100,drawers:2,columns:1,rows:1},tray:{width:150,depth:100,height:25,drawers:2,columns:2,rows:2}};
-export const deskDefaults={kind:'drawers',openwork:'none',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
+export const deskPresets={screw:{width:70,depth:70,height:65,columns:1,rows:1,finish:'fluted'},box:{width:60,depth:60,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},'pen-tray':{width:160,depth:55,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},bin:{width:110,depth:110,height:140,drawers:2,columns:1,rows:1,wall:1.8,finish:'smooth'},drawers:{width:140,depth:130,height:100,drawers:2,columns:1,rows:1},pot:{width:80,depth:80,height:100,drawers:2,columns:1,rows:1},tray:{width:150,depth:100,height:25,drawers:2,columns:2,rows:2}};
+export const deskDefaults={kind:'drawers',lidText:'',openwork:'none',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
 export const deskPalettes={ivory:{body:'#eee6d7',detail:'#cbb798'},sage:{body:'#8c9b81',detail:'#eee5d3'},charcoal:{body:'#414441',detail:'#b38c62'},walnut:{body:'#72533e',detail:'#d7c4a5'},sand:{body:'#d9ccb4',detail:'#efe7d7'}};
 export function validateDeskSettings(input){
  const p={...deskDefaults,...input};
@@ -9,7 +9,8 @@ export function validateDeskSettings(input){
  if(!Number.isFinite(p.openingSize)||p.openingSize<4||p.openingSize>20){if(p.openwork!=='none')throw Error('Use 4–20 mm for opening size.');p.openingSize=10;}
  if(standaloneTray(p)){p.columns=1;p.rows=1;}
  if(!['square','round'].includes(p.shape))throw Error('Choose a square or round outline.');
- if(p.kind==='bin'||p.kind==='pot'&&p.shape==='round')p.depth=p.width;
+ if(p.kind==='screw'){p.shape='round';p.columns=p.rows=1;p.lidText=String(p.lidText??'').trim();if(p.lidText.length>24||/[\u0000-\u001f<>]/.test(p.lidText))throw Error('Use up to 24 printable characters for the lid text.');if(p.height<30)throw Error('Screw containers need at least 30 mm height.');}
+ if(p.kind==='screw'||p.kind==='bin'||p.kind==='pot'&&p.shape==='round')p.depth=p.width;
  if(p.kind==='bin'&&p.height<50)throw Error('Desk bins need at least 50 mm height.');
  if(!['pockets','smooth'].includes(p.stackTop))throw Error('Choose locating pockets or a smooth final top.');
  if(!['boxes','pens','fixed','open'].includes(p.trayLayout))throw Error('Choose removable boxes, a pen layout, fixed dividers or an open tray.');
@@ -41,7 +42,7 @@ export const finishInset=p=>Math.max(p.openwork==='woven'?.4:0,adjustableFinish(
 
 export const standaloneTray=p=>['box','pen-tray'].includes(p.kind);
 
-export const openworkAvailable=p=>p.kind!=='bin'&&!(p.kind==='pot'&&p.shape==='round');
+export const openworkAvailable=p=>!['bin','screw'].includes(p.kind)&&!(p.kind==='pot'&&p.shape==='round');
 
 // Shared mating dimensions; keep the pin seats open through the entire rim wall.
 export function binDimensions(p){const width=p.width-2*finishInset(p),rimWall=p.wall+.6,opening=width-2*rimWall,lidPlate=opening-1.2;return {width,rimWall,opening,lidPlate,lidGap:.6,pinSpan:width-.6,pinRadius:1,padWidth:3,entryWidth:3.8,bearingRadius:1.4,bearingClearance:.4,rimHeight:4,pivot:2,minimumHeight:Math.max(50,Math.ceil(Math.hypot(lidPlate/2,2)+p.wall+2.6))};}
