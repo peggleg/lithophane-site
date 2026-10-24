@@ -6,7 +6,7 @@ test('all coaster shapes, surfaces, leaf backings and 4–6 counts produce conne
  for(const coasterShape of ['round','square','hexagon','monstera'])for(const coasterSurface of ['flat','recessed'])for(const leafBacking of coasterShape==='monstera'?['backed','open']:['backed'])for(const coasterCount of [4,5,6]){const model=build({coasterShape,coasterSurface,leafBacking,coasterCount});assert.equal(model.parts.length,coasterCount);check(model);assert.equal(printProfile(model.settings.kind).top_shell_layers,'5');assert.match(deskGuide(model),/5 top \/ 5 bottom/);}
 });
 test('solid backing retains every leaf opening over a continuous base; cut-through version deliberately drains',()=>{
- const backed=build({coasterShape:'monstera',leafBacking:'backed'}),open=build({coasterShape:'monstera',leafBacking:'open'}),a=restore(backed.parts[0]),b=restore(open.parts[0]),base=a.slice(1),holes=b.slice(1);assert.ok(base.area()>holes.area()+100);const own=[];const profile=coasterOutline(m,o=>(own.push(o),o),backed.settings),missing=profile.subtract(base);assert.ok(missing.area()<.001,'entire backing is solid');[a,b,base,holes,missing,...own].forEach(x=>x.delete());
+ const backed=build({coasterShape:'monstera',leafBacking:'backed'}),open=build({coasterShape:'monstera',leafBacking:'open'}),a=restore(backed.parts[0]),b=restore(open.parts[0]),base=a.slice(1),holes=b.slice(1);assert.ok(base.area()>holes.area()+100);const own=[];const profile=coasterOutline(m,o=>(own.push(o),o),backed.settings),edgeAllowance=profile.offset(-.002),missing=edgeAllowance.subtract(base);assert.ok(missing.area()<.001,'entire backing is solid');[a,b,base,holes,edgeAllowance,missing,...own].forEach(x=>x.delete());
 });
 test('stacking holders clear matching coaster outlines through the full insertion path in every shape and backing',()=>{
  for(const coasterShape of ['round','square','hexagon','monstera'])for(const leafBacking of ['open','backed'])for(const clearance of [.2,.8]){const settings={coasterShape,leafBacking,clearance,coasterCount:6},coasters=build(settings),holder=build({...settings,kind:'coaster-tray'});check(holder);const h=restore(holder.parts[0]),c=restore(coasters.parts[0]);for(const dz of [0,1,10,30]){const placed=c.translate([0,0,holder.settings.wall+dz]),hit=placed.intersect(h);assert.ok(hit.volume()<.001,'coaster clears holder');placed.delete();hit.delete();}h.delete();c.delete();assert.equal(printProfile(holder.settings.kind).top_shell_layers,'3');}
@@ -31,4 +31,12 @@ test('natural leaf keeps seven enclosed fenestrations, exact dimensions and a pr
   owned.reverse().forEach(o=>o.delete());
  }
  for(const finish of ['smooth','fluted','slatted','ribbed','scalloped','wave'])check(build({kind:'coaster-tray',finish,coasterShape:'monstera'}));
+});
+
+test('leaf veins engrave the actual mesh without reducing the moisture backing below 2.4 mm',()=>{
+ for(const coasterSurface of ['flat','recessed'])for(const [width,depth]of [[60,160],[100,125],[160,60]]){
+  const model=build({coasterShape:'monstera',coasterSurface,width,depth}),owned=[],own=o=>(owned.push(o),o),leaf=monsteraSections(m,own,width,depth),solid=own(restore(model.parts[0])),floor=model.coasterFit.floor;
+  assert.equal(model.coasterFit.veinDepth,.4);assert.ok(leaf.veins.area()>20);const low=own(solid.slice(2.39)),high=own(solid.slice(floor-.2)),unengraved=own(leaf.outline.subtract(leaf.holes)),grooves=own(unengraved.subtract(high)),veinHit=own(grooves.intersect(leaf.veins));assert.ok(veinHit.area()>10,'vein grooves exist in exported geometry');assert.ok(own(leaf.veins.subtract(low)).area()<.001,'continuous backing below every vein');owned.reverse().forEach(o=>o.delete());
+ }
+ const thin=build({coasterShape:'monstera',height:3.6,coasterRim:1.2});assert.ok(thin.coasterFit.veinDepth<.001);check(thin);
 });

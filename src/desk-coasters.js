@@ -1,6 +1,8 @@
+import {makeCoasterPlant} from './coaster-plant.js';
 import {monsteraSections} from './monstera.js';
-export const isCoaster=p=>['coaster','coaster-tray','coaster-rack'].includes(p.kind);
+export const isCoaster=p=>['coaster','coaster-tray','coaster-rack','coaster-plant'].includes(p.kind);
 export function validateCoaster(p){
+ if(p.kind==='coaster-plant'&&p.coasterShape!=='monstera')throw Error('The plant display holds monstera leaves. Choose the monstera shape.');
  if(!['round','square','hexagon','monstera'].includes(p.coasterShape)||!['flat','recessed'].includes(p.coasterSurface)||!['open','backed'].includes(p.leafBacking))throw Error('Choose an available coaster shape, surface and leaf backing.');
  if(!Number.isInteger(p.coasterCount)||p.coasterCount<4||p.coasterCount>6)throw Error('Choose a set of 4–6 matching coasters.');
  for(const [key,min,max]of [['width',60,160],['depth',60,160],['height',3,8],['coasterRim',.6,2]])if(!Number.isFinite(p[key])||p[key]<min||p[key]>max)throw Error(`Use ${min}–${max} mm for coaster ${key}. Holders need room around the coasters inside the A1 mini limit.`);
@@ -14,14 +16,18 @@ export function coasterOutline(module,own,p){const {CrossSection:C}=module,w=p.w
  if(p.coasterShape==='hexagon')return own(new C([Array.from({length:6},(_,i)=>[Math.cos(i*Math.PI/3)*w/2,Math.sin(i*Math.PI/3)*d/Math.sqrt(3)])],'NonZero'));
  return monsteraSections(module,own,w,d).outline;
 }
-export function makeCoasters(module,own,p,{round,ribs,box,add}){
+export function makeCoasters(module,own,p,{round,ribs,box,add,reference}){
  const {CrossSection:C,Manifold:M}=module,leaf=p.coasterShape==='monstera',sections=leaf?monsteraSections(module,own,p.width,p.depth):null,profile=sections?.outline??coasterOutline(module,own,p),cuts=sections?.holes;
  const floor=p.coasterSurface==='recessed'?p.height-p.coasterRim:p.height;
  let coaster=own(profile.extrude(p.height));
  if(p.coasterSurface==='recessed')coaster=own(coaster.subtract(own(own(profile.offset(-2.4)).extrude(p.coasterRim+.1).translate([0,0,floor]))));
  if(leaf){const backed=p.leafBacking==='backed',start=backed?Math.max(2.4,floor-.8):-.01,detail=backed&&p.coasterSurface==='recessed'?own(cuts.intersect(own(profile.offset(-2.4)))):cuts;coaster=own(coaster.subtract(own(detail.extrude(p.height+.2).translate([0,0,start]))));}
+ // Recess the veins rather than raising them under a drinking glass. At the
+ // thinnest permitted floor, omit the engraving to retain 2.4 mm of backing.
+ const veinDepth=leaf?Math.min(.4,Math.max(0,floor-2.4)):0;
+ if(leaf&&veinDepth>.001){const detail=p.coasterSurface==='recessed'?own(sections.veins.intersect(own(profile.offset(-2.4)))):sections.veins;coaster=own(coaster.subtract(own(detail.extrude(veinDepth+.02).translate([0,0,floor-veinDepth]))));}
  const gap=p.clearance,wall=p.wall;
- let fit={width:p.width,depth:p.depth,height:p.height,coasterWidth:p.width,coasterDepth:p.depth,coasterThickness:p.height,count:p.coasterCount,clearance:gap,floor};
+ let fit={width:p.width,depth:p.depth,height:p.height,coasterWidth:p.width,coasterDepth:p.depth,coasterThickness:p.height,count:p.coasterCount,clearance:gap,floor,veinDepth};
  if(p.kind==='coaster'){
   for(let i=0;i<p.coasterCount;i++)add(`coaster-${i+1}`,'coaster',coaster,[(i%2-.5)*(p.width+8),(Math.floor(i/2)-(Math.ceil(p.coasterCount/2)-1)/2)*(p.depth+8),0]);
  }else if(p.kind==='coaster-tray'){
@@ -34,6 +40,10 @@ export function makeCoasters(module,own,p,{round,ribs,box,add}){
   // those bubbles; never export loose surface fragments as extra parts.
   if(p.finish==='wave'){const shells=holder.decompose().map(own);holder=shells.reduce((a,b)=>a.volume()>b.volume()?a:b);}
   add('coaster-stacking-holder','holder',holder,[0,0,0]);const b=holder.boundingBox();fit={...fit,width:b.max[0]-b.min[0],depth:b.max[1]-b.min[1],height:h};
+ }else if(p.kind==='coaster-plant'){
+  const plant=makeCoasterPlant(module,own,p,profile,{box,add,decorate:(outline,h)=>contourDetail(module,own,p,outline,h)});fit={...fit,...plant};
+  for(const slot of fit.plant.slots){const leafPose=own(coaster.translate([-slot.tipCentre,-slot.bottom+.15,-p.height/2]).rotate([slot.angle,0,0]).rotate([0,0,slot.rotation]).translate([slot.x,slot.y,slot.base+slot.length]));fit.references.push(reference('display-leaf-'+slot.name,'reference-leaf',leafPose,[0,0,0]));}
+  const bounds={min:[...fit.plant.potBounds.min],max:[...fit.plant.potBounds.max]};for(const ref of fit.references)for(let a=0;a<3;a++){bounds.min[a]=Math.min(bounds.min[a],ref.bounds.min[a]);bounds.max[a]=Math.max(bounds.max[a],ref.bounds.max[a]);}fit.width=bounds.max[0]-bounds.min[0];fit.depth=bounds.max[1]-bounds.min[1];fit.height=bounds.max[2]-bounds.min[2];
  }else{
   const w=p.width+2*gap+2*wall,slot=p.height+2*gap,d=p.coasterCount*slot+(p.coasterCount+1)*wall,h=24,base=round(w,d,3),features=[own(base.extrude(wall))];
   // Slots use the FULL coaster thickness including its rim, not just its floor.

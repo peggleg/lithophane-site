@@ -45,9 +45,26 @@ const holes=[
  {x:-.070,y:.035,rx:.025,ry:.057,angle:35},
  {x:-.070,y:-.145,rx:.023,ry:.051,angle:29}
 ];
+// Curved midrib and secondary veins, drawn in the blade's shared coordinates.
+const veinCurves=[
+ [[.02,-.31],[-.015,-.12],[.015,.17],[.02,.43]],
+ [[-.002,-.22],[-.055,-.30],[-.16,-.35],[-.29,-.31]],
+ [[.002,-.19],[.08,-.29],[.20,-.34],[.29,-.31]],
+ [[-.003,-.12],[-.10,-.16],[-.26,-.12],[-.40,-.07]],
+ [[.002,-.09],[.11,-.15],[.27,-.12],[.41,-.08]],
+ [[.002,.025],[-.10,-.015],[-.28,.025],[-.41,.065]],
+ [[.007,.055],[.12,.005],[.30,.065],[.435,.12]],
+ [[.013,.18],[-.08,.14],[-.23,.20],[-.31,.28]],
+ [[.014,.21],[.10,.18],[.24,.25],[.32,.30]]
+];
+function stroke(points,width){const left=[],right=[];for(let i=0;i<points.length;i++){const prev=points[Math.max(0,i-1)],next=points[Math.min(points.length-1,i+1)],dx=next[0]-prev[0],dy=next[1]-prev[1],length=Math.hypot(dx,dy),r=width/2;left.push([points[i][0]-dy/length*r,points[i][1]+dx/length*r]);right.push([points[i][0]+dy/length*r,points[i][1]-dx/length*r]);}return [...left,...right.reverse()];}
+// A fuller cordate base and a longer tapered tip avoid a round, hand-like
+// silhouette. Apply the same gentle drawing transform to every leaf detail.
+function bladePoint([x,y]){const edgeWeight=Math.max(0,Math.min(1,(Math.abs(x)-.15)/.15)),fullness=Math.max(-.22,Math.min(.25,-y*.7-.03));return [x*(1+edgeWeight*fullness),y>.27?.27+(y-.27)*1.45:y];}
 export function monsteraSections(module,own,width,depth){
- const {CrossSection:C}=module,raw=own(new C([cubicPoints(edge)],'NonZero')),b=raw.bounds(),cx=(b.min[0]+b.max[0])/2,cy=(b.min[1]+b.max[1])/2,sx=width/(b.max[0]-b.min[0]),sy=depth/(b.max[1]-b.min[1]);
+ const {CrossSection:C}=module,raw=own(new C([cubicPoints(edge).map(bladePoint)],'NonZero')),b=raw.bounds(),cx=(b.min[0]+b.max[0])/2,cy=(b.min[1]+b.max[1])/2,sx=width/(b.max[0]-b.min[0]),sy=depth/(b.max[1]-b.min[1]);
  const transform=section=>own(section.translate([-cx,-cy]).scale([sx,sy]));
- const cutouts=holes.map(h=>{const a=h.angle*Math.PI/180,points=cubicPoints(aperture,12).map(([x,y])=>{const px=x*h.rx,py=y*h.ry;return [h.x+px*Math.cos(a)-py*Math.sin(a),h.y+px*Math.sin(a)+py*Math.cos(a)];});return own(new C([points],'NonZero'));});
- return {outline:transform(raw),holes:transform(own(C.union(cutouts)))};
+ const cutouts=holes.map(h=>{const a=h.angle*Math.PI/180,points=cubicPoints(aperture,12).map(([x,y])=>{const px=x*h.rx,py=y*h.ry;return [h.x+px*Math.cos(a)-py*Math.sin(a),h.y+px*Math.sin(a)+py*Math.cos(a)];});return own(new C([points.map(bladePoint)],'NonZero'));});
+ const outline=transform(raw),veins=own(C.union(veinCurves.map((curve,i)=>{const points=cubicPoints([curve],24);points.push(curve[3]);return own(new C([stroke(points.map(bladePoint).map(([x,y])=>[(x-cx)*sx,(y-cy)*sy]),i===0?.9:.6)],'NonZero'));}))),safeVeins=own(veins.intersect(own(outline.offset(-1.2))));
+ return {outline,holes:transform(own(C.union(cutouts))),veins:safeVeins};
 }

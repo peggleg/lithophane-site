@@ -1,0 +1,18 @@
+import test from 'node:test';import assert from 'node:assert/strict';import init from 'manifold-3d/manifold';import {generateDeskModel} from '../src/desk-geometry.js';import {deskDefaults,deskPresets} from '../src/desk-settings.js';import {printProfile} from '../src/print-profile.js';import {deskGuide,deskStlZip} from '../src/desk-export.js';
+const m=await init();m.setup();const build=p=>generateDeskModel(m,{...deskDefaults,...deskPresets['coaster-plant'],kind:'coaster-plant',...p});const raw=p=>new m.Manifold(new m.Mesh({numProp:3,vertProperties:p.mesh.vertices,triVerts:p.mesh.faces}));function pose(p){const a=raw(p),b=a.rotate(p.rotation.map(x=>x*180/Math.PI)),c=b.translate(p.assembly);a.delete();b.delete();return c;}function clear(a,b,label){const h=a.intersect(b),v=h.volume();h.delete();assert.ok(v<.002,label+': '+v);}
+function closed(part){const s=raw(part);assert.equal(s.status(),'NoError');const pieces=s.decompose();assert.equal(pieces.length,1,part.name);pieces.forEach(p=>p.delete());assert.ok(s.volume()>0);assert.ok(part.printSize.every(x=>x>0&&x<=170.001));s.delete();}
+test('plant display keeps 4–6 removable leaves, connected parts and assembly clearances at extreme leaf dimensions',()=>{
+ for(const coasterCount of [4,5,6])for(const [width,depth]of [[60,60],[100,125],[160,160],[160,60],[60,160]]){
+  const model=build({coasterCount,width,depth});assert.equal(model.parts.length,coasterCount+2);assert.equal(model.coasterFit.references.length,coasterCount);model.parts.forEach(closed);
+  const parts=model.parts.map(pose),leaves=model.coasterFit.references.map(pose),solids=[...parts,...leaves];for(let i=0;i<solids.length;i++)for(let j=i+1;j<solids.length;j++)clear(solids[i],solids[j],`${coasterCount}/${width}/${depth}: ${i}/${j}`);
+  const plate=parts.at(-1);for(const lift of [0,1,5,20,50]){const moved=plate.translate([0,0,lift]);clear(moved,parts[0],'plate lifts through pot opening');moved.delete();}
+  for(let i=0;i<leaves.length;i++){const slot=model.coasterFit.plant.slots[i],a=slot.angle*Math.PI/180,t=slot.rotation*Math.PI/180;for(const distance of [0,1,5,12,25]){const moved=leaves[i].translate([-Math.sin(t)*Math.cos(a)*distance,Math.cos(t)*Math.cos(a)*distance,Math.sin(a)*distance]);for(const part of parts)clear(moved,part,'leaf insertion clears holder');for(let j=0;j<i;j++)clear(moved,leaves[j],'lower leaves insert before upper leaves');moved.delete();}}
+  solids.forEach(x=>x.delete());
+ }
+});
+test('plant pots retain all surface styles; sockets clear keyed stems at both clearance limits',()=>{
+ for(const finish of ['smooth','fluted','slatted','ribbed','scalloped','wave'])for(const clearance of [.2,.8]){const model=build({finish,clearance,wall:4,coasterCount:6});model.parts.forEach(closed);const parts=model.parts.map(pose);for(let i=1;i<parts.length-1;i++)for(const lift of [0,1,5,11,25]){const moved=parts[i].translate([0,0,lift]);clear(moved,parts.at(-1),'keyed stem inserts into plate');clear(moved,parts[0],'keyed stem clears pot');moved.delete();}parts.forEach(p=>p.delete());}
+});
+test('plant holder downloads exclude reference coasters and preserve the separate holder profile',()=>{
+ const model=build({coasterCount:5});assert.equal(printProfile(model.settings.kind).top_shell_layers,'3');assert.equal(printProfile('coaster').top_shell_layers,'5');const guide=deskGuide(model);assert.match(guide,/5 stems/);assert.match(guide,/references only/);assert.match(guide,/lower-tier leaves first/);const bytes=Buffer.concat(deskStlZip(model).map(c=>Buffer.from(c))),text=bytes.toString('latin1');assert.ok(text.includes('plant-display-pot.stl'));assert.ok(text.includes('plant-socket-plate.stl'));assert.ok(!text.includes('display-leaf-'));assert.throws(()=>build({coasterShape:'round'}),/monstera/);
+});

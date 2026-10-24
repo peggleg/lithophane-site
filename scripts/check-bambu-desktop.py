@@ -17,7 +17,7 @@ from PIL import Image
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--fixtures', default='artifacts/bambu-import')
 parser.add_argument('--output', default='artifacts/bambu-desktop')
-parser.add_argument('--kinds', nargs='+', default=['lithophane','fan','keyring','nameplate','clicker','desk','coaster','coaster-tray','coaster-rack','lantern','future-tool'])
+parser.add_argument('--kinds', nargs='+', default=['lithophane','fan','keyring','nameplate','clicker','desk','coaster','coaster-tray','coaster-rack','coaster-plant','lantern','future-tool'])
 args = parser.parse_args()
 source, output = Path(args.fixtures).resolve(), Path(args.output).resolve()
 output.mkdir(parents=True, exist_ok=True)

@@ -11,9 +11,9 @@ export function generateDeskModel(module,input,fontBuffer){
  const outline=(w,d)=>circular?own(C.circle(w/2,128).rotate(360/256)):round(w,d);
  const parts=[];
  function add(name,role,solid,assembly,rotation=[0,0,0]){
-  const repair=p.kind==='bin'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
+  const repair=p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
   const bounds=clean.boundingBox(),size=bounds.max.map((v,i)=>v-bounds.min[i]);if(size.some(v=>v>170.001))throw Error('A finished part exceeds the 170 mm A1 mini design limit. Reduce its dimensions.');
-  let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=(p.kind==='bin'?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
+  let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=(['bin','coaster-plant'].includes(p.kind)?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
   parts.push({name,role,bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
  }
  function ribs(solid,w,d,h,frontOnly=false){
@@ -71,7 +71,7 @@ export function generateDeskModel(module,input,fontBuffer){
  add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
  let screwFit,storageFit,coasterFit;
  try{
-  if(isCoaster(p)){coasterFit=makeCoasters(module,own,p,{round,ribs,box,add});}
+  if(isCoaster(p)){coasterFit=makeCoasters(module,own,p,{round,ribs,box,add,reference:(...args)=>{add(...args);return parts.pop();}});}
   else if(isStorage(p)){storageFit=makeStorage(module,own,p,{round,ribs,hollowBox,add});}
   else if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
   else if(p.kind==='drawers'){

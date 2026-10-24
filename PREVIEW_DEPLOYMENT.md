@@ -83,3 +83,7 @@ The lithophane Fit menu now includes a four-photo lantern using the existing pos
 ## Integral bin rim and thinner swing lid
 
 Bins now have two printable parts: the body with a built-in rim and the lid. The 2.5 mm lid carries longer 2.5 mm round pins, with upward-open blind seats for drop-in assembly and removal. An internal 45-degree ramp supports the rim transition. No separate rim or glue is needed. See `docs/bin-integral-rim.md`; this replaces the earlier three-part bin assembly. Existing print settings remain unchanged.
+
+## Monstera plant holder
+
+Monstera coasters now have engraved branching veins and a suggested elongated leaf proportion. A plant-display holder joins the stacking tray and upright rack on `/coasters/`, with a styled pot, keyed socket plate and removable stems for 4–6 leaves. Reference leaves appear only in the assembled preview; download the matching coaster set separately. Every part retains the A1 mini limit. Coasters keep 5/5 skins, holders keep 3/3, and both retain 8% gyroid with two walls. See `docs/monstera-coasters.md` for fit, assembly and physical validation limits.

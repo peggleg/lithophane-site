@@ -31,7 +31,8 @@
     "test:compartment-storage": "node scripts/check-desk-storage-browser.mjs",
     "test:coasters": "node scripts/check-desk-coasters-browser.mjs",
     "test:lantern": "node scripts/check-lantern-browser.mjs",
-    "test:lantern-lifecycle": "node scripts/check-lantern-lifecycle-browser.mjs"
+    "test:lantern-lifecycle": "node scripts/check-lantern-lifecycle-browser.mjs",
+    "test:coaster-plant": "node scripts/check-coaster-plant-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
