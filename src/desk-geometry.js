@@ -1,3 +1,4 @@
+import {isStorage,makeStorage} from './desk-storage.js';
 import {makeScrewContainer} from './desk-screw.js';
 import {carveOpenwork} from './desk-openwork.js';
 import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray,binDimensions} from './desk-settings.js';
@@ -66,9 +67,11 @@ export function generateDeskModel(module,input,fontBuffer){
   if(frontOnly){const notch=own(round(Math.min(26,w/3),14,4).extrude(p.wall+6).rotate([90,0,0]).translate([0,-d/2+p.wall+2,h+1]));solid=own(solid.subtract(notch));}
   return solid;
  }
- let screwFit;
+ add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
+ let screwFit,storageFit;
  try{
-  if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
+  if(isStorage(p)){storageFit=makeStorage(module,own,p,{round,ribs,hollowBox,add});}
+  else if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
   else if(p.kind==='drawers'){
    const stack=drawerStacking(p),bodyHeight=p.height-stack.footHeight;
    const r=2*p.wall,outer=round(p.width,bodyHeight,r),inner=round(p.width-2*p.wall,bodyHeight-2*p.wall,.5);
@@ -134,6 +137,6 @@ export function generateDeskModel(module,input,fontBuffer){
    }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
-  return {settings:p,parts,...(screwFit?{screwFit}:{}),width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
+  return {settings:p,parts,...(storageFit?{storageFit}:{}),...(screwFit?{screwFit}:{}),width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }
