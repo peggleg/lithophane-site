@@ -1,3 +1,4 @@
+import {monsteraSections} from './monstera.js';
 export const isCoaster=p=>['coaster','coaster-tray','coaster-rack'].includes(p.kind);
 export function validateCoaster(p){
  if(!['round','square','hexagon','monstera'].includes(p.coasterShape)||!['flat','recessed'].includes(p.coasterSurface)||!['open','backed'].includes(p.leafBacking))throw Error('Choose an available coaster shape, surface and leaf backing.');
@@ -11,24 +12,10 @@ export function coasterOutline(module,own,p){const {CrossSection:C}=module,w=p.w
  if(p.coasterShape==='round')return own(C.circle(w/2,128));
  if(p.coasterShape==='square')return own(own(C.square([w-12,d-12],true)).offset(6,'Round',2,48));
  if(p.coasterShape==='hexagon')return own(new C([Array.from({length:6},(_,i)=>[Math.cos(i*Math.PI/3)*w/2,Math.sin(i*Math.PI/3)*d/Math.sqrt(3)])],'NonZero'));
- const points=[],put=(x,y)=>points.push([x*w,y*d]);
- const curve=(a,b,c,e)=>{for(let i=0;i<24;i++){const t=i/24,u=1-t;put(u**3*a[0]+3*u*u*t*b[0]+3*u*t*t*c[0]+t**3*e[0],u**3*a[1]+3*u*u*t*b[1]+3*u*t*t*c[1]+t**3*e[1]);}};
- curve([0,.5],[.15,.43],[.5,.31],[.49,.05]);curve([.49,.05],[.5,-.18],[.33,-.42],[.14,-.35]);curve([.14,-.35],[.07,-.32],[.04,-.3],[.035,-.34]);
- put(.035,-.5);put(-.025,-.5);put(-.025,-.34);curve([-.025,-.34],[-.05,-.3],[-.1,-.34],[-.16,-.36]);curve([-.16,-.36],[-.4,-.43],[-.52,-.1],[-.49,.08]);curve([-.49,.08],[-.46,.32],[-.12,.44],[0,.5]);
- const leaf=own(new C([points],'NonZero')),b=leaf.bounds();return own(leaf.translate([-(b.max[0]+b.min[0])/2,-(b.max[1]+b.min[1])/2]).scale([w/(b.max[0]-b.min[0]),d/(b.max[1]-b.min[1])]));
-}
-function leafCuts(module,own,p){const {CrossSection:C}=module,cuts=[];
- // Broad central spine and tapered side splits keep the open version connected.
- for(const side of [-1,1])for(const y of [-.2,0,.2]){
-  const start=[side*.18*p.width,y*p.depth],end=[side*.60*p.width,(y+.10)*p.depth],v=[end[0]-start[0],end[1]-start[1]],n=[-v[1]/Math.hypot(...v),v[0]/Math.hypot(...v)],tip=2.0,mouth=3.8;
-  const poly=[ [start[0]+n[0]*tip,start[1]+n[1]*tip],[end[0]+n[0]*mouth,end[1]+n[1]*mouth],[end[0]-n[0]*mouth,end[1]-n[1]*mouth],[start[0]-n[0]*tip,start[1]-n[1]*tip] ];
-  cuts.push(own(new C([poly],'EvenOdd')));
- }
- for(const side of [-1,1])for(const y of [-.12,.10,.28])cuts.push(own(C.circle(1,32).scale([p.width*.032,p.depth*.055]).rotate(-side*25).translate([side*p.width*.105,p.depth*y])));
- return own(C.union(cuts));
+ return monsteraSections(module,own,w,d).outline;
 }
 export function makeCoasters(module,own,p,{round,ribs,box,add}){
- const {CrossSection:C,Manifold:M}=module,profile=coasterOutline(module,own,p),leaf=p.coasterShape==='monstera',cuts=leaf?leafCuts(module,own,p):null;
+ const {CrossSection:C,Manifold:M}=module,leaf=p.coasterShape==='monstera',sections=leaf?monsteraSections(module,own,p.width,p.depth):null,profile=sections?.outline??coasterOutline(module,own,p),cuts=sections?.holes;
  const floor=p.coasterSurface==='recessed'?p.height-p.coasterRim:p.height;
  let coaster=own(profile.extrude(p.height));
  if(p.coasterSurface==='recessed')coaster=own(coaster.subtract(own(own(profile.offset(-2.4)).extrude(p.coasterRim+.1).translate([0,0,floor]))));
@@ -42,6 +29,10 @@ export function makeCoasters(module,own,p,{round,ribs,box,add}){
   let holder=own(contourDetail(module,own,p,outer,h).subtract(own(cavity.extrude(h).translate([0,0,wall]))));
   // Finger windows stop above the solid floor and open at the top; no bridges.
   const access=box(Math.min(32,p.width*.35),p.depth+30,h,0,0,wall+2);holder=own(holder.subtract(access));
+  // Hollowing a deeply concave waved outline can leave minute decorative
+  // flecks or sealed bubbles. Keep the connected functional tray and fill
+  // those bubbles; never export loose surface fragments as extra parts.
+  if(p.finish==='wave'){const shells=holder.decompose().map(own);holder=shells.reduce((a,b)=>a.volume()>b.volume()?a:b);}
   add('coaster-stacking-holder','holder',holder,[0,0,0]);const b=holder.boundingBox();fit={...fit,width:b.max[0]-b.min[0],depth:b.max[1]-b.min[1],height:h};
  }else{
   const w=p.width+2*gap+2*wall,slot=p.height+2*gap,d=p.coasterCount*slot+(p.coasterCount+1)*wall,h=24,base=round(w,d,3),features=[own(base.extrude(wall))];
