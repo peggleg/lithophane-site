@@ -26,7 +26,10 @@
     "test:standalone-trays": "node scripts/check-standalone-trays-browser.mjs",
     "test:bambu-import": "node scripts/check-bambu-import.mjs",
     "test:openwork": "node scripts/check-openwork-browser.mjs",
-    "test:desk-fit": "node scripts/check-desk-fit-browser.mjs"
+    "test:desk-fit": "node scripts/check-desk-fit-browser.mjs",
+    "test:screw-containers": "node scripts/check-desk-screw-browser.mjs",
+    "test:compartment-storage": "node scripts/check-desk-storage-browser.mjs",
+    "test:coasters": "node scripts/check-desk-coasters-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
