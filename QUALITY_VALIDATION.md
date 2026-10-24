@@ -93,7 +93,7 @@ Clicker design limits: Letter Charms accepts 1–12 buttons, Number Pad 1–9, D
 
 Pocket Pebble batches: select Pocket Pebble to reveal A–Z, a–z, 0–9 and custom batch lettering (1–64 characters; whitespace separates entries and duplicates are retained). Each entry exports its own base and cap in a numbered STL folder. Batch 3MF contains the same independent objects in a grid; arrange or split plates in the slicer. The single-pebble preview stays separate. Font, keyring and switch-fit settings apply to every item. Batch creation runs in a cancellable worker. `npm run test:pebble-batch` checks alphabet ZIP/3MF contents, custom duplicates, presets, limits, cancellation and mobile layout.
 
-## Resizable Japandi desk collection
+## Resizable desk collection
 
 `/desk/` generates storage drawers, pen pots and sorting trays locally. Width, depth, height, wall/floor thickness, compartments, drawer count (1–4) and per-side drawer clearance are adjustable. Smooth, Soft Fluted and Slatted finishes change the exported solids; Ivory/Sand, Sage/Cream and Charcoal/Wood palettes affect the preview only.
 

@@ -40,7 +40,7 @@ Caps taper from 21.5 mm to 18.8 mm with rounded corners and hollow skirts. Autom
 
 Letter Charms support 1–12 buttons; Number Pad 1–9; Daisy Chain exactly 5; Pocket Pebble exactly 1. Pocket Arcade, Christmas Clicks and Cloud Cluster support 1–5. Pocket Pebble batch downloads support 1–64 characters, including an A–Z preset. All lettering accepts printable punctuation such as !"£$%. Removed Name Bar and Symbol Strip presets are unavailable.
 
-## Resizable Japandi desk collection
+## Resizable desk collection
 
 `/desk/` generates storage drawers, pen pots and sorting trays locally. Width, depth, height, wall/floor thickness, compartments, drawer count (1–4) and per-side drawer clearance are adjustable. Smooth, Soft Fluted and Slatted finishes change the exported solids; Ivory/Sand, Sage/Cream and Charcoal/Wood palettes affect the preview only.
 
@@ -71,3 +71,7 @@ The desk collection includes repeated sets of 4–6 round, rounded-square, hexag
 Stacking holders follow the selected outline, with a solid floor and top-open finger windows. Upright racks size their slots from the full coaster thickness including any rim. Both holders auto-size to quantity and clearance. Switching between a coaster set and its holder preserves all coaster dimensions/settings. Download the set and holder separately so each has the correct project-wide profile: coasters use 8% gyroid, 2 walls and **5 top / 5 bottom layers**, while holders retain **3/3**. Other profiles are unchanged. UI estimates, guides, 3MF projects and ZIP sidecars use the selected item's profile. All parts are checked against the 170 mm design limit. Larger/deeper surface detail may require smaller coaster dimensions to leave room for the holder walls.
 
 Digital checks cover connected solids, backing coverage, all outlines, surfaces and counts, holder insertion paths, upright slot clearance and all six holder styles. Real Bambu Studio 2.8.2.61 CLI imports and desktop Open Project / Save Project round trips confirm 5/5 for actual coaster geometry and 3/3 for both actual holder projects. Physical fit and moisture resistance require print testing.
+
+## Coaster page and site naming
+
+Coasters and their two holder types now live at `/coasters/`, with their own homepage card, menu link, page metadata and reset defaults. `/desk/` lists storage and desk items only. Both pages reuse the same geometry/export engine; print profiles are unchanged (coasters 5/5, holders and desk items 3/3). All eight pages include one shared note about A1 mini starting designs, custom-size checks and splitting larger sets across plates. The former decorative collection name has been removed from page copy, metadata and filenames.

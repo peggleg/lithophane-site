@@ -106,7 +106,7 @@ Caps taper from 21.5 mm to 18.8 mm with rounded corners and hollow skirts. Autom
 
 Letter Charms support 1–12 buttons; Number Pad 1–9; Daisy Chain exactly 5; Pocket Pebble exactly 1. Pocket Arcade, Christmas Clicks and Cloud Cluster support 1–5. Pocket Pebble batch downloads support 1–64 characters, including an A–Z preset. All lettering accepts printable punctuation such as !"£$%. Removed Name Bar and Symbol Strip presets are unavailable.
 
-## Resizable Japandi desk collection
+## Resizable desk collection
 
 `/desk/` generates storage drawers, pen pots and sorting trays locally. Width, depth, height, wall/floor thickness, compartments, drawer count (1–4) and per-side drawer clearance are adjustable. Smooth, Soft Fluted and Slatted finishes change the exported solids; Ivory/Sand, Sage/Cream and Charcoal/Wood palettes affect the preview only.
 

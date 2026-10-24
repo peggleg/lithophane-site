@@ -31,3 +31,5 @@ header #site-navigation.is-open{display:flex}header #site-navigation a{display:b
 @media(max-width:760px){header{padding:14px 20px}header .brand{font-size:23px}header #site-navigation{right:20px}}
 header nav a[aria-current=page]{text-decoration:underline;text-underline-offset:5px}
 @media(max-width:360px){header{gap:8px;padding:14px 16px}header>a.brand{font-size:20px}.nav-toggle,.theme-control{padding:8px 12px}header #site-navigation{right:16px}}
+
+.plate-note{font-size:12px;line-height:1.6;color:var(--muted);padding:12px 0;margin:0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
