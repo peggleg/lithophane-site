@@ -9,25 +9,26 @@ const build=p=>generateDeskModel(m,{...deskDefaults,...deskPresets[p.kind],...p}
 const raw=p=>new m.Manifold(new m.Mesh({numProp:3,vertProperties:p.mesh.vertices,triVerts:p.mesh.faces}));
 function pose(p){const a=raw(p),b=a.rotate(p.rotation.map(x=>x*180/Math.PI)),c=b.translate(p.assembly);a.delete();b.delete();return c;}
 function clear(a,b,label){const hit=a.intersect(b),v=hit.volume();hit.delete();assert.ok(v<.0001,`${label}: intersection ${v} mm3`);}
-test('bins admit the lid and bearing pads through the rim entry along the complete assembly path',()=>{
+test('integral-rim bins admit both longer pins from above without bending or glue',()=>{
  for(const shape of ['square','round'])for(const finish of styles)for(const wall of [1.8,2.4,4])for(const width of [40,110,170]){
-  const model=build({kind:'bin',shape,finish,wall,width,height:140}),[body,rim,lid]=model.parts.map(pose),name=`${shape}/${finish}/${wall}/${width}`;
-  clear(body,rim,name+' seated rim/body');clear(lid,body,name+' seated lid/body');clear(lid,rim,name+' seated lid/rim');
-  for(let lift=0;lift<=5;lift+=.25){const raised=rim.translate([0,0,lift]);clear(raised,lid,name+' rim insertion '+lift);clear(raised,body,name+' pad entry '+lift);raised.delete();}
-  [body,rim,lid].forEach(x=>x.delete());
+  const model=build({kind:'bin',shape,finish,wall,width,height:140}),[body,lid]=model.parts.map(pose),name=`${shape}/${finish}/${wall}/${width}`;
+  assert.equal(model.parts.length,2);assert.equal(body.decompose().length,1);assert.equal(lid.decompose().length,1);
+  for(let lift=0;lift<=6;lift+=.5){const raised=lid.translate([0,0,lift]);clear(raised,body,name+' top insertion '+lift);raised.delete();}
+  [body,lid].forEach(x=>x.delete());
  }
 });
-test('the shortest allowed bins retain floor and rim clearance through a full 180-degree lid sweep',()=>{
+test('the shortest allowed bins retain floor and integral rim clearance through a full 180-degree lid sweep',()=>{
  for(const shape of ['square','round'])for(const finish of styles)for(const wall of [1.8,4])for(const width of [40,110,170]){
-  const p={...deskDefaults,...deskPresets.bin,kind:'bin',shape,finish,wall,width},fit=binDimensions(p),model=build({...p,height:fit.minimumHeight}),body=pose(model.parts[0]),rim=pose(model.parts[1]),lid=raw(model.parts[2]);
-  for(let angle=-90;angle<=90;angle+=5){const a=lid.translate([0,0,-fit.pivot]),b=a.rotate([angle,0,0]),c=b.translate([0,0,model.height-2]);clear(c,body,`${shape}/${finish}/${width} floor at ${angle}`);clear(c,rim,`${shape}/${finish}/${width} rim at ${angle}`);[a,b,c].forEach(x=>x.delete());}
-  [body,rim,lid].forEach(x=>x.delete());
+  const p={...deskDefaults,...deskPresets.bin,kind:'bin',shape,finish,wall,width},fit=binDimensions(p),model=build({...p,height:fit.minimumHeight}),body=pose(model.parts[0]),lid=raw(model.parts[1]);
+  for(let angle=-90;angle<=90;angle+=5){const a=lid.translate([0,0,-fit.pivot]),b=a.rotate([angle,0,0]),c=b.translate([0,0,model.height-fit.pivot]);clear(c,body,`${shape}/${finish}/${width} swing at ${angle}`);[a,b,c].forEach(x=>x.delete());}
+  [body,lid].forEach(x=>x.delete());
   if(fit.minimumHeight>50)assert.throws(()=>validateDeskSettings({...p,height:fit.minimumHeight-1}),/swing clear/);
  }
 });
-test('the 110 mm bin has separately measured plate, pin and rim dimensions',()=>{
- const model=build({kind:'bin',width:110,height:140,shape:'square',finish:'smooth',wall:1.8}),lid=raw(model.parts[2]),plate=lid.slice(.2),bounds=plate.bounds();
- assert.ok(Math.abs(bounds.max[0]-bounds.min[0]-104)<.001);assert.equal(model.binFit.opening,105.2);assert.equal(model.parts[2].printSize[0],109.4);assert.equal(model.binFit.entryWidth,3.8);assert.equal(model.binFit.bearingClearance,.4);assert.equal(model.binFit.minimumHeight,57);plate.delete();lid.delete();
+test('110 mm bin has a 2.5 mm lid and genuinely round 2.5 mm longer pins',()=>{
+ const model=build({kind:'bin',width:110,height:140,shape:'square',finish:'smooth',wall:1.8}),lid=raw(model.parts[1]),fit=model.binFit,sideView=lid.rotate([90,0,0]),plate=sideView.slice(3),bounds=plate.bounds();
+ assert.ok(Math.abs(bounds.max[0]-bounds.min[0]-99.2)<.001);assert.equal(fit.opening,100.4);assert.equal(model.parts[1].printSize[0],108.4);assert.equal(model.parts[1].printSize[2],2.5);assert.equal(fit.pinRadius,1.25);assert.ok(fit.pinProjection>=4.5);assert.equal(fit.entryWidth,3.1);assert.equal(fit.bearingClearance,.3);
+ const rotated=lid.rotate([0,90,0]),section=rotated.slice(52),pb=section.bounds();for(let a=0;a<2;a++)assert.ok(Math.abs(pb.max[a]-pb.min[a]-2.5)<.001);assert.ok(Math.abs(section.area()-Math.PI*1.25**2)<.03);section.delete();rotated.delete();plate.delete();sideView.delete();lid.delete();
 });
 test('drawer columns, surface detail and openwork clear the case along the full insertion path',()=>{
  for(const finish of styles)for(const openwork of ['none','honeycomb','woven'])for(const drawerColumns of [1,4]){

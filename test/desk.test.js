@@ -46,11 +46,11 @@ test('drawer feet seat in matching pockets while a final unit retains a solid sm
 
 test('square and round bins have flush flat lids, closed floors and collision-free swing',()=>{
  for(const shape of ['square','round'])for(const finish of ['smooth','fluted','slatted'])for(const width of [50,110,170]){
-  const m=build({kind:'bin',shape,finish,width,depth:width,height:100});assert.equal(m.parts.length,3);m.parts.forEach(check);
-  const body=restore(m.parts[0]),rawRim=restore(m.parts[1]),rim=rawRim.rotate([180,0,0]).translate(m.parts[1].assembly),lid=restore(m.parts[2]);
-  assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[2].assembly[2]+4,100);
-  for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.translate([0,0,-2]).rotate([angle,0,0]).translate([0,0,98]);for(const stationary of [body,rim]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
-  assert.equal(Object.keys(unzip(deskStlZip(m))).length,5);assert.match(deskGuide(m),/Glue ONLY/);[body,rawRim,rim,lid].forEach(s=>s.delete());
+  const m=build({kind:'bin',shape,finish,width,depth:width,height:100});assert.equal(m.parts.length,2);m.parts.forEach(check);
+  const body=restore(m.parts[0]),lid=restore(m.parts[1]);
+  assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[1].assembly[2]+2.5,100);
+  for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.translate([0,0,-1.25]).rotate([angle,0,0]).translate([0,0,98.75]);for(const stationary of [body]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
+  assert.equal(Object.keys(unzip(deskStlZip(m))).length,4);assert.match(deskGuide(m),/no separate rim/);[body,lid].forEach(s=>s.delete());
  }
 });
 test('round pen pots retain circular footprint and closed connected divided geometry',()=>{for(const finish of ['smooth','fluted','slatted'])for(const width of [80,170]){const m=build({kind:'pot',shape:'round',finish,width,depth:50,columns:2,rows:2});assert.equal(m.depth,width);check(m.parts[0]);const s=restore(m.parts[0]),b=s.boundingBox();assert.ok(Math.abs((b.max[0]-b.min[0])-(b.max[1]-b.min[1]))<.05);s.delete();}});
@@ -71,7 +71,7 @@ test('deep ribs, scallops and waves create closed A1 mini parts with smooth cavi
   assert.match(deskGuide(m),/projection 1.6 mm; spacing 8 mm/);
   if(kind==='drawers'){const raw=restore(m.parts[0]),shell=raw.rotate([90,0,0]).translate(m.parts[0].assembly);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(shell);assert.ok(hit.volume()<.001,'decorated drawer clears case');[d,pose,hit].forEach(o=>o.delete());}raw.delete();shell.delete();}
   if(kind==='tray'){const tray=restore(m.parts[0]);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(tray);assert.ok(hit.volume()<.001,'auto-sized inserts clear decorated tray');[d,pose,hit].forEach(o=>o.delete());}tray.delete();}
-  if(kind==='bin'){const body=restore(m.parts[0]),raw=restore(m.parts[1]),rim=raw.rotate([180,0,0]).translate(m.parts[1].assembly),lid=restore(m.parts[2]);for(const angle of [-90,0,90]){const pose=lid.translate([0,0,-2]).rotate([angle,0,0]).translate([0,0,m.height-2]);for(const other of [body,rim]){const hit=pose.intersect(other);assert.ok(hit.volume()<.001,'decorated bin retains free lid travel');hit.delete();}pose.delete();}[body,raw,rim,lid].forEach(o=>o.delete());}
+  if(kind==='bin'){const body=restore(m.parts[0]),lid=restore(m.parts[1]);for(const angle of [-90,0,90]){const pose=lid.translate([0,0,-1.25]).rotate([angle,0,0]).translate([0,0,m.height-1.25]);const hit=pose.intersect(body);assert.ok(hit.volume()<.001,'decorated bin retains free lid travel');hit.delete();pose.delete();}[body,lid].forEach(o=>o.delete());}
   if(kind==='pot'||kind==='bin'){const s=restore(m.parts[0]),slice=s.slice(10),small=module.CrossSection.square([10,10],true).translate([m.width/4,0]),hit=slice.intersect(small);assert.ok(hit.area()<.001,'interior remains hollow');[s,slice,small,hit].forEach(o=>o.delete());}
  }
 });
@@ -90,4 +90,4 @@ test('standalone sorting boxes and pen trays are single closed resizable parts w
  const small=build({kind:'box',width:25,depth:25,height:12,finish:'smooth'});check(small.parts[0]);assert.throws(()=>build({kind:'box',width:24}),/25/);
 });
 
-test('bins start smooth with thinner walls while drawer structure retains its default',()=>{const m=build({kind:'bin'});assert.equal(m.settings.finish,'smooth');assert.equal(m.settings.wall,1.8);assert.equal(m.parts.length,3);m.parts.forEach(check);assert.equal(deskDefaults.wall,2.4);assert.equal(deskDefaults.finish,'fluted');});
+test('bins start smooth with thinner walls while drawer structure retains its default',()=>{const m=build({kind:'bin'});assert.equal(m.settings.finish,'smooth');assert.equal(m.settings.wall,1.8);assert.equal(m.parts.length,2);m.parts.forEach(check);assert.equal(deskDefaults.wall,2.4);assert.equal(deskDefaults.finish,'fluted');});

@@ -49,5 +49,5 @@ export const standaloneTray=p=>['box','pen-tray'].includes(p.kind);
 
 export const openworkAvailable=p=>!isCoaster(p)&&!['bin','screw','storage','storage-pots'].includes(p.kind)&&!(p.kind==='pot'&&p.shape==='round');
 
-// Shared mating dimensions; keep the pin seats open through the entire rim wall.
-export function binDimensions(p){const width=p.width-2*finishInset(p),rimWall=p.wall+.6,opening=width-2*rimWall,lidPlate=opening-1.2;return {width,rimWall,opening,lidPlate,lidGap:.6,pinSpan:width-.6,pinRadius:1,padWidth:3,entryWidth:3.8,bearingRadius:1.4,bearingClearance:.4,rimHeight:4,pivot:2,minimumHeight:Math.max(50,Math.ceil(Math.hypot(lidPlate/2,2)+p.wall+2.6))};}
+// Shared mating dimensions for the integral rim and top-loading lift-out lid.
+export function binDimensions(p){const width=p.width-2*finishInset(p),rimWall=Math.max(4.8,p.wall+.6),opening=width-2*rimWall,lidPlate=opening-1.2,lidThickness=2.5,pinRadius=1.25,pivot=lidThickness/2;return {width,rimWall,opening,lidPlate,lidThickness,lidGap:.6,pinSpan:width-1.6,pinRadius,pinProjection:rimWall-.2,entryWidth:3.1,bearingRadius:1.55,bearingClearance:.3,rimHeight:5,pivot,minimumHeight:Math.max(50,Math.ceil(Math.hypot(lidPlate/2,pivot)+p.wall+pivot+.6))};}
