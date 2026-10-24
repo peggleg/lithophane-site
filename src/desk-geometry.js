@@ -1,5 +1,5 @@
 import {carveOpenwork} from './desk-openwork.js';
-import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray} from './desk-settings.js';
+import {validateDeskSettings,trayCells,drawerStacking,finishInset,adjustableFinish,standaloneTray,binDimensions} from './desk-settings.js';
 export function generateDeskModel(module,input){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
@@ -88,16 +88,17 @@ export function generateDeskModel(module,input){
    const dw=slotWidth-2*p.clearance-2*sideDetail,dd=p.depth-p.wall-p.clearance-detail,dh=slot-2*p.clearance;
    for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++)add(p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,'drawer',container(dw,dd,dh,true),[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance]);
   }else if(p.kind==='bin'){
-   const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,h=p.height-4;
-   const outer=outline(w,d),opening=own(outer.offset(-p.wall-.6)),lidProfile=own(opening.offset(-.6));
+   const fit=binDimensions(p),w=fit.width,d=w,h=p.height-fit.rimHeight;
+   const outer=outline(w,d),opening=own(outer.offset(-fit.rimWall)),lidProfile=own(opening.offset(-fit.lidGap));
    let body=container(w,d,h,false,false);
    // Raised bearing pads support the trunnions; the removable rim closes the seats.
-   for(const side of [-1,1])body=own(body.add(box(p.wall,3,1,side*(w/2-p.wall/2),0,h)));
+   for(const side of [-1,1])body=own(body.add(box(p.wall,fit.padWidth,1,side*(w/2-p.wall/2),0,h)));
    add('bin-body','bin',body,[0,0,0]);
    let rim=own(own(outer.extrude(4)).subtract(own(opening.extrude(4))));
    for(const side of [-1,1]){
-    const bore=own(C.circle(1.25,32).extrude(p.wall+1).rotate([0,90,0]).translate([side<0?-w/2-.1:w/2-p.wall-.8,0,2]));
-    const slot=box(p.wall+1,2.5,2,side*(w/2-p.wall/2),0,0);
+    const channelDepth=fit.rimWall+.8;
+    const bore=own(C.circle(fit.bearingRadius,32).extrude(channelDepth).rotate([0,90,0]).translate([side<0?-w/2-.4:w/2-fit.rimWall-.4,0,fit.pivot]));
+    const slot=box(channelDepth,fit.entryWidth,fit.pivot+.02,side*(w/2-fit.rimWall/2),0,-.01);
     rim=own(rim.subtract(own(bore.add(slot))));
    }
    // Inverted for printing: bearing slots face upward.
@@ -107,7 +108,7 @@ export function generateDeskModel(module,input){
    for(const side of [-1,1])lid=own(lid.add(own(C.circle(1,32).extrude(pinLength).rotate([0,side*90,0]).translate([side*pinStart,0,2]))));
    // Store the actual pivot for the assembled preview.
    add('flat-swing-lid','lid',lid,[0,0,h]);
-   parts.at(-1).pivot=[0,0,2];
+   parts.at(-1).pivot=[0,0,fit.pivot];
   }else if(standaloneTray(p)){
    const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,profile=round(w,d,3),inner=own(profile.offset(-p.wall));
    add(p.kind==='box'?'standalone-sorting-box':'standalone-pen-tray',p.kind,carveOpenwork(module,own,ribs(hollowBox(profile,p.height),w,d,p.height),w,d,p.height,p),[0,0,0]);
@@ -130,6 +131,6 @@ export function generateDeskModel(module,input){
    }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
-  return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),prototype:true};
+  return {settings:p,parts,width:p.width,height:p.height,depth:p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }

@@ -20,6 +20,7 @@ export function validateDeskSettings(input){
  if(p.kind==='drawers'&&((p.height-1.2-(p.drawers+1)*p.wall)/p.drawers-2*p.clearance<16||p.width<70||p.depth<65))throw Error('Drawers need at least 70 mm width, 65 mm depth and 16 mm of usable height per drawer. Increase the height or reduce the drawer count.');
  if(p.kind==='pot'&&p.height<40)throw Error('Pen pots need at least 40 mm height.');
  const inset=finishInset(p);
+ if(p.kind==='bin'&&p.height<binDimensions(p).minimumHeight)throw Error(`This bin needs at least ${binDimensions(p).minimumHeight} mm height for the lid to swing clear of its solid floor. Increase the height or reduce its width.`);
  const innerWidth=p.kind==='drawers'?(p.width-(p.drawerColumns+1)*p.wall)/p.drawerColumns-2*p.wall-2*p.clearance:p.width-2*p.wall-2*inset,innerDepth=p.kind==='drawers'?p.depth-3*p.wall-p.clearance-inset:p.depth-2*p.wall-2*inset;
  if(p.kind!=='bin'&&!(p.kind==='tray'&&['open','pens'].includes(p.trayLayout))&&((innerWidth-(p.columns-1)*p.wall)/p.columns<18||(innerDepth-(p.rows-1)*p.wall)/p.rows<18))throw Error('Each compartment needs at least 18 mm of width and depth. Increase the item size or reduce drawer columns or internal divisions.');
  if(p.kind==='tray'&&['boxes','pens'].includes(p.trayLayout)&&(trayCells(p).some(cell=>cell.width-2*p.clearance-2*p.wall<18||cell.depth-2*p.clearance-2*p.wall<18)||p.height-2*p.wall-.8<6))throw Error('Each inner box needs at least 18 × 18 mm of usable space and 6 mm of usable depth. Increase the tray size or reduce the box count.');
@@ -41,3 +42,6 @@ export const finishInset=p=>Math.max(p.openwork==='woven'?.4:0,adjustableFinish(
 export const standaloneTray=p=>['box','pen-tray'].includes(p.kind);
 
 export const openworkAvailable=p=>p.kind!=='bin'&&!(p.kind==='pot'&&p.shape==='round');
+
+// Shared mating dimensions; keep the pin seats open through the entire rim wall.
+export function binDimensions(p){const width=p.width-2*finishInset(p),rimWall=p.wall+.6,opening=width-2*rimWall,lidPlate=opening-1.2;return {width,rimWall,opening,lidPlate,lidGap:.6,pinSpan:width-.6,pinRadius:1,padWidth:3,entryWidth:3.8,bearingRadius:1.4,bearingClearance:.4,rimHeight:4,pivot:2,minimumHeight:Math.max(50,Math.ceil(Math.hypot(lidPlate/2,2)+p.wall+2.6))};}

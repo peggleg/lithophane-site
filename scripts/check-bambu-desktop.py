@@ -46,7 +46,7 @@ def text(value):
 def focus_canvas():
     windows = [w for w in d.screen().root.query_tree().children
                if w.get_attributes().map_state == X.IsViewable]
-    window = max(windows, key=lambda w: w.get_geometry().width)
+    window = max(reversed(windows), key=lambda w: w.get_geometry().width)
     g = window.get_geometry()
     xtest.fake_input(d, X.MotionNotify, x=g.x + int(g.width * .7),
                      y=g.y + int(g.height * .25))
@@ -60,7 +60,9 @@ def wait_ready(title):
     while time.monotonic() < deadline:
         windows = [w for w in d.screen().root.query_tree().children
                    if w.get_attributes().map_state == X.IsViewable]
-        if len(windows) == 1 and windows[0].get_wm_name() == title:
+        matching = [w for w in windows if w.get_wm_name() == title]
+        dialogs = [w for w in windows if matching and w.get_wm_transient_for() == matching[-1]]
+        if matching and not dialogs:
             stable += 1
             if stable >= 5: return
         else:
