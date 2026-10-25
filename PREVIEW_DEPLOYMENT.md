@@ -91,3 +91,5 @@ Monstera coasters now have engraved branching veins and a suggested elongated le
 ## Optional drawer colour sheets
 
 Openwork drawers can now include top-loading guides and separate 1 mm printable colour sheets. Plain cutouts remain the default, without guides or slots, and match the previous meshes exactly. Front/front-and-sides selection controls which sheets are supplied; every sheet follows its drawer's dimensions and is printed flat. Preview colour is independent of the existing body palette. Desk profiles remain 8% gyroid, two walls and 3/3 layers; thin sheets become solid through skin overlap. See `docs/drawer-colour-sheets.md` for assembly and validation details.
+
+Drawer colour sheets now sit just 0.2 mm behind the inner perforated wall. A continuous 1.2 mm-high bottom retaining lip forms the drop-in channel; side/end guides and divider clearances retain vertical insertion and removal. Plain cutout geometry and print profiles remain unchanged.

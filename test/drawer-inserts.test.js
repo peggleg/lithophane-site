@@ -20,3 +20,14 @@ test('the actual perforations are completely backed by the front colour sheet',(
   assert.ok(holes.area()>10,'real openings sampled');assert.ok(missing.area()<.01,`${openwork}: uncovered area ${missing.area()}`);[body,flat,rotated,section,front,panel,grip,holes,projection,cover,missing].forEach(s=>s.delete());
  }
 });
+test('sheets sit 0.2 mm behind the cutout walls and enter a continuous bottom retaining lip',()=>{
+ const p={...deskDefaults,finish:'smooth',openwork:'honeycomb',openworkFaces:'front-sides',drawerInserts:'sheet'},model=build(p),drawer=model.parts.find(p=>p.role==='drawer'),body=pose(drawer),[w,d]=drawer.printSize;
+ for(const sheet of model.parts.filter(p=>p.insertFit?.drawer===drawer.name)){
+  const s=sheet.insertFit,at=pose(sheet),bounds=at.boundingBox(),gap=s.side===0?bounds.min[1]-(drawer.assembly[1]-d/2+p.wall):s.side===1?drawer.assembly[0]+w/2-p.wall-bounds.max[0]:bounds.min[0]-(drawer.assembly[0]-w/2+p.wall);assert.ok(Math.abs(gap-.2)<.001,'actual sheet/wall gap');
+  const u=s.centre,n=s.normal+.5+s.gap+s.lip/2;let x,y;if(s.side===0){x=u;y=-d/2+n;}else{x=s.side*(w/2-n);y=u;}
+  const probe=m.Manifold.cube([.6,.6,.6],true).translate([drawer.assembly[0]+x,drawer.assembly[1]+y,drawer.assembly[2]+p.wall+.6]),hit=probe.intersect(body);assert.ok(hit.volume()>.21,'lip exists at the middle of the sheet, not only at its ends');clear(at,body,'bottom channel clears sheet');probe.delete();hit.delete();at.delete();
+ }body.delete();
+});
+test('internal drawer dividers leave the near-flush sheet insertion channels clear',()=>{
+ for(const clearance of [.2,.8]){const model=build({columns:2,rows:3,clearance,openwork:'diamond',openworkFaces:'front-sides',drawerInserts:'sheet'}),drawers=model.parts.filter(p=>p.role==='drawer');for(const drawer of drawers){closed(drawer);const body=pose(drawer);for(const sheet of model.parts.filter(p=>p.insertFit?.drawer===drawer.name)){const at=pose(sheet);for(const lift of [0,1,10,50]){const raised=at.translate([0,0,lift]);clear(raised,body,'divider ends clear sheet');raised.delete();}at.delete();}body.delete();}}
+});

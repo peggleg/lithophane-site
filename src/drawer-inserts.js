@@ -4,14 +4,14 @@ export const drawerCornerRadius=(w,d,p)=>drawerInsertActive(p)?Math.min(p.wall+1
 // All mating dimensions and pattern coverage derive from these same sheets.
 export function drawerInsertLayout(w,d,h,p){
  if(!drawerInsertActive(p))return [];
- const gap=p.clearance,lip=1.2,r=drawerCornerRadius(w,d,p),normal=r+lip+gap+drawerSheetThickness/2,bottom=p.wall+.2,top=h-.4;
+ const gap=p.clearance,lip=1.2,r=drawerCornerRadius(w,d,p),wallGap=.2,normal=p.wall+wallGap+drawerSheetThickness/2,bottom=p.wall+.2,top=h-.4;
  const front={side:0,name:'front',min:-w/2+p.wall+gap,max:w/2-p.wall-gap,normal,bottom,top};
  const sheets=[front];
  if(p.openworkFaces==='front-sides'){
   const start=-d/2+normal+drawerSheetThickness/2+gap+lip+.6,end=d/2-r-gap;
   for(const side of [1,-1])sheets.push({side,name:side===1?'right':'left',min:start,max:end,normal,bottom,top});
  }
- return sheets.map(s=>({...s,width:s.max-s.min,height:top-bottom,centre:(s.min+s.max)/2,thickness:drawerSheetThickness,gap,lip}));
+ return sheets.map(s=>({...s,width:s.max-s.min,height:top-bottom,centre:(s.min+s.max)/2,thickness:drawerSheetThickness,gap,lip,wallGap,bottomLipHeight:1.2}));
 }
 export function addDrawerInsertRails(module,own,solid,w,d,h,p,{box}){
  const sheets=drawerInsertLayout(w,d,h,p);if(!sheets.length)return solid;
@@ -22,8 +22,14 @@ export function addDrawerInsertRails(module,own,solid,w,d,h,p,{box}){
   // makes both slots match the common min/max measured in world Y.
   const lo=s.side===-1?-s.max:s.min,hi=s.side===-1?-s.min:s.max;
   for(const [a,b]of [[lo-s.gap-s.lip,lo+s.lip],[hi-s.lip,hi+s.gap+s.lip]])blocks.push(place((a+b)/2,(start+end)/2,b-a,end-start,h-p.wall-.18,p.wall-.02));
-  const slot=place((lo+hi)/2,s.normal,hi-lo+2*s.gap,s.thickness+2*s.gap,h+1,p.wall-.01);
-  const rails=own(own(module.Manifold.union(blocks)).subtract(slot));solid=own(solid.add(rails));
+  // The perforated wall itself is the front stop: only 0.2 mm separates it
+  // from the sheet. Clear divider ends as well as the small rounded corners.
+  const slotEnd=s.normal+s.thickness/2+s.gap;
+  const slot=place((lo+hi)/2,(p.wall+slotEnd)/2,hi-lo+2*s.gap,slotEnd-p.wall,h+1,p.wall);
+  solid=own(solid.subtract(slot));
+  const rails=own(own(module.Manifold.union(blocks)).subtract(slot));
+  const bottomLip=place((lo+hi)/2,slotEnd+s.lip/2,hi-lo+2*s.gap,s.lip,s.bottomLipHeight+.02,p.wall-.02);
+  solid=own(own(solid.add(rails)).add(bottomLip));
  }
  return solid;
 }
