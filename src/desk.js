@@ -7,7 +7,7 @@ import './desk.css';
 import {deskDefaults,deskPresets,validateDeskSettings,adjustableFinish,standaloneTray,openworkAvailable} from './desk-settings.js';
 import {isStorage} from './desk-storage.js';
 import {createDeskPreview} from './desk-preview.js';
-const $=id=>document.getElementById(id),fields=['openingSize','detailDepth','detailSpacing','width','depth','height','wall','clearance','penShare','drawers','drawerColumns','columns','rows'];const coasterPage=document.body.dataset.collection==='coasters',pageDefaults={...deskDefaults,...(coasterPage?{...deskPresets.coaster,kind:'coaster'}:{})};let state={...pageDefaults,drawerFinishes:[]},model=null,worker=null,timer=null,generation=0,busy=false,preview;
+const $=id=>document.getElementById(id),fields=['openingSize','detailDepth','detailSpacing','width','depth','height','wall','clearance','penShare','drawers','drawerColumns','columns','rows'];const coasterPage=document.body.dataset.collection==='coasters',pageDefaults={...deskDefaults,...(coasterPage?{...deskPresets.coaster,kind:'coaster'}:new URLSearchParams(location.search).get('item')==='cupboard'?{...deskPresets.cupboard,kind:'cupboard'}:{})};let state={...pageDefaults,drawerFinishes:[]},model=null,worker=null,timer=null,generation=0,busy=false,preview;
 const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','desk');
 try{preview=createDeskPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. You can still generate and download your design.';}
 function controls(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=busy||!model;}
