@@ -33,3 +33,5 @@ header nav a[aria-current=page]{text-decoration:underline;text-underline-offset:
 @media(max-width:360px){header{gap:8px;padding:14px 16px}header>a.brand{font-size:20px}.nav-toggle,.theme-control{padding:8px 12px}header #site-navigation{right:16px}}
 
 .plate-note{font-size:12px;line-height:1.6;color:var(--muted);padding:12px 0;margin:0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+
+.nav-group-label{display:block;padding:12px 14px 4px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;border-top:1px solid var(--line)}

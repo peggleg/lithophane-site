@@ -18,7 +18,7 @@ test('invalid or unsafe site URLs fail configuration',()=>{
 test('each page has its own canonical, title and schema beneath the configured mount',()=>{
  const base='https://imgdrop.app/lithophane/';
  const seen=new Set();
- for(const [page,path]of Object.entries({home:'',lithophane:'lithophane/',fan:'folding-fan/',nameplates:'nameplates/',keyrings:'keyrings/',clickers:'clickers/',desk:'desk/',coasters:'coasters/'})){
+ for(const [page,path]of Object.entries({home:'',lithophane:'lithophane/',fan:'folding-fan/',nameplates:'nameplates/',keyrings:'keyrings/',clickers:'clickers/',desk:'desk/',coasters:'coasters/',kitchen:'kitchen/',bathroom:'bathroom/'})){
   const a=seoAssets(base,page),tags=seoHead(a);
   assert.equal(a.url,base+path);assert.equal(JSON.parse(a.schema).url,base+path);
   assert.equal(tags.find(t=>t.attrs.rel==='canonical').attrs.href,base+path);
@@ -28,5 +28,5 @@ test('each page has its own canonical, title and schema beneath the configured m
   for(const route of ['', 'lithophane/','folding-fan/'])assert.ok(a.sitemap.includes(`<loc>${base+route}</loc>`));
   const preview=seoAssets('',page);assert.equal(preview.url,'');assert.equal(preview.sitemap,'');assert.equal(seoHead(preview).some(t=>t.attrs.rel==='canonical'),false);
  }
- assert.equal(seen.size,8);
+ assert.equal(seen.size,10);
 });

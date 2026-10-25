@@ -1,0 +1,15 @@
+# Kitchen and bathroom collections
+
+`/kitchen/` and `/bathroom/` use the shared desk generator, preview, six surface styles, filament estimator and complete Bambu project exporter. Shared trays, pots, screw containers and swing-lid bins use the same geometry as Desk; collection defaults and labels do not fork these generators. Only theme preference is persisted.
+
+All finished printable parts are checked within 170 × 170 × 170 mm. The kitchen-roll assembly can exceed this because its shaft has 1–3 screw-together sections, each 70–150 mm **including** its male connector. Each joint overlaps 9.2 mm. The shaft is 28 mm diameter; use a larger roll core. The base can have an annular refillable ballast chamber with a separate loose cover. The user supplies dry ballast. The top cap unscrews; joints share a right-handed 3.6 mm pitch and adjustable printing clearance. Shafts print upright, caps top-down. Stability and thread wear require physical testing.
+
+The cocktail-stick dispenser shares the screw-container thread design, with a clipped female cutter preserving its roof and an adjustable 2.5–5 mm dispensing hole. It dispenses by inverting and gently shaking, without a feed mechanism. The body and lid are separate parts. Stick dimensions and printed opening tolerance affect dispensing.
+
+Soap dishes have a removable draining platform supported inside a solid catch tray, with a finger notch for removal. Sink caddies and toothbrush holders have floor drainage, optional openwork on all four walls and an optional separate solid catch tray. The drip tray supports the holder 2 mm above its floor. Removing the tray does not add feet or an unsupported floor. Plain floors and solid walls remain available independently. Drainage holes are clipped to a solid perimeter; floor opening width is capped at 12 mm and webs stay at least 2.4 mm. Openwork never perforates a catch tray. Inspect toolpaths for bridges and support needs; no support/profile override is inserted.
+
+The vanity set includes a tray, three separate pots of staggered heights and a ring dish. All resize together. Cotton-pad dispensers have a front access opening and a lift-off locating lid; usable pad diameter is reported in the guide. Spoon rests have a lowered handle opening while retaining their solid floor.
+
+Profiles remain 8% gyroid, 2 wall loops, 3 top and 3 bottom layers for every new item. Minimum skin-thickness overrides remain zero. Existing coaster 5/5, keyring/nameplate 2/2 and photo-generator 4/4 policies are unchanged. UI, gram estimates, guides, ZIP sidecars and 3MF read the shared print-profile module. Solid catch-tray geometry does not establish watertightness; test a physical sample on a protected surface.
+
+Validation covers closed, connected meshes, assembled part interference across six styles and resized extremes, drainage cross-sections, roll thread travel, browser downloads/mobile layouts and actual Bambu Studio CLI plus desktop Open/Save profile retention. Digital checks do not establish physical fit, stability, strength, drainage or cleaning performance.

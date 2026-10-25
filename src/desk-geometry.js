@@ -1,3 +1,5 @@
+import {isHome} from './home-settings.js';
+import {makeHomeItems} from './home-geometry.js';
 import {makeBin} from './bin-geometry.js';
 import {drawerInsertActive,drawerCornerRadius,drawerInsertLayout,addDrawerInsertRails,drawerSheetSolid} from './drawer-inserts.js';
 import {isCoaster,makeCoasters} from './desk-coasters.js';
@@ -9,19 +11,19 @@ export function generateDeskModel(module,input,fontBuffer){
  const p=validateDeskSettings(input),{CrossSection:C,Manifold:M}=module,owned=[];const own=x=>(owned.push(x),x);
  const round=(w,d,r=Math.min(9,w/5,d/5))=>own(own(C.square([w-2*r,d-2*r],true)).offset(r,'Round',2,48));
  const box=(w,d,h,x=0,y=0,z=0)=>own(own(C.square([w,d],true)).extrude(h).translate([x,y,z]));
- const circular=['pot','bin','screw'].includes(p.kind)&&p.shape==='round';
+ const circular=['pot','bin','screw','roll','cotton','toothpick'].includes(p.kind)&&p.shape==='round';
  const outline=(w,d)=>circular?own(C.circle(w/2,128).rotate(360/256)):round(w,d);
  const parts=[];
  function add(name,role,solid,assembly,rotation=[0,0,0]){
-  const repair=drawerInsertActive(p)||p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
+  const repair=isHome(p)||drawerInsertActive(p)||p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
   const bounds=clean.boundingBox(),size=bounds.max.map((v,i)=>v-bounds.min[i]);if(size.some(v=>v>170.001))throw Error('A finished part exceeds the 170 mm A1 mini design limit. Reduce its dimensions.');
   let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=((drawerInsertActive(p)||['bin','coaster-plant'].includes(p.kind))?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
   parts.push({name,role,...(role==='plant-branch'?{rotationOrder:'ZYX'}:{}),bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
  }
- function ribs(solid,w,d,h,frontOnly=false){
+ function ribs(solid,w,d,h,frontOnly=false,isRound=circular){
   if(p.finish==='smooth')return solid;
-  if(adjustableFinish(p))return sculptedRibs(solid,w,d,h,frontOnly);
-  if(circular){const features=[],radius=p.finish==='fluted'?.8:.65,n=4*Math.floor(Math.PI*w/(p.finish==='fluted'?4:7)/4);for(let i=0;i<n;i++){const a=i*2*Math.PI/n;features.push(own((p.finish==='fluted'?own(C.circle(radius,16)):own(round(1.3,3.2,.6).rotate(a*180/Math.PI))).extrude(h-2).translate([(w/2+ (p.finish==='fluted'?-.25:-.32))*Math.cos(a),(w/2+(p.finish==='fluted'?-.25:-.32))*Math.sin(a),1])));}return own(M.union([solid,...features]));}
+  if(adjustableFinish(p))return sculptedRibs(solid,w,d,h,frontOnly,isRound);
+  if(isRound){const features=[],radius=p.finish==='fluted'?.8:.65,n=4*Math.floor(Math.PI*w/(p.finish==='fluted'?4:7)/4);for(let i=0;i<n;i++){const a=i*2*Math.PI/n;features.push(own((p.finish==='fluted'?own(C.circle(radius,16)):own(round(1.3,3.2,.6).rotate(a*180/Math.PI))).extrude(h-2).translate([(w/2+ (p.finish==='fluted'?-.25:-.32))*Math.cos(a),(w/2+(p.finish==='fluted'?-.25:-.32))*Math.sin(a),1])));}return own(M.union([solid,...features]));}
   const step=p.finish==='fluted'?4:7,radius=p.finish==='fluted'?.8:1.6,features=[];
   const feature=(x,y,side)=>{
    let profile=p.finish==='fluted'?own(C.circle(radius,16)):round(side?1.3:3.2,side?3.2:1.3,.6);
@@ -31,7 +33,7 @@ export function generateDeskModel(module,input,fontBuffer){
   if(!frontOnly)for(let y=-d/2+10;y<=d/2-10;y+=step){feature(-w/2+.25,y,true);feature(w/2-.25,y,true);}
   return features.length?own(M.union([solid,...features])):solid;
  }
- function sculptedRibs(solid,w,d,h,frontOnly){
+ function sculptedRibs(solid,w,d,h,frontOnly,isRound){
   const depth=p.detailDepth,pitch=p.detailSpacing,features=[],steps=p.finish==='wave'?Math.min(32,Math.max(12,Math.ceil(h/4))):3,rise=h-2,ramp=Math.min(rise/2,Math.max(2,depth+1));
   function feature(x,y,nx,ny){
    let profile;
@@ -43,18 +45,18 @@ export function generateDeskModel(module,input,fontBuffer){
    const full=own(profile.extrude(rise,steps).translate([x+nx*offset,y+ny*offset,1]));
    features.push(own(full.warp(v=>{
     let t=v[2]-1;if(p.finish!=='wave'){const f=t/rise*4,k=Math.min(3,Math.floor(f)),knots=[0,ramp,rise/2,rise-ramp,rise];t=knots[k]+(knots[k+1]-knots[k])*(f-k);v[2]=t+1;}const ease=Math.min(1,t/ramp,(rise-t)/ramp),retract=(depth-.05)*(1-ease),wave=p.finish==='wave'?Math.sin(t/rise*Math.PI*2)*Math.min(1.5,pitch*.16):0;
-    if(circular){const r=Math.hypot(v[0],v[1])-retract,a=Math.atan2(v[1],v[0])+wave/(w/2);v[0]=r*Math.cos(a);v[1]=r*Math.sin(a);}
+    if(isRound){const r=Math.hypot(v[0],v[1])-retract,a=Math.atan2(v[1],v[0])+wave/(w/2);v[0]=r*Math.cos(a);v[1]=r*Math.sin(a);}
     else {v[0]-=nx*retract+ny*wave;v[1]-=ny*retract-nx*wave;}
    })));
   }
-  if(circular){const n=Math.max(12,4*Math.floor(Math.PI*w/pitch/4));for(let i=0;i<n;i++){const a=i*2*Math.PI/n;feature(w/2*Math.cos(a),w/2*Math.sin(a),Math.cos(a),Math.sin(a));}}
+  if(isRound){const n=Math.max(12,4*Math.floor(Math.PI*w/pitch/4));for(let i=0;i<n;i++){const a=i*2*Math.PI/n;feature(w/2*Math.cos(a),w/2*Math.sin(a),Math.cos(a),Math.sin(a));}}
   else {
    const margin=Math.max(10,pitch*.6),xs=Math.max(1,Math.floor((w-2*margin)/pitch)+1),ys=Math.max(1,Math.floor((d-2*margin)/pitch)+1);
    for(let i=0;i<xs;i++){const x=(i-(xs-1)/2)*pitch;feature(x,-d/2,0,-1);if(!frontOnly)feature(x,d/2,0,1);}
    if(!frontOnly)for(let i=0;i<ys;i++){const y=(i-(ys-1)/2)*pitch;feature(-w/2,y,-1,0);feature(w/2,y,1,0);}
   }
   // Keep the cavity smooth and attach ribs to the wall without exceeding the requested footprint.
-  const envelope=frontOnly?own(C.square([w,d+2*depth],true)):outline(w+2*depth,d+2*depth),core=own(outline(w,d).offset(-.3)),band=own(envelope.subtract(core)),clip=own(band.extrude(h));
+  const envelope=frontOnly?own(C.square([w,d+2*depth],true)):isRound?own(C.circle(w/2+depth,128)):outline(w+2*depth,d+2*depth),core=own((isRound?own(C.circle(w/2,128)):outline(w,d)).offset(-.3)),band=own(envelope.subtract(core)),clip=own(band.extrude(h));
   const detail=own(own(M.union(features)).intersect(clip));return own(solid.add(detail));
  }
  function hollowBox(profile,h){const inner=own(profile.offset(-p.wall));if(inner.isEmpty())throw Error('The tray is too small for this wall thickness.');return own(own(profile.extrude(h)).subtract(own(inner.extrude(h).translate([0,0,p.wall]))));}
@@ -71,9 +73,10 @@ export function generateDeskModel(module,input,fontBuffer){
   return solid;
  }
  add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
- let screwFit,storageFit,coasterFit;
+ let screwFit,storageFit,coasterFit,homeFit;
  try{
-  if(isCoaster(p)){coasterFit=makeCoasters(module,own,p,{round,ribs,box,add,reference:(...args)=>{add(...args);return parts.pop();}});}
+  if(isHome(p)){homeFit=makeHomeItems(module,own,p,{round,ribs,box,add});}
+  else if(isCoaster(p)){coasterFit=makeCoasters(module,own,p,{round,ribs,box,add,reference:(...args)=>{add(...args);return parts.pop();}});}
   else if(isStorage(p)){storageFit=makeStorage(module,own,p,{round,ribs,hollowBox,add});}
   else if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
   else if(p.kind==='drawers'){
@@ -131,6 +134,6 @@ export function generateDeskModel(module,input,fontBuffer){
    }
   }
   let x=0;for(const part of parts){part.x=x-part.bounds.min[0];part.y=-part.bounds.min[1];x+=part.printSize[0]+10;}
-  return {settings:p,parts,...(coasterFit?{coasterFit}:{}),...(storageFit?{storageFit}:{}),...(screwFit?{screwFit}:{}),width:coasterFit?.width??p.width,height:coasterFit?.height??p.height,depth:coasterFit?.depth??p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
+  return {settings:p,parts,...(homeFit?{homeFit}:{}),...(coasterFit?{coasterFit}:{}),...(storageFit?{storageFit}:{}),...(screwFit?{screwFit}:{}),width:homeFit?.width??coasterFit?.width??p.width,height:homeFit?.height??coasterFit?.height??p.height,depth:homeFit?.depth??coasterFit?.depth??p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }

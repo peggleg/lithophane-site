@@ -11,7 +11,7 @@ assert.ok(headers.includes('sha256-'+createHash('sha256').update(schema).digest(
 for(const match of html.matchAll(/(?:src|href)="(\/(?:assets\/[^"\s]+|favicon\.svg))"/g))assert.ok(fs.existsSync(dir+match[1]),`Missing asset ${match[1]}`);
 console.log('Preview indexing policy, root assets, sitemap omission and CSP hash passed.');
 
-for(const page of ['index.html','lithophane/index.html','folding-fan/index.html','nameplates/index.html','keyrings/index.html','clickers/index.html','desk/index.html','coasters/index.html']){
+for(const page of ['index.html','lithophane/index.html','folding-fan/index.html','nameplates/index.html','keyrings/index.html','clickers/index.html','desk/index.html','coasters/index.html','kitchen/index.html','bathroom/index.html']){
  const content=fs.readFileSync(`${dir}/${page}`,'utf8');
  assert.ok(!/japandi/i.test(content));assert.match(content,/Our starting designs fit the A1 mini/);
  assert.match(content,/<meta name="robots" content="noindex, nofollow"/);
@@ -20,7 +20,7 @@ for(const page of ['index.html','lithophane/index.html','folding-fan/index.html'
  assert.ok(headers.includes('sha256-'+createHash('sha256').update(json).digest('base64')));
  for(const match of content.matchAll(/(?:src|href)="(\/(?:assets\/[^"\s]+|favicon\.svg))"/g))assert.ok(fs.existsSync(dir+match[1]),`Missing asset ${match[1]}`);
 }
-console.log('All eight preview pages have matching CSP hashes and existing assets.');
+console.log('All ten preview pages have matching CSP hashes and existing assets.');
 
 for(const script of fs.readFileSync(`${dir}/nameplates/index.html`,'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g))assert.ok(headers.includes('sha256-'+createHash('sha256').update(script[1]).digest('base64')));
 assert.match(headers,/wasm-unsafe-eval/);

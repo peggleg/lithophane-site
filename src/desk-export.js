@@ -1,3 +1,4 @@
+import {homeGuide} from './home-guide.js';
 import {isCoaster} from './desk-coasters.js';
 import {isStorage} from './desk-storage.js';
 import {adjustableFinish,standaloneTray} from './desk-settings.js';
@@ -6,7 +7,7 @@ import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
-export function deskGuide(model){const p=model.settings;return `${filamentReport(model.parts,p.kind)}\nDESIGN STUDIO — ${isCoaster(p)?'COASTERS & HOLDERS':'DESK COLLECTION'}
+export function deskGuide(model){if(model.homeFit)return homeGuide(model);const p=model.settings;return `${filamentReport(model.parts,p.kind)}\nDESIGN STUDIO — ${isCoaster(p)?'COASTERS & HOLDERS':(p.collection||'DESK COLLECTION').toUpperCase()}
 ${p.kind}; ${p.finish} finish;${adjustableFinish(p)?` projection ${p.detailDepth} mm; spacing ${p.detailSpacing} mm;`:""}${p.kind==='drawers'?` ${p.stackTop==='pockets'?'locating-pocket':'smooth final'} top;`:''} requested size ${p.width} × ${p.depth} × ${p.height} mm (width × depth × height).
 
 A1 MINI PRINTING

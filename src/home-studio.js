@@ -1,0 +1,38 @@
+import './theme.js';
+import './desk.css';
+import {deskDefaults,deskPresets,validateDeskSettings,adjustableFinish,openworkAvailable} from './desk-settings.js';
+import {homeCollections,isHome,isWet} from './home-settings.js';
+import {createDeskPreview} from './desk-preview.js';
+import {createFilamentDisplay} from './filament-display.js';
+const $=id=>document.getElementById(id),collection=document.body.dataset.collection,options=homeCollections[collection];
+const numbers=['width','depth','height','wall','clearance','openingSize','detailDepth','detailSpacing','columns','rows','segmentLength','shaftSections','dispenseSize'];
+let state,model=null,worker=null,timer=null,revision=0,busy=false,preview;
+const filament=createFilamentDisplay($('feedback'),'filament-estimate');
+try{preview=createDeskPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. Downloads are still available.';}
+for(const [value,label]of options){const o=document.createElement('option');o.value=value;o.textContent=label;$('kind').append(o);}
+function select(kind){state={...deskDefaults,...deskPresets[kind],kind,collection,columns:deskPresets[kind].columns??1,rows:deskPresets[kind].rows??1};if(kind==='pot')state.shape='round';if(kind==='tray')state.trayLayout='boxes';$('parts-view').checked=$('open-lid').checked=false;preview?.setParts(false);preview?.setLidOpen(false);sync();generate();}
+function sync(){
+ const round=['roll','cotton','toothpick','screw'].includes(state.kind)||['pot','bin'].includes(state.kind)&&state.shape==='round';if(round)state.depth=state.width;
+ for(const id of [...numbers,'kind','finish','palette','openwork','shape','trayLayout','lidText'])$(id).value=state[id]??'';
+ for(const id of ['drainFloor','dripTray','weightedBase'])$(id).checked=state[id];
+ $('shape-field').hidden=!['pot','bin'].includes(state.kind);$('depth-field').hidden=round||state.kind==='bin';
+ $('width-label').textContent=round?'Diameter (mm)':'Width (mm)';$('height-label').textContent=state.kind==='roll'?'Base height (mm)':'Height (mm)';
+ $('roll-settings').hidden=state.kind!=='roll';$('dispenser-settings').hidden=state.kind!=='toothpick';$('drainage-settings').hidden=!isWet(state);$('drip-tray-field').hidden=state.kind==='soap';
+ $('openwork-settings').hidden=!openworkAvailable(state);$('openwork-placement-note').textContent=isWet(state)?state.kind==='soap'?'Pattern applies to the removable platform. The catch tray stays solid.':'Pattern applies to all four holder walls. The removable drip tray stays solid.':'Openwork applies to the front and sides; the floor and back stay solid.';
+ $('detail-settings').hidden=!adjustableFinish(state);$('compartments').hidden=!['tray','pot','caddy','toothbrush'].includes(state.kind);$('tray-layout-field').hidden=state.kind!=='tray';$('lid-text-field').hidden=state.kind!=='screw';
+ $('lid-label').hidden=!['cotton','toothpick','roll','screw','bin'].includes(state.kind);$('open-lid').checked=false;preview?.setLidOpen(false);
+ $('height').min=state.kind==='screw'?'30':'12';$('height').max=state.kind==='roll'?'25':state.kind==='soap'?'35':state.kind==='spoon'?'30':'170';
+}
+function controls(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=busy||!model;}
+function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('cancel').hidden=true;controls();}
+function fail(message){model=null;stop();preview?.setModel(null);filament.clear();$('feedback').textContent=message;$('bed-status').textContent='Adjust the settings to generate a printable design.';$('dimensions').textContent=$('part-count').textContent='—';$('print-sizes').replaceChildren();$('assembly-note').textContent='';}
+function generate(){const token=++revision;stop();model=null;controls();preview?.setModel(null);filament.clear();$('print-sizes').replaceChildren();$('assembly-note').textContent='';$('dimensions').textContent=$('part-count').textContent='—';$('export-status').textContent='';filament.setKind(state.kind);let settings;try{settings=validateDeskSettings(state);}catch(e){fail(e.message);return;}$('feedback').textContent='Preparing your design…';$('bed-status').textContent='Checking each part against the A1 mini limit…';
+ timer=setTimeout(()=>{busy=true;controls();$('cancel').hidden=false;worker=new Worker(new URL('./desk-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(token!==revision)return;if(data.error){fail(data.error);return;}if(!data.model)return;model=data.model;stop();preview?.setModel(model);filament.update(model.parts);$('dimensions').textContent=[model.width,model.depth,model.height].map(v=>+v.toFixed(1)).join(' × ')+' mm';$('part-count').textContent=model.parts.length;for(const part of model.parts){const li=document.createElement('li');li.textContent=`${part.name}: ${part.printSize.join(' × ')} mm`;$('print-sizes').append(li);}$('assembly-note').textContent=model.homeFit?.note||'These designs share their geometry and settings with the Desk collection. Follow the included assembly guide.';$('bed-status').textContent='Every part fits within 170 × 170 × 170 mm. Arrange larger sets across plates; allow for brim and supports.';$('feedback').textContent='Design ready. Geometry and sizes checked; physical fit needs a test print.';};worker.onerror=()=>fail('Could not generate this design. Change a setting to retry.');worker.postMessage({action:'generate',settings});},160);
+}
+for(const id of numbers)$(id).oninput=()=>{state[id]=Number($(id).value);if(id==='width')sync();generate();};
+for(const id of ['finish','openwork','shape','trayLayout'])$(id).oninput=()=>{state[id]=$(id).value;if(id==='openwork')state.openworkFaces='front-sides';sync();generate();};
+for(const id of ['drainFloor','dripTray','weightedBase'])$(id).onchange=()=>{state[id]=$(id).checked;generate();};
+$('lidText').oninput=()=>{state.lidText=$('lidText').value;generate();};$('palette').oninput=()=>{state.palette=$('palette').value;if(model){model.settings.palette=state.palette;preview?.setPalette(state.palette);}};
+$('kind').oninput=()=>select($('kind').value);$('reset').onclick=()=>select(options[0][0]);$('parts-view').onchange=()=>preview?.setParts($('parts-view').checked);$('open-lid').onchange=()=>preview?.setLidOpen($('open-lid').checked);$('top-view').onclick=()=>preview?.reset('top');$('reset-view').onclick=()=>preview?.reset();$('cancel').onclick=()=>{revision++;stop();$('feedback').textContent='Cancelled. Change a setting to generate again.';};
+function download(format){if(!model||busy)return;stop();busy=true;controls();$('cancel').hidden=false;$('export-status').textContent='Preparing your download…';worker=new Worker(new URL('./desk-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.error){stop();$('export-status').textContent=data.error;return;}if(!data.chunks)return;const extension=format==='3mf'?'3mf':format==='guide'?'txt':'zip',url=URL.createObjectURL(new Blob(data.chunks,{type:format==='3mf'?'model/3mf':format==='guide'?'text/plain':'application/zip'})),a=document.createElement('a');a.href=url;a.download=`${collection}-${model.settings.kind}-${model.settings.width}x${model.settings.depth}x${model.settings.height}-${model.settings.finish}.${extension}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);stop();$('export-status').textContent='Downloaded. Open the 3MF as a project and arrange parts across plates.';};worker.onerror=()=>{stop();$('export-status').textContent='Download failed. Please retry.';};worker.postMessage({action:'export',format,model});}
+$('stl').onclick=()=>download('stl');$('three-mf').onclick=()=>download('3mf');$('print-guide').onclick=()=>download('guide');select(options[0][0]);
