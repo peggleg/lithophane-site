@@ -4,7 +4,8 @@ export function validateCupboard(p){
  for(const id of ['cupboardPorts','drawerConnectors'])if(!['none','vertical','sides','both'].includes(p[id]))throw Error('Choose no connectors, vertical, side-by-side, or both.');
  if(p.kind!=='cupboard')return;
  if(!Number.isInteger(p.cupboardRows)||p.cupboardRows<1||p.cupboardRows>3||!Number.isInteger(p.cupboardColumns)||p.cupboardColumns<1||p.cupboardColumns>2)throw Error('Choose 1–3 cupboard modules high and 1–2 across.');
- if(!['single','double'].includes(p.doorMode)||!['left','right'].includes(p.hingeSide))throw Error('Choose single or double doors and a hinge side.');
+ p.doorMode='single';
+ if(!['left','right'].includes(p.hingeSide))throw Error('Choose left or right door hinges.');
  for(const id of ['cupboardFloor','cupboardTop'])if(!['auto','each','none'].includes(p[id]))throw Error('Choose automatic, every module, or no floors/tops.');
  if(typeof p.doorMagnets!=='boolean')throw Error('Choose whether to include magnet pockets.');
  if(p.width/p.cupboardColumns<70||p.depth<60||p.height<80||p.wall<2.4)throw Error('Cupboards need 70 mm width per column, 60 mm depth, 80 mm module height and at least 2.4 mm walls. Total closed width stays within 170 mm.');

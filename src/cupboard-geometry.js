@@ -64,11 +64,10 @@ export function makeCupboard(module,own,p,{round,box,add}){
   let shell=own(M.union([box(W,p.wall,H,0,back-p.wall/2,0),box(p.wall,D-18,H,-W/2+p.wall/2,(front+back)/2,0),box(p.wall,D-18,H,W/2-p.wall/2,(front+back)/2,0),box(8+p.wall,p.wall,H,-W/2+(8+p.wall)/2,front+p.wall/2,0),box(8+p.wall,p.wall,H,W/2-(8+p.wall)/2,front+p.wall/2,0)]));
   if(caps.floor)shell=own(shell.add(box(W-2*p.wall,D-18,p.wall,0,(front+back)/2,0)));
   if(caps.top)shell=own(shell.add(box(W-2*p.wall,D-18,p.wall,0,(front+back)/2,H-p.wall)));
-  if(p.doorMode==='double')shell=own(shell.add(box(6,D-18,H,0,(front+back)/2,0)));
   for(const side of [-1,1]){const edge=side*W/2,inner=edge-side*p.wall,wide=edge-side*(8+p.wall),ramp=own(new C([[[inner,front+p.wall+8.2],[inner,front+p.wall-.02],[wide,front+p.wall-.02]]],'NonZero').extrude(H));shell=own(shell.add(ramp));}
-  const ranges=p.doorMode==='double'?[{left:-W/2+margin,right:-3-p.clearance,side:-1},{left:3+p.clearance,right:W/2-margin,side:1}]:[{left:-W/2+margin,right:W/2-margin,side:p.hingeSide==='left'?-1:1}];
+  const ranges=[{left:-W/2+margin,right:W/2-margin,side:p.hingeSide==='left'?-1:1}];
   for(let leaf=0;leaf<ranges.length;leaf++){
-   const q=ranges[leaf],inner=p.doorMode==='double'&&(q.side===-1&&col>0||q.side===1&&col<p.cupboardColumns-1),opening=inner?90:110,pullHeight=inner?2:5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-7),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
+   const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-7),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
    if(p.doorMagnets)keepShapes.push(own(C.circle(5,40).translate([edge+free*1.5,q.side===1?-17:17])));
    const keep=own(C.union(keepShapes)),profile=plate(dw,dh,2);let door=styledDoor(profile,dw,dh,keep);
    const holes=doorCutouts(profile,dw,dh,keep);if(holes&&!holes.isEmpty())door=own(door.subtract(own(holes.extrude(thickness+1).translate([0,0,-.1]))));
@@ -97,7 +96,7 @@ export function makeCupboard(module,own,p,{round,box,add}){
    }
    if(p.doorMagnets){
     const mx=edge+free*1.5,my=q.side===1?-17:17,pad=own(C.circle(4.5,48).extrude(thickness+1.2).translate([mx,my,0]));door=own(own(door.add(pad)).subtract(own(C.circle(3.1,48).extrude(2.1).translate([mx,my,thickness-.8]))));
-    const gx=dx+mx,gz=dc-my,magnetFront=faceY+thickness+1.2+p.clearance,rootWidth=p.doorMode==='double'?6:8+p.wall,rootX=p.doorMode==='double'?0:free*(W/2-rootWidth/2),block=own(M.hull([box(rootWidth,.2,9,rootX,front+p.wall-.05,gz-4.5),box(9,3.2,9,gx,magnetFront+1.6,gz-4.5)])),magnetHole=own(C.circle(3.1,48).extrude(2.1).rotate([-90,0,0]).translate([gx,magnetFront-.1,gz]));shell=own(shell.add(own(block.subtract(magnetHole))));
+    const gx=dx+mx,gz=dc-my,magnetFront=faceY+thickness+1.2+p.clearance,rootWidth=8+p.wall,rootX=free*(W/2-rootWidth/2),block=own(M.hull([box(rootWidth,.2,9,rootX,front+p.wall-.05,gz-4.5),box(9,3.2,9,gx,magnetFront+1.6,gz-4.5)])),magnetHole=own(C.circle(3.1,48).extrude(2.1).rotate([-90,0,0]).translate([gx,magnetFront-.1,gz]));shell=own(shell.add(own(block.subtract(magnetHole))));
    }
    // Closed-ended dovetail tunnels retain the joining keys at the seam. Join
    // all door panels first, present the complete leaf, then insert hinge pins.

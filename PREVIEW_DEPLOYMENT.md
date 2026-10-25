@@ -125,3 +125,7 @@ Final retaining-part checks: connector barbs use a split profile that compresses
 The homepage now separates personal projects from Home & Living, features modular cupboards, and includes full Kitchen and Bathroom cards alongside Desk and Coasters. New images are captured from the actual generators, including raised soap sides. Copy highlights mixed drawer finishes, connectors and the current collections. The cupboard call-to-action opens `/desk/?item=cupboard#studio` directly; reset retains that entry selection and unrecognised item queries fall back to drawers. Generator geometry and print profiles are unchanged.
 
 Validation: homepage images, ten cards, desktop/tablet/mobile Light/Dark layouts, direct cupboard selection/reset and unknown-query fallback passed in the browser. SEO tests, production/preview builds and preview CSP/indexing checks passed.
+
+## Single-door cupboards only
+
+Cupboards now offer only left- or right-hinged single doors. The double-door selector, centre-divider geometry and associated public copy are removed. Legacy double-door settings normalize to a single door. Side-by-side columns and vertically linked panels remain available. Single-door mesh buffers and assembly transforms match the previous release across left/right and one/two-column configurations; print profiles are unchanged. All ten cupboard tests and the cupboard browser/export/mobile checks passed.
