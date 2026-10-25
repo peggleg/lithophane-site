@@ -15,6 +15,7 @@ try{
     await download('three-mf',`artifacts/home-bambu/${kind}.3mf`);const guide=await download('print-guide',`artifacts/home-bambu/${kind}.txt`);assert.match(await fs.readFile(await guide.path(),'utf8'),/3 top and 3 bottom/);
     await page.locator('#model-preview').screenshot({path:`artifacts/home-${kind}.png`});
    }
+   if(kind==='soap'){for(const n of ['0','12','5']){await page.fill('#soapRimHeight',n);await ready();assert.match(await page.locator('#assembly-note').textContent(),new RegExp(n+' mm retaining sides'));}}
    if(['soap','caddy','toothbrush'].includes(kind)){
     for(const pattern of ['diamond','slots','windows','honeycomb']){await page.selectOption('#openwork',pattern);await ready();}
     await page.uncheck('#drainFloor');await ready();await page.check('#drainFloor');await ready();

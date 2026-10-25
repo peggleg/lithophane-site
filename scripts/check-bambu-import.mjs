@@ -14,7 +14,7 @@ const executable=process.env.BAMBU_STUDIO_PATH;
 if(!executable)throw Error('Set BAMBU_STUDIO_PATH to the official Bambu Studio executable. This check does not substitute a JSON parser for the slicer.');
 const dir=path.resolve('artifacts/bambu-import');await fs.mkdir(dir,{recursive:true});
 const mesh=makePanel({width:20,height:20,min:3,max:3,cols:2,rows:2,tones:new Float32Array(4)});
-const fixtures=[['lithophane',threeMfBytes(mesh)],['fan',fan3mf(makeFan(defaults))],...['keyring','nameplate','clicker','desk','coaster','coaster-tray','coaster-rack','coaster-plant','lantern','soap','caddy','toothbrush','roll','toothpick','cotton','vanity','spoon','future-tool'].map(kind=>[kind,solid3mf({settings:{kind},parts:[{name:kind,mesh}]})])];
+const fixtures=[['lithophane',threeMfBytes(mesh)],['fan',fan3mf(makeFan(defaults))],...['keyring','nameplate','clicker','desk','coaster','coaster-tray','coaster-rack','coaster-plant','lantern','cupboard','soap','caddy','toothbrush','roll','toothpick','cotton','vanity','spoon','future-tool'].map(kind=>[kind,solid3mf({settings:{kind},parts:[{name:kind,mesh}]})])];
 for(const [kind,chunks] of fixtures){
  const file=path.join(dir,kind+'.3mf'),output=path.join(dir,kind+'-effective.json');
  await fs.writeFile(file,chunks instanceof Uint8Array?chunks:Buffer.concat(chunks.map(c=>Buffer.from(c))));

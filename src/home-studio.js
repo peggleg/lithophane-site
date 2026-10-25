@@ -5,7 +5,7 @@ import {homeCollections,isHome,isWet} from './home-settings.js';
 import {createDeskPreview} from './desk-preview.js';
 import {createFilamentDisplay} from './filament-display.js';
 const $=id=>document.getElementById(id),collection=document.body.dataset.collection,options=homeCollections[collection];
-const numbers=['width','depth','height','wall','clearance','openingSize','detailDepth','detailSpacing','columns','rows','segmentLength','shaftSections','dispenseSize'];
+const numbers=['soapRimHeight','width','depth','height','wall','clearance','openingSize','detailDepth','detailSpacing','columns','rows','segmentLength','shaftSections','dispenseSize'];
 let state,model=null,worker=null,timer=null,revision=0,busy=false,preview;
 const filament=createFilamentDisplay($('feedback'),'filament-estimate');
 try{preview=createDeskPreview($('model-canvas'));}catch{$('model-preview').textContent='3D preview needs WebGL. Downloads are still available.';}
@@ -16,8 +16,8 @@ function sync(){
  for(const id of [...numbers,'kind','finish','palette','openwork','shape','trayLayout','lidText'])$(id).value=state[id]??'';
  for(const id of ['drainFloor','dripTray','weightedBase'])$(id).checked=state[id];
  $('shape-field').hidden=!['pot','bin'].includes(state.kind);$('depth-field').hidden=round||state.kind==='bin';
- $('width-label').textContent=round?'Diameter (mm)':'Width (mm)';$('height-label').textContent=state.kind==='roll'?'Base height (mm)':'Height (mm)';
- $('roll-settings').hidden=state.kind!=='roll';$('dispenser-settings').hidden=state.kind!=='toothpick';$('drainage-settings').hidden=!isWet(state);$('drip-tray-field').hidden=state.kind==='soap';
+ $('width-label').textContent=round?'Diameter (mm)':'Width (mm)';$('height-label').textContent=state.kind==='roll'?'Base height (mm)':state.kind==='soap'?'Catch-tray height (mm)':'Height (mm)';
+ $('roll-settings').hidden=state.kind!=='roll';$('dispenser-settings').hidden=state.kind!=='toothpick';$('soap-settings').hidden=state.kind!=='soap';$('drainage-settings').hidden=!isWet(state);$('drip-tray-field').hidden=state.kind==='soap';
  $('openwork-settings').hidden=!openworkAvailable(state);$('openwork-placement-note').textContent=isWet(state)?state.kind==='soap'?'Pattern applies to the removable platform. The catch tray stays solid.':'Pattern applies to all four holder walls. The removable drip tray stays solid.':'Openwork applies to the front and sides; the floor and back stay solid.';
  $('detail-settings').hidden=!adjustableFinish(state);$('compartments').hidden=!['tray','pot','caddy','toothbrush'].includes(state.kind);$('tray-layout-field').hidden=state.kind!=='tray';$('lid-text-field').hidden=state.kind!=='screw';
  $('lid-label').hidden=!['cotton','toothpick','roll','screw','bin'].includes(state.kind);$('open-lid').checked=false;preview?.setLidOpen(false);

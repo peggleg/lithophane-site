@@ -2,7 +2,7 @@ import {filamentReport} from './filament.js';
 import {printProfileImport} from './print-profile.js';
 export function homeGuide(model){const p=model.settings,f=model.homeFit;return `${filamentReport(model.parts,p.kind)}
 DESIGN STUDIO — ${(p.collection||'HOME & LIVING').toUpperCase()}
-${p.kind}; ${p.finish} surface. Requested dimensions ${p.width} × ${p.depth} × ${p.height} mm${p.kind==='roll'?' (base dimensions; the shaft is additional)':''}.
+${p.kind}; ${p.finish} surface. Requested dimensions ${p.width} × ${p.depth} × ${p.height} mm${p.kind==='roll'?' (base dimensions; the shaft is additional)':p.kind==='soap'?' (catch-tray dimensions; retaining sides are additional)':''}.
 Assembled size ${[model.width,model.depth,model.height].map(n=>n.toFixed(1)).join(' × ')} mm.
 
 A1 MINI

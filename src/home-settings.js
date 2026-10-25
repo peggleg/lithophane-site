@@ -8,7 +8,7 @@ export const homePresets={
  cotton:{width:80,depth:80,height:130,columns:1,rows:1,openwork:'none'},
  vanity:{width:160,depth:140,height:90,columns:1,rows:1,openwork:'none'}
 };
-export const homeDefaults={segmentLength:150,shaftSections:2,weightedBase:true,dispenseSize:3.2,drainFloor:true,dripTray:true};
+export const homeDefaults={soapRimHeight:5,segmentLength:150,shaftSections:2,weightedBase:true,dispenseSize:3.2,drainFloor:true,dripTray:true};
 export const isHome=p=>Object.hasOwn(homePresets,p.kind);
 export const isWet=p=>['soap','caddy','toothbrush'].includes(p.kind);
 export const homeCollections={
@@ -30,6 +30,7 @@ export function validateHome(p,inset=0){
  if(['toothpick','cotton','toothbrush','caddy'].includes(p.kind)&&p.height<45)throw Error('This item needs at least 45 mm height.');
  if(p.kind==='cotton'&&p.width<60)throw Error('Use at least 60 mm diameter for the cotton-pad dispenser.');
  if(p.kind==='vanity'&&(p.width<120||p.depth<100||p.height<40))throw Error('Vanity sets need at least 120 × 100 × 40 mm for three pots and a ring dish.');
+ if(p.kind==='soap'&&(!Number.isFinite(p.soapRimHeight)||p.soapRimHeight<0||p.soapRimHeight>20))throw Error('Soap retaining sides must be 0–20 mm above the platform.');
  if(p.kind==='soap'&&(p.width<75||p.depth<55||p.height<14||p.height>35))throw Error('Soap dishes need at least 75 × 55 mm, with 14–35 mm height.');
  if(p.kind==='spoon'&&(p.width<60||p.depth<80||p.height>30))throw Error('Spoon rests need at least 60 × 80 mm and 12–30 mm height.');
  if(['caddy','toothbrush'].includes(p.kind)){const reserve=2*inset+2*p.wall+(p.dripTray?2*(p.wall+p.clearance+inset):0),iw=p.width-reserve,id=p.depth-reserve;if((iw-(p.columns-1)*p.wall)/p.columns<18||(id-(p.rows-1)*p.wall)/p.rows<18)throw Error('Each wet-use compartment needs at least 18 mm usable width and depth. Increase the size or reduce rows and columns.');}

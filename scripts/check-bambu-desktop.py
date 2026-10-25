@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 import time
 import zipfile
-from Xlib import X, XK, display
+from Xlib import X, XK, display, error
 from Xlib.ext import xtest
 from PIL import Image
 
@@ -43,25 +43,55 @@ def text(value):
         if shifted: key('Shift_L', False)
     d.sync()
 
+def visible_windows():
+    # Native file dialogs can disappear between QueryTree and attribute reads.
+    windows = []
+    for window in d.screen().root.query_tree().children:
+        try:
+            if window.get_attributes().map_state == X.IsViewable:
+                windows.append(window)
+        except error.BadWindow:
+            continue
+    return windows
+
+def window_name(window):
+    try:
+        return window.get_wm_name()
+    except error.BadWindow:
+        return None
+
+def transient_for(window):
+    try:
+        return window.get_wm_transient_for()
+    except error.BadWindow:
+        return None
+
 def focus_canvas():
-    windows = [w for w in d.screen().root.query_tree().children
-               if w.get_attributes().map_state == X.IsViewable]
-    window = max(reversed(windows), key=lambda w: w.get_geometry().width)
-    g = window.get_geometry()
-    xtest.fake_input(d, X.MotionNotify, x=g.x + int(g.width * .7),
-                     y=g.y + int(g.height * .25))
-    xtest.fake_input(d, X.ButtonPress, 1)
-    xtest.fake_input(d, X.ButtonRelease, 1)
-    d.sync()
+    deadline = time.monotonic() + 10
+    while time.monotonic() < deadline:
+        windows = visible_windows()
+        try:
+            if windows:
+                window = max(reversed(windows), key=lambda w: w.get_geometry().width)
+                g = window.get_geometry()
+                xtest.fake_input(d, X.MotionNotify, x=g.x + int(g.width * .7),
+                                 y=g.y + int(g.height * .25))
+                xtest.fake_input(d, X.ButtonPress, 1)
+                xtest.fake_input(d, X.ButtonRelease, 1)
+                d.sync()
+                return
+        except error.BadWindow:
+            pass
+        time.sleep(.2)
+    raise RuntimeError('Bambu desktop window is unavailable')
 
 def wait_ready(title):
     deadline = time.monotonic() + 90
     stable = 0
     while time.monotonic() < deadline:
-        windows = [w for w in d.screen().root.query_tree().children
-                   if w.get_attributes().map_state == X.IsViewable]
-        matching = [w for w in windows if w.get_wm_name() == title]
-        dialogs = [w for w in windows if matching and w.get_wm_transient_for() == matching[-1]]
+        windows = visible_windows()
+        matching = [w for w in windows if window_name(w) == title]
+        dialogs = [w for w in windows if matching and transient_for(w) == matching[-1]]
         if matching and not dialogs:
             stable += 1
             if stable >= 5: return
@@ -116,6 +146,7 @@ for kind in args.kinds:
             time.sleep(.2)
     for field in keys:
         assert actual[field] == expected[field], f'{kind}: desktop restored {field}={actual[field]} (expected {expected[field]})'
+    wait_ready(kind)
     report.append({'kind': kind, 'desktop_settings': {k: actual[k] for k in keys}})
     print(f'{kind}: desktop Open Project / Save Project retained all agreed values', flush=True)
 (output / 'results.json').write_text(json.dumps(report, indent=2) + '\n')

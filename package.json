@@ -34,7 +34,8 @@
     "test:lantern-lifecycle": "node scripts/check-lantern-lifecycle-browser.mjs",
     "test:coaster-plant": "node scripts/check-coaster-plant-browser.mjs",
     "test:drawer-sheets": "node scripts/check-drawer-sheets-browser.mjs",
-    "test:home": "node scripts/check-home-browser.mjs"
+    "test:home": "node scripts/check-home-browser.mjs",
+    "test:cupboards": "node scripts/check-cupboard-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
