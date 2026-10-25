@@ -48,8 +48,8 @@ test('square and round bins have flush flat lids, closed floors and collision-fr
  for(const shape of ['square','round'])for(const finish of ['smooth','fluted','slatted'])for(const width of [50,110,170]){
   const m=build({kind:'bin',shape,finish,width,depth:width,height:100});assert.equal(m.parts.length,2);m.parts.forEach(check);
   const body=restore(m.parts[0]),lid=restore(m.parts[1]);
-  assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[1].assembly[2]+2.5,100);
-  for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.translate([0,0,-1.25]).rotate([angle,0,0]).translate([0,0,98.75]);for(const stationary of [body]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
+  assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[1].assembly[2],100);
+  for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.rotate([180,0,0]).translate([0,0,4.5]).rotate([angle,0,0]).translate([0,0,95.5]);for(const stationary of [body]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
   assert.equal(Object.keys(unzip(deskStlZip(m))).length,4);assert.match(deskGuide(m),/no separate rim/);[body,lid].forEach(s=>s.delete());
  }
 });
@@ -71,7 +71,7 @@ test('deep ribs, scallops and waves create closed A1 mini parts with smooth cavi
   assert.match(deskGuide(m),/projection 1.6 mm; spacing 8 mm/);
   if(kind==='drawers'){const raw=restore(m.parts[0]),shell=raw.rotate([90,0,0]).translate(m.parts[0].assembly);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(shell);assert.ok(hit.volume()<.001,'decorated drawer clears case');[d,pose,hit].forEach(o=>o.delete());}raw.delete();shell.delete();}
   if(kind==='tray'){const tray=restore(m.parts[0]);for(const p of m.parts.slice(1)){const d=restore(p),pose=d.translate(p.assembly),hit=pose.intersect(tray);assert.ok(hit.volume()<.001,'auto-sized inserts clear decorated tray');[d,pose,hit].forEach(o=>o.delete());}tray.delete();}
-  if(kind==='bin'){const body=restore(m.parts[0]),lid=restore(m.parts[1]);for(const angle of [-90,0,90]){const pose=lid.translate([0,0,-1.25]).rotate([angle,0,0]).translate([0,0,m.height-1.25]);const hit=pose.intersect(body);assert.ok(hit.volume()<.001,'decorated bin retains free lid travel');hit.delete();pose.delete();}[body,lid].forEach(o=>o.delete());}
+  if(kind==='bin'){const body=restore(m.parts[0]),lid=restore(m.parts[1]);for(const angle of [-90,0,90]){const pose=lid.rotate([180,0,0]).translate([0,0,4.5]).rotate([angle,0,0]).translate([0,0,m.height-4.5]);const hit=pose.intersect(body);assert.ok(hit.volume()<.001,'decorated bin retains free lid travel');hit.delete();pose.delete();}[body,lid].forEach(o=>o.delete());}
   if(kind==='pot'||kind==='bin'){const s=restore(m.parts[0]),slice=s.slice(10),small=module.CrossSection.square([10,10],true).translate([m.width/4,0]),hit=slice.intersect(small);assert.ok(hit.area()<.001,'interior remains hollow');[s,slice,small,hit].forEach(o=>o.delete());}
  }
 });

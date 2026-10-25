@@ -2,6 +2,7 @@ import {makeCoasterPlant} from './coaster-plant.js';
 import {monsteraSections} from './monstera.js';
 export const isCoaster=p=>['coaster','coaster-tray','coaster-rack','coaster-plant'].includes(p.kind);
 export function validateCoaster(p){
+ if(p.kind==='coaster-plant')p.leafHanger=true;else p.leafHanger=p.leafHanger!==false;
  if(p.kind==='coaster-plant'&&p.coasterShape!=='monstera')throw Error('The plant display holds monstera leaves. Choose the monstera shape.');
  if(!['round','square','hexagon','monstera'].includes(p.coasterShape)||!['flat','recessed'].includes(p.coasterSurface)||!['open','backed'].includes(p.leafBacking))throw Error('Choose an available coaster shape, surface and leaf backing.');
  if(!Number.isInteger(p.coasterCount)||p.coasterCount<4||p.coasterCount>6)throw Error('Choose a set of 4–6 matching coasters.');
@@ -26,6 +27,7 @@ export function makeCoasters(module,own,p,{round,ribs,box,add,reference}){
  // thinnest permitted floor, omit the engraving to retain 2.4 mm of backing.
  const veinDepth=leaf?Math.min(.4,Math.max(0,floor-2.4)):0;
  if(leaf&&veinDepth>.001){const detail=p.coasterSurface==='recessed'?own(sections.veins.intersect(own(profile.offset(-2.4)))):sections.veins;coaster=own(coaster.subtract(own(detail.extrude(veinDepth+.02).translate([0,0,floor-veinDepth]))));}
+ if(leaf&&p.leafHanger)coaster=own(coaster.subtract(own(sections.hangingHole.extrude(p.height+.1).translate([0,0,-.01]))));
  const gap=p.clearance,wall=p.wall;
  let fit={width:p.width,depth:p.depth,height:p.height,coasterWidth:p.width,coasterDepth:p.depth,coasterThickness:p.height,count:p.coasterCount,clearance:gap,floor,veinDepth};
  if(p.kind==='coaster'){
@@ -41,8 +43,8 @@ export function makeCoasters(module,own,p,{round,ribs,box,add,reference}){
   if(p.finish==='wave'){const shells=holder.decompose().map(own);holder=shells.reduce((a,b)=>a.volume()>b.volume()?a:b);}
   add('coaster-stacking-holder','holder',holder,[0,0,0]);const b=holder.boundingBox();fit={...fit,width:b.max[0]-b.min[0],depth:b.max[1]-b.min[1],height:h};
  }else if(p.kind==='coaster-plant'){
-  const plant=makeCoasterPlant(module,own,p,profile,{box,add,decorate:(outline,h)=>contourDetail(module,own,p,outline,h)});fit={...fit,...plant};
-  for(const slot of fit.plant.slots){const leafPose=own(coaster.translate([-slot.tipCentre,-slot.bottom+.15,-p.height/2]).rotate([slot.angle,0,0]).rotate([0,0,slot.rotation]).translate([slot.x,slot.y,slot.base+slot.length]));fit.references.push(reference('display-leaf-'+slot.name,'reference-leaf',leafPose,[0,0,0]));}
+  const plant=makeCoasterPlant(module,own,p,profile,sections.hanger,{box,add,decorate:(outline,h)=>contourDetail(module,own,p,outline,h)});fit={...fit,...plant};
+  for(const slot of fit.plant.slots){const leafPose=own(coaster.translate([-sections.hanger.x,-sections.hanger.y,-p.height/2]).rotate([slot.angle,0,0]).rotate([0,0,slot.rotation]).translate([slot.x,slot.y,slot.z]));fit.references.push(reference('display-leaf-'+slot.name,'reference-leaf',leafPose,[0,0,0]));}
   const bounds={min:[...fit.plant.potBounds.min],max:[...fit.plant.potBounds.max]};for(const ref of fit.references)for(let a=0;a<3;a++){bounds.min[a]=Math.min(bounds.min[a],ref.bounds.min[a]);bounds.max[a]=Math.max(bounds.max[a],ref.bounds.max[a]);}fit.width=bounds.max[0]-bounds.min[0];fit.depth=bounds.max[1]-bounds.min[1];fit.height=bounds.max[2]-bounds.min[2];
  }else{
   const w=p.width+2*gap+2*wall,slot=p.height+2*gap,d=p.coasterCount*slot+(p.coasterCount+1)*wall,h=24,base=round(w,d,3),features=[own(base.extrude(wall))];

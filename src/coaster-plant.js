@@ -1,33 +1,35 @@
-// Removable leaf display: a pot, lift-out socket plate and one keyed stem per
-// coaster. The coasters are reference meshes in this holder project, not extra
-// printable objects: they keep their separate 5/5-layer project.
-export function makeCoasterPlant(module,own,p,profile,{box,add,decorate}){
- const {CrossSection:C,Manifold:M}=module,wall=p.wall,gap=p.clearance,diameter=Math.min(140,Math.max(80,p.width*1.05)),potHeight=45,postWidth=6.4,plateFloor=2.4,socketHeight=10,ring=diameter/2-wall-11;
- const circle=own(C.circle(diameter/2,128)),cavity=own(C.circle(diameter/2-wall,128));
- const pot=own(decorate(circle,potHeight).subtract(own(cavity.extrude(potHeight).translate([0,0,wall]))));
- add('plant-display-pot','plant-pot',pot,[0,0,0]);
+// One modular trunk carries two tiers of branches. Leaves hang by their stem
+// holes on upward pegs; no separate leaf posts extend down into the pot.
+export function makeCoasterPlant(module,own,p,profile,hanger,{box,add,decorate}){
+ const {CrossSection:C,Manifold:M}=module,wall=p.wall,gap=p.clearance,diameter=Math.min(140,Math.max(80,p.width*1.05)),potHeight=45,plateFloor=2.4,socketHeight=12,postWidth=8,base=wall+plateFloor;
+ const circle=own(C.circle(diameter/2,128)),cavity=own(C.circle(diameter/2-wall,128)),pot=own(decorate(circle,potHeight).subtract(own(cavity.extrude(potHeight).translate([0,0,wall]))));add('plant-display-pot','plant-pot',pot,[0,0,0]);
  const plateRadius=diameter/2-wall-gap,plateProfile=own(C.circle(plateRadius,128));let plate=own(plateProfile.extrude(plateFloor));
- const grip=Math.max(6,Math.min(10,p.depth*.075)),b=profile.bounds(),bottom=b.min[1],tip=own(profile.intersect(own(C.square([p.width+2,grip],true).translate([0,bottom+grip/2])))),tb=tip.bounds(),tipCentre=(tb.min[0]+tb.max[0])/2,tipWidth=tb.max[0]-tb.min[0],slotWidth=tipWidth+2*gap,slotThickness=p.height+2*gap,clipWidth=slotWidth+2*wall;
- // Separate height levels keep the wide leaves from crossing each other. Lower
- // tilt automatically for deep leaves so every long stem stays under 170 mm.
- let angle=60,low=potHeight+5,level;
- while(angle>=30){level=p.depth*Math.sin(angle*Math.PI/180)+p.height+12;if(low+level+grip*Math.sin(angle*Math.PI/180)+slotThickness+wall<168)break;angle-=5;}
- if(angle<30)throw Error('Reduce leaf depth or coaster thickness so the display stems fit the A1 mini.');
- const radians=angle*Math.PI/180,slots=[],references=[];
- const levels=[Math.ceil(p.coasterCount/2),Math.floor(p.coasterCount/2)];let index=0;
+ const collar=own(C.circle(8+gap+wall,64).extrude(socketHeight).translate([0,0,plateFloor])),socket=box(postWidth+2*gap,postWidth+2*gap,socketHeight+.02,0,0,plateFloor);plate=own(plate.add(own(collar.subtract(socket))));plate=own(plate.subtract(box(3,4,plateFloor+.1,0,plateRadius,0)));
+ const angle=-60,radians=Math.PI/3,sag=p.depth*Math.sin(radians)+p.height,low=potHeight+sag+12-base,level=sag+12,high=low+level,reach=Math.max(34,p.width*.43),slots=[],references=[],levels=[Math.ceil(p.coasterCount/2),Math.floor(p.coasterCount/2)];
+ let trunk=own(C.circle(8,64).extrude(high+2));trunk=own(trunk.subtract(box(30,30,12,0,0,0)));trunk=own(trunk.add(box(postWidth,postWidth,12)));
+ for(const height of [low,high]){const a=own(C.circle(8,64).extrude(.1).translate([0,0,height-20])),b=own(C.circle(14,64).extrude(12).translate([0,0,height-14])),c=own(C.circle(8,64).extrude(.1).translate([0,0,height+1.9]));trunk=own(trunk.add(own(M.hull([a,b,c]))));}
+ let index=0;
+ function stroke(points,width){const left=[],right=[];for(let i=0;i<points.length;i++){const a=points[Math.max(0,i-1)],b=points[Math.min(points.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),r=width/2;left.push([points[i][0]-dy/len*r,points[i][1]+dx/len*r]);right.push([points[i][0]+dy/len*r,points[i][1]-dx/len*r]);}return own(new C([[...left,...right.reverse()]],'NonZero'));}
  for(let tier=0;tier<2;tier++)for(let j=0;j<levels[tier];j++){
-  const theta=j*360/levels[0]+tier*180/levels[0],a=theta*Math.PI/180,x=-ring*Math.sin(a),y=ring*Math.cos(a),length=low+tier*level;
-  // Rotate at origin, then position: square keys follow each leaf's heading.
-  const outer=own(box(postWidth+2*gap+2*wall,postWidth+2*gap+2*wall,socketHeight,0,0,plateFloor).rotate([0,0,theta]).translate([x,y,0]));
-  const hole=own(box(postWidth+2*gap,postWidth+2*gap,socketHeight+.02,0,0,plateFloor).rotate([0,0,theta]).translate([x,y,0]));plate=own(plate.add(own(outer.subtract(hole))));
-  const head=own(box(clipWidth,grip+wall,slotThickness+wall,0,(grip-wall)/2,-slotThickness/2-wall).rotate([angle,0,0]).translate([0,0,length]));
-  const stemTop=box(postWidth,postWidth,.1,0,0,length-12),headFloor=own(box(clipWidth,wall,.1,0,-wall/2,-slotThickness/2-wall).rotate([angle,0,0]).translate([0,0,length]));
-  const transition=own(M.hull([stemTop,headFloor]));let stem=own(box(postWidth,postWidth,length-11.9).add(transition).add(head));
-  const mouth=own(box(slotWidth,grip+.2,slotThickness+wall+1,0,(grip+.2)/2,-slotThickness/2).rotate([angle,0,0]).translate([0,0,length]));stem=own(stem.subtract(mouth));
-  const name=`plant-stem-${++index}-${tier?'upper':'lower'}`;add(name,'plant-stem',stem,[x,y,wall+plateFloor],[0,0,a]);
-  slots.push({name,x,y,rotation:theta,angle,length,tipCentre,bottom,grip,slotWidth,slotThickness,base:wall+plateFloor});
+  const theta=j*360/levels[0]+tier*180/levels[0],a=theta*Math.PI/180,height=tier?high:low,n=[Math.sin(radians),Math.cos(radians)],back=p.height/2+gap+2.5,end=[reach-n[0]*back,-n[1]*back],points=[];
+  for(let i=0;i<=24;i++){const t=i/24,u=1-t;points.push([u**3*17+3*u*u*t*23+3*u*t*t*(end[0]-8)+t**3*end[0],u**3*(-8)+3*u*u*t*(-8)+3*u*t*t*(end[1]-3)+t**3*end[1]]);}
+  const rod=stroke(points,5),root=own(C.square([9,8],true).translate([12,-8])),stop=own(C.circle(2.5,40).translate(end));const rootRound=own(C.circle(2.5,40).translate([17,-8]));let branch=own(own(own(rod.add(root)).add(rootRound)).add(stop));
+  const start=[reach-n[0]*(p.height/2+gap+3),-n[1]*(p.height/2+gap+3)],finish=[reach+n[0]*(p.height/2+3),n[1]*(p.height/2+3)],peg=stroke([start,finish],1.8);branch=own(branch.add(peg));
+  const solid=own(branch.extrude(1.8)),name=`plant-branch-${++index}-${tier?'upper':'lower'}`;
+  add(name,'plant-branch',solid,[-.9*Math.cos(a),-.9*Math.sin(a),base+height],[Math.PI/2,0,a+Math.PI/2]);
+  // Exported branch meshes lie flat; assembled rotation is extrinsic X then Z.
+  slots.push({name,x:-reach*Math.sin(a),y:reach*Math.cos(a),z:base+height,rotation:theta,angle,tier,hookNormal:[-n[0]*Math.sin(a),n[0]*Math.cos(a),n[1]],reach});
+  const cut=own(box(1.8+2*gap,12,8+2*gap,0,12.5,height-12-gap).rotate([0,0,theta]));trunk=own(trunk.subtract(cut));
  }
- plate=own(plate.subtract(box(3,4,plateFloor+.1,0,plateRadius,0)));
+ // Split only in the straight portions, keeping every hub and socket intact.
+ const ranges=[];let at=0;
+ for(const [end,hub]of [[low-20,false],[low+2,true],[high-20,false],[high+2,true]]){const count=hub?1:Math.max(1,Math.ceil((end-at)/150)),size=(end-at)/count;for(let k=0;k<count;k++)ranges.push([at+k*size,at+(k+1)*size]);at=end;}
+ for(let i=0;i<ranges.length;i++){
+  const [start,end]=ranges[i],clip=box(40,40,end-start,0,0,start);let segment=own(trunk.intersect(clip));
+  if(i>0)segment=own(segment.subtract(box(postWidth+2*gap,postWidth+2*gap,10.2,0,0,start-.01)));
+  if(i<ranges.length-1)segment=own(segment.add(box(postWidth,postWidth,10.02,0,0,end-.02)));
+  segment=own(segment.translate([0,0,-start]));add(`plant-trunk-${i+1}-of-${ranges.length}`,'plant-trunk',segment,[0,0,base+start]);
+ }
  add('plant-socket-plate','plant-plate',plate,[0,0,wall]);
- return {width:diameter,depth:diameter,height:wall+plateFloor+low+level+p.depth*Math.sin(radians)+p.height,plant:{potBounds:pot.boundingBox(),diameter,potHeight,plateFloor,socketHeight,postWidth,tipWidth,tipCentre,bottom,grip,angle,slots},references};
+ return {width:diameter,depth:diameter,height:base+high+2,plant:{potBounds:pot.boundingBox(),diameter,potHeight,plateFloor,socketHeight,postWidth,hanger,angle,slots,trunkSections:ranges.length},references};
 }

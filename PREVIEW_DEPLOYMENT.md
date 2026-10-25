@@ -93,3 +93,11 @@ Monstera coasters now have engraved branching veins and a suggested elongated le
 Openwork drawers can now include top-loading guides and separate 1 mm printable colour sheets. Plain cutouts remain the default, without guides or slots, and match the previous meshes exactly. Front/front-and-sides selection controls which sheets are supplied; every sheet follows its drawer's dimensions and is printed flat. Preview colour is independent of the existing body palette. Desk profiles remain 8% gyroid, two walls and 3/3 layers; thin sheets become solid through skin overlap. See `docs/drawer-colour-sheets.md` for assembly and validation details.
 
 Drawer colour sheets now sit just 0.2 mm behind the inner perforated wall. A continuous 1.2 mm-high bottom retaining lip forms the drop-in channel; side/end guides and divider clearances retain vertical insertion and removal. Plain cutout geometry and print profiles remain unchanged.
+
+## Captured bin hinge and branching coaster plant
+
+The bin retains two printable parts. Integral 2.5 mm lid pins clip into enclosed bearings by flexing the rim; stop tabs limit opening to about 90 degrees from closed in either direction. The 2.5 mm main lid panel prints top-down, with local hinge/stop features underneath. This replaces the open pivot seats.
+
+The plant holder now uses one segmented central trunk with branch hubs and flat-printing removable branches. Leaves hang downward by reinforced stem holes on upward-facing pegs, rather than sitting on individual posts in the pot. The new hanging-hole option must be enabled for matching leaf coasters. Existing stacking and rack holders remain available. Every part keeps the A1 mini size check and its existing profile (3/3 holder/bin, 5/5 coasters, 8% gyroid, two walls). See the bin and monstera design notes for assembly and physical validation limits.
+
+Validation: all 139 geometry/unit tests passed, plus targeted hanging-leaf balance and capture checks. Bin, coaster and plant browser checks passed. Actual Bambu Studio CLI imports and desktop Open/Save round trips retained the agreed profiles; production and preview builds passed. Physical clip force, wear and plant stability still require printed samples.

@@ -66,5 +66,7 @@ export function monsteraSections(module,own,width,depth){
  const transform=section=>own(section.translate([-cx,-cy]).scale([sx,sy]));
  const cutouts=holes.map(h=>{const a=h.angle*Math.PI/180,points=cubicPoints(aperture,12).map(([x,y])=>{const px=x*h.rx,py=y*h.ry;return [h.x+px*Math.cos(a)-py*Math.sin(a),h.y+px*Math.sin(a)+py*Math.cos(a)];});return own(new C([points.map(bladePoint)],'NonZero'));});
  const outline=transform(raw),veins=own(C.union(veinCurves.map((curve,i)=>{const points=cubicPoints([curve],24);points.push(curve[3]);return own(new C([stroke(points.map(bladePoint).map(([x,y])=>[(x-cx)*sx,(y-cy)*sy]),i===0?.9:.6)],'NonZero'));}))),safeVeins=own(veins.intersect(own(outline.offset(-1.2))));
- return {outline,holes:transform(own(C.union(cutouts))),veins:safeVeins};
+ const bounds=outline.bounds(),tip=own(outline.intersect(own(C.square([width+2,.8],true).translate([0,bounds.min[1]+.4])))),tb=tip.bounds(),hanger={x:(tb.min[0]+tb.max[0])/2,y:bounds.min[1]+3.2,radius:1.6};
+ const pad=own(C.circle(3.2,48).translate([hanger.x,hanger.y])),neckY=bounds.min[1]+Math.min(14,Math.max(6,depth*.1)),neckBand=own(outline.intersect(own(C.square([Math.max(12,width*.16),.5],true).translate([hanger.x,neckY])))),nb=neckBand.bounds(),neck=own(C.circle(1.6,40).translate([(nb.min[0]+nb.max[0])/2,neckY])),bridge=own(C.hull([pad,neck])),blade=own(outline.add(bridge)),hangingHole=own(C.circle(hanger.radius,48).translate([hanger.x,hanger.y]));
+ return {outline:blade,holes:transform(own(C.union(cutouts))),veins:safeVeins,hanger,hangingHole};
 }

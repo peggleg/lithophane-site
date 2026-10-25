@@ -1,3 +1,4 @@
+import {makeBin} from './bin-geometry.js';
 import {drawerInsertActive,drawerCornerRadius,drawerInsertLayout,addDrawerInsertRails,drawerSheetSolid} from './drawer-inserts.js';
 import {isCoaster,makeCoasters} from './desk-coasters.js';
 import {isStorage,makeStorage} from './desk-storage.js';
@@ -15,7 +16,7 @@ export function generateDeskModel(module,input,fontBuffer){
   const repair=drawerInsertActive(p)||p.kind==='bin'||p.kind==='coaster-plant'||adjustableFinish(p)||(p.openwork!=='none'&&!['case','inner-box'].includes(role)),prepared=repair?own(solid.setTolerance(.0001)):solid,clean=own(prepared.simplify(.001));if(clean.status()!=='NoError'||clean.isEmpty()||clean.volume()<=0)throw Error('Could not make a closed desk part. Adjust the dimensions.');
   const bounds=clean.boundingBox(),size=bounds.max.map((v,i)=>v-bounds.min[i]);if(size.some(v=>v>170.001))throw Error('A finished part exceeds the 170 mm A1 mini design limit. Reduce its dimensions.');
   let mesh=clean.getMesh();if(repair){mesh.tolerance=.0001;const rounded=own(new M(mesh));const unified=own(rounded.asOriginal()),repaired=own(unified.setTolerance(.001));if(repaired.status()!=='NoError'||repaired.isEmpty())throw Error('Could not resolve the surface detail. Reduce the detail depth or increase spacing.');mesh=((drawerInsertActive(p)||['bin','coaster-plant'].includes(p.kind))?own(repaired.simplify(.001)):repaired).getMesh();}const vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];
-  parts.push({name,role,bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
+  parts.push({name,role,...(role==='plant-branch'?{rotationOrder:'ZYX'}:{}),bounds,mesh:{vertices,faces:new Uint32Array(mesh.triVerts)},assembly,rotation,printSize:size.map(v=>+v.toFixed(2))});
  }
  function ribs(solid,w,d,h,frontOnly=false){
   if(p.finish==='smooth')return solid;
@@ -106,28 +107,8 @@ export function generateDeskModel(module,input,fontBuffer){
     }
    }
   }else if(p.kind==='bin'){
-   const fit=binDimensions(p),w=fit.width,d=w,pivotZ=p.height-fit.pivot;
-   const outer=outline(w,d),opening=own(outer.offset(-fit.rimWall)),lidProfile=own(opening.offset(-fit.lidGap));
-   // The thicker top band and upward-open bearing seats print with the body.
-   let body=container(w,d,p.height,false,false);
-   const band=own(own(outer.extrude(fit.rimHeight)).subtract(own(opening.extrude(fit.rimHeight))));
-   body=own(body.add(own(band.translate([0,0,p.height-fit.rimHeight]))));
-   // A 45-degree interior ramp supports the thicker rim as it grows inward.
-   const ramp=fit.rimWall-p.wall,lower=own(own(outer.offset(-p.wall)).extrude(.01)),upper=own(opening.extrude(.01).translate([0,0,ramp]));
-   const cavity=own(M.hull([lower,upper])),shoulder=own(own(outer.extrude(ramp+.01)).subtract(cavity));
-   body=own(body.add(own(shoulder.translate([0,0,p.height-fit.rimHeight-ramp]))));
-   for(const side of [-1,1]){
-    const inner=w/2-fit.rimWall-.7,end=w/2-.5,channelDepth=end-inner;
-    const bore=own(C.circle(fit.bearingRadius,48).extrude(channelDepth).rotate([0,side*90,0]).translate([side*inner,0,pivotZ]));
-    const entry=box(channelDepth,fit.entryWidth,p.height-pivotZ+.02,side*(inner+end)/2,0,pivotZ);
-    body=own(body.subtract(own(bore.add(entry))));
-   }
-   add('bin-body-integral-rim','bin',body,[0,0,0]);
-   let lid=own(lidProfile.extrude(fit.lidThickness));
-   const lb=lidProfile.bounds(),pinStart=lb.max[0]-.2,pinLength=fit.pinSpan/2-pinStart;
-   for(const side of [-1,1])lid=own(lid.add(own(C.circle(fit.pinRadius,48).extrude(pinLength).rotate([0,side*90,0]).translate([side*pinStart,0,fit.pivot]))));
-   add('flat-swing-lid','lid',lid,[0,0,p.height-fit.lidThickness]);
-   parts.at(-1).pivot=[0,0,fit.pivot];
+   makeBin(module,own,p,binDimensions(p),{outline,container,box,add});
+   parts.find(part=>part.role==='lid').pivot=[0,0,binDimensions(p).pivot];
   }else if(standaloneTray(p)){
    const inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset,profile=round(w,d,3),inner=own(profile.offset(-p.wall));
    add(p.kind==='box'?'standalone-sorting-box':'standalone-pen-tray',p.kind,carveOpenwork(module,own,ribs(hollowBox(profile,p.height),w,d,p.height),w,d,p.height,p),[0,0,0]);
