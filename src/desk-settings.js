@@ -1,3 +1,4 @@
+import {printerKey,printLimit} from './printer-settings.js';
 import {cupboardOptionsDefaults,validateStorageOptions} from './cupboard-options.js';
 import {validateDrawerStyles,drawerStyle} from './drawer-finishes.js';
 import {cupboardDefaults,cupboardPreset,validateCupboard} from './cupboard-settings.js';
@@ -5,10 +6,10 @@ import {homePresets,homeDefaults,isHome,isWet,validateHome} from './home-setting
 import {isCoaster,validateCoaster} from './desk-coasters.js';
 import {isStorage,storageLayout} from './desk-storage.js';
 export const deskPresets={cupboard:cupboardPreset,...homePresets,'coaster-plant':{width:100,depth:125,height:4.4,columns:1,rows:1,coasterShape:'monstera',finish:'fluted'},coaster:{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},'coaster-tray':{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},'coaster-rack':{width:100,depth:100,height:4.4,columns:1,rows:1,finish:'smooth'},storage:{width:150,depth:110,height:40,columns:3,rows:2},'storage-pots':{width:150,depth:110,height:40,columns:3,rows:2},screw:{width:70,depth:70,height:65,columns:1,rows:1,finish:'fluted'},box:{width:60,depth:60,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},'pen-tray':{width:160,depth:55,height:25,drawers:2,columns:1,rows:1,finish:'smooth'},bin:{width:110,depth:110,height:140,drawers:2,columns:1,rows:1,wall:1.8,finish:'smooth'},drawers:{width:140,depth:130,height:100,drawers:2,columns:1,rows:1},pot:{width:80,depth:80,height:100,drawers:2,columns:1,rows:1},tray:{width:150,depth:100,height:25,drawers:2,columns:2,rows:2}};
-export const deskDefaults={...cupboardOptionsDefaults,drawerFinishMode:'same',drawerFinishes:[],...cupboardDefaults,...homeDefaults,kind:'drawers',coasterShape:'round',coasterSurface:'recessed',coasterRim:1.2,leafBacking:'backed',leafHanger:true,coasterCount:4,lidText:'',storageLid:'lift',columnShares:'',rowShares:'',openwork:'none',drawerInserts:'none',sheetColour:'#68bfc7',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
+export const deskDefaults={printer:'a1-mini',...cupboardOptionsDefaults,drawerFinishMode:'same',drawerFinishes:[],...cupboardDefaults,...homeDefaults,kind:'drawers',coasterShape:'round',coasterSurface:'recessed',coasterRim:1.2,leafBacking:'backed',leafHanger:true,coasterCount:4,lidText:'',storageLid:'lift',columnShares:'',rowShares:'',openwork:'none',drawerInserts:'none',sheetColour:'#68bfc7',openworkFaces:'front',openingSize:10,drawerColumns:1,shape:'square',finish:'fluted',detailDepth:1.6,detailSpacing:8,palette:'sage',trayLayout:'boxes',penShare:50,stackTop:'pockets',wall:2.4,clearance:.4,...deskPresets.drawers};
 export const deskPalettes={ivory:{body:'#eee6d7',detail:'#cbb798'},sage:{body:'#8c9b81',detail:'#eee5d3'},charcoal:{body:'#414441',detail:'#b38c62'},walnut:{body:'#72533e',detail:'#d7c4a5'},sand:{body:'#d9ccb4',detail:'#efe7d7'}};
 export function validateDeskSettings(input){
- const p={...deskDefaults,...input};
+ const p={...deskDefaults,...input};p.printer=printerKey(p);
  validateHome(p,finishInset(p));
  validateCupboard(p);
  validateDrawerStyles(p);
@@ -27,7 +28,7 @@ export function validateDeskSettings(input){
  if(!['pockets','smooth'].includes(p.stackTop))throw Error('Choose locating pockets or a smooth final top.');
  if(!['boxes','pens','fixed','open'].includes(p.trayLayout))throw Error('Choose removable boxes, a pen layout, fixed dividers or an open tray.');
  if(!Object.hasOwn(deskPresets,p.kind)||!['smooth','fluted','slatted','ribbed','scalloped','wave'].includes(p.finish)||!Object.hasOwn(deskPalettes,p.palette))throw Error('Choose an available desk item, surface style and palette.');
- for(const [id,min,max]of [['width',standaloneTray(p)?25:40,170],['depth',standaloneTray(p)?25:40,170],['height',isCoaster(p)?3:12,170],['wall',1.8,4],['clearance',.2,.8],['penShare',25,65],['detailDepth',.6,2.4],['detailSpacing',4,14]])if(!Number.isFinite(p[id])||p[id]<min||p[id]>max)throw Error(`Use ${min}–${max} mm for ${id}. Every part must fit within 170 × 170 × 170 mm.`);
+ for(const [id,min,max]of [['width',standaloneTray(p)?25:40,printLimit(p)],['depth',standaloneTray(p)?25:40,printLimit(p)],['height',isCoaster(p)?3:12,printLimit(p)],['wall',1.8,4],['clearance',.2,.8],['penShare',25,65],['detailDepth',.6,2.4],['detailSpacing',4,14]])if(!Number.isFinite(p[id])||p[id]<min||p[id]>max)throw Error(`Use ${min}–${max} mm for ${id}. Every part must fit within ${printLimit(p)} × ${printLimit(p)} × ${printLimit(p)} mm.`);
  for(const [id,max]of [['drawerColumns',4],['drawers',4],['columns',4],['rows',3]])if(!Number.isInteger(p[id])||p[id]<1||p[id]>max)throw Error(`Choose 1–${max} for ${id}.`);
  validateStorageOptions(p);
  if(isCoaster(p))validateCoaster(p);

@@ -1,3 +1,4 @@
+
 export const cupboardDefaults={cupboardRows:2,cupboardColumns:1,doorMode:'single',hingeSide:'left',cupboardFloor:'auto',cupboardTop:'auto',doorMagnets:false,cupboardPorts:'both',drawerConnectors:'none'};
 export const cupboardPreset={width:170,depth:130,height:170,wall:2.4,columns:1,rows:1,finish:'fluted'};
 export function validateCupboard(p){
@@ -8,7 +9,7 @@ export function validateCupboard(p){
  if(!['left','right'].includes(p.hingeSide))throw Error('Choose left or right door hinges.');
  for(const id of ['cupboardFloor','cupboardTop'])if(!['auto','each','none'].includes(p[id]))throw Error('Choose automatic, every module, or no floors/tops.');
  if(typeof p.doorMagnets!=='boolean')throw Error('Choose whether to include magnet pockets.');
- if(p.width/p.cupboardColumns<70||p.depth<60||p.height<80||p.wall<2.4)throw Error('Cupboards need 70 mm width per column, 60 mm depth, 80 mm module height and at least 2.4 mm walls. Total closed width stays within 170 mm.');
+ if(p.width/p.cupboardColumns<70||p.depth<60||p.height<80||p.wall<2.4)throw Error('Cupboards need 70 mm width per column, 60 mm depth, 80 mm module height and at least 2.4 mm walls. Total closed width stays within the selected printer size.');
  p.columns=p.rows=1;
 }
 export const cupboardCaps=(p,row)=>({floor:p.cupboardFloor==='each'||p.cupboardFloor==='auto'&&row===0,top:p.cupboardTop==='each'||p.cupboardTop==='auto'&&row===p.cupboardRows-1});

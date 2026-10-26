@@ -1,6 +1,7 @@
+import {printerKey} from './printer-settings.js';
 const outlines=new Map(),holes=new Map(),radii=new Map();
 function dimensions(p){
- const plate=p.kind==='nameplate',minWidth=plate?60:35,maxWidth=plate?240:100,minHeight=plate?25:20,maxHeight=plate?120:65;
+ const plate=p.kind==='nameplate',large=printerKey(p)==='256',minWidth=plate?60:35,maxWidth=large?256:plate?170:100,minHeight=plate?25:20,maxHeight=large?256:plate?120:65;
  if(![p.width,p.height].every(Number.isFinite)||p.width<minWidth||p.width>maxWidth||p.height<minHeight||p.height>maxHeight)throw Error(`Use ${minWidth}–${maxWidth} mm width and ${minHeight}–${maxHeight} mm height.`);
  if(!plate&&(!Number.isFinite(p.hole)||p.hole<3||p.hole>8))throw Error('Use a 3–8 mm ring hole.');
 }

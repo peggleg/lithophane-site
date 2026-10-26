@@ -50,7 +50,7 @@ test('square and round bins have flush flat lids, closed floors and collision-fr
   const body=restore(m.parts[0]),lid=restore(m.parts[1]);
   assert.ok(body.slice(1).area()>width*width*.6);assert.equal(m.parts[1].assembly[2],100);
   for(const angle of [-90,-60,-30,0,30,60,90]){const pose=lid.rotate([180,0,0]).translate([0,0,4.5]).rotate([angle,0,0]).translate([0,0,95.5]);for(const stationary of [body]){const hit=pose.intersect(stationary);assert.ok(hit.volume()<.001,`${shape} ${finish} ${width} swing ${angle}: ${hit.volume()}`);hit.delete();}pose.delete();}
-  assert.equal(Object.keys(unzip(deskStlZip(m))).length,4);assert.match(deskGuide(m),/no separate rim/);[body,lid].forEach(s=>s.delete());
+  assert.equal(Object.keys(unzip(deskStlZip(m))).length,5);assert.match(deskGuide(m),/no separate rim/);[body,lid].forEach(s=>s.delete());
  }
 });
 test('round pen pots retain circular footprint and closed connected divided geometry',()=>{for(const finish of ['smooth','fluted','slatted'])for(const width of [80,170]){const m=build({kind:'pot',shape:'round',finish,width,depth:50,columns:2,rows:2});assert.equal(m.depth,width);check(m.parts[0]);const s=restore(m.parts[0]),b=s.boundingBox();assert.ok(Math.abs((b.max[0]-b.min[0])-(b.max[1]-b.min[1]))<.05);s.delete();}});
@@ -60,7 +60,7 @@ test('side-by-side drawers have separate closed parts and clear their case, divi
   const m=build({drawerColumns,drawers,finish,width:170,depth:130,height:170,columns:1,rows:1,clearance:.2});assert.equal(m.parts.length,1+drawers*drawerColumns);m.parts.forEach(check);
   const raw=restore(m.parts[0]),shell=raw.rotate([90,0,0]).translate(m.parts[0].assembly),placed=[];
   for(const part of m.parts.slice(1)){const d=restore(part),closed=d.translate(part.assembly);for(const pull of [0,40]){const moved=d.translate([part.assembly[0],part.assembly[1]-pull,part.assembly[2]]),hit=moved.intersect(shell);assert.ok(hit.volume()<.001,`${drawerColumns} columns ${drawers} rows ${finish}: case collision`);hit.delete();for(const other of placed){const overlap=moved.intersect(other);assert.ok(overlap.volume()<.001,'adjacent drawer clearance');overlap.delete();}moved.delete();}placed.push(closed);d.delete();}
-  placed.forEach(s=>s.delete());raw.delete();shell.delete();assert.match(deskGuide(m),new RegExp(`${drawers} drawer rows × ${drawerColumns} drawer columns`));assert.equal(Object.keys(unzip(deskStlZip(m))).length,m.parts.length+2);
+  placed.forEach(s=>s.delete());raw.delete();shell.delete();assert.match(deskGuide(m),new RegExp(`${drawers} drawer rows × ${drawerColumns} drawer columns`));assert.equal(Object.keys(unzip(deskStlZip(m))).length,m.parts.length+3);
  }
  assert.throws(()=>build({drawerColumns:4,width:70}),/18 mm/);assert.throws(()=>build({drawerColumns:5}),/1–4/);
 });

@@ -13,7 +13,7 @@ console.log('Preview indexing policy, root assets, sitemap omission and CSP hash
 
 for(const page of ['index.html','lithophane/index.html','folding-fan/index.html','nameplates/index.html','keyrings/index.html','clickers/index.html','desk/index.html','coasters/index.html','kitchen/index.html','bathroom/index.html']){
  const content=fs.readFileSync(`${dir}/${page}`,'utf8');
- assert.ok(!/japandi/i.test(content));assert.match(content,/Our starting designs fit the A1 mini/);
+ assert.ok(!/japandi/i.test(content));assert.match(content,/A1 mini is selected by default; choose the optional 256 mm printer size/);
  assert.match(content,/<meta name="robots" content="noindex, nofollow"/);
  assert.ok(!content.includes('rel="canonical"'));
  const json=content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1];

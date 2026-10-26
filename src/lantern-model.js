@@ -1,3 +1,4 @@
+import {printerKey,assertPrintSize} from './printer-settings.js';
 import {exportEstimate,MIB} from './resolution.js';
 export const lanternFaces=['Front','Right','Back','Left'];
 export const lanternSpec=Object.freeze({width:145,depth:145,height:177.8,panelWidth:105,panelHeight:148,panelMax:3,ledDiameter:59,ledHeight:8,recessDiameter:59.6,recessHeight:8.4});
@@ -8,13 +9,13 @@ export function readSTL(buffer){
  return {vertices:new Float32Array(points),faces:new Uint32Array(faces)};
 }
 export function meshBounds(mesh){const min=[Infinity,Infinity,Infinity],max=[-Infinity,-Infinity,-Infinity];for(let i=0;i<mesh.vertices.length;i++) {const a=i%3;min[a]=Math.min(min[a],mesh.vertices[i]);max[a]=Math.max(max[a],mesh.vertices[i]);}return {min,max,size:max.map((x,i)=>x-min[i])};}
-export function frameModel(meshes){
+export function frameModel(meshes,printer){
  const parts=[];let x=0;
  for(const [role,count]of [['side',4],['retainer',4],['base',1],['ring',1]])for(let i=0;i<count;i++){
-  const mesh=meshes[role];if(!mesh)throw Error('Lantern frame files are not ready. Retry loading the lantern.');const bounds=meshBounds(mesh);if(bounds.size.some(x=>x>170.001))throw Error('A lantern part exceeds the A1 mini design limit.');
+  const mesh=meshes[role];if(!mesh)throw Error('Lantern frame files are not ready. Retry loading the lantern.');const bounds=meshBounds(mesh);assertPrintSize(bounds.size,printer);
   parts.push({name:`lantern-${role}${count>1?'-'+lanternFaces[i].toLowerCase():''}`,role,side:i,mesh,printSize:bounds.size.map(x=>+x.toFixed(2)),x:x-bounds.min[0],y:-bounds.min[1]});x+=bounds.size[0]+10;
  }
- return {settings:{kind:'lantern'},parts};
+ return {settings:{kind:'lantern',printer:printerKey(printer)},parts};
 }
 export function lanternPose([x,y,z],role,side=0){
  if(role==='base')return [x-72.5,y-72.5,z];

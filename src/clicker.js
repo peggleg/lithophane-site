@@ -1,3 +1,5 @@
+import {mountPrinterPicker} from './printer-picker.js';
+
 import {createFilamentDisplay} from './filament-display.js';
 import {symbolCollections,symbolNames} from './clicker-symbols.js';
 import './theme.js';
@@ -6,6 +8,7 @@ import {fonts} from './font-catalogue.js';
 import {clickerDefaults,clickerPresets,clickerPalettes,clickerCountRange,isClickerCharacter,pebbleBatchCharacters} from './clicker-settings.js';
 import {createClickerPreview} from './clicker-preview.js';
 const $=id=>document.getElementById(id),fitFields=['floor','pitch','cutout','cavity','wall','socketClearance','stemWidth','stemHeight'];
+const printerPicker=mountPrinterPicker(value=>{state.printer=value;sync();generate();});
 let state=structuredClone(clickerDefaults),selected=0,model=null,worker=null,timer=null,generation=0,busy=false,preview=null;
 const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','clicker'),batchFilamentDisplay=createFilamentDisplay($('batch-status'),'batch-filament-estimate','clicker');
 const batchEstimateButton=document.createElement('button');batchEstimateButton.id='batch-filament';batchEstimateButton.className='quiet';batchEstimateButton.textContent='Estimate batch filament';$('batch-filament-estimate','clicker').after(batchEstimateButton);batchEstimateButton.onclick=()=>exportFile('estimate',true);
@@ -21,7 +24,7 @@ function editor(){const key=state.keys[selected];$('key-heading').textContent=`B
  const palette=clickerPalettes[state.palette];$('key-colour').value=key.colour||palette?.caps[selected%palette.caps.length]||$('cap-colour').value;
  $('letter-field').hidden=key.type!=='text';$('symbol-field').hidden=key.type!=='symbol';}
 
-function sync(){$('pebble-batch').hidden=state.design!=='pebble';batchStatus();const {min,max}=clickerCountRange(state.design);$('count').replaceChildren();for(let count=min;count<=max;count++){const option=document.createElement('option');option.value=count;option.textContent=count;$('count').append(option);}$('quick-word').maxLength=max*2;$('word-help').textContent=min===max?`Use ${min} printable characters for this design, or edit each button below.`:`Type ${min}–${max} letters, numbers or punctuation marks, or edit each button below.`;for(const id of ['design','count','font','palette',...fitFields])$(id).value=state[id];$('keyring').checked=state.keyring;$('count').disabled=min===max;updateWord();buttons();editor();preview?.select(selected);colours();}
+function sync(){printerPicker.sync(state);$('pebble-batch').hidden=state.design!=='pebble';batchStatus();const {min,max}=clickerCountRange(state.design);$('count').replaceChildren();for(let count=min;count<=max;count++){const option=document.createElement('option');option.value=count;option.textContent=count;$('count').append(option);}$('quick-word').maxLength=max*2;$('word-help').textContent=min===max?`Use ${min} printable characters for this design, or edit each button below.`:`Type ${min}–${max} letters, numbers or punctuation marks, or edit each button below.`;for(const id of ['design','count','font','palette',...fitFields])$(id).value=state[id];$('keyring').checked=state.keyring;$('count').disabled=min===max;updateWord();buttons();editor();preview?.select(selected);colours();}
 function downloads(){for(const id of ['batch-stl','batch-three-mf','batch-filament'])$(id).disabled=busy||state.design!=='pebble'||!batchStatus();for(const id of ['stl','three-mf','print-guide','try-button'])$(id).disabled=!model||busy||(id==='try-button'&&($('parts-view').checked||$('open-tray').checked));}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('progress').hidden=true;$('cancel').hidden=true;downloads();}
 function generate(){const token=++generation;stop();model=null;filamentDisplay.clear();batchFilamentDisplay.clear();preview?.setModel(null);downloads();$('feedback').textContent='Preparing your clicker…';$('export-status').textContent='';$('dimensions').textContent='—';$('part-count').textContent='—';

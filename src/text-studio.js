@@ -1,3 +1,5 @@
+import {mountPrinterPicker} from './printer-picker.js';
+
 import {createFilamentDisplay} from './filament-display.js';
 import {createSymbolEditor} from './symbol-editor.js';
 import './theme.js';
@@ -6,11 +8,13 @@ import {textDefaults,keyringShapeSizes} from './text-settings.js';
 import {createTextPreview} from './text-preview.js';
 const $=id=>document.getElementById(id),kind=document.body.dataset.generator,defaults=textDefaults[kind];
 const fields=['line1','line2','font','width','height','base','relief','size','mode','align',...(kind==='keyring'?['shape','hole','qrEnabled','qrText']:['stand'])];
+const printerPicker=mountPrinterPicker(()=>{printerLimits();generate();});
+function printerLimits(){const large=printerPicker.get()==='256';$('width').max=large?256:kind==='keyring'?100:170;$('height').max=large?256:kind==='keyring'?65:120;}
 let editor=null;
 let worker=null,timer=null,model=null,generation=0,preview=null,busy=false;
 const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate',kind);
 try{preview=createTextPreview($('model-canvas'));}catch{$('model-preview').textContent='Interactive preview needs WebGL. You can still generate and download your design.';}
-function settings(){const result={...defaults};for(const id of fields)result[id]=$(id).type==='checkbox'?$(id).checked:$(id).type==='number'?Number($(id).value):$(id).value;if(kind==='keyring'&&result.shape==='circle')result.height=result.width;result.symbols=editor?.get()||[];return result;}
+function settings(){const result={...defaults,printer:printerPicker.get()};for(const id of fields)result[id]=$(id).type==='checkbox'?$(id).checked:$(id).type==='number'?Number($(id).value):$(id).value;if(kind==='keyring'&&result.shape==='circle')result.height=result.width;result.symbols=editor?.get()||[];return result;}
 function enable(){for(const id of ['stl','three-mf','print-guide'])$(id).disabled=!model||busy;}
 function stop(report=false){clearTimeout(timer);worker?.terminate();worker=null;busy=false;$('progress').hidden=true;$('cancel').hidden=true;if(report)$('export-status').textContent='Cancelled. Change a setting to rebuild your design.';enable();}
 function fail(message){model=null;filamentDisplay.clear();preview?.setModel(null);$('feedback').textContent=message;$('dimensions').textContent='—';$('fitted-size').textContent='—';$('part-count').textContent='—';stop();}
@@ -35,6 +39,6 @@ $('parts-view').addEventListener('change',()=>preview?.setParts($('parts-view').
 $('reset-view').onclick=()=>preview?.reset();$('top-view').onclick=()=>preview?.reset(true);
 $('stl').onclick=()=>start('stl');$('three-mf').onclick=()=>start('3mf');$('print-guide').onclick=()=>start('guide');
 $('cancel').onclick=()=>{++generation;stop(true);};
-function reset(){for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
+function reset(){printerPicker.reset();printerLimits();for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
 editor=createSymbolEditor(settings,generate);
 $('reset').onclick=()=>{editor?.reset();reset();};window.addEventListener('pagehide',()=>{++generation;stop();preview?.dispose();model=null;filamentDisplay.clear();});reset();

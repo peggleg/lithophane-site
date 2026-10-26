@@ -1,5 +1,6 @@
+import {printerKey,printLimit} from './printer-settings.js';
 import {symbolNames} from './clicker-symbols.js';
-export const clickerDefaults={kind:'clicker',design:'charm',count:3,capShape:'rounded',font:'rounded',palette:'candy',keyring:true,floor:1.8,pitch:24,cutout:14.1,cavity:9,wall:2.4,socketClearance:.15,stemWidth:5.8,stemHeight:4,keys:[...'JOY'].map(value=>({type:'text',value}))};
+export const clickerDefaults={printer:'a1-mini',kind:'clicker',design:'charm',count:3,capShape:'rounded',font:'rounded',palette:'candy',keyring:true,floor:1.8,pitch:24,cutout:14.1,cavity:9,wall:2.4,socketClearance:.15,stemWidth:5.8,stemHeight:4,keys:[...'JOY'].map(value=>({type:'text',value}))};
 export const clickerPresets={
  christmas:{count:5,capShape:'rounded',palette:'christmas',keyring:true,keys:['tree','snowflake','present','bauble','gingerbread'].map(value=>({type:'symbol',value}))},
  charm:{count:3,capShape:'rounded',palette:'candy',keyring:true,keys:[...'JOY'].map(value=>({type:'text',value}))},
@@ -12,7 +13,7 @@ export const clickerPresets={
 export function clickerCountRange(design){return design==='charm'?{min:1,max:12}:design==='numbers'?{min:1,max:9}:design==='bloom'?{min:5,max:5}:design==='pebble'?{min:1,max:1}:{min:1,max:5};}
 export const isClickerCharacter=value=>/^[\p{L}\p{N}\p{P}\p{S}]$/u.test(value);
 export function validateClickerSettings(input){
- const p={...clickerDefaults,...input};
+ const p={...clickerDefaults,...input};p.printer=printerKey(p);
  if(!Object.hasOwn(clickerPresets,p.design)||p.capShape!=='rounded')throw Error('Choose an available design and square keycaps.');
  const {min,max}=clickerCountRange(p.design);
  if(!Number.isInteger(p.count)||p.count<min||p.count>max)throw Error(min===max?`This design has exactly ${min} buttons.`:`Choose ${min}–${max} buttons for this design.`);
@@ -26,7 +27,7 @@ export function validateClickerSettings(input){
 export function clickerPositions(p){
  if(p.design==='bloom'&&p.count>=4){const ring=[[-p.pitch,0],[0,p.pitch],[p.pitch,0],[0,-p.pitch]];return p.count===5?[[0,0],...ring]:ring;}
  if(p.design==='cloud'&&p.count>=3){const bottom=Math.min(3,p.count-1),top=p.count-bottom;return [...Array.from({length:top},(_,i)=>[(i-(top-1)/2)*p.pitch,p.pitch/2]),...Array.from({length:bottom},(_,i)=>[(i-(bottom-1)/2)*p.pitch,-p.pitch/2])];}
- if(!['cloud','numbers','gamepad','bloom'].includes(p.design))return Array.from({length:p.count},(_,i)=>[(i-(p.count-1)/2)*p.pitch,0]);
+ if(!['cloud','numbers','gamepad','bloom'].includes(p.design)){const cols=Math.min(p.count,Math.max(1,Math.floor((printLimit(p)-16)/p.pitch))),rows=Math.ceil(p.count/cols);return Array.from({length:p.count},(_,i)=>{const row=Math.floor(i/cols),n=Math.min(cols,p.count-row*cols);return [(i%cols-(n-1)/2)*p.pitch,((rows-1)/2-row)*24];});}
  const cols=Math.ceil(Math.sqrt(p.count)),rows=Math.ceil(p.count/cols);
  return Array.from({length:p.count},(_,i)=>{const row=Math.floor(i/cols),inRow=Math.min(cols,p.count-row*cols);return [(i%cols-(inRow-1)/2)*p.pitch,((rows-1)/2-row)*p.pitch];});
 }

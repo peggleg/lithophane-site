@@ -16,7 +16,7 @@ self.onmessage=({data})=>{
   }
   image?.close();progress(25);
   const mesh=makePanel(panel);panel.tones=null;progress(55);
-  const parts=format==='3mf'?threeMfParts(mesh,progress):[stlBytes(mesh)];
+  const parts=format==='3mf'?threeMfParts(mesh,progress,panel.printer):[stlBytes(mesh)];
   progress(95);
   const blob=new Blob(parts,{type:format==='3mf'?'model/3mf':'model/stl'});
   self.postMessage({progress:100,blob});

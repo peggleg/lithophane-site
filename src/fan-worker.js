@@ -4,6 +4,6 @@ self.onmessage=({data})=>{try{
  self.postMessage({progress:10});const {settings:p,photo,format}=data;
  const parts=format==='test'?[...pivotParts(p),...[1,2,3].map(i=>({name:`test-eyelet-${i}`,mesh:ringMesh({height:1.2,outer:6,inner:3.3,steps:64})}))]:makeFan(p,photo);
  const filament=filamentParts(parts,'fan');if(format==='estimate'){self.postMessage({filament});return;}
- self.postMessage({progress:65});const bytes=format==='3mf'?fan3mf(parts):partsZip(parts,p);
+ self.postMessage({progress:65});const bytes=format==='3mf'?fan3mf(parts,p.printer):partsZip(parts,p);
  self.postMessage({bytes,filament,progress:100},[bytes.buffer]);
 }catch(e){self.postMessage({error:e.message});}};

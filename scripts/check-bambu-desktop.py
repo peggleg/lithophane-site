@@ -113,7 +113,8 @@ def settings(file):
 
 keys = ['sparse_infill_density', 'sparse_infill_pattern', 'wall_loops',
         'top_shell_layers', 'bottom_shell_layers',
-        'top_shell_thickness', 'bottom_shell_thickness']
+        'top_shell_thickness', 'bottom_shell_thickness', 'printer_settings_id',
+        'printable_area', 'printable_height', 'filament_settings_id']
 report = []
 for kind in args.kinds:
     incoming, saved = source / (kind + '.3mf'), output / (kind + '.3mf')

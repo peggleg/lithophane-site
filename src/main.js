@@ -1,3 +1,5 @@
+import {mountPrinterPicker} from './printer-picker.js';
+import {printLimit,printerSizeText} from './printer-settings.js';
 import {filamentAssumptionsFor,panelGrams} from './filament.js';
 import './theme.js';
 import {mountSampleGallery} from './sample-gallery.js';
@@ -9,13 +11,14 @@ import {planSampling,previewSize,exportEstimate,assertExportBudget,memoryBudget,
 import {drawPhoto,paintBacklight,photoLayout,dragCrop} from './image-processing.js';
 const filamentAssumptions=filamentAssumptionsFor('lithophane');
 const $=id=>document.getElementById(id);
+const printerPicker=mountPrinterPicker(()=>{cancelExport(false);$('width').max=$('height').max=printLimit(printerPicker.get());lanternUI?.setPrinter(printerPicker.get());render();});$('width').max=$('height').max=170;
 const fields=['width','height','min','max','detail','crop','zoom','panx','pany','brightness','contrast','invert','overlap','clearance','overlay'];
 let image=null,worker=null,grid=null,loadId=0,exportId=0,exporting=false,loading=false,renderFrame=0;
 let source={name:'My lithophane',custom:false};
 const canvas=$('preview'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 const n=id=>Number($(id).value);
 let lanternUI=null,lanternMount=null,lanternReset=0;
-function layoutMode(){const on=$('frame').value==='lantern';for(const id of ['upload-label','single-panel-controls','single-photo-controls','single-workspace'])$(id).hidden=on;$('lantern-studio').hidden=!on;$('studio').classList.toggle('lantern-mode',on);if(on&&!lanternMount){const resetAtStart=lanternReset;lanternMount=import('./lantern-studio.js').then(m=>m.mountLantern($('lantern-studio'),{currentPhoto:async()=>{const current=image,name=source.name,config={...adjustments()};return current&&!loading?{image:await createImageBitmap(current),name,adjustments:config}:null;}})).then(ui=>{lanternUI=ui;if(resetAtStart!==lanternReset)ui.reset();if($('frame').value!=='lantern')ui.pause();return ui;}).catch(e=>{$('lantern-studio').textContent='Could not open the lantern studio: '+e.message;lanternMount=null;});}if(!on)lanternUI?.pause();}
+function layoutMode(){const on=$('frame').value==='lantern';for(const id of ['upload-label','single-panel-controls','single-photo-controls','single-workspace'])$(id).hidden=on;$('lantern-studio').hidden=!on;$('studio').classList.toggle('lantern-mode',on);if(on&&!lanternMount){const resetAtStart=lanternReset;lanternMount=import('./lantern-studio.js').then(m=>m.mountLantern($('lantern-studio'),{printer:()=>printerPicker.get(),currentPhoto:async()=>{const current=image,name=source.name,config={...adjustments()};return current&&!loading?{image:await createImageBitmap(current),name,adjustments:config}:null;}})).then(ui=>{lanternUI=ui;if(resetAtStart!==lanternReset)ui.reset();if($('frame').value!=='lantern')ui.pause();return ui;}).catch(e=>{$('lantern-studio').textContent='Could not open the lantern studio: '+e.message;lanternMount=null;});}if(!on)lanternUI?.pause();}
 
 const adjustments=()=>({crop:$('crop').value,zoom:n('zoom'),panx:n('panx'),pany:n('pany'),brightness:n('brightness'),contrast:n('contrast'),invert:$('invert').checked});
 function cropControls(p){
@@ -58,8 +61,8 @@ canvas.addEventListener('keydown',event=>{
  $('panx').value=Math.max(0,Math.min(100,n('panx')+delta[0]));$('pany').value=Math.max(0,Math.min(100,n('pany')+delta[1]));render();
 });
 function settings(){
- const p={width:n('width'),height:n('height'),min:n('min'),max:n('max')};
- if(![p.width,p.height,p.min,p.max,n('overlap')].every(Number.isFinite)||p.width<20||p.width>300||p.height<20||p.height>300||p.min<0.6||p.min>3||p.max<p.min||p.max>6||n('overlap')<0||n('overlap')>15)throw Error('Use panel sizes of 20–300 mm, minimum thickness 0.6–3 mm, maximum thickness up to 6 mm and at least the minimum, and edge overlap of 0–15 mm.');
+ const p={printer:printerPicker.get(),width:n('width'),height:n('height'),min:n('min'),max:n('max')};
+ if(![p.width,p.height,p.min,p.max,n('overlap')].every(Number.isFinite)||p.width<20||p.width>printLimit(p)||p.height<20||p.height>printLimit(p)||p.min<0.6||p.min>3||p.max<p.min||p.max>6||n('overlap')<0||n('overlap')>15)throw Error(`Use panel sizes of 20–${printLimit(p)} mm, minimum thickness 0.6–3 mm, maximum thickness up to 6 mm and at least the minimum, and edge overlap of 0–15 mm.`);
  if(2*n('overlap')>=Math.min(p.width,p.height))throw Error('Edge overlap must leave a visible photo area.');
  return {...p,...planSampling(p.width,p.height,n('detail'))};
 }
@@ -148,7 +151,7 @@ function cancelExport(report=true){
 }
 async function startExport(format,test=false){
  if(!grid||loading)return;cancelExport(false);
- const panel=test?{width:20,height:20,min:grid.max,max:grid.max,cols:2,rows:2,tones:new Float32Array(4)}:{...grid};
+ const panel=test?{printer:printerPicker.get(),width:20,height:20,min:grid.max,max:grid.max,cols:2,rows:2,tones:new Float32Array(4)}:{...grid};
  const photoAdjustments=adjustments(),budget=memoryBudget(navigator.deviceMemory);
  const token=exportId;let copy=null;
  try{
@@ -190,9 +193,9 @@ function resetCrop(){ $('zoom').value=100;$('panx').value=50;$('pany').value=50;
 $('reset-crop').onclick=()=>{cancelExport(false);resetCrop();render();};
 $('summary').onclick=()=>{
  if(!grid)return;const p=grid;
- download(`LITHOPHANE — PRINT SUMMARY\n\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${filamentAssumptions}\nCorner fit test: ${panelGrams(20,20,p.max).toFixed(1)} g PLA at the default settings.\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; 8% gyroid sparse infill; 2 wall loops; 4 top and bottom layers; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Thin photo areas may be filled by the shells. Gyroid can affect backlit image quality; test transmission and the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
+ download(`LITHOPHANE — PRINT SUMMARY\n\n${printerSizeText(p)}\nPanel: ${p.width} × ${p.height} mm\nThickness: ${p.min}–${p.max} mm\nMesh: ${$('mesh-summary').textContent}\nMaterial estimate: ${$('material-estimate').textContent}\n${filamentAssumptions}\nCorner fit test: ${panelGrams(20,20,p.max).toFixed(1)} g PLA at the default settings.\n${$('fit-summary').textContent}\n\nPhoto adjustments: ${$('crop').value}, zoom ${n('zoom')}%, crop position ${n('panx')}% / ${n('pany')}%, brightness ${n('brightness')}, contrast ${n('contrast')}, invert ${$('invert').checked}\n\nSTARTING PRINT SETTINGS (not a validated printer profile)\nWhite PLA; 0.12–0.16 mm layers; 8% gyroid sparse infill; 2 wall loops; 4 top and bottom layers; vertical orientation with a brim. Slice at 100% scale in millimetres. Mesh spacing is independent of nozzle width and layer height. Inspect toolpaths; use the slicer for time and filament estimates. Thin photo areas may be filled by the shells. Gyroid can affect backlit image quality; test transmission and the corner fit before printing the panel.\n\nLIGHTING\nLED tealights only, no flame. Postcard frame for Bambu LED kit: 105 × 148 × 3 mm, portrait or landscape; cable exit in base. 0.2 mm is mechanical fit allowance, not thermal clearance. Ventilate, avoid pinched wires, follow manufacturer guidance and test temperatures.\n\nPostcard frame and licence: ${FRAME_URL}\nPhotos and models were generated locally and were not uploaded or stored by this app.\n`,exportFilename(`${source.name.replace(/\.(jpe?g|png|webp)$/i,'')}-print-summary`,p,'txt'),'text/plain');
 };
-$('reset').onclick=()=>{
+$('reset').onclick=()=>{printerPicker.reset();$('width').max=$('height').max=170;lanternUI?.setPrinter('a1-mini');
  ++lanternReset;lanternUI?.reset();
  endDrag();
  ++loadId;loading=false;cancelExport(false);image?.close();image=null;source={name:'My lithophane',custom:false};grid=null;$('photo').value='';if($('save-dialog').open)$('save-dialog').close('cancel');

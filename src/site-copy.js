@@ -1,1 +1,1 @@
-export const plateNote='Our starting designs fit the A1 mini’s smaller build plates. Check custom dimensions and arrange larger sets across plates in your slicer.';
+export const plateNote='A1 mini is selected by default; choose the optional 256 mm printer size for larger designs. Finished parts are checked against your choice. Arrange larger sets across plates in your slicer.';

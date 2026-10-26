@@ -1,3 +1,5 @@
+import {mountPrinterPicker} from './printer-picker.js';
+import {printLimit} from './printer-settings.js';
 import {createFilamentDisplay} from './filament-display.js';
 import './theme.js';
 import './fan.css';
@@ -8,6 +10,7 @@ const $=id=>document.getElementById(id),preview=$('preview'),ctx=preview.getCont
 const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate','fan');let filamentWorker=null,filamentTimer=null,filamentWeights=null;
 function estimateFilament(p){clearTimeout(filamentTimer);filamentWorker?.terminate();filamentDisplay.clear();filamentWeights=null;const currentPhoto=photo;filamentTimer=setTimeout(()=>{filamentWorker=new Worker(new URL('./fan-worker.js',import.meta.url),{type:'module'});filamentWorker.onmessage=({data})=>{if(data.progress)return;if(data.filament){filamentWeights=data.filament;filamentDisplay.weights(data.filament);}filamentWorker?.terminate();filamentWorker=null;};filamentWorker.postMessage({settings:p,photo:currentPhoto,format:'estimate'});},250);}
 let image=null,photo=null,view='open',worker=null,loadId=0,busy=false,loading=false;
+const printerPicker=mountPrinterPicker(()=>{cancel();$('length').max=printLimit(printerPicker.get())-6;render();});$('length').max=164;
 const fields=['count','length','angle','stand','crop','zoom','panx','pany','brightness','contrast','invert','backlit'];
 const adjustments=()=>({crop:$('crop').value,zoom:+$('zoom').value,panx:+$('panx').value,pany:+$('pany').value});
 let drag=null;
@@ -41,7 +44,7 @@ preview.addEventListener('keydown',event=>{
  for(const [i,id]of ['panx','pany'].entries())if(!$(id).disabled)$(id).value=Math.max(0,Math.min(100,+$(id).value+delta[i]*step));render();
 });
 $('reset-crop').onclick=()=>{endDrag();cancel();$('zoom').value=100;$('panx').value=50;$('pany').value=50;render();};
-function settings(){return validateFan({count:+$('count').value,length:+$('length').value,angle:+$('angle').value,stand:$('stand').checked});}
+function settings(){return validateFan({printer:printerPicker.get(),count:+$('count').value,length:+$('length').value,angle:+$('angle').value,stand:$('stand').checked});}
 function cancel(){worker?.terminate();worker=null;busy=false;$('progress').hidden=true;$('cancel').hidden=true;enable();}
 function enable(){let valid=true;try{settings();}catch{valid=false;}for(const id of ['zip','three-mf'])$(id).disabled=!photo||busy||loading||!valid;$('test-fit').disabled=busy||!valid;$('summary').disabled=!valid;}
 function prepare(p){
@@ -124,7 +127,7 @@ for(const design of fanSamples){
 function download(bytes,name,type){const url=URL.createObjectURL(new Blob([bytes],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(format){cancel();let p;try{p=settings();}catch(e){$('export-status').textContent=e.message;return;}if(!photo&&format!=='test')return;busy=true;enable();$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Building parts locally…';worker=new Worker(new URL('./fan-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.progress)$('progress').value=data.progress;if(data.error){cancel();$('export-status').textContent=`Export failed: ${data.error}`;}if(data.bytes){download(data.bytes,format==='test'?'fan-pivot-test.zip':`folding-fan-${p.count}-blades.${format==='3mf'?'3mf':'zip'}`,format==='3mf'?'model/3mf':'application/zip');cancel();$('export-status').textContent='Downloaded. Read the included assembly instructions; fit remains provisional.';}};worker.onerror=()=>{cancel();$('export-status').textContent='Export failed. Try again with fewer blades.';};worker.postMessage({settings:p,photo,format});}
 $('zip').onclick=()=>start('zip');$('three-mf').onclick=()=>start('3mf');$('test-fit').onclick=()=>start('test');$('cancel').onclick=()=>{cancel();$('export-status').textContent='Export cancelled.';};$('summary').onclick=()=>{try{download(instructions(settings(),filamentWeights?null:makeFan(settings(),photo),filamentWeights),'fan-assembly.txt','text/plain');}catch(e){$('export-status').textContent=e.message;}};
-$('reset').onclick=()=>{++loadId;endDrag();cancel();image?.close?.();image=null;photo=null;loading=false;$('photo').value='';for(const [id,val]of Object.entries({...defaults,zoom:100,panx:50,pany:50,brightness:0,contrast:0,crop:'cover'})){if(id==='stand')$('stand').checked=val;else $(id).value=val;}$('invert').checked=false;$('backlit').checked=true;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));$('export-status').textContent='Session cleared.';$('sample-status').textContent='';document.querySelectorAll('[data-fan-sample]').forEach(b=>b.setAttribute('aria-pressed','false'));render();};
+$('reset').onclick=()=>{printerPicker.reset();$('length').max=164;++loadId;endDrag();cancel();image?.close?.();image=null;photo=null;loading=false;$('photo').value='';for(const [id,val]of Object.entries({...defaults,zoom:100,panx:50,pany:50,brightness:0,contrast:0,crop:'cover'})){if(id==='stand')$('stand').checked=val;else $(id).value=val;}$('invert').checked=false;$('backlit').checked=true;view='open';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='open')));$('export-status').textContent='Session cleared.';$('sample-status').textContent='';document.querySelectorAll('[data-fan-sample]').forEach(b=>b.setAttribute('aria-pressed','false'));render();};
 window.addEventListener('pagehide',()=>{clearTimeout(filamentTimer);filamentWorker?.terminate();++loadId;endDrag();cancel();image?.close?.();image=null;photo=null;sample.width=1;preview.width=1;});
 draw($('hero').getContext('2d'),defaults,'open',false);render();
 

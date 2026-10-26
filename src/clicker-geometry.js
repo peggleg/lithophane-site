@@ -1,3 +1,4 @@
+import {assertPartsFit} from './printer-settings.js';
 import opentype from 'opentype.js';
 import {flattenPath} from './text-geometry.js';
 import {makeClickerSymbol} from './clicker-symbols.js';
@@ -60,6 +61,7 @@ export function generateClickerModel(module,fontBuffer,input){
  p.keys.forEach((key,i)=>addPart(`keycap-${i+1}-${key.type==='symbol'?key.value:key.type==='blank'?'blank':'letter'}`,'cap',makeCap(key,p.capShape),[...positions[i],deckTop+4.5],i));
  let nextX=parts[0].bounds.max[0]+8;for(const part of parts.slice(1)){part.x=nextX-part.bounds.min[0];nextX+=part.bounds.max[0]-part.bounds.min[0]+8;}
  const bounds=base.boundingBox();
+ assertPartsFit(parts,p);
  return {parts,settings:p,width:+(bounds.max[0]-bounds.min[0]).toFixed(2),height:+(bounds.max[1]-bounds.min[1]).toFixed(2),baseHeight:height,rimHeight,deckSeat:seat,deckTop,positions,eyelet,floorThickness:p.floor,construction:'glue-in-base',capShoulderTop:roof+2,capTop:roof+2.6,capRoof:roof,capInterior:17.5,capWidth:21.5,capRest:4.5,pressTravel:4,prototype:true};
 
  }finally{for(let i=owned.length-1;i>=0;i--)owned[i].delete();}

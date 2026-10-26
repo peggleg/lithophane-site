@@ -1,12 +1,13 @@
+import {printerSizeText} from './printer-settings.js';
 import {filamentReport} from './filament.js';
-import {printProfileImport} from './print-profile.js';
+import {printerProfileImport} from './print-profile.js';
 export function homeGuide(model){const p=model.settings,f=model.homeFit;return `${filamentReport(model.parts,p.kind)}
 DESIGN STUDIO — ${(p.collection||'HOME & LIVING').toUpperCase()}
 ${p.kind}; ${p.finish} surface. Requested dimensions ${p.width} × ${p.depth} × ${p.height} mm${p.kind==='roll'?' (base dimensions; the shaft is additional)':p.kind==='soap'?' (catch-tray dimensions; retaining sides are additional)':''}.
 Assembled size ${[model.width,model.depth,model.height].map(n=>n.toFixed(1)).join(' × ')} mm.
 
-A1 MINI
-Every printable part is checked within 170 × 170 × 170 mm, including surface detail. This leaves allowance within the 180 mm build volume; brim, supports and keep-out areas must still fit. Parts may need several plates. Arrange before slicing.
+PRINTER SIZE
+${printerSizeText(p)} Parts may need several plates. Arrange before slicing.
 ${model.parts.map(s=>`${s.name}: ${s.printSize.join(' × ')} mm`).join('\n')}
 
 ASSEMBLY
@@ -17,7 +18,7 @@ DRAINAGE & OPENWORK
 ${['soap','caddy','toothbrush'].includes(p.kind)?`${p.kind==='soap'?'The pattern applies to the removable platform. Its catch tray remains solid.':'The pattern applies to all four holder walls; the separate drip tray stays solid.'} Pattern: ${p.openwork}. Opening target ${p.openingSize} mm; floor openings are capped at 12 mm, with at least 2.4 mm webs and a solid edge frame. ${p.drainFloor?'Floor/platform drainage is enabled.':'Floor/platform is solid; water will not drain through it.'} ${p.kind!=='soap'?(p.dripTray?'A removable catch tray is included.':'No catch tray: use only where drips can drain away.') :''} Openwork may require local supports or bridging adjustments; inspect toolpaths. Empty, rinse and dry parts regularly. Solid catch-tray geometry and skin settings do not guarantee a watertight print; test on a protected surface.`:'Solid walls. These accessories do not have a water-tight seal.'}
 
 PRINT SETTINGS
-${printProfileImport}
+${printerProfileImport(p)}
 The agreed profile remains 8% gyroid sparse infill, 2 wall loops, 3 top and 3 bottom layers. Thin walls may print solid. Palettes are preview colours only. Choose your actual material in the slicer; use suitable material for the intended temperature and cleaning conditions. These are organisers, not certified food-contact or hot-cookware products.
 
 FIT CHECK

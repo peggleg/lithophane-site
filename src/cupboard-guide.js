@@ -1,11 +1,12 @@
-import {filamentReport} from './filament.js';import {printProfileImport} from './print-profile.js';
+import {printerSizeText} from './printer-settings.js';
+import {filamentReport} from './filament.js';import {printerProfileImport} from './print-profile.js';
 export function cupboardGuide(model){const p=model.settings,f=model.cupboardFit;return `${filamentReport(model.parts,p.kind)}
 DESIGN STUDIO — MODULAR CUPBOARD
 Closed width ${p.width} mm including hinges; ${p.cupboardColumns} columns × ${p.cupboardRows} modules high. Each module is ${p.height} mm high; connected height ${f.height} mm. Requested depth ${p.depth} mm; rear clips add 2.4 mm. Each module column is ${f.caseWidth.toFixed(1)} mm wide.
 Single door, ${p.hingeSide} hinges. Surface ${p.finish}; openwork ${p.openwork}, target opening size ${p.openingSize} mm.
 
-PRINTABLE PARTS / A1 MINI
-Every part, including integral hinge barrels, fits within 170 × 170 × 170 mm. The assembled cupboard can be taller than the printer. Multiple plates are needed; arrange parts in your slicer.
+PRINTABLE PARTS / SELECTED PRINTER
+${printerSizeText(p)} The assembled cupboard can be taller than the printer. Multiple plates are needed; arrange parts in your slicer.
 ${model.parts.map(s=>`${s.name}: ${s.printSize.join(' × ')} mm${s.assemblyHidden?' (spare connector; shown only in printing-orientations view)':''}`).join('\n')}
 
 CASE ASSEMBLY
@@ -27,7 +28,7 @@ Rear cable exits: ${p.cupboardCable}, ${p.cableDiameter} mm diameter. Wall venti
 Door labels: ${p.cupboardLabels}. One label per column on the panel with the pull. One line repeats across columns; several lines run left to right. Recessed holders include separate 0.8 mm inserts with 0.4 mm text engraving, or can take paper. Retain with removable adhesive; these are not snap-fit inserts. Engraved text is cut directly into the front. Label inserts are included in the part list and weight estimate.
 
 PRINT SETTINGS
-${printProfileImport}
+${printerProfileImport(p)}
 All cupboard parts retain 8% gyroid sparse infill, 2 wall loops, 3 top and 3 bottom layers. No profile exception is required. Preview colours do not assign filament. The estimate excludes ballast, magnets, supports, brim, purge and waste.
 
 FIT AND USE

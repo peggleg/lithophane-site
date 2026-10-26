@@ -1,8 +1,10 @@
+import {assertPartsFit,assertPrintSize} from './printer-settings.js';
 import {projectMetadata,profileFiles} from './print-profile.js';
 import { zipParts, strToU8 } from './zip.js';
 import { gridCounts } from './resolution.js';
 
-export function makePanel({ width, height, min, max, cols, rows, tones }) {
+export function makePanel({ width, height, min, max, cols, rows, tones, printer }) {
+  assertPrintSize([width,height,max],printer);
   if (![width, height, min, max].every(Number.isFinite) || width <= 0 || height <= 0 || min <= 0 || max < min) throw Error('Invalid panel dimensions or thickness.');
   const counts = gridCounts(cols, rows);
   if (tones.length !== counts.samples) throw Error('Invalid image grid.');
@@ -53,7 +55,8 @@ export function stlBytes({vertices:v,faces:f}) {
   }
   return out;
 }
-export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
+export function threeMfParts({vertices:v,faces:f}, progress=()=>{},printer) {
+  assertPartsFit([{mesh:{vertices:v,faces:f}}],printer);
   const model=[];let chunk='';
   const write=text=>{chunk+=text;if(chunk.length>=65536){model.push(strToU8(chunk));chunk='';}};
   const coordinate=n=>Number(n.toFixed(6)).toString();
@@ -69,13 +72,13 @@ export function threeMfParts({vertices:v,faces:f}, progress=()=>{}) {
   }
   write('</triangles></mesh></object></resources><build><item objectid="1"/></build></model>');
   if(chunk)model.push(strToU8(chunk));
-  return zipParts({...profileFiles('lithophane'),
+  return zipParts({...profileFiles('lithophane',printer),
     '[Content_Types].xml':strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="config" ContentType="application/json"/><Default Extension="txt" ContentType="text/plain"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>'),
     '_rels/.rels':strToU8('<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>'),
     '3D/3dmodel.model':model
   });
 }
-export function threeMfBytes(mesh) {
-  const parts=threeMfParts(mesh), out=new Uint8Array(parts.reduce((n,p)=>n+p.length,0));
+export function threeMfBytes(mesh,printer) {
+  const parts=threeMfParts(mesh,undefined,printer), out=new Uint8Array(parts.reduce((n,p)=>n+p.length,0));
   let offset=0;for(const part of parts){out.set(part,offset);offset+=part.length;}return out;
 }

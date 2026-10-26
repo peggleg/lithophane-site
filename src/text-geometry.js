@@ -1,3 +1,4 @@
+import {assertPartsFit} from './printer-settings.js';
 import {encodeKeyringQR} from './qr-code.js';
 import {outline,ringHole} from './symbols.js';
 import opentype from 'opentype.js';
@@ -86,6 +87,7 @@ export function generateTextModel(module,fontBuffer,input){
    parts.push({name:'desk-stand',mesh:toMesh(stand(p.width*.7)),x:p.width/2+p.width*.35+15});
    parts.push({name:'stand-fit-test',mesh:toMesh(stand(20)),x:p.width/2+p.width*.7+45});
   }
+  assertPartsFit(parts,p);
   return {parts,settings:p,...(qr?{qr:{text:qr.text,size:qr.size,pitch:qr.pitch,x:qr.x,y:qr.y,side:qr.side,quiet:4}}:{}),fontSize:+(p.size*scale).toFixed(2),width:p.width,height:p.height,holeX,holeY,warnings:[...(qr?['Use a light base and dark QR modules with a slicer colour change. Four blank modules surround the code. Scan a physical print before use.']:[]),'Start with a 0.4 mm nozzle and 0.2 mm layers; inspect small details in your slicer.',p.kind==='nameplate'&&p.stand?'Stand fit and small-letter quality require physical testing.':'Small-letter quality and tag strength require physical testing.']};
  }finally{for(let i=owned.length-1;i>=0;i--)owned[i].delete();}
 }
