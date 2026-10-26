@@ -81,6 +81,7 @@ export function generateDeskModel(module,input,fontBuffer){
  }
  add.hidden=()=>{parts.at(-1).assemblyHidden=true;};
  add.door=(pivot,side,opening=110)=>{parts.at(-1).doorPivot=pivot;parts.at(-1).doorSide=side;parts.at(-1).doorOpening=opening;};
+ add.pill=(day,pivot)=>{parts.at(-1).pillDay=day;if(pivot)parts.at(-1).pillHingePivot=pivot;};
  add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
  let screwFit,storageFit,coasterFit,homeFit,cupboardFit;
  try{
