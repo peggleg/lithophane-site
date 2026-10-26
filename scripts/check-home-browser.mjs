@@ -11,7 +11,7 @@ try{
   for(const kind of kinds){
    await page.selectOption('#kind',kind);await ready();assert.match(await page.locator('#filament-estimate').textContent(),/8% infill|8% gyroid/);assert.match(await page.locator('#filament-estimate').textContent(),/3 top and 3 bottom/);
    assert.ok(Number(await page.locator('#part-count').textContent())>=1);assert.match(await page.locator('#bed-status').textContent(),/170/);
-   if(['roll','toothpick','caddy','soap','toothbrush','cotton','vanity','spoon'].includes(kind)){
+   if(['pill','roll','toothpick','caddy','soap','toothbrush','cotton','vanity','spoon'].includes(kind)){
     await download('three-mf',`artifacts/home-bambu/${kind}.3mf`);const guide=await download('print-guide',`artifacts/home-bambu/${kind}.txt`);assert.match(await fs.readFile(await guide.path(),'utf8'),/3 top and 3 bottom/);
     await page.locator('#model-preview').screenshot({path:`artifacts/home-${kind}.png`});
    }

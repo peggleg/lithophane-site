@@ -1,9 +1,12 @@
 import {cupboardCaps,connectorAxes} from './cupboard-settings.js';
 import {snapBridge,rearHole} from './storage-connectors.js';
+import {cupboardInterior} from './cupboard-interior.js';
+import {makeStorageLabel} from './storage-labels.js';
 import {openworkCells} from './desk-openwork.js';
 
-export function makeCupboard(module,own,p,{round,box,add}){
+export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
  const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2+18,axisY=-D/2+10,faceY=axisY-4,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=1.4,bore=pinRadius+p.clearance,R=4,ports=connectorAxes(p.cupboardPorts),hinges=[H*.25-9,H*.75-9],doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
+ const interior=cupboardInterior(module,own,p,{round,box,add});
  const circle=(r,h,z=0)=>own(C.circle(r,64).extrude(h).translate([0,0,z]));
  const boreSection=direction=>own(own(C.circle(bore,64)).add(own(new C([[[-bore/Math.SQRT2,direction*bore/Math.SQRT2],[bore/Math.SQRT2,direction*bore/Math.SQRT2],[0,direction*bore*Math.SQRT2]]],'NonZero'))));
  const caseBore=boreSection(-1),doorBore=boreSection(1);
@@ -68,9 +71,11 @@ export function makeCupboard(module,own,p,{round,box,add}){
   const ranges=[{left:-W/2+margin,right:W/2-margin,side:p.hingeSide==='left'?-1:1}];
   for(let leaf=0;leaf<ranges.length;leaf++){
    const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-7),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
+   const label=hasPull?makeStorageLabel(module,own,p,'cupboard',col,dw,fontBuffer):null;if(label)keepShapes.push(own(label.keep.offset(2).translate([0,15])));
    if(p.doorMagnets)keepShapes.push(own(C.circle(5,40).translate([edge+free*1.5,q.side===1?-17:17])));
    const keep=own(C.union(keepShapes)),profile=plate(dw,dh,2);let door=styledDoor(profile,dw,dh,keep);
    const holes=doorCutouts(profile,dw,dh,keep);if(holes&&!holes.isEmpty())door=own(door.subtract(own(holes.extrude(thickness+1).translate([0,0,-.1]))));
+   if(label?.cut)door=own(door.subtract(own(label.cut.translate([0,15,-.01]))));
    // The barrel axis lies in the print plane, with its underside on the bed.
    for(const start of hinges){
     shell=hingeCase(shell,hx,start,q.side,opening);
@@ -109,16 +114,19 @@ export function makeCupboard(module,own,p,{round,box,add}){
     }
    }
    add(`cupboard-door-r${row+1}-c${col+1}-d${leaf+1}`,'cupboard-door',door,[cx+dx,faceY,z0+dc],[-Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);
+   if(label?.insert){add(`cupboard-label-c${col+1}`,'door-label',label.insert,[cx+dx,faceY+1,z0+dc-15],[Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);}
    doorRecords.push({row,col,leaf,side:q.side,x:cx+dx,axisX:cx+hx,opening,width:dw,bottom:z0+doorBottom,top:z0+doorTop,centre:z0+dc});
   }
+  shell=interior.openings(interior.apply(shell,row),row,portMap.get(`${row}/${col}`)||[]);
   for(const [x,z]of portMap.get(`${row}/${col}`)||[])shell=own(shell.subtract(rearHole(module,own,p,x,z,back)));
   add(`cupboard-case-r${row+1}-c${col+1}`,'cupboard-case',printCase(shell),[cx,back,z0+H/2],[Math.PI/2,0,0]);cases.push({row,col,floor:caps.floor,top:caps.top});
  }
+ interior.parts();
  for(const a of doorRecords.filter(a=>a.row<p.cupboardRows-1)){
   const b=doorRecords.find(b=>b.row===a.row+1&&b.col===a.col&&b.leaf===a.leaf),gap=b.bottom-a.top,length=19+gap,solid=own(channel(keyProfile,length).translate([0,length/2,0]));
   for(const [i,offset]of [-a.width*.25,a.width*.25].entries()){add(`door-splice-r${a.row+1}-${a.row+2}-c${a.col+1}-d${a.leaf+1}-${i+1}`,'door-splice',solid,[a.x+offset,faceY+thickness+.4,(a.top+b.bottom)/2],[-Math.PI/2,0,0]);add.door([a.axisX,axisY,0],a.side,a.opening);}
  }
  for(const [i,j]of joining.entries())add(`case-${j.axis}-locking-key-${i+1}`,'connector-key',snapBridge(module,own,p,{horizontal:j.axis==='sides'}),[j.x,back+2.4,j.z],[Math.PI/2,0,0]);
  for(const [axis,on]of Object.entries(ports))if(on)for(let i=1;i<=2;i++){add(`spare-${axis}-locking-key-${i}`,'connector-key',snapBridge(module,own,p,{horizontal:axis==='sides'}),[0,0,0]);add.hidden();}
- return {width:p.width,depth:p.depth+2.4,height:H*p.cupboardRows,caseWidth:W,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
+ return {width:p.width,depth:p.depth+2.4,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
 }

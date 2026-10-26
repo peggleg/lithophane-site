@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import init from 'manifold-3d/manifold';
-import {generateDeskModel} from '../src/desk-geometry.js';import {deskDefaults,validateDeskSettings} from '../src/desk-settings.js';import {homePresets} from '../src/home-settings.js';import {deskGuide,deskStlZip,solid3mf} from '../src/desk-export.js';import {printProfile} from '../src/print-profile.js';
-const m=await init();m.setup();
+import fs from 'node:fs';
+import {generateDeskModel as generate} from '../src/desk-geometry.js';import {deskDefaults,validateDeskSettings} from '../src/desk-settings.js';import {homePresets} from '../src/home-settings.js';import {deskGuide,deskStlZip,solid3mf} from '../src/desk-export.js';import {printProfile} from '../src/print-profile.js';
+const m=await init();m.setup();const font=fs.readFileSync('src/fonts/Nunito-ExtraBold.ttf'),fontBuffer=font.buffer.slice(font.byteOffset,font.byteOffset+font.byteLength),generateDeskModel=(m,p)=>generate(m,p,fontBuffer);
 function solid(part){return new m.Manifold(new m.Mesh({numProp:3,vertProperties:part.mesh.vertices,triVerts:part.mesh.faces}));}
 function posed(part){const a=solid(part),b=a.rotate(part.rotation.map(r=>r*180/Math.PI)),c=b.translate(part.assembly);a.delete();b.delete();return c;}
 function check(model){const shapes=model.parts.map(posed);try{for(let i=0;i<model.parts.length;i++){const part=model.parts[i],s=solid(part);assert.equal(s.status(),'NoError',part.name);assert.ok(s.volume()>0);const pieces=s.decompose();assert.equal(pieces.length,1,part.name+' connected');pieces.forEach(p=>p.delete());s.delete();assert.ok(part.printSize.every(v=>v<=170.001),part.name+' A1 size');for(let j=0;j<i;j++){const overlap=shapes[i].intersect(shapes[j]);assert.ok(overlap.volume()<.05,`${model.settings.kind}: ${part.name} intersects ${model.parts[j].name}: ${overlap.volume()}`);overlap.delete();}}}finally{shapes.forEach(s=>s.delete());}}

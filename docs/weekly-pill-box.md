@@ -1,0 +1,11 @@
+# Weekly pill box
+
+Bathroom collection item `pill`, available at `/bathroom/?item=pill`. Seven fixed compartments in a single base, with separate lift-off lids engraved MON–SUN. Default assembled dimensions 168 × 65 × 26 mm; usable straight spans per day approximately 21.1 × 59.1 × 18.7 mm below the lid guides. Rounded corners reduce capacity locally. Width/depth resize the wells and lids together; usable width must remain at least 18 mm per day, depth 20 mm, overall height 18–60 mm. All parts retain the 170 mm A1 mini design allowance. Six shared surface styles decorate the base.
+
+Each lid has a 1.2 mm guide ring entering 2.5 mm, with the selected 0.2–0.8 mm clearance per side. It rests on the rim; this is not a locking catch. Individual finger scallops expose the edges for removal. Print base bottom-down, lids top-down with rings upward. Text is engraved 0.6 mm into the top, with its orientation compensated for the final assembly rotation. No hinges or glue. Print one lid first and check its fit before printing the set. Clearances, wear and retention need physical testing.
+
+Not airtight or child-resistant. Follow the medicine packaging storage instructions; keep away from children and bathroom moisture. This is an organiser, not a substitute for packaging required to protect particular medicines.
+
+The profile is unchanged: 0.4 mm nozzle, 0.2 mm layers, A1 mini/Generic PLA/textured PEI, 8% gyroid, two wall loops, three top and bottom layers, zero minimum skin thickness. Guides, estimates, 3MF and STL sidecars use kind `pill`. The exporter includes all eight named parts. Colours are previews only.
+
+Validation: `test/pill-box.test.js` checks all styles and clearances, connected parts, closed floors, seven enclosed wells, independent lid removal, bounds, text orientation and profile/guide consistency. The Home collection tests also include this item. `scripts/check-pill-box-browser.mjs` exercises desktop/mobile generation, actual downloads, profiles, invalid sizes and reset. Actual Bambu Studio 2.8.2.61 import, desktop Open Project/Save Project and representative native slices verify the export profile beyond archive inspection. Printed moisture resistance, retention and physical fit are not validated.

@@ -1,4 +1,5 @@
 export const homePresets={
+ pill:{width:168,depth:65,height:26,columns:1,rows:1,openwork:'none'},
  soap:{width:130,depth:90,height:18,columns:1,rows:1,openwork:'honeycomb'},
  caddy:{width:150,depth:95,height:100,columns:2,rows:1,openwork:'honeycomb'},
  toothbrush:{width:90,depth:70,height:110,columns:2,rows:1,openwork:'slots'},
@@ -13,7 +14,7 @@ export const isHome=p=>Object.hasOwn(homePresets,p.kind);
 export const isWet=p=>['soap','caddy','toothbrush'].includes(p.kind);
 export const homeCollections={
  kitchen:[['roll','Kitchen-roll holder'],['toothpick','Cocktail-stick dispenser'],['caddy','Sink caddy'],['pot','Utensil pot'],['spoon','Spoon rest'],['tray','Drawer organiser'],['box','Small tray'],['screw','Lidded storage pot'],['bin','Swing-lid bin']],
- bathroom:[['soap','Soap dish'],['toothbrush','Toothbrush holder'],['vanity','Vanity organiser'],['cotton','Cotton-pad dispenser'],['box','Small tray'],['screw','Lidded storage pot'],['bin','Swing-lid bin']]
+ bathroom:[['soap','Soap dish'],['toothbrush','Toothbrush holder'],['pill','7-day pill box · Mon–Sun'],['vanity','Vanity organiser'],['cotton','Cotton-pad dispenser'],['box','Small tray'],['screw','Lidded storage pot'],['bin','Swing-lid bin']]
 };
 export function validateHome(p,inset=0){
  if(!isHome(p))return;
@@ -21,6 +22,7 @@ export function validateHome(p,inset=0){
  else p.shape='square';
  if(!isWet(p))p.openwork='none';
  for(const id of ['drainFloor','dripTray','weightedBase'])if(typeof p[id]!=='boolean')throw Error('Choose a valid drainage or base option.');
+ if(p.kind==='pill'){p.columns=p.rows=1;if((p.width-2*inset-8*p.wall)/7<18||p.depth-2*inset-2*p.wall<20||p.height<18||p.height>60)throw Error('Pill boxes need at least 18 mm usable width per day, 20 mm depth and 18–60 mm overall height. Increase width or reduce wall/detail thickness.');}
  if(p.kind==='roll'){
   if(!Number.isInteger(p.shaftSections)||p.shaftSections<1||p.shaftSections>3)throw Error('Choose 1–3 shaft sections.');
   if(!Number.isFinite(p.segmentLength)||p.segmentLength<70||p.segmentLength>150)throw Error('Shaft sections must be 70–150 mm, including the threaded connector.');

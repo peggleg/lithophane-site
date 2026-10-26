@@ -1,3 +1,4 @@
+import {makeStorageLabel} from './storage-labels.js';
 import {drawerStyle} from './drawer-finishes.js';
 import {makeCupboard} from './cupboard-geometry.js';
 import {connectDrawerCase,addDrawerKeys} from './storage-connectors.js';
@@ -83,8 +84,8 @@ export function generateDeskModel(module,input,fontBuffer){
  add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
  let screwFit,storageFit,coasterFit,homeFit,cupboardFit;
  try{
-  if(p.kind==='cupboard'){cupboardFit=makeCupboard(module,own,p,{round,box,add});}
-  else if(isHome(p)){homeFit=makeHomeItems(module,own,p,{round,ribs,box,add});}
+  if(p.kind==='cupboard'){cupboardFit=makeCupboard(module,own,p,{round,box,add,fontBuffer});}
+  else if(isHome(p)){homeFit=makeHomeItems(module,own,p,{round,ribs,box,add,fontBuffer});}
   else if(isCoaster(p)){coasterFit=makeCoasters(module,own,p,{round,ribs,box,add,reference:(...args)=>{add(...args);return parts.pop();}});}
   else if(isStorage(p)){storageFit=makeStorage(module,own,p,{round,ribs,hollowBox,add});}
   else if(p.kind==='screw'){screwFit=makeScrewContainer(module,own,p,ribs,add,fontBuffer);}
@@ -111,7 +112,10 @@ export function generateDeskModel(module,input,fontBuffer){
    for(let i=0;i<p.drawers;i++)for(let col=0;col<p.drawerColumns;col++){
     const q={...p,finish:drawerStyle(p,i*p.drawerColumns+col)},detail=finishInset(q),dd=p.depth-p.wall-p.clearance-detail-(p.drawerConnectors!=='none'?2.4:0);surface=q;
     const name=p.drawerColumns===1?`drawer-${i+1}`:`drawer-row-${i+1}-column-${col+1}`,assembly=[-p.width/2+p.wall+slotWidth/2+col*(slotWidth+p.wall),-p.depth/2+detail+dd/2,stack.footHeight+p.wall+i*(slot+p.wall)+p.clearance];
-    const drawer=addDrawerInsertRails(module,own,container(dw,dd,dh,true,true,q),dw,dd,dh,q,{box});add(name,'drawer',drawer,assembly);parts.at(-1).surfaceStyle=q.finish;
+    let drawer=addDrawerInsertRails(module,own,container(dw,dd,dh,true,true,q),dw,dd,dh,q,{box});
+    const label=makeStorageLabel(module,own,p,'drawers',i*p.drawerColumns+col,dw,fontBuffer);
+    if(label){const y=-dd/2-detail,z=(p.wall+1+dh-8)/2,bottom=z-label.height/2,pad=box(label.width,detail+p.wall+.05,label.height,0,y+(detail+p.wall+.05)/2,bottom);drawer=own(drawer.add(pad));if(detail>0){const root=box(label.width,p.wall,.1,0,-dd/2+p.wall/2,bottom-detail),ramp=own(M.hull([root,box(label.width,detail+p.wall+.05,.1,0,y+(detail+p.wall+.05)/2,bottom)]));drawer=own(drawer.add(ramp));}if(label.cut)drawer=own(drawer.subtract(own(label.cut.rotate([-90,0,0]).translate([0,y-.01,z]))));if(label.insert)add(`${name}-label`,'drawer-label',label.insert,[assembly[0],assembly[1]+y+1,assembly[2]+z],[Math.PI/2,0,0]);}
+    add(name,'drawer',drawer,assembly);parts.at(-1).surfaceStyle=q.finish;
     for(const sheet of drawerInsertLayout(dw,dd,dh,q)){
      const solid=drawerSheetSolid(module,own,sheet,dw,dh,q);let position,rotation;
      if(sheet.side===0){position=[sheet.centre,-dd/2+sheet.normal+.5,sheet.bottom];rotation=[Math.PI/2,0,0];}

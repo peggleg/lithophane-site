@@ -1,3 +1,4 @@
+import {makePillBox} from './pill-box.js';
 import {finishInset} from './desk-settings.js';
 import {carveOpenwork} from './desk-openwork.js';
 import {makeScrewContainer,screwRidge,screwDimensions} from './desk-screw.js';
@@ -17,7 +18,7 @@ export function drainageSection(module,own,profile,p){
  return own(own(C.union(cells)).intersect(safe));
 }
 
-export function makeHomeItems(module,own,p,{round,ribs,box,add}){
+export function makeHomeItems(module,own,p,{round,ribs,box,add,fontBuffer}){
  const {CrossSection:C,Manifold:M}=module,inset=finishInset(p),w=p.width-2*inset,d=p.depth-2*inset;
  const cylinder=(r,h,z=0)=>own(C.circle(r,96).extrude(h).translate([0,0,z]));
  const hollow=(profile,h)=>own(own(profile.extrude(h)).subtract(own(own(profile.offset(-p.wall)).extrude(h).translate([0,0,p.wall]))));
@@ -32,6 +33,7 @@ export function makeHomeItems(module,own,p,{round,ribs,box,add}){
   for(const x of [-1,1])for(const y of [-1,1])features.push(box(7,7,h,x*(b.max[0]-5),y*(b.max[1]-5),z));
   return own(own(M.union(features)).intersect(own(profile.extrude(h+.02).translate([0,0,z-.01]))));
  }
+ if(p.kind==='pill')return makePillBox(module,own,p,{round,ribs,add,fontBuffer});
  if(p.kind==='soap'){
   const outer=rounded(w,d),inner=own(outer.offset(-p.wall)),insert=own(inner.offset(-p.clearance)),z=p.height-p.wall;
   let tray=ribs(hollow(outer,p.height),w,d,p.height);

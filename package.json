@@ -36,7 +36,10 @@
     "test:drawer-sheets": "node scripts/check-drawer-sheets-browser.mjs",
     "test:home": "node scripts/check-home-browser.mjs",
     "test:cupboards": "node scripts/check-cupboard-browser.mjs",
-    "test:homepage": "node scripts/check-homepage-browser.mjs"
+    "test:homepage": "node scripts/check-homepage-browser.mjs",
+    "test:storage-options": "node scripts/check-storage-options-browser.mjs",
+    "test:storage-options-slicer": "node scripts/check-storage-options-slicer.mjs",
+    "test:pill-box": "node scripts/check-pill-box-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
