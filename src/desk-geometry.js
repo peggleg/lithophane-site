@@ -82,6 +82,7 @@ export function generateDeskModel(module,input,fontBuffer){
  }
  add.hidden=()=>{parts.at(-1).assemblyHidden=true;};
  add.door=(pivot,side,opening=110)=>{parts.at(-1).doorPivot=pivot;parts.at(-1).doorSide=side;parts.at(-1).doorOpening=opening;};
+ add.colour=(group,extruder,colour)=>Object.assign(parts.at(-1),{colourGroup:group,extruder,...(colour?{colour}:{})});
  add.pill=(day,pivot)=>{parts.at(-1).pillDay=day;if(pivot)parts.at(-1).pillHingePivot=pivot;};
  add.usable=size=>{parts.at(-1).usableSize=size.map(v=>+v.toFixed(2));};
  let screwFit,storageFit,coasterFit,homeFit,cupboardFit;
@@ -150,7 +151,7 @@ export function generateDeskModel(module,input,fontBuffer){
     }
    }
   }
-  let x=0,y=0,rowDepth=0;const grid=p.kind==='cupboard'||p.kind==='drawers'&&p.drawerConnectors!=='none';for(const part of parts){if(grid&&x+part.printSize[0]>2*printLimit(p)){x=0;y+=rowDepth+12;rowDepth=0;}part.x=x-part.bounds.min[0];part.y=y-part.bounds.min[1];x+=part.printSize[0]+10;rowDepth=Math.max(rowDepth,part.printSize[1]);}
+  let x=0,y=0,rowDepth=0;const grid=p.kind==='cupboard'||p.kind==='drawers'&&p.drawerConnectors!=='none';const placedGroups=new Map();for(const part of parts){if(part.colourGroup&&placedGroups.has(part.colourGroup)){const anchor=placedGroups.get(part.colourGroup);part.x=anchor.x;part.y=anchor.y;continue;}if(grid&&x+part.printSize[0]>2*printLimit(p)){x=0;y+=rowDepth+12;rowDepth=0;}part.x=x-part.bounds.min[0];part.y=y-part.bounds.min[1];x+=part.printSize[0]+10;rowDepth=Math.max(rowDepth,part.printSize[1]);if(part.colourGroup)placedGroups.set(part.colourGroup,part);}
   return {settings:p,parts,...(cupboardFit?{cupboardFit}:{}),...(homeFit?{homeFit}:{}),...(coasterFit?{coasterFit}:{}),...(storageFit?{storageFit}:{}),...(screwFit?{screwFit}:{}),width:cupboardFit?.width??homeFit?.width??coasterFit?.width??p.width,height:cupboardFit?.height??homeFit?.height??coasterFit?.height??p.height,depth:cupboardFit?.depth??homeFit?.depth??coasterFit?.depth??p.depth,...(p.kind==='drawers'?{stacking:drawerStacking(p)}:{}),...(p.kind==='bin'?{binFit:binDimensions(p)}:{}),prototype:true};
  }finally{for(const obj of owned.reverse())obj.delete();}
 }

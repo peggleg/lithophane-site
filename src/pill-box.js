@@ -14,8 +14,8 @@ export function makePillBox(module,own,p,{round,ribs,add,fontBuffer}){
   // A small open-top finger scallop exposes each lid edge without a protruding tab.
   wells.push(own(C.circle(3,40).extrude(3).translate([x,-d/2+t/2,baseHeight-2.5])));
   const plate=own(local.offset(Math.min(t*.35,(t-2*p.clearance)/2))),ring=own(tongue.subtract(inner));let lid=own(plate.extrude(t));if(hinge)lid=hinge.lid(lid);else lid=own(lid.add(own(ring.extrude(2.51).translate([0,0,t-.01]))));
-  const letters=textShape(module,own,day.toUpperCase(),cell,16,fontBuffer,false);if(letters)lid=own(lid.subtract(own(letters.extrude(.61).translate([0,0,-.01]))));
-  if(!p.pillTest||i===0){add(`pill-lid-${i+1}-${day.toLowerCase()}`,'pill-lid',lid,[x,f.baseY,p.height],[Math.PI,0,0]);add.pill(i,hinge?[x,hinge.axisY+f.baseY,hinge.axisZ]:null);}
+  let label;const letters=textShape(module,own,day.toUpperCase(),cell,16,fontBuffer,false);if(letters){const cut=own(letters.extrude(.61).translate([0,0,-.01]));if(p.pillLabelStyle==='colour')label=own(lid.intersect(own(letters.extrude(.6))));lid=own(lid.subtract(p.pillLabelStyle==='colour'?own(letters.extrude(.6)):cut));}
+  if(!p.pillTest||i===0){add(`pill-lid-${i+1}-${day.toLowerCase()}`,'pill-lid',lid,[x,f.baseY,p.height],[Math.PI,0,0]);add.pill(i,hinge?[x,hinge.axisY+f.baseY,hinge.axisZ]:null);if(label){const group=`pill-lid-${i+1}-${day.toLowerCase()}`;add.colour(group,1);add(`${group}-lettering`,'pill-label',label,[x,f.baseY,p.height],[Math.PI,0,0]);add.pill(i,hinge?[x,hinge.axisY+f.baseY,hinge.axisZ]:null);add.colour(group,2,p.pillLabelColour);}}
   records.push({day,x,width:cell,depth:d-2*t,usableHeight:f.usableHeight});
  }
  base=own(base.subtract(own(M.union(wells))));

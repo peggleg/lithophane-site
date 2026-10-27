@@ -10,7 +10,7 @@ export const homePresets={
  cotton:{width:80,depth:80,height:130,columns:1,rows:1,openwork:'none'},
  vanity:{width:160,depth:140,height:90,columns:1,rows:1,openwork:'none'}
 };
-export const homeDefaults={pillLidStyle:'lift',pillTest:false,soapRimHeight:5,segmentLength:150,shaftSections:2,weightedBase:true,dispenseSize:3.2,drainFloor:true,dripTray:true};
+export const homeDefaults={pillLidStyle:'lift',pillTest:false,pillLabelStyle:'engraved',pillLabelColour:'#333333',soapRimHeight:5,segmentLength:150,shaftSections:2,weightedBase:true,dispenseSize:3.2,drainFloor:true,dripTray:true};
 export const isHome=p=>Object.hasOwn(homePresets,p.kind);
 export const isWet=p=>['soap','caddy','toothbrush'].includes(p.kind);
 export const homeCollections={
@@ -23,7 +23,7 @@ export function validateHome(p,inset=0){
  else p.shape='square';
  if(!isWet(p))p.openwork='none';
  for(const id of ['drainFloor','dripTray','weightedBase'])if(typeof p[id]!=='boolean')throw Error('Choose a valid drainage or base option.');
- if(p.kind==='pill'){p.columns=p.rows=1;if(typeof p.pillTest!=='boolean')throw Error('Choose a valid hinge test option.');if(p.pillTest&&p.pillLidStyle!=='hinged')throw Error('Select clip-on hinged lids for the single-day test.');if(!['lift','hinged'].includes(p.pillLidStyle))throw Error('Choose lift-off or individually hinged pill lids.');if((p.width-2*inset-8*p.wall)/7<18||p.depth-2*inset-2*p.wall-(p.pillLidStyle==='hinged'?8:0)<20||p.height<18||p.height>60)throw Error('Pill boxes need at least 18 mm usable width per day, 20 mm depth and 18–60 mm overall height. Increase width or reduce wall/detail thickness.');}
+ if(p.kind==='pill'){p.columns=p.rows=1;if(!['engraved','colour'].includes(p.pillLabelStyle)||!/^#[0-9a-f]{6}$/i.test(p.pillLabelColour))throw Error('Choose a valid pill label style and colour.');if(typeof p.pillTest!=='boolean')throw Error('Choose a valid hinge test option.');if(p.pillTest&&p.pillLidStyle!=='hinged')throw Error('Select clip-on hinged lids for the single-day test.');if(!['lift','hinged'].includes(p.pillLidStyle))throw Error('Choose lift-off or individually hinged pill lids.');if((p.width-2*inset-8*p.wall)/7<18||p.depth-2*inset-2*p.wall-(p.pillLidStyle==='hinged'?8:0)<20||p.height<18||p.height>60)throw Error('Pill boxes need at least 18 mm usable width per day, 20 mm depth and 18–60 mm overall height. Increase width or reduce wall/detail thickness.');}
  if(p.kind==='roll'){
   if(!Number.isInteger(p.shaftSections)||p.shaftSections<1||p.shaftSections>3)throw Error('Choose 1–3 shaft sections.');
   if(!Number.isFinite(p.segmentLength)||p.segmentLength<70||p.segmentLength>(printerKey(p)==='256'?256:150))throw Error(`Shaft sections must be 70–${printerKey(p)==='256'?256:150} mm, including the threaded connector.`);
