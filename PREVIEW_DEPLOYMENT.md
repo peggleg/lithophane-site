@@ -129,3 +129,10 @@ Validation: homepage images, ten cards, desktop/tablet/mobile Light/Dark layouts
 ## Single-door cupboards only
 
 Cupboards now offer only left- or right-hinged single doors. The double-door selector, centre-divider geometry and associated public copy are removed. Legacy double-door settings normalize to a single door. Side-by-side columns and vertically linked panels remain available. Single-door mesh buffers and assembly transforms match the previous release across left/right and one/two-column configurations; print profiles are unchanged. All ten cupboard tests and the cupboard browser/export/mobile checks passed.
+
+### Monstera guide outline and AMS veins
+
+- Reworked the leaf silhouette, curved splits, fenestrations and lobe-following vein network against the supplied guide. Matching shaped holders share the same botanical-v3 outline.
+- Added optional flush AMS veins, selectable colour and 2/3-layer inlay depth. Plant preset uses AMS; matching coaster sets retain the choice. Leaf pairs export as aligned multipart objects, decorated face on the bed.
+- Geometry checks cover both backings, extreme dimensions, holder fit and 4/6/8/10-leaf plant assembly/removal/balance. Browser checks cover previews, both printers, downloads and mobile.
+- Native Bambu Studio slicing confirms the vein filament only at 0.2/0.4 mm or 0.2/0.4/0.6 mm. Desktop Open/Save retains both filament assignments and the existing profiles: 8% gyroid, 2 walls, coaster 5/5 and holder 3/3.

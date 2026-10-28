@@ -42,7 +42,9 @@
     "test:pill-box": "node scripts/check-pill-box-browser.mjs",
     "test:printers": "node scripts/check-printer-browser.mjs",
     "test:printer-import": "node scripts/check-printer-import.mjs",
-    "test:printer-slices": "node scripts/check-printer-slices.mjs"
+    "test:printer-slices": "node scripts/check-printer-slices.mjs",
+    "test:coaster-veins": "node scripts/check-coaster-veins-browser.mjs",
+    "test:coaster-veins-slicer": "node scripts/check-coaster-veins-slicer.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
