@@ -39,15 +39,11 @@ export function makeHomeItems(module,own,p,{round,ribs,box,add,fontBuffer}){
   let tray=ribs(hollow(outer,p.height),w,d,p.height);
   tray=own(tray.add(supports(inner,z-p.wall,p.wall)));
   let plate=own(insert.extrude(p.wall));
-  // Lift notches give access without an unsupported handle or a separate clip.
-  const lift=own(C.circle(6,32).extrude(p.wall+p.soapRimHeight+.2).translate([w/2-p.wall-p.clearance,0,-.1]));
-  plate=own(plate.subtract(lift));
   const holes=p.drainFloor?drainageSection(module,own,insert,p):null;
   if(holes&&!holes.isEmpty())plate=own(plate.subtract(own(holes.extrude(p.wall+.2).translate([0,0,-.1]))));
   if(p.soapRimHeight>0){const rim=own(own(insert.extrude(p.soapRimHeight+.02)).subtract(own(own(insert.offset(-p.wall)).extrude(p.soapRimHeight+.2).translate([0,0,-.1]))).translate([0,0,p.wall-.02]));plate=own(plate.add(rim));}
-  plate=own(plate.subtract(lift));
   add('soap-catch-tray','catch-tray',tray,[0,0,0]);add('removable-soap-platform','draining-platform',plate,[0,0,z]);
-  return {height:p.height+p.soapRimHeight,note:`${p.soapRimHeight} mm retaining sides above the soap platform help keep the bar in place. Lift the platform at its finger notch to empty and clean the solid tray.`,drainage:p.drainFloor,waterGap:z-p.wall,soapRimHeight:p.soapRimHeight};
+  return {height:p.height+p.soapRimHeight,note:`${p.soapRimHeight} mm retaining sides above the soap platform help keep the bar in place. The retaining sides form a continuous rim. Remove the platform to empty and clean the solid tray.`,drainage:p.drainFloor,waterGap:z-p.wall,soapRimHeight:p.soapRimHeight};
  }
  if(['caddy','toothbrush'].includes(p.kind)){
   const trayH=9,z=p.dripTray?p.wall+2:0,bw=p.dripTray?w-2*(p.wall+p.clearance+inset):w,bd=p.dripTray?d-2*(p.wall+p.clearance+inset):d,h=p.height-z,profile=rounded(bw,bd),inside=own(profile.offset(-p.wall));
