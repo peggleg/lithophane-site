@@ -1,10 +1,9 @@
+import {plantPot} from './coaster-plant-pot.js';
 // One modular trunk carries two tiers of branches. Leaves hang by their stem
 // holes on upward pegs; no separate leaf posts extend down into the pot.
 export function makeCoasterPlant(module,own,p,profile,hanger,{box,add,decorate}){
- const {CrossSection:C,Manifold:M}=module,wall=p.wall,gap=p.clearance,diameter=Math.min(140,Math.max(80,p.width*1.05)),potHeight=45,plateFloor=2.4,socketHeight=12,postWidth=8,base=wall+plateFloor;
- const circle=own(C.circle(diameter/2,128)),cavity=own(C.circle(diameter/2-wall,128)),pot=own(decorate(circle,potHeight).subtract(own(cavity.extrude(potHeight).translate([0,0,wall]))));add('plant-display-pot','plant-pot',pot,[0,0,0]);
- const plateRadius=diameter/2-wall-gap,plateProfile=own(C.circle(plateRadius,128));let plate=own(plateProfile.extrude(plateFloor));
- const collar=own(C.circle(8+gap+wall,64).extrude(socketHeight).translate([0,0,plateFloor])),socket=box(postWidth+2*gap,postWidth+2*gap,socketHeight+.02,0,0,plateFloor);plate=own(plate.add(own(collar.subtract(socket))));plate=own(plate.subtract(box(3,4,plateFloor+.1,0,plateRadius,0)));
+ const {CrossSection:C,Manifold:M}=module,wall=p.wall,gap=p.clearance,planter=plantPot(module,own,p,{decorate}),{pot,plate,diameter,potHeight,plateFloor,socketHeight,postWidth,base}=planter;
+ add('plant-display-pot','plant-pot',pot,[0,0,0]);
  const angle=-60,radians=Math.PI/3,sag=p.depth*Math.sin(radians)+p.height,low=potHeight+sag+12-base,level=sag+12,high=low+level,reach=Math.max(34,p.width*.43),slots=[],references=[],levels=[Math.ceil(p.coasterCount/2),Math.floor(p.coasterCount/2)];
  let trunk=own(C.circle(8,64).extrude(high+2));trunk=own(trunk.subtract(box(30,30,12,0,0,0)));trunk=own(trunk.add(box(postWidth,postWidth,12)));
  for(const height of [low,high]){const a=own(C.circle(8,64).extrude(.1).translate([0,0,height-20])),b=own(C.circle(14,64).extrude(12).translate([0,0,height-14])),c=own(C.circle(8,64).extrude(.1).translate([0,0,height+1.9]));trunk=own(trunk.add(own(M.hull([a,b,c]))));}
@@ -30,6 +29,6 @@ export function makeCoasterPlant(module,own,p,profile,hanger,{box,add,decorate})
   if(i<ranges.length-1)segment=own(segment.add(box(postWidth,postWidth,10.02,0,0,end-.02)));
   segment=own(segment.translate([0,0,-start]));add(`plant-trunk-${i+1}-of-${ranges.length}`,'plant-trunk',segment,[0,0,base+start]);
  }
- add('plant-socket-plate','plant-plate',plate,[0,0,wall]);
- return {width:diameter,depth:diameter,height:base+high+2,plant:{potBounds:pot.boundingBox(),diameter,potHeight,plateFloor,socketHeight,postWidth,hanger,angle,slots,trunkSections:ranges.length},references};
+ add('plant-socket-plate','plant-plate',plate,[0,0,planter.plateTop],[Math.PI,0,0]);
+ return {width:diameter,depth:diameter,height:base+high+2,plant:{potBounds:pot.boundingBox(),diameter,potHeight,baseDiameter:planter.baseDiameter,plateTop:planter.plateTop,plateFloor,socketHeight,postWidth,hanger,angle,slots,trunkSections:ranges.length},references};
 }

@@ -21,3 +21,11 @@ The fuller heart-shaped base, elongated tip and curved engraved veins remain. Ve
 Reference leaves appear only in the assembled holder preview. They are excluded from holder downloads, part counts and filament estimates. Download the matched coaster set separately: leaves retain 5/5 skins, every holder part retains 3/3, and both retain 8% gyroid and two walls. Preview colours do not assign filament. Inspect trunk-joint bridges and long-part adhesion; brim and support settings are not silently changed.
 
 Validation covers 4–6 leaves, extreme 60–160 mm dimensions, all pot styles, two fit clearances, connected parts, keyed trunk/branch insertion, upward leaf removal, all final assembly intersections, optional hanging holes, backing and holder fit. The assembled plant may exceed the printer volume; each printable part stays within the A1 mini design limit.
+
+## Approved plant-pot redesign
+
+The planter now has a taller tapered silhouette, a rounded support-friendly foot, a rolled lip and a recessed dark soil-like deck, retaining the central branching plant. Pot diameter follows coaster width (80–140 mm) and height is 78% of diameter; the default is about 105 × 82 mm. All six surface styles follow the taper. Warm ivory is the default plant palette. The deck sits 5 mm below the top, on an integral annular ledge. Shallow dimples texture its soil face.
+
+The socket is underneath the deck. Print the deck TOP-DOWN (soil face on the bed, socket up); the pot remains bottom-down. Inspect the small blind-socket roof bridge. Insert the deck with the socket underneath, then fit the central trunk. Remove the trunk before lifting the deck for access. The 8 mm trunk keys and existing branch/leaf fits are unchanged, but pot, deck and trunk heights must be regenerated together; previous assemblies do not interchange. Both printer profiles retain 8% gyroid, two walls, 3/3 holder skins; separate leaf coasters retain 5/5. Colours are preview choices; assign filament in your slicer.
+
+Digital tests cover connected parts, all surface styles, 4–6 hanging leaves, insertion/removal, assembled intersections and estimated load centres compared with the smaller actual ground-contact footprint. These checks do not establish physical tip resistance, connector strength or retention; test the printed set on a stable surface.
