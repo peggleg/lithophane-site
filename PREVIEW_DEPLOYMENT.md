@@ -132,7 +132,7 @@ Cupboards now offer only left- or right-hinged single doors. The double-door sel
 
 ### Monstera guide outline and AMS veins
 
-- Reworked the leaf silhouette, curved splits, fenestrations and lobe-following vein network against the supplied guide. Matching shaped holders share the same botanical-v3 outline.
+- Reworked the leaf silhouette, curved splits, fenestrations and lobe-following vein network against the supplied guide. The printed-model reference informs a bowed midrib, diagonal branching, unequal tapered widths and curved rounded tips. Matching shaped holders share the same botanical-v3 outline.
 - Added optional flush AMS veins, selectable colour and 2/3-layer inlay depth. Plant preset uses AMS; matching coaster sets retain the choice. Leaf pairs export as aligned multipart objects, decorated face on the bed.
 - Geometry checks cover both backings, extreme dimensions, holder fit and 4/6/8/10-leaf plant assembly/removal/balance. Browser checks cover previews, both printers, downloads and mobile.
 - Native Bambu Studio slicing confirms the vein filament only at 0.2/0.4 mm or 0.2/0.4/0.6 mm. Desktop Open/Save retains both filament assignments and the existing profiles: 8% gyroid, 2 walls, coaster 5/5 and holder 3/3.

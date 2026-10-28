@@ -14,4 +14,4 @@ test('3MF exports each leaf and its inlays as one object with two assigned filam
  assert.throws(()=>generateDeskModel(m,{...model.settings,coasterSurface:'recessed'}),/flat leaf/);
 });
 
-test('guide veins form one connected lobe-following network clear of enclosed holes',()=>{for(const [w,d]of [[60,160],[100,125],[160,60]]){const o=[],own=x=>(o.push(x),x),s=monsteraSections(m,own,w,d),intersection=own(s.veins.intersect(s.holes)),network=own(s.veins.subtract(s.holes)),pieces=network.decompose();assert.ok(intersection.area()<.001);assert.equal(pieces.length,1);pieces.forEach(x=>x.delete());o.reverse().forEach(x=>x.delete());}});
+test('guide veins form one connected lobe-following network clear of enclosed holes',()=>{for(const [w,d]of [[60,60],[60,160],[100,125],[160,60],[160,160],[60,246],[246,60],[246,246]]){const o=[],own=x=>(o.push(x),x),s=monsteraSections(m,own,w,d),intersection=own(s.veins.intersect(s.holes)),network=own(s.veins.subtract(s.holes)),pieces=network.decompose();assert.ok(intersection.area()<.001);assert.equal(pieces.length,1);pieces.forEach(x=>x.delete());o.reverse().forEach(x=>x.delete());}});
