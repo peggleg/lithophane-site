@@ -1,3 +1,4 @@
+import {compactQRSize} from './qr-code.js';
 import {mountPrinterPicker} from './printer-picker.js';
 
 import {createFilamentDisplay} from './filament-display.js';
@@ -10,7 +11,7 @@ const $=id=>document.getElementById(id),kind=document.body.dataset.generator,def
 const fields=['line1','line2','font','width','height','base','relief','size','mode','align',...(kind==='keyring'?['shape','hole','qrEnabled','qrText']:['stand'])];
 const printerPicker=mountPrinterPicker(()=>{printerLimits();generate();});
 function printerLimits(){const large=printerPicker.get()==='256';$('width').max=large?256:kind==='keyring'?100:170;$('height').max=large?256:kind==='keyring'?65:120;}
-let editor=null;
+let editor=null,qrAutoSize=false;
 let worker=null,timer=null,model=null,generation=0,preview=null,busy=false;
 const filamentDisplay=createFilamentDisplay($('feedback'),'filament-estimate',kind);
 try{preview=createTextPreview($('model-canvas'));}catch{$('model-preview').textContent='Interactive preview needs WebGL. You can still generate and download your design.';}
@@ -32,13 +33,20 @@ function generate(){
 }
 function download(chunks,name,type){const url=URL.createObjectURL(new Blob(chunks,{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(format){if(!model||busy)return;stop();busy=true;enable();$('progress').hidden=false;$('progress').value=0;$('cancel').hidden=false;$('export-status').textContent='Preparing download locally…';const current=model;worker=new Worker(new URL('./text-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(data.error){stop();$('export-status').textContent=data.error;}if(data.progress)$('progress').value=data.progress;if(data.chunks){const extension=format==='guide'?'txt':format==='3mf'?'3mf':current.parts.length>1?'zip':'stl';download(data.chunks,`${kind}-${current.width}x${current.height}.${extension}`,extension==='zip'?'application/zip':extension==='txt'?'text/plain':extension==='3mf'?'model/3mf':'model/stl');stop();$('export-status').textContent='Downloaded. Inspect the toolpaths and print guide before printing.';}};worker.onerror=()=>{stop();$('export-status').textContent='Download failed. Please try again.';};worker.postMessage({action:'export',model:current,format});}
-fields.forEach(id=>$(id).addEventListener('input',()=>{if(id==='qrEnabled'&&$('qrEnabled').checked){if(+$('height').value<50){$('shape').value='rounded';$('width').value=65;$('height').value=60;}$('base-colour').value='#ffffff';$('text-colour').value='#111111';colours();}if(id==='shape'){const [width,height]=kind==='keyring'&&$('qrEnabled').checked?({rounded:[65,60],capsule:[85,60],circle:[65,65],heart:[75,65],star:[65,65],cloud:[85,65]}[$('shape').value]):keyringShapeSizes[$('shape').value];$('width').value=width;$('height').value=height;}generate();}));
+function fitQR(){try{const size=compactQRSize($('qrText').value,Number($('hole').value));for(const id of ['shape','width','height'])$(id).value=size[id];qrAutoSize=true;}catch{/* Generation displays encoding/validation errors. */}}
+if($('qr-compact'))$('qr-compact').onclick=()=>{fitQR();generate();};
+fields.forEach(id=>$(id).addEventListener('input',()=>{
+ if(id==='qrEnabled'&&$('qrEnabled').checked){fitQR();$('base-colour').value='#ffffff';$('text-colour').value='#111111';colours();}
+ if(['width','height','shape'].includes(id))qrAutoSize=false;
+ if(kind==='keyring'&&$('qrEnabled').checked&&qrAutoSize&&['qrText','hole'].includes(id))fitQR();
+ if(id==='shape'){if(kind==='keyring'&&$('qrEnabled').checked&&$('shape').value==='rounded')fitQR();else{const [width,height]=kind==='keyring'&&$('qrEnabled').checked?({capsule:[85,60],circle:[65,65],heart:[75,65],star:[65,65],cloud:[85,65]}[$('shape').value]):keyringShapeSizes[$('shape').value];$('width').value=width;$('height').value=height;}}
+ generate();}));
 function colours(){preview?.setColours({base:$('base-colour').value,text:$('text-colour').value});}
 for(const id of ['base-colour','text-colour'])$(id).addEventListener('input',colours);
 $('parts-view').addEventListener('change',()=>preview?.setParts($('parts-view').checked));$('parts-view').parentElement.hidden=kind!=='nameplate';
 $('reset-view').onclick=()=>preview?.reset();$('top-view').onclick=()=>preview?.reset(true);
 $('stl').onclick=()=>start('stl');$('three-mf').onclick=()=>start('3mf');$('print-guide').onclick=()=>start('guide');
 $('cancel').onclick=()=>{++generation;stop(true);};
-function reset(){printerPicker.reset();printerLimits();for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
+function reset(){qrAutoSize=false;printerPicker.reset();printerLimits();for(const id of fields)if($(id).type==='checkbox')$(id).checked=defaults[id];else $(id).value=defaults[id];$('base-colour').value=kind==='keyring'?'#c59772':'#77916c';$('text-colour').value='#f4eddb';$('parts-view').checked=false;preview?.setParts(false);colours();generate();}
 editor=createSymbolEditor(settings,generate);
 $('reset').onclick=()=>{editor?.reset();reset();};window.addEventListener('pagehide',()=>{++generation;stop();preview?.dispose();model=null;filamentDisplay.clear();});reset();

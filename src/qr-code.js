@@ -5,3 +5,11 @@ export function encodeKeyringQR(value){
  if(/[\u0000-\u001F\u007F]/.test(text))throw Error('Use a single line of QR text without control characters.');
  const code=QRCode.create(text,{errorCorrectionLevel:'M'});return {text,size:code.modules.size,data:Array.from(code.modules.data),quiet:4};
 }
+
+// Compact rounded tag: keep two extrusion-width modules and the full quiet zone,
+// plus the existing 3 mm edge/chain-hole protection. No URL rewriting.
+export function compactQRSize(value,hole=5){
+ if(!Number.isFinite(hole)||hole<3||hole>8)throw Error('Choose a ring hole diameter of 3–8 mm.');
+ const code=encodeKeyringQR(value),side=(code.size+8)*.8;
+ return {shape:'rounded',width:Math.max(35,Math.ceil(side+hole+10)),height:Math.ceil(side+8)};
+}
