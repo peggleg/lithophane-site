@@ -1,12 +1,13 @@
 import {printLimit} from './printer-settings.js';
 import {makeCoasterPlant} from './coaster-plant.js';
 import {monsteraSections} from './monstera.js';
+export const coasterCounts=kind=>kind==='coaster-plant'?[4,6,8,10]:[4,5,6,8,10];
 export const isCoaster=p=>['coaster','coaster-tray','coaster-rack','coaster-plant'].includes(p.kind);
 export function validateCoaster(p){
  if(p.kind==='coaster-plant')p.leafHanger=true;else p.leafHanger=p.leafHanger!==false;
  if(p.kind==='coaster-plant'&&p.coasterShape!=='monstera')throw Error('The plant display holds monstera leaves. Choose the monstera shape.');
  if(!['round','square','hexagon','monstera'].includes(p.coasterShape)||!['flat','recessed'].includes(p.coasterSurface)||!['open','backed'].includes(p.leafBacking))throw Error('Choose an available coaster shape, surface and leaf backing.');
- if(!Number.isInteger(p.coasterCount)||p.coasterCount<4||p.coasterCount>6)throw Error('Choose a set of 4–6 matching coasters.');
+ if(!Number.isInteger(p.coasterCount)||!coasterCounts(p.kind).includes(p.coasterCount))throw Error(p.kind==='coaster-plant'?'Choose 4, 6, 8 or 10 leaves for the plant.':'Choose 4, 5, 6, 8 or 10 matching coasters.');
  for(const [key,min,max]of [['width',60,printLimit(p)-10],['depth',60,printLimit(p)-10],['height',3,8],['coasterRim',.6,2]])if(!Number.isFinite(p[key])||p[key]<min||p[key]>max)throw Error(`Use ${min}–${max} mm for coaster ${key}. Holders need room around the coasters inside the selected printer limit.`);
  if(p.coasterSurface==='recessed'&&p.height-p.coasterRim<2.4)throw Error('Leave at least 2.4 mm of solid model thickness below the recessed coaster surface. Increase thickness or reduce rim height.');
  if(p.kind==='coaster')p.finish='smooth';p.openwork='none';p.columns=p.rows=1;if(p.coasterShape==='round')p.depth=p.width;

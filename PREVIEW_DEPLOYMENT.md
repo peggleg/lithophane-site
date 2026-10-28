@@ -86,7 +86,7 @@ Bins now have two printable parts: the body with a built-in rim and the lid. The
 
 ## Monstera plant holder
 
-Monstera coasters now have engraved branching veins and a suggested elongated leaf proportion. A plant-display holder joins the stacking tray and upright rack on `/coasters/`, with a styled pot, keyed socket plate and removable stems for 4–6 leaves. Reference leaves appear only in the assembled preview; download the matching coaster set separately. Every part retains the A1 mini limit. Coasters keep 5/5 skins, holders keep 3/3, and both retain 8% gyroid with two walls. See `docs/monstera-coasters.md` for fit, assembly and physical validation limits.
+Monstera coasters now have engraved branching veins and a suggested elongated leaf proportion. A plant-display holder joins the stacking tray and upright rack on `/coasters/`, with a styled pot, keyed socket plate and removable stems for 4, 6, 8 or 10 leaves. Reference leaves appear only in the assembled preview; download the matching coaster set separately. Every part retains the A1 mini limit. Coasters keep 5/5 skins, holders keep 3/3, and both retain 8% gyroid with two walls. See `docs/monstera-coasters.md` for fit, assembly and physical validation limits.
 
 ## Optional drawer colour sheets
 
