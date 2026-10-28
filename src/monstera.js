@@ -2,38 +2,28 @@
 // blade, uneven rounded lobes, deep marginal splits and inner fenestrations.
 // Coordinates share one transform so the outline, holes and fitted holder agree.
 const edge=[
- [[.02,.5],[.16,.43],[.26,.40],[.31,.33]],
- [[.31,.33],[.345,.285],[.27,.245],[.15,.215]],
- [[.15,.215],[.125,.208],[.125,.183],[.153,.182]],
- [[.153,.182],[.27,.205],[.38,.278],[.425,.23]],
- [[.425,.23],[.47,.19],[.495,.125],[.49,.08]],
- [[.49,.08],[.48,.045],[.29,.075],[.16,.055]],
- [[.16,.055],[.135,.05],[.135,.025],[.16,.015]],
- [[.16,.015],[.28,.004],[.45,.035],[.49,-.035]],
- [[.49,-.035],[.51,-.10],[.475,-.18],[.44,-.205]],
- [[.44,-.205],[.39,-.235],[.29,-.16],[.17,-.15]],
- [[.17,-.15],[.14,-.148],[.135,-.175],[.16,-.195]],
- [[.16,-.195],[.25,-.235],[.39,-.24],[.365,-.30]],
- [[.365,-.30],[.34,-.385],[.24,-.43],[.15,-.39]],
- [[.15,-.39],[.09,-.36],[.065,-.29],[.025,-.285]],
- // A short curved petiole nestles between the basal lobes.
+ [[.02,.5],[.17,.40],[.43,.25],[.49,.02]],
+ [[.49,.02],[.55,-.17],[.43,-.40],[.23,-.405]],
+ [[.23,-.405],[.12,-.42],[.065,-.32],[.025,-.285]],
  [[.025,-.285],[.07,-.32],[.08,-.4],[.12,-.46]],
  [[.12,-.46],[.14,-.49],[.08,-.52],[.06,-.49]],
  [[.06,-.49],[.025,-.43],[.015,-.35],[-.025,-.295]],
- [[-.025,-.295],[-.065,-.31],[-.10,-.385],[-.18,-.405]],
- [[-.18,-.405],[-.27,-.43],[-.365,-.365],[-.405,-.29]],
- [[-.405,-.29],[-.42,-.25],[-.27,-.205],[-.16,-.21]],
- [[-.16,-.21],[-.135,-.21],[-.13,-.18],[-.16,-.165]],
- [[-.16,-.165],[-.28,-.11],[-.43,-.18],[-.475,-.115]],
- [[-.475,-.115],[-.515,-.055],[-.5,.035],[-.465,.075]],
- [[-.465,.075],[-.425,.11],[-.27,.015],[-.16,.015]],
- [[-.16,.015],[-.13,.015],[-.13,.04],[-.153,.06]],
- [[-.153,.06],[-.26,.13],[-.415,.11],[-.44,.185]],
- [[-.44,.185],[-.46,.245],[-.375,.32],[-.32,.335]],
- [[-.32,.335],[-.27,.35],[-.225,.225],[-.145,.225]],
- [[-.145,.225],[-.12,.225],[-.12,.25],[-.14,.27]],
- [[-.14,.27],[-.205,.34],[-.10,.44],[.02,.5]]
+ [[-.025,-.295],[-.075,-.32],[-.12,-.43],[-.25,-.405]],
+ [[-.25,-.405],[-.44,-.39],[-.55,-.16],[-.49,.035]],
+ [[-.49,.035],[-.43,.25],[-.17,.42],[.02,.5]]
 ];
+const splits=[
+ [[.47,.27],[.35,.28],[.25,.14],[.15,.17]],
+ [[.57,.08],[.42,.12],[.30,.0],[.15,.025]],
+ [[.57,-.10],[.40,-.06],[.29,-.17],[.15,-.14]],
+ [[.47,-.31],[.32,-.32],[.23,-.27],[.15,-.27]],
+ [[-.43,.30],[-.28,.28],[-.21,.20],[-.15,.22]],
+ [[-.55,.12],[-.40,.14],[-.25,.055],[-.15,.065]],
+ [[-.57,-.08],[-.40,-.05],[-.25,-.12],[-.15,-.11]],
+ [[-.49,-.29],[-.32,-.31],[-.22,-.22],[-.15,-.235]]
+];
+function splitStroke(points){const left=[],right=[];for(let i=0;i<points.length;i++){const a=points[Math.max(0,i-1)],b=points[Math.min(points.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),r=(.038-(.038-.015)*i/(points.length-1))/2;left.push([points[i][0]-dy/len*r,points[i][1]+dx/len*r]);right.push([points[i][0]+dy/len*r,points[i][1]-dx/len*r]);}return [...left,...right.reverse()];}
+
 function cubicPoints(curves,steps=18){const points=[];for(const [a,b,c,d]of curves)for(let i=0;i<steps;i++){const t=i/steps,u=1-t;points.push([u**3*a[0]+3*u*u*t*b[0]+3*u*t*t*c[0]+t**3*d[0],u**3*a[1]+3*u*u*t*b[1]+3*u*t*t*c[1]+t**3*d[1]]);}return points;}
 const aperture=[[[0,1],[.75,.85],[1,.2],[.6,-.5]],[[.6,-.5],[.3,-1],[-.2,-1],[-.6,-.6]],[[-.6,-.6],[-1,-.05],[-.7,.65],[0,1]]];
 const holes=[
@@ -62,10 +52,10 @@ function stroke(points,width){const left=[],right=[];for(let i=0;i<points.length
 // silhouette. Apply the same gentle drawing transform to every leaf detail.
 function bladePoint([x,y]){const edgeWeight=Math.max(0,Math.min(1,(Math.abs(x)-.15)/.15)),fullness=Math.max(-.22,Math.min(.25,-y*.7-.03));return [x*(1+edgeWeight*fullness),y>.27?.27+(y-.27)*1.45:y];}
 export function monsteraSections(module,own,width,depth){
- const {CrossSection:C}=module,raw=own(new C([cubicPoints(edge).map(bladePoint)],'NonZero')),b=raw.bounds(),cx=(b.min[0]+b.max[0])/2,cy=(b.min[1]+b.max[1])/2,sx=width/(b.max[0]-b.min[0]),sy=depth/(b.max[1]-b.min[1]);
+ const {CrossSection:C}=module,envelope=own(new C([cubicPoints(edge).map(bladePoint)],'NonZero')),slits=splits.map(curve=>{const points=cubicPoints([curve],24);points.push(curve[3]);return own(new C([splitStroke(points).map(bladePoint)],'NonZero'));}),raw=own(envelope.subtract(own(C.union(slits)))),b=raw.bounds(),cx=(b.min[0]+b.max[0])/2,cy=(b.min[1]+b.max[1])/2,sx=width/(b.max[0]-b.min[0]),sy=depth/(b.max[1]-b.min[1]);
  const transform=section=>own(section.translate([-cx,-cy]).scale([sx,sy]));
  const cutouts=holes.map(h=>{const a=h.angle*Math.PI/180,points=cubicPoints(aperture,12).map(([x,y])=>{const px=x*h.rx,py=y*h.ry;return [h.x+px*Math.cos(a)-py*Math.sin(a),h.y+px*Math.sin(a)+py*Math.cos(a)];});return own(new C([points.map(bladePoint)],'NonZero'));});
- const outline=transform(raw),veins=own(C.union(veinCurves.map((curve,i)=>{const points=cubicPoints([curve],24);points.push(curve[3]);return own(new C([stroke(points.map(bladePoint).map(([x,y])=>[(x-cx)*sx,(y-cy)*sy]),i===0?.9:.6)],'NonZero'));}))),safeVeins=own(veins.intersect(own(outline.offset(-1.2))));
+ const outline=transform(raw),veins=own(C.union(veinCurves.map((curve,i)=>{const points=cubicPoints([curve],24);points.push(curve[3]);return own(new C([stroke(points.map(bladePoint).map(([x,y])=>[(x-cx)*sx,(y-cy)*sy]),i===0?1.1:.8)],'NonZero'));}))),safeVeins=own(veins.intersect(own(outline.offset(-1.2))));
  const bounds=outline.bounds(),tip=own(outline.intersect(own(C.square([width+2,.8],true).translate([0,bounds.min[1]+.4])))),tb=tip.bounds(),hanger={x:(tb.min[0]+tb.max[0])/2,y:bounds.min[1]+3.2,radius:1.6};
  const pad=own(C.circle(3.2,48).translate([hanger.x,hanger.y])),neckY=bounds.min[1]+Math.min(14,Math.max(6,depth*.1)),neckBand=own(outline.intersect(own(C.square([Math.max(12,width*.16),.5],true).translate([hanger.x,neckY])))),nb=neckBand.bounds(),neck=own(C.circle(1.6,40).translate([(nb.min[0]+nb.max[0])/2,neckY])),bridge=own(C.hull([pad,neck])),blade=own(outline.add(bridge)),hangingHole=own(C.circle(hanger.radius,48).translate([hanger.x,hanger.y]));
  return {outline:blade,holes:transform(own(C.union(cutouts))),veins:safeVeins,hanger,hangingHole};
