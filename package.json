@@ -44,7 +44,9 @@
     "test:printer-import": "node scripts/check-printer-import.mjs",
     "test:printer-slices": "node scripts/check-printer-slices.mjs",
     "test:coaster-veins": "node scripts/check-coaster-veins-browser.mjs",
-    "test:coaster-veins-slicer": "node scripts/check-coaster-veins-slicer.mjs"
+    "test:coaster-veins-slicer": "node scripts/check-coaster-veins-slicer.mjs",
+    "test:products": "node scripts/check-product-browser.mjs",
+    "test:product-slicer": "node scripts/check-product-slicer.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
