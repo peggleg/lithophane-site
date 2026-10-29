@@ -4,7 +4,7 @@ import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
 export {solid3mf} from './solid-export.js';
-export function clickerGuide(model){const p=model.settings;return `${filamentReport(model.parts,'clicker')}\nDESIGN STUDIO — GLUE-IN MECHANICAL CLICKER PROTOTYPE
+export function clickerGuide(model){const p=model.settings;return `${filamentReport(model.parts,'clicker')}\nDESIGN STUDIO — GLUE-IN MECHANICAL CLICKER
 ${printerSizeText(p)}
 ${model.batchCount?`BATCH: ${model.batchCount} separate Pocket Pebbles (${model.parts.length} printed pieces).\nCharacters: ${model.batchCharacters.join(' ')}\nEach named folder contains one base and one cap. Duplicate characters are preserved. Arrange the 3MF objects or split them across print plates in your slicer.\n`:''}PRINTED PARTS
 ${model.batchCount?`Each pebble has one base and one cap; this batch contains ${model.parts.length} printed pieces.`:`One base plus one cap per button (${p.count+1} printed pieces).`} No separate deck, insert or fit-test pieces.
@@ -17,7 +17,7 @@ Do not put glue on the moving stem, upper housing seams, cap socket, metal conta
 
 CAPS AND PRINTING
 Square caps taper from 21.5 mm to 18.8 mm with rounded corners, a hollow skirt and a cross-stem socket. Print the base bottom-down and the caps open-side-down. Support the cap roofs as needed; keep the sockets clear. Start with 0.2 mm layers and inspect sliced toolpaths.
-Socket cross length ${4+p.socketClearance} mm; cross thickness ${1.1+p.socketClearance} mm; insertion ${p.stemHeight} mm. Switch bodies, pins and boxed stems vary. This prototype is NOT fit-tested. Start with a single-button design and check your actual switch before committing to a longer base.
+Socket cross length ${4+p.socketClearance} mm; cross thickness ${1.1+p.socketClearance} mm; insertion ${p.stemHeight} mm. Switch bodies, pins and boxed stems vary. Start with a single-button design and check your actual switch before committing to a longer base.
 
 FILES
 STL ZIP: ${model.batchCount?'one numbered folder per pebble, each containing base.stl and cap.stl, plus this guide and PRINT-SETTINGS.json':'clicker-base.stl, one named keycap STL per button, this guide and PRINT-SETTINGS.json'}. Millimetre 3MF contains the same printable objects. Preview switches are excluded. Colours are illustrative and do not assign filament. No switch or chain is included.

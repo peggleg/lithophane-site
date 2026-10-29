@@ -114,7 +114,7 @@ export function makeHomeItems(module,own,p,{round,ribs,box,add,fontBuffer}){
   let cap=own(cylinder(16,12).subtract(female()));cap=own(cap.rotate([180,0,0]).translate([0,0,12]));
   const top=baseH+p.shaftSections*bodyH;
   add('roll-holder-top-cap','home-lid',cap,[0,0,top+12],[Math.PI,0,0]);
-  return {width:p.width,depth:p.width,height:top+12,shaftAdvance:bodyH,segmentLength:p.segmentLength,usableRollHeight:p.shaftSections*bodyH,note:`${p.shaftSections} shaft sections, ${p.segmentLength} mm each INCLUDING the connector. Screw clockwise onto the base, then add the removable top cap. ${p.weightedBase?'Fill the open annular base chamber with dry ballast before seating its loose cover. Ballast is separately supplied; the cover is not sealed.':'This is a solid-model base without a ballast chamber.'} The 28 mm shaft needs a roll core larger than 28 mm. Thread fit and stability need a printed test.`};
+  return {width:p.width,depth:p.width,height:top+12,shaftAdvance:bodyH,segmentLength:p.segmentLength,usableRollHeight:p.shaftSections*bodyH,note:`${p.shaftSections} shaft sections, ${p.segmentLength} mm each INCLUDING the connector. Screw clockwise onto the base, then add the removable top cap. ${p.weightedBase?'Fill the open annular base chamber with dry ballast before seating its loose cover. Ballast is separately supplied; the cover is not sealed.':'This is a solid-model base without a ballast chamber.'} The 28 mm shaft needs a roll core larger than 28 mm.`};
  }
  throw Error('Unknown home accessory.');
 }

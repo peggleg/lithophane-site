@@ -1,5 +1,7 @@
 # Print defaults for this site
 
+User-facing copy policy: this is an internal site. Do not add prototype, untested, unvalidated or physical-testing disclaimers to pages, generated status messages or download guides. Keep useful assembly instructions, optional fit-test downloads, slicer guidance and factual material/use limits. Continue development checks and internal validation records; removing disclaimers does not establish a load rating.
+
 Apply this policy to current generators and every future addition:
 - Standard lightweight items: 8% gyroid sparse infill and 2 wall loops.
 - User-requested load-bearing exception: desk clamps, mounted accessories and future pegboard panels/supports use 30% gyroid, 4 wall loops, 5 top and 5 bottom layers. Use `isLoadBearingPrint` in the shared profile source. This is a conservative starting profile, not a load rating; preserve safe print orientation and require physical load/creep and latch-fatigue tests.
