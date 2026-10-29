@@ -33,3 +33,10 @@ test('raised-edge shelves have a clear tray floor, remain connected and release 
  }
  checkParts(generateProduct(m,{kind:'pegboard-shelf',printer:'256',width:240}));
 });
+
+test('lift-off storage bins keep the shared interface clear at size extremes',()=>{
+ for(const width of [50,170])for(const depth of [25,80]){
+  const g=generateProduct(m,{kind:'pegboard-bin',width,depth,height:150});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const K=productKernel(m,g.settings);try{const shoe=mountShoe(K,g.settings,pegboardRailFrame,width),release=mountShoe(K,g.settings,pegboardRailFrame,width,{release:1.5}),fixed=K.own(part.subtract(shoe.tongue)),open=K.own(fixed.add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);const free=K.own(release.tongue.intersect(K.box(width+10,100,80,0,-25,-9.5,1)));assert.ok(hit(fixed,free)<.003);}finally{K.dispose();}part.delete();adapter.delete();
+ }
+ checkParts(generateProduct(m,{kind:'pegboard-bin',printer:'256',width:240}));
+});

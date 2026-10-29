@@ -24,10 +24,11 @@ export function makePegboardAccessory(K,p){
   K.add('pegboard-universal-adapter','pegboard-adapter',pegboardAdapterSolid(K,p),[-90,0,0]);
   return {previewDirection:[1,-1.8,.6],fit:{interface:mountInterface,wallGap:10,boltPitch:40,boardThickness:p.boardThickness},note:'One removable slide-on interface for pegboard and desk accessories. Attach with two M4 screws, washers and nuts; download accessories separately.',guide:`Print the adapter BACK-DOWN as supplied, with the rail and countersinks facing up. ${adapterGuide(p)}`};
  }
- const mapped={'pegboard-short-hook':'headphone-hook','pegboard-long-hook':'headphone-hook'}[p.kind];
+ const mapped={'pegboard-short-hook':'headphone-hook','pegboard-long-hook':'headphone-hook','pegboard-bin':'remote-pocket'}[p.kind];
  if(mapped){const info=makeMountAccessory({...K,add:(name,role,solid,rotation,colour)=>K.add(name===mapped?p.kind:name,role,solid,rotation,colour)}, {...p,kind:mapped},pegboardRailFrame);
   info.guide=info.guide.replaceAll('clamp','universal adapter').replace('The universal adapter, example desk and pads are excluded from this accessory download. Download the universal adapter separately.','The panel and adapter are preview references only; download the adapter separately.');
   info.note='Slide down onto the universal adapter until the integral catch clicks. Pull the broad tab outward and lift to remove. This same accessory also fits the desk clamp. The board and adapter are preview references only.';
+  if(p.kind==='pegboard-bin'){info.note=`Nominal usable bin: ${(p.width-6.4).toFixed(1)} × ${(p.depth-6.4).toFixed(1)} × ${(p.height-3.2).toFixed(1)} mm, with rounded corners. Empty it before removal. `+info.note;info.guide=info.guide.replaceAll('pocket','bin').replaceAll('Remote bins','Storage bins');}
   info.guide+=' '+adapterGuide(p);info.previewDirection=[1,-1.8,.7];return info;
  }
  if(['pegboard-cup','pegboard-shelf'].includes(p.kind)){const info=makePegboardHolder(K,p);info.guide+=' '+adapterGuide(p);return info;}
