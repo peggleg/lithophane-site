@@ -5,7 +5,7 @@ import {makeStorageLabel} from './storage-labels.js';
 import {openworkCells} from './desk-openwork.js';
 
 export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
- const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2+18,axisY=-D/2+10,faceY=axisY-4,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=1.4,bore=pinRadius+p.clearance,R=4,ports=connectorAxes(p.cupboardPorts),hinges=[H*.25-9,H*.75-9],doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
+ const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2,axisY=front+3.6,faceY=front,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=1.4,bore=pinRadius+p.clearance,R=4,ports=connectorAxes(p.cupboardPorts),hinges=[H*.25-9,H*.75-9],doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
  const interior=cupboardInterior(module,own,p,{round,box,add});
  const circle=(r,h,z=0)=>own(C.circle(r,64).extrude(h).translate([0,0,z]));
  const boreSection=direction=>own(own(C.circle(bore,64)).add(own(new C([[[-bore/Math.SQRT2,direction*bore/Math.SQRT2],[bore/Math.SQRT2,direction*bore/Math.SQRT2],[0,direction*bore*Math.SQRT2]]],'NonZero'))));
@@ -24,16 +24,23 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
  }
  for(let col=1;col<p.cupboardColumns;col++)for(let row=0;row<p.cupboardRows;row++)for(const z of [H*.25,H*.75]){port(row,col-1,W/2-8,z);port(row,col,-W/2+8,z);joining.push({axis:'sides',x:(col-p.cupboardColumns/2)*W,z:row*H+z});}
  function hingeCase(solid,x,start,side,opening){
-  const pieces=[];
+  const pieces=[],edge=side*W/2,doorEdge=side*(W/2-margin),armA=Math.min(x,doorEdge)-.2,armB=Math.max(x,doorEdge)+.2;
+  // A side-corner pocket clears the rotating centre knuckle and recessed arm.
+  const pocket=globalCylinder(4.3,8.1,x,axisY,start+4.95),armRelief=box(armB-armA,Math.max(thickness+2,6),8.1,(armA+armB)/2,front+Math.max(thickness+2,6)/2-.1,start+4.95),sideWindow=box(1.6,8.4,8.1,side*(W/2-.7),front+4.1,start+4.95);
+  solid=own(solid.subtract(pocket).subtract(armRelief).subtract(sideWindow));
+  const sweep=[],armLength=Math.abs(doorEdge-x)+.2,armDepth=Math.max(thickness,3.2);
+  for(let angle=0;angle<=opening;angle+=5){const a=own(C.square([armLength,armDepth],true).translate([-side*armLength/2,1.2+armDepth/2-3.6]));sweep.push(own(own(a.offset(.3,'Round',2,16)).rotate(side*angle)));}
+  solid=own(solid.subtract(own(own(C.union(sweep)).extrude(8.1).translate([x,axisY,start+4.95]))));
   for(const z of [start,start+13]){
-   let barrel=globalCylinder(R,5,x,axisY,z);
-   const edge=side*(W/2),xa=Math.min(x-side*R,edge),xb=Math.max(x-side*R,edge),arm=box(xb-xa,front+p.wall-axisY,5,(xa+xb)/2,(axisY+front+p.wall)/2,z);
-   barrel=own(own(barrel.add(arm)).subtract(own(caseBore.extrude(5.2).translate([x,axisY,z-.1]))));pieces.push(barrel);
+   const raw=globalCylinder(R,5,x,axisY,z),clip=box(12,12,5.2,x,front+6,z-.1),arm=box(Math.abs(edge-x),5,5,(edge+x)/2,axisY+2.5,z);
+   pieces.push(own(own(raw.intersect(clip)).add(arm)));
   }
-  function sector(inner,outer){const points=[];for(let i=0;i<=12;i++){const a=(opening-110+153+13*i/12)*Math.PI/180;points.push([-side*outer*Math.cos(a),-outer*Math.sin(a)]);}for(let i=12;i>=0;i--){const a=(opening-110+153+13*i/12)*Math.PI/180;points.push([-side*inner*Math.cos(a),-inner*Math.sin(a)]);}return own(new C([points],'NonZero').translate([x,axisY]));}
-  const post=own(sector(6.2,7).extrude(7).translate([0,0,start+4.6])),root=box(1.2,p.wall,7,side*(W/2-.6),front+p.wall/2,start+4.6);
-  pieces.push(own(sector(3.4,7).extrude(2.8).translate([0,0,start+2])),own(M.hull([post,root])));
-  return own(solid.add(own(M.union(pieces))));
+  // Annular side stop stays within the case width and outside the rotating barrel.
+  const points=[],first=opening+Math.asin(2.4/4.3)*180/Math.PI+.5;
+  for(let i=0;i<=40;i++){const a=(first+(270-first)*i/40)*Math.PI/180;points.push([-side*5*Math.cos(a),-5*Math.sin(a)]);}
+  for(let i=40;i>=0;i--){const a=(first+(270-first)*i/40)*Math.PI/180;points.push([-side*4.3*Math.cos(a),-4.3*Math.sin(a)]);}
+  pieces.push(own(new C([points],'NonZero').extrude(7).translate([x,axisY,start+4.6])));
+  return own(own(solid.add(own(M.union(pieces)))).subtract(own(caseBore.extrude(19.2).translate([x,axisY,start-1]))));
  }
  function doorCutouts(profile,w,h,keep){
   if(p.openwork==='none')return null;
@@ -64,15 +71,15 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
  function channel(profile,length){return own(profile.extrude(length).rotate([90,0,0]));}
  for(let row=0;row<p.cupboardRows;row++)for(let col=0;col<p.cupboardColumns;col++){
   const cx=(col-(p.cupboardColumns-1)/2)*W,z0=row*H,caps=cupboardCaps(p,row),doorBottom=(caps.floor?p.wall:0)+p.clearance,doorTop=H-(caps.top?p.wall:0)-p.clearance,dh=doorTop-doorBottom,dc=(doorBottom+doorTop)/2;
-  let shell=own(M.union([box(W,p.wall,H,0,back-p.wall/2,0),box(p.wall,D-18,H,-W/2+p.wall/2,(front+back)/2,0),box(p.wall,D-18,H,W/2-p.wall/2,(front+back)/2,0),box(8+p.wall,p.wall,H,-W/2+(8+p.wall)/2,front+p.wall/2,0),box(8+p.wall,p.wall,H,W/2-(8+p.wall)/2,front+p.wall/2,0)]));
-  if(caps.floor)shell=own(shell.add(box(W-2*p.wall,D-18,p.wall,0,(front+back)/2,0)));
-  if(caps.top)shell=own(shell.add(box(W-2*p.wall,D-18,p.wall,0,(front+back)/2,H-p.wall)));
+  let shell=own(M.union([box(W,p.wall,H,0,back-p.wall/2,0),box(p.wall,D,H,-W/2+p.wall/2,(front+back)/2,0),box(p.wall,D,H,W/2-p.wall/2,(front+back)/2,0),box(8+p.wall,p.wall,H,-W/2+(8+p.wall)/2,front+p.wall/2,0),box(8+p.wall,p.wall,H,W/2-(8+p.wall)/2,front+p.wall/2,0)]));
+  if(caps.floor)shell=own(shell.add(box(W-2*p.wall,D,p.wall,0,(front+back)/2,0)));
+  if(caps.top)shell=own(shell.add(box(W-2*p.wall,D,p.wall,0,(front+back)/2,H-p.wall)));
   for(const side of [-1,1]){const edge=side*W/2,inner=edge-side*p.wall,wide=edge-side*(8+p.wall),ramp=own(new C([[[inner,front+p.wall+8.2],[inner,front+p.wall-.02],[wide,front+p.wall-.02]]],'NonZero').extrude(H));shell=own(shell.add(ramp));}
   const ranges=[{left:-W/2+margin,right:W/2-margin,side:p.hingeSide==='left'?-1:1}];
   for(let leaf=0;leaf<ranges.length;leaf++){
-   const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-7),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
+   const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-5),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
    const label=hasPull?makeStorageLabel(module,own,p,'cupboard',col,dw,fontBuffer):null;if(label)keepShapes.push(own(label.keep.offset(2).translate([0,15])));
-   if(p.doorMagnets)keepShapes.push(own(C.circle(5,40).translate([edge+free*1.5,q.side===1?-17:17])));
+   if(p.doorMagnets)keepShapes.push(own(C.circle(5,40).translate([edge-free*5,q.side===1?-17:17])));
    const keep=own(C.union(keepShapes)),profile=plate(dw,dh,2);let door=styledDoor(profile,dw,dh,keep);
    const holes=doorCutouts(profile,dw,dh,keep);if(holes&&!holes.isEmpty())door=own(door.subtract(own(holes.extrude(thickness+1).translate([0,0,-.1]))));
    if(label?.cut)door=own(door.subtract(own(label.cut.translate([0,15,-.01]))));
@@ -80,10 +87,10 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
    for(const start of hinges){
     shell=hingeCase(shell,hx,start,q.side,opening);
     const y=dc-(start+5+p.clearance),length=8-2*p.clearance;
-    let barrel=own(circle(R,length).rotate([90,0,0]).translate([localAxis,y,4]));
-    const arm=box(Math.abs(localAxis-q.side*dw/2)+.2,length,thickness,(localAxis+q.side*dw/2)/2,y-length/2,0);
-    const footProfile=own(new C([[[-2.4,0],[2.4,0],[4,2.4],[4,4],[-4,4],[-4,2.4]]],'NonZero')),foot=own(footProfile.extrude(length).rotate([90,0,0]).translate([localAxis,y,0]));
-    barrel=own(own(own(barrel.add(arm)).add(foot)).subtract(own(doorBore.extrude(length+.2).rotate([90,0,0]).translate([localAxis,y+.1,4]))));door=own(door.add(barrel));
+    let barrel=own(circle(R,length).rotate([90,0,0]).translate([localAxis,y,3.6]));
+    barrel=own(barrel.intersect(box(12,length+.2,8,localAxis,y-length/2,0)));
+    const arm=box(Math.abs(localAxis-q.side*dw/2)+.2,length,Math.max(thickness,3.2),(localAxis+q.side*dw/2)/2,y-length/2,1.2);
+    barrel=own(own(barrel.add(arm)).subtract(own(doorBore.extrude(length+.2).rotate([90,0,0]).translate([localAxis,y+.1,3.6]))));door=own(door.add(barrel));
     // Separate replaceable pin: bed-facing head and split-free round shaft.
     const pin=own(M.union([circle(2.5,1),circle(pinRadius,18.2,1),own(M.cylinder(.6,pinRadius,1,40).translate([0,0,19.2]))]));
     add(`hinge-pin-r${row+1}-c${col+1}-d${leaf+1}-${start===hinges[0]?'lower':'upper'}`,'hinge-pin',pin,[cx+hx,axisY,z0+start+19],[Math.PI,0,0]);
@@ -91,7 +98,7 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
    // One flex catch per module, with a receiving pocket integral with the case.
    const slot=box(.6,16,thickness+.2,edge-free*1.8,0,-.1),release=box(2.1,.6,thickness+.2,edge-free*.75,8,-.1);door=own(door.subtract(own(slot.add(release))));
    const nub=box(1.2,2.4,1.2,edge+free*.4,0,thickness-.9);door=own(door.add(nub));
-   const ex=dx+edge,receiver=box(3.4,front+p.wall-(faceY+thickness-1.2),8,ex+free*1.9,(front+p.wall+faceY+thickness-1.2)/2,dc-4),pocket=box(1.8,3.2,2.8,ex+free*.7,faceY+thickness-.3,dc-1.4);shell=own(shell.add(own(receiver.subtract(pocket))));
+   const ex=dx+edge,receiverFront=Math.min(front+p.wall-.1,faceY+thickness-1.2),receiverBack=Math.max(front+p.wall,faceY+thickness+2.4),receiver=box(3.4,receiverBack-receiverFront,8,ex+free*1.9,(receiverFront+receiverBack)/2,dc-4),pocket=box(1.8,3.2,2.8,ex+free*.7,faceY+thickness-.3,dc-1.4);shell=own(own(shell.add(receiver)).subtract(pocket));
    if(hasPull){
     door=own(door.subtract(own(C.square([6+2*p.clearance,3+2*p.clearance],true).extrude(thickness+2).translate([pullX,0,-.1]))));
     const cap=circle(4.5,pullHeight),stem=circle(1.5,thickness+p.clearance+.05,pullHeight-.01),root=circle(1.5,.08,pullHeight+thickness+p.clearance-.02),tab=box(6,2.2,.4,0,0,pullHeight+thickness+p.clearance+2);
@@ -100,8 +107,8 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
     add(`door-pull-c${col+1}-d${leaf+1}`,'door-pull',pull,[cx+dx+pullX,faceY-pullHeight,z0+dc],[-Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);
    }
    if(p.doorMagnets){
-    const mx=edge+free*1.5,my=q.side===1?-17:17,pad=own(C.circle(4.5,48).extrude(thickness+1.2).translate([mx,my,0]));door=own(own(door.add(pad)).subtract(own(C.circle(3.1,48).extrude(2.1).translate([mx,my,thickness-.8]))));
-    const gx=dx+mx,gz=dc-my,magnetFront=faceY+thickness+1.2+p.clearance,rootWidth=8+p.wall,rootX=free*(W/2-rootWidth/2),block=own(M.hull([box(rootWidth,.2,9,rootX,front+p.wall-.05,gz-4.5),box(9,3.2,9,gx,magnetFront+1.6,gz-4.5)])),magnetHole=own(C.circle(3.1,48).extrude(2.1).rotate([-90,0,0]).translate([gx,magnetFront-.1,gz]));shell=own(shell.add(own(block.subtract(magnetHole))));
+    const mx=edge-free*5,my=q.side===1?-17:17,pad=own(C.circle(4.5,48).extrude(thickness+1.2).translate([mx,my,0]));door=own(own(door.add(pad)).subtract(own(C.circle(3.1,48).extrude(2.1).translate([mx,my,thickness-.8]))));
+    const gx=dx+mx,gz=dc-my,magnetFront=faceY+thickness+1.2+p.clearance,rootWidth=8+p.wall,rootX=free*(W/2-rootWidth/2),block=own(M.hull([box(rootWidth,.2,9,rootX,front+p.wall-.05,gz-4.5),box(9,3.2,9,gx,magnetFront+1.6,gz-4.5)])),magnetHole=own(C.circle(3.1,48).extrude(magnetFront-front+2.1).rotate([-90,0,0]).translate([gx,front-.1,gz])),padClearance=own(C.circle(4.5+p.clearance,48).extrude(magnetFront-front+.1).rotate([-90,0,0]).translate([gx,front-.1,gz]));shell=own(own(own(shell.add(block)).subtract(padClearance)).subtract(magnetHole));
    }
    // Closed-ended dovetail tunnels retain the joining keys at the seam. Join
    // all door panels first, present the complete leaf, then insert hinge pins.
@@ -113,10 +120,18 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
      door=own(door.add(own(pad.subtract(tool))));
     }
    }
+   const closedPanelClearance=own(own(profile.offset(p.clearance,'Round',2,32)).extrude(thickness+p.clearance+.1).rotate([-90,0,0]).translate([dx,faceY-.1,dc]));shell=own(shell.subtract(closedPanelClearance));
+   // Joined-door keys need local passages through optional intermediate caps.
+   for(let seam=1;seam<p.cupboardRows;seam++){const lower=cupboardCaps(p,seam-1),upper=cupboardCaps(p,seam),a=seam*H-(lower.top?p.wall:0)-p.clearance,b=seam*H+(upper.floor?p.wall:0)+p.clearance,length=19+b-a,bottom=(a+b-length)/2-z0;if(bottom>H||bottom+length<0)continue;
+    for(const offset of [-dw*.25,dw*.25]){const paths=[];for(let angle=0;angle<=opening;angle+=5){const base=own(new C([[[-3+dx+offset-hx,faceY+thickness+.4-axisY],[3+dx+offset-hx,faceY+thickness+.4-axisY],[2+dx+offset-hx,faceY+thickness+2.4-axisY],[-2+dx+offset-hx,faceY+thickness+2.4-axisY]]],'NonZero'));paths.push(own(own(base.offset(p.clearance+.15,'Round',2,16)).rotate(q.side*angle)));}shell=own(shell.subtract(own(own(C.union(paths)).extrude(length).translate([hx,axisY,bottom]))));}
+   }
+
    add(`cupboard-door-r${row+1}-c${col+1}-d${leaf+1}`,'cupboard-door',door,[cx+dx,faceY,z0+dc],[-Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);
    if(label?.insert){add(`cupboard-label-c${col+1}`,'door-label',label.insert,[cx+dx,faceY+1,z0+dc-15],[Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);}
    doorRecords.push({row,col,leaf,side:q.side,x:cx+dx,axisX:cx+hx,opening,width:dw,bottom:z0+doorBottom,top:z0+doorTop,centre:z0+dc});
   }
+  // Side access pockets let each pin head lift out, including across a module seam.
+  for(let sourceRow=0;sourceRow<p.cupboardRows;sourceRow++)for(const start of hinges){const bottom=sourceRow*H+start+18-z0;if(bottom<H&&bottom+21.2>0){const sx=(p.hingeSide==='left'?-1:1)*(W/2-3.85);shell=own(shell.subtract(box(7.9,5.8,21.2,sx,axisY,bottom)));}}
   shell=interior.openings(interior.apply(shell,row),row,portMap.get(`${row}/${col}`)||[]);
   for(const [x,z]of portMap.get(`${row}/${col}`)||[])shell=own(shell.subtract(rearHole(module,own,p,x,z,back)));
   add(`cupboard-case-r${row+1}-c${col+1}`,'cupboard-case',printCase(shell),[cx,back,z0+H/2],[Math.PI/2,0,0]);cases.push({row,col,floor:caps.floor,top:caps.top});
@@ -128,5 +143,5 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
  }
  for(const [i,j]of joining.entries())add(`case-${j.axis}-locking-key-${i+1}`,'connector-key',snapBridge(module,own,p,{horizontal:j.axis==='sides'}),[j.x,back+2.4,j.z],[Math.PI/2,0,0]);
  for(const [axis,on]of Object.entries(ports))if(on)for(let i=1;i<=2;i++){add(`spare-${axis}-locking-key-${i}`,'connector-key',snapBridge(module,own,p,{horizontal:axis==='sides'}),[0,0,0]);add.hidden();}
- return {width:p.width,depth:p.depth+2.4,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
+ return {width:p.width,depth:p.depth+7.4,faceY,axisY,hingeInset:5,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
 }
