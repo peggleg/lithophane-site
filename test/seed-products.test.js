@@ -22,3 +22,8 @@ test('grow-row integral joints fit neighbours and separate vertically without op
  }
  assert.throws(()=>validateProduct({kind:'seed-grow-row',units:2.5}),/whole number/);
 });
+
+test('write-on label batches remain flat and within both printer limits',()=>{
+ for(const printer of ['a1-mini','256'])for(const input of [{markerWidth:25,markerHeight:15,stakeLength:35,quantity:1},{markerWidth:60,markerHeight:35,stakeLength:120,quantity:3}]){const g=generateProduct(m,{kind:'seed-labels',printer,...input});assert.equal(g.parts.length,input.quantity);for(const p of g.parts){const a=posed(p),parts=a.decompose();assert.equal(a.status(),'NoError');assert.equal(parts.length,1);parts.forEach(x=>x.delete());a.delete();assert.ok(p.printSize.every(v=>v<=printLimit(g.settings)));assert.equal(p.printSize[2],2);assert.ok(p.printSize[1]<=input.markerHeight+input.stakeLength+.01);}}
+ assert.throws(()=>validateProduct({kind:'seed-labels',quantity:2.5}),/whole number/);
+});
