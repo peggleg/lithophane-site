@@ -1,3 +1,4 @@
+import {makePegboardHolder} from './pegboard-holders.js';
 import {makePegboard} from './pegboard-products.js';
 import {mountRail,mountShoe,mountInterface,makeMountAccessory} from './mount-products.js';
 export const pegboardRailFrame=Object.freeze({railY:-7,railZ:0});
@@ -29,5 +30,6 @@ export function makePegboardAccessory(K,p){
   info.note='Slide down onto the universal adapter until the integral catch clicks. Pull the broad tab outward and lift to remove. This same accessory also fits the desk clamp. The board and adapter are preview references only.';
   info.guide+=' '+adapterGuide(p);info.previewDirection=[1,-1.8,.7];return info;
  }
+ if(p.kind==='pegboard-cup'){const info=makePegboardHolder(K,p);info.guide+=' '+adapterGuide(p);return info;}
  throw Error('Choose an available pegboard accessory.');
 }

@@ -18,3 +18,10 @@ test('short and long rounded hooks remain connected and clear adapter during rel
   const g=generateProduct(m,{kind,width,outreach});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const blocked=part.translate([0,0,1]);assert.ok(hit(blocked,adapter)>.05);blocked.delete();part.delete();adapter.delete();
  }
 });
+
+test('round tool cups are connected, hollow, clear the board and retain the latch release',()=>{
+ for(const diameter of [50,120])for(const height of [60,150]){
+  const g=generateProduct(m,{kind:'pegboard-cup',diameter,height});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);
+  const K=productKernel(m,g.settings);try{const f=pegboardRailFrame,shoe=mountShoe(K,g.settings,f,28),released=mountShoe(K,g.settings,f,28,{release:1.5}),fixed=K.own(part.subtract(shoe.tongue)),open=K.own(fixed.add(released.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);const free=K.own(released.tongue.intersect(K.box(60,100,80,0,-25,f.railZ-9.5,1)));assert.ok(hit(fixed,free)<.003);const interior=K.cyl(diameter/2-5,height-4,0,shoe.front-diameter/2+3.2,shoe.bottom+44-height+4);assert.ok(hit(part,interior)<.003,'interior is open to the top');}finally{K.dispose();}part.delete();adapter.delete();
+ }
+});
