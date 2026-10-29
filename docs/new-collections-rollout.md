@@ -18,3 +18,7 @@ Current steering: strengthen existing mounted items before releasing the control
 Strength review deployed at 055298c2054e9cc40c4d0892a9f9d3f74d5bbc8d; Cloudflare success. Controller cradle implementation resumed using the reinforced profile. Its centre relief has 45-degree transitions for the side printing orientation; rounded horns and the standard integral release latch remain.
 
 Controller cradle validated with closed meshes at 70/160 mm A1 mini and 240 mm Bambu A1 widths, both fit clearances, positive catch engagement, mobile/download checks, native slicing and both desktop project round trips. Ready for its individual preview release; next remote pocket and cable guide.
+
+Controller cradle deployed at ff6b0c51e6d7a99dda5d233bc18b53d7bf1bc7bb; Cloudflare success. Remote pocket in progress. Its upright orientation keeps the storage cavity support-free; the matching latch test must use the same orientation, and the guide explicitly flags layer-bond fatigue testing before use.
+
+Remote pocket validated at 50/160 mm A1 mini and 240 mm A1 widths, 25/80 mm depths and 60/170/240 mm heights: connected shells, engagement and full release clearance, upright printing orientation, mobile/downloads, native slicing and both desktop project round trips. Interior spans are shown in the product note. Ready for individual preview release.
