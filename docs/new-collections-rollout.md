@@ -11,4 +11,4 @@ Order:
 
 All item dimensions adjustable where mechanically appropriate. Standard interfaces, threads and gear relationships remain compatible. Defaults: A1 mini (170 mm design allowance); optional Bambu A1 256 mm. Shared print defaults: 8% gyroid, 2 walls, 3/3 layers for these new items. Preserve all existing exceptions. Estimated grams, guides, STL and complete Bambu 3MF projects required. Cancel/stale export handling, mobile previews, native slicer and desktop project round trips required. Digital fit checks do not establish physical strength or surface protection.
 
-Status: desk clamp completed and validated for its first preview deployment. Next: headphone hook, then the other interchangeable accessories.
+Deployed: desk clamp (884109633096ac769261ed56e2b6e1abb3dd1d5c), Cloudflare success. Headphone hook completed with integral catch and optional PLA/PETG coupons; validated and ready for its preview deployment. Next: controller cradle, remote pocket, cable guide. User correction: NO loose locking pin. Use an integral broad release tab/catch; include an optional PLA/PETG connector test. Reuse the deployed clamp rail.
