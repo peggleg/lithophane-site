@@ -1,3 +1,4 @@
+import {spindleSolids} from '../src/pegboard-spindle.js';
 import {printLimit} from '../src/printer-settings.js';
 import test from 'node:test';import assert from 'node:assert/strict';import init from 'manifold-3d/manifold';
 import {generateProduct} from '../src/product-geometry.js';import {productKernel} from '../src/product-kernel.js';import {pegboardAdapterSolid,pegboardRailFrame} from '../src/pegboard-accessories.js';import {mountShoe} from '../src/mount-products.js';import {printProfile} from '../src/print-profile.js';
@@ -39,4 +40,13 @@ test('lift-off storage bins keep the shared interface clear at size extremes',()
   const g=generateProduct(m,{kind:'pegboard-bin',width,depth,height:150});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const K=productKernel(m,g.settings);try{const shoe=mountShoe(K,g.settings,pegboardRailFrame,width),release=mountShoe(K,g.settings,pegboardRailFrame,width,{release:1.5}),fixed=K.own(part.subtract(shoe.tongue)),open=K.own(fixed.add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);const free=K.own(release.tongue.intersect(K.box(width+10,100,80,0,-25,-9.5,1)));assert.ok(hit(fixed,free)<.003);}finally{K.dispose();}part.delete();adapter.delete();
  }
  checkParts(generateProduct(m,{kind:'pegboard-bin',printer:'256',width:240}));
+});
+
+test('spool spindle and retaining disc have matching threads and remain removable',()=>{
+ for(const rodDiameter of [8,32])for(const outreach of [15,100]){
+  const g=generateProduct(m,{kind:'pegboard-spool',rodDiameter,outreach,capDiameter:rodDiameter+10});checkParts(g);assert.equal(g.parts.length,3);const K=productKernel(m,g.settings);try{const s=spindleSolids(K,g.settings),adapter=pegboardAdapterSolid(K,g.settings);assert.ok(hit(s.socket,adapter)<.003);assert.ok(hit(s.socket,s.rod)<.003);assert.ok(hit(s.rod,s.cap)<.003);const release=mountShoe(K,g.settings,pegboardRailFrame,36,{release:1.5}),fixed=K.own(s.socket.subtract(s.shoe.tongue)),open=K.own(fixed.add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);
+  const move=(solid,angle,advance)=>K.own(solid.translate([0,-s.axis.y,-s.axis.z]).rotate([-90,0,0]).rotate([0,0,angle]).translate([0,0,advance]).rotate([90,0,0]).translate([0,s.axis.y,s.axis.z]));for(const a of [90,180,270]){assert.ok(hit(s.socket,move(s.rod,a,a/360*3.6))<.01,'rear thread advances freely');assert.ok(hit(s.rod,move(s.cap,a,a/360*1.8))<.01,'disc thread advances freely');}
+  }finally{K.dispose();}
+ }
+ assert.throws(()=>generateProduct(m,{kind:'pegboard-spool',rodDiameter:32,capDiameter:20}),/retaining disc/);
 });
