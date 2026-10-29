@@ -22,3 +22,7 @@ Controller cradle validated with closed meshes at 70/160 mm A1 mini and 240 mm B
 Controller cradle deployed at ff6b0c51e6d7a99dda5d233bc18b53d7bf1bc7bb; Cloudflare success. Remote pocket in progress. Its upright orientation keeps the storage cavity support-free; the matching latch test must use the same orientation, and the guide explicitly flags layer-bond fatigue testing before use.
 
 Remote pocket validated at 50/160 mm A1 mini and 240 mm A1 widths, 25/80 mm depths and 60/170/240 mm heights: connected shells, engagement and full release clearance, upright printing orientation, mobile/downloads, native slicing and both desktop project round trips. Interior spans are shown in the product note. Ready for individual preview release.
+
+Remote pocket deployed at ea044fbe3ba9edafa6c7bc49800fe8e773f8d2db, Cloudflare success. Cable guide in progress: open round channels with full-depth cable paths and a self-supporting angled underside, using the common integral catch and strengthened print settings.
+
+Cable guide validated for 2/6 channels, 2/8 mm wires and 15/30 mm depth, including full wire paths, positive retention, released removal clearance and both printer projects/native slices/desktop round trips. Ready for individual preview release. First mount category complete after this deployment; next modular pegboards.
