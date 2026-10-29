@@ -36,6 +36,7 @@ export function makePegboardAccessory(K,p){
  if(mapped){const info=makeMountAccessory({...K,add:(name,role,solid,rotation,colour)=>K.add(name===mapped?p.kind:name,role,solid,rotation,colour)}, {...p,kind:mapped},pegboardRailFrame);
   info.guide=info.guide.replaceAll('clamp rail','adapter rail').replace('away from the desk','outward').replace('The clamp, example desk and pads are excluded from this accessory download. Download the clamp separately.','The panel and selected mount are preview references only; download the mount separately.');
   info.note='Slide down onto the universal adapter until the integral catch clicks. Pull the broad tab outward and lift to remove. This same accessory also fits the desk clamp. The board and adapter are preview references only.';
+  if(p.kind==='pegboard-cables'){const c=info.fit.cable;info.note=`Automatic clip depth: ${c.depth} mm; ${p.cableDiameter} mm round cable, ${c.seatDiameter.toFixed(2)} mm circular seat (${c.clearance} mm clearance per side). `+info.note;}
   if(p.kind==='pegboard-bin'){info.note=`Nominal usable bin: ${(p.width-6.4).toFixed(1)} × ${(p.depth-6.4).toFixed(1)} × ${(p.height-3.2).toFixed(1)} mm, with rounded corners. Empty it before removal. `+info.note;info.guide=info.guide.replaceAll('pocket','bin').replaceAll('Remote bins','Storage bins');}
   info.guide+=' '+adapterGuide(p);info.previewDirection=[1,-1.8,.7];return info;
  }
