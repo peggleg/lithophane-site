@@ -2,6 +2,10 @@
 
 Publish each item to preview/lithophane and confirm Cloudflare before enabling the next item. Never publish to production. The concept boards are the appearance target; actual geometry previews must show the same rounded silhouettes, clear functional joints and muted palette. Do not replace printable geometry with generated render artwork.
 
+Current state (29 October 2026): desk mounts and the pegboard range are deployed, including the cup/mug holder. Pegboards have quick-move lift-off mounts as well as screw-fixed adapters, sharing the desk-clamp rail. Cable guides now have automatically sized round seats and clip depth, adjustable radial clearance and a curved rear stop. The user removed prototype/untested disclaimers from public copy; keep internal checks and factual assembly guidance.
+
+Active: seed-starting collection. The removable-cell nursery is implemented with tapered lift-out cells, a low fluted catch tray and clear drainage rests. Default 3 × 2 layout uses 38 mm cells. Preserve 8% gyroid, two walls, 3/3 skins; native and desktop checks passed. Finish navigation/homepage checks and publish this item, then implement the wick-fed reservoir, modular grow rows and labels. Crochet storage and board-game accessories remain next in the approved order. The dated notes below are implementation history, not current status.
+
 Order:
 1. Desk mounts: padded removable clamp, headphone hook, controller cradle, remote pocket, cable guide. One standard removable accessory interface across all sizes. No holes or adhesive in the desk. Broad soft contact pads; make pad materials explicit.
 2. Pegboards: connecting panels with appropriately distributed independent supports; hooks, cups, spool/tape accessories and reusable mounting accessories. Wall and desk-clamp supports must be distinguished.
