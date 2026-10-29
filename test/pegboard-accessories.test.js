@@ -74,3 +74,10 @@ test('controller cradles fit quick-move and fixed adapters at both saddle extrem
  }
  checkParts(generateProduct(m,{kind:'pegboard-controller',printer:'256',width:240,outreach:70}));
 });
+
+test('snap-in pegboard cable guides retain wires and clear both adapter types',()=>{
+ for(const mountType of ['quick','fixed'])for(const cableDiameter of [2,8])for(const channels of [2,3,6]){
+  const g=generateProduct(m,{kind:'pegboard-cables',mountType,cableDiameter,channels,depth:28});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter')),K=productKernel(m,g.settings);try{const W=g.productFit.shoeWidth,rest=mountShoe(K,g.settings,pegboardRailFrame,W),release=mountShoe(K,g.settings,pegboardRailFrame,W,{release:1.5}),open=K.own(part.subtract(rest.tongue).add(release.tongue));assert.ok(hit(part,adapter)<.003);for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);for(let i=0;i<channels;i++){const x=(i-(channels-1)/2)*(cableDiameter+4),wire=K.cyl(cableDiameter/2,100,x,rest.front-28+cableDiameter/2+1.5,-40);assert.ok(hit(part,wire)<.003);assert.ok(hit(part,K.own(wire.translate([0,-(cableDiameter/2+.3),0])))>.02,'lips obstruct lateral escape');}}finally{K.dispose();}part.delete();adapter.delete();
+ }
+ assert.throws(()=>generateProduct(m,{kind:'pegboard-cables',channels:2.5}),/whole cable/);
+});
