@@ -7,7 +7,7 @@ export const printDefaults=Object.freeze({sparse_infill_pattern:'gyroid',sparse_
 // Lightweight organisers retain the original policy. Static mounted loads use
 // a separately reviewed, more conservative starting profile; no load rating is
 // inferred from these process values.
-export const loadBearingKinds=Object.freeze(['desk-clamp','cup-holder','headphone-hook','controller-cradle','remote-pocket','cable-guide']);
+export const loadBearingKinds=Object.freeze(['cupboard-hinge','desk-clamp','cup-holder','headphone-hook','controller-cradle','remote-pocket','cable-guide']);
 export const isLoadBearingPrint=kind=>loadBearingKinds.includes(kind)||typeof kind==='string'&&kind.startsWith('pegboard-');
 export const usesDirectPegs=(kind,p)=>kind?.startsWith('pegboard-')&&!['pegboard-panel','pegboard-adapter','pegboard-quick-adapter'].includes(kind)&&p?.mountType==='direct';
 export function printProfile(kind,settings){const structural=isLoadBearingPrint(kind),layers=structural||kind==='coaster'?'5':['lithophane','fan'].includes(kind)?'4':['keyring','nameplate'].includes(kind)?'2':'3';return {...printDefaults,...(structural?{sparse_infill_density:'30%',wall_loops:'4'}:{}),top_shell_layers:layers,bottom_shell_layers:layers,...(kind==='pegboard-quick-adapter'||usesDirectPegs(kind,settings)?{enable_support:'1',support_type:'normal(auto)'}:{})};}

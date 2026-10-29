@@ -5,6 +5,7 @@ User-facing copy policy: this is an internal site. Do not add prototype, unteste
 Apply this policy to current generators and every future addition:
 - Standard lightweight items: 8% gyroid sparse infill and 2 wall loops.
 - User-requested load-bearing exception: desk clamps, mounted accessories and future pegboard panels/supports use 30% gyroid, 4 wall loops, 5 top and 5 bottom layers. Use `isLoadBearingPrint` in the shared profile source. This is a conservative starting profile, not a load rating; preserve safe print orientation and require physical load/creep and latch-fatigue tests.
+- Cupboard hinge halves and their printed M5-sized bolts/nuts use the reinforced 30% gyroid, 4 walls and 5/5 skins as per-object overrides. Cases/doors retain ordinary 8%/2/3 settings. Preserve `part.printKind` through 3MF object settings, ZIP part sidecars and filament estimates.
 - Keyrings and nameplates: 2 top layers and 2 bottom layers.
 - Lithophanes and fans: preserve their existing 4 top and 4 bottom layers.
 - Coasters: 5 top layers and 5 bottom layers (user-approved moisture-coverage exception). Coaster holders keep 3/3.

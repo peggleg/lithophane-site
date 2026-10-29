@@ -1,3 +1,4 @@
+import {cupboardHinges,cupboardHingeStarts} from './cupboard-hinges.js';
 import {cupboardCaps,connectorAxes} from './cupboard-settings.js';
 import {snapBridge,rearHole} from './storage-connectors.js';
 import {cupboardInterior} from './cupboard-interior.js';
@@ -5,27 +6,26 @@ import {makeStorageLabel} from './storage-labels.js';
 import {openworkCells} from './desk-openwork.js';
 
 export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
- const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2,axisY=front+3.6,faceY=front,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=1.4,bore=pinRadius+p.clearance,R=4,ports=connectorAxes(p.cupboardPorts),hinges=[H*.25-9,H*.75-9],doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
+ const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2,axisY=front-6,faceY=front,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=2.5,bore=2.8,R=5.5,ports=connectorAxes(p.cupboardPorts),hinges=cupboardHingeStarts(H),doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
  // Crop the actual finished parts, never a separately rebuilt hinge. Keep the
  // entire case depth so the overhang begins at precisely the full-case layer.
+ let accepted=false;
  function add(name,role,solid,assembly,rotation){
-  if(!p.cupboardHingeTest)return emit(name,role,solid,assembly,rotation);
+  accepted=false;if(!p.cupboardHingeTest){accepted=true;return emit(name,role,solid,assembly,rotation);}
   if(name==='cupboard-case-r1-c1'){
    const side=p.hingeSide==='left'?-1:1;
-   solid=own(solid.intersect(box(30,36,D+.2,side*(W/2-15),hinges[0]+9-H/2,-.1)));
+   solid=own(solid.intersect(box(56,64,D+.2,side*(W/2-28),hinges[0]+14-H/2,-.1)));
   }else if(name==='cupboard-door-r1-c1-d1'){
    const caps=cupboardCaps(p,0),dc=((caps.floor?p.wall:0)+p.clearance+H-(caps.top?p.wall:0)-p.clearance)/2;
-   solid=own(solid.intersect(box(30,36,thickness+12,(p.hingeSide==='left'?-1:1)*(W/2-15),dc-hinges[0]-9,-.1)));
-  }else if(name!=='hinge-pin-r1-c1-d1-lower')return;
-  emit('hinge-test-'+name,role,solid,assembly,rotation);
+   solid=own(solid.intersect(box(56,64,thickness+12,(p.hingeSide==='left'?-1:1)*(W/2-28),dc-hinges[0]-14,-.1)));
+  }else if(!name.startsWith('m5-r1-c1-h1-'))return;
+  accepted=true;emit('hinge-test-'+name,role,solid,assembly,rotation);
  }
- add.hidden=(...args)=>{if(!p.cupboardHingeTest)emit.hidden(...args);};
- add.door=(...args)=>{if(!p.cupboardHingeTest)emit.door(...args);};
+ add.hidden=(...args)=>{if(accepted)emit.hidden(...args);};
+ add.door=(...args)=>{if(accepted)emit.door(...args);};
+ const hardware=cupboardHinges(module,own,p,{box,round});
  const interior=cupboardInterior(module,own,p,{round,box,add});
  const circle=(r,h,z=0)=>own(C.circle(r,64).extrude(h).translate([0,0,z]));
- const boreSection=direction=>own(own(C.circle(bore,64)).add(own(new C([[[-bore/Math.SQRT2,direction*bore/Math.SQRT2],[bore/Math.SQRT2,direction*bore/Math.SQRT2],[0,direction*bore*Math.SQRT2]]],'NonZero'))));
- const caseBore=boreSection(-1),doorBore=boreSection(1);
- const globalCylinder=(r,h,x,y,z)=>own(circle(r,h).translate([x,y,z]));
  const plate=(w,h,r=2)=>round(w,h,Math.min(r,w/4,h/4));
  const printCase=s=>own(s.translate([0,-back,-H/2]).rotate([-90,0,0]));
  function port(row,col,x,z){const key=`${row}/${col}`,a=portMap.get(key)||[];if(!a.some(v=>Math.abs(v[0]-x)<.01&&Math.abs(v[1]-z)<.01))a.push([x,z]);portMap.set(key,a);}
@@ -38,25 +38,6 @@ export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
   const x=sign*(W/2-18);port(row-1,col,x,H-8);port(row,col,x,8);joining.push({axis:'vertical',x:(col-(p.cupboardColumns-1)/2)*W+x,z:row*H});
  }
  for(let col=1;col<p.cupboardColumns;col++)for(let row=0;row<p.cupboardRows;row++)for(const z of [H*.25,H*.75]){port(row,col-1,W/2-8,z);port(row,col,-W/2+8,z);joining.push({axis:'sides',x:(col-p.cupboardColumns/2)*W,z:row*H+z});}
- function hingeCase(solid,x,start,side,opening){
-  const pieces=[],edge=side*W/2,doorEdge=side*(W/2-margin),armA=Math.min(x,doorEdge)-.2,armB=Math.max(x,doorEdge)+.2;
-  // A side-corner pocket clears the rotating centre knuckle and recessed arm.
-  const pocket=globalCylinder(4.3,8.1,x,axisY,start+4.95),armRelief=box(armB-armA,Math.max(thickness+2,6),8.1,(armA+armB)/2,front+Math.max(thickness+2,6)/2-.1,start+4.95),sideWindow=box(1.6,8.4,8.1,side*(W/2-.7),front+4.1,start+4.95);
-  solid=own(solid.subtract(pocket).subtract(armRelief).subtract(sideWindow));
-  const sweep=[],armLength=Math.abs(doorEdge-x)+.2,armDepth=Math.max(thickness,3.2);
-  for(let angle=0;angle<=opening;angle+=5){const a=own(C.square([armLength,armDepth],true).translate([-side*armLength/2,1.2+armDepth/2-3.6]));sweep.push(own(own(a.offset(.3,'Round',2,16)).rotate(side*angle)));}
-  solid=own(solid.subtract(own(own(C.union(sweep)).extrude(8.1).translate([x,axisY,start+4.95]))));
-  for(const z of [start,start+13]){
-   const raw=globalCylinder(R,5,x,axisY,z),clip=box(12,12,5.2,x,front+6,z-.1),arm=box(Math.abs(edge-x),5,5,(edge+x)/2,axisY+2.5,z);
-   pieces.push(own(own(raw.intersect(clip)).add(arm)));
-  }
-  // Annular side stop stays within the case width and outside the rotating barrel.
-  const points=[],first=opening+Math.asin(2.4/4.3)*180/Math.PI+.5;
-  for(let i=0;i<=40;i++){const a=(first+(270-first)*i/40)*Math.PI/180;points.push([-side*5*Math.cos(a),-5*Math.sin(a)]);}
-  for(let i=40;i>=0;i--){const a=(first+(270-first)*i/40)*Math.PI/180;points.push([-side*4.3*Math.cos(a),-4.3*Math.sin(a)]);}
-  pieces.push(own(new C([points],'NonZero').extrude(7).translate([x,axisY,start+4.6])));
-  return own(own(solid.add(own(M.union(pieces)))).subtract(own(caseBore.extrude(19.2).translate([x,axisY,start-1]))));
- }
  function doorCutouts(profile,w,h,keep){
   if(p.openwork==='none')return null;
   const shapes=[];
@@ -92,23 +73,39 @@ export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
   for(const side of [-1,1]){const edge=side*W/2,inner=edge-side*p.wall,wide=edge-side*(8+p.wall),ramp=own(new C([[[inner,front+p.wall+8.2],[inner,front+p.wall-.02],[wide,front+p.wall-.02]]],'NonZero').extrude(H));shell=own(shell.add(ramp));}
   const ranges=[{left:-W/2+margin,right:W/2-margin,side:p.hingeSide==='left'?-1:1}];
   for(let leaf=0;leaf<ranges.length;leaf++){
-   const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-5),localAxis=hx-dx,free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
+   const q=ranges[leaf],opening=110,pullHeight=5,dw=q.right-q.left,dx=(q.left+q.right)/2,hx=q.side*(W/2-8),free=-q.side,edge=free*dw/2,pullX=edge-free*7,pullRow=Math.floor(p.cupboardRows/2),hasPull=row===pullRow,keepShapes=[own(C.circle(7,48).translate([pullX,0])),own(C.square([10,26],true).translate([edge,0]))];
    const label=hasPull?makeStorageLabel(module,own,p,'cupboard',col,dw,fontBuffer):null;if(label)keepShapes.push(own(label.keep.offset(2).translate([0,15])));
    if(p.doorMagnets)keepShapes.push(own(C.circle(5,40).translate([edge-free*5,q.side===1?-17:17])));
+   for(const start of hinges)keepShapes.push(own(plate(32,24,2).translate([hx-hardware.side*26,dc-start-21])));
    const keep=own(C.union(keepShapes)),profile=plate(dw,dh,2);let door=styledDoor(profile,dw,dh,keep);
    const holes=doorCutouts(profile,dw,dh,keep);if(holes&&!holes.isEmpty())door=own(door.subtract(own(holes.extrude(thickness+1).translate([0,0,-.1]))));
    if(label?.cut)door=own(door.subtract(own(label.cut.translate([0,15,-.01]))));
-   // The barrel axis lies in the print plane, with its underside on the bed.
-   for(const start of hinges){
-    shell=hingeCase(shell,hx,start,q.side,opening);
-    const y=dc-(start+5+p.clearance),length=8-2*p.clearance;
-    let barrel=own(circle(R,length).rotate([90,0,0]).translate([localAxis,y,3.6]));
-    barrel=own(barrel.intersect(box(12,length+.2,8,localAxis,y-length/2,0)));
-    const arm=box(Math.abs(localAxis-q.side*dw/2)+.2,length,Math.max(thickness,3.2),(localAxis+q.side*dw/2)/2,y-length/2,1.2);
-    barrel=own(own(barrel.add(arm)).subtract(own(doorBore.extrude(length+.2).rotate([90,0,0]).translate([localAxis,y+.1,3.6]))));door=own(door.add(barrel));
-    // Separate replaceable pin: bed-facing head and split-free round shaft.
-    const pin=own(M.union([circle(2.5,1),circle(pinRadius,18.2,1),own(M.cylinder(.6,pinRadius,1,40).translate([0,0,19.2]))]));
-    add(`hinge-pin-r${row+1}-c${col+1}-d${leaf+1}-${start===hinges[0]?'lower':'upper'}`,'hinge-pin',pin,[cx+hx,axisY,z0+start+19],[Math.PI,0,0]);
+   // Independent knuckles print axis-up from the bed, then bolt to the case/door.
+   for(const [hi,start]of hinges.entries()){
+    const inward=-q.side,origin=[cx+hx,axisY,z0+start],tag=`m5-r${row+1}-c${col+1}-h${hi+1}-`;
+    const place=(name,role,s,z=0,moving=false)=>{add(tag+name,role,s,[origin[0],origin[1],origin[2]+z]);if(moving)add.door([cx+hx,axisY,0],q.side,opening);};
+    place('lower-case-half','hinge-case-half',hardware.lower);place('door-half','hinge-door-half',hardware.door,14+p.clearance,true);
+    if(row===0&&col===0&&hi===0){add(tag+'driver','hinge-driver',hardware.driver,[0,0,0]);add.hidden();}
+    place('pivot-bolt','hinge-pivot-bolt',hardware.pivotBolt,-3.3);place('pivot-nut','hinge-pivot-nut',hardware.pivotNut,28.3);
+    // Remove only the old front stile behind the stationary hinge leaves.
+    for(const [half,z]of [[hardware.lower,0]]){const profile=own(hardware.caseCross.offset(.25,'Round',2,32));shell=own(shell.subtract(own(profile.extrude(14.2).translate([hx,axisY,start+z-.1]))));}
+    const swing=[];for(let a=0;a<=110;a+=5)swing.push(own(own(hardware.doorCross.offset(.3,'Round',2,32)).rotate(q.side*a)));shell=own(shell.subtract(own(own(C.union(swing)).extrude(14.2).translate([hx,axisY,start+13.9]))));
+    for(const offset of [17,29]){
+     const yz=start+7,edge=q.side*W/2;
+     const web=own(new C([[[edge,front+offset+13],[edge-q.side*p.wall,front+offset+13],[edge-q.side*7,front+offset+6],[edge-q.side*7,front+offset-7],[edge,front+offset-7]]],'NonZero').extrude(14).translate([0,0,yz-7]));shell=own(shell.add(web));
+     const hole=own(hardware.teardrop(2.8).rotate(90).extrude(9).rotate([90,0,inward===1?90:-90]).translate([edge-q.side*.1,front+offset,yz])),head=own(hardware.teardrop(5.8).rotate(90).extrude(3.2).rotate([90,0,inward===1?90:-90]).translate([edge,front+offset,yz]));shell=own(shell.subtract(hole).subtract(head));
+     add(tag+`case-bolt-${offset}`,'hinge-mount-bolt',hardware.mountBolt,[cx+edge,front+offset,z0+yz],[0,inward*Math.PI/2,0]);
+     add(tag+`case-nut-${offset}`,'hinge-mount-nut',hardware.mountNut,[cx+edge+inward*9.2,front+offset,z0+yz],[0,inward*Math.PI/2,0]);
+    }
+    // Recut after both tapered pads are united so the second cannot refill a head seat.
+    for(const offset of [17,29]){const edge=q.side*W/2,yz=start+7,head=own(hardware.teardrop(5.8).rotate(90).extrude(3.2).rotate([90,0,inward===1?90:-90]).translate([edge,front+offset,yz]));shell=own(shell.subtract(head));}
+    const padX=hx+inward*26,padY=dc-start-21,pad=own(plate(28,14,2).extrude(7).translate([padX,padY,0]));door=own(door.add(pad));
+    for(const u of [20,32]){
+     const x=hx+inward*u,y=dc-start-21;
+     const hole=own(C.circle(2.8,64).extrude(7.2).translate([x,y,-.1])),head=own(C.circle(5.8,64).extrude(3.2).translate([x,y,-.1]));door=own(door.subtract(hole).subtract(head));
+     add(tag+`door-bolt-${u}`,'hinge-mount-bolt',hardware.mountBolt,[cx+x,front,z0+start+21],[-Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);
+     add(tag+`door-nut-${u}`,'hinge-mount-nut',hardware.mountNut,[cx+x,front+9.2,z0+start+21],[-Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);
+    }
    }
    // One flex catch per module, with a receiving pocket integral with the case.
    const slot=box(.6,16,thickness+.2,edge-free*1.8,0,-.1),release=box(2.1,.6,thickness+.2,edge-free*.75,8,-.1);door=own(door.subtract(own(slot.add(release))));
@@ -145,8 +142,6 @@ export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
    if(label?.insert){add(`cupboard-label-c${col+1}`,'door-label',label.insert,[cx+dx,faceY+1,z0+dc-15],[Math.PI/2,0,0]);add.door([cx+hx,axisY,0],q.side,opening);}
    doorRecords.push({row,col,leaf,side:q.side,x:cx+dx,axisX:cx+hx,opening,width:dw,bottom:z0+doorBottom,top:z0+doorTop,centre:z0+dc});
   }
-  // Side access pockets let each pin head lift out, including across a module seam.
-  for(let sourceRow=0;sourceRow<p.cupboardRows;sourceRow++)for(const start of hinges){const bottom=sourceRow*H+start+18-z0;if(bottom<H&&bottom+21.2>0){const sx=(p.hingeSide==='left'?-1:1)*(W/2-3.85);shell=own(shell.subtract(box(7.9,5.8,21.2,sx,axisY,bottom)));}}
   shell=interior.openings(interior.apply(shell,row),row,portMap.get(`${row}/${col}`)||[]);
   for(const [x,z]of portMap.get(`${row}/${col}`)||[])shell=own(shell.subtract(rearHole(module,own,p,x,z,back)));
   add(`cupboard-case-r${row+1}-c${col+1}`,'cupboard-case',printCase(shell),[cx,back,z0+H/2],[Math.PI/2,0,0]);cases.push({row,col,floor:caps.floor,top:caps.top});
@@ -158,5 +153,5 @@ export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
  }
  for(const [i,j]of joining.entries())add(`case-${j.axis}-locking-key-${i+1}`,'connector-key',snapBridge(module,own,p,{horizontal:j.axis==='sides'}),[j.x,back+2.4,j.z],[Math.PI/2,0,0]);
  for(const [axis,on]of Object.entries(ports))if(on)for(let i=1;i<=2;i++){add(`spare-${axis}-locking-key-${i}`,'connector-key',snapBridge(module,own,p,{horizontal:axis==='sides'}),[0,0,0]);add.hidden();}
- return {hingeTest:!!p.cupboardHingeTest,hingePrintHeight:D-3.6,width:p.width,depth:p.depth+7.4,faceY,axisY,hingeInset:5,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
+ return {hingeVersion:'printed-m5-v1',hingesPerModule:hinges.length,hingeTest:!!p.cupboardHingeTest,hingePrintHeight:0,width:p.cupboardHingeTest?56:p.width,depth:p.depth+14,faceY,axisY,hingeInset:8,height:p.cupboardHingeTest?64:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
 }

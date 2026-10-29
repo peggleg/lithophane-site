@@ -4,7 +4,7 @@ import {homeGuide} from './home-guide.js';
 import {isCoaster} from './desk-coasters.js';
 import {isStorage} from './desk-storage.js';
 import {adjustableFinish,standaloneTray} from './desk-settings.js';
-import {profileSidecar,printerProfileImport,printerFiles} from './print-profile.js';
+import {profileSidecar,printProfile,printerProfileImport,printerFiles} from './print-profile.js';
 import {filamentReport} from './filament.js';
 import {zipParts,strToU8} from './zip.js';
 import {stlBytes} from './geometry.js';
@@ -33,4 +33,4 @@ FILES
 One named STL per part, this guide and PRINT-SETTINGS.json in the ZIP. Millimetre 3MF contains the same parts in their printing orientations. ${printerProfileImport(p)}
 All dimensions and models stay in your browser; the site saves only your theme preference.
 `;}
-export function deskStlZip(model){const files={...printerFiles(model.settings),'PRINT-SETTINGS.json':profileSidecar(model.settings.kind),'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}
+export function deskStlZip(model){const files={...printerFiles(model.settings),'PRINT-SETTINGS.json':profileSidecar(model.settings.kind),...(model.parts.some(p=>p.printKind)?{'PART-PRINT-SETTINGS.json':strToU8(JSON.stringify(Object.fromEntries(model.parts.filter(p=>p.printKind).map(p=>[p.name,printProfile(p.printKind)])),null,2))}:{}),'PRINT-GUIDE.txt':strToU8(deskGuide(model))};for(const p of model.parts)files[p.name+'.stl']=stlBytes(p.mesh);return zipParts(files);}

@@ -1,3 +1,4 @@
+import {cupboardHingeStarts} from './cupboard-hinges.js';
 import {cupboardCaps,connectorAxes} from './cupboard-settings.js';
 export const cupboardOptionsDefaults={shelfMode:'none',shelfLayout:'half',shelfHeights:'',shelfDividers:0,dividerHeight:60,cupboardCable:'none',cableDiameter:8,cupboardVent:'none',ventFaces:'back',ventSize:8,cupboardLabels:'none',cupboardLabelTexts:'',drawerLabels:'none',drawerLabelTexts:''};
 export function cupboardLevels(p){
@@ -7,6 +8,7 @@ export function cupboardLevels(p){
   if(!Number.isFinite(z)||z<p.wall+14||z+p.wall>total-p.wall-14)return false;
   if(caps.some(c=>z<c.top+14&&z+p.wall>c.bottom-14))return false;
   if(others.some(h=>Math.abs(z-h)<p.wall+16))return false;
+  if(p.shelfMode==='removable'&&Array.from({length:p.cupboardRows},(_,row)=>cupboardHingeStarts(H).map(h=>row*H+h)).flat().some(h=>z>h-.3&&z-3<h+14.3))return false;
   if(ports.some(h=>Math.abs(z-h)<7.5))return false;
   if(cables.some(h=>Math.abs(z-h)<p.cableDiameter/2+p.wall+4))return false;
   return true;
@@ -16,7 +18,7 @@ export function cupboardLevels(p){
   if(p.shelfLayout==='custom'){
    const raw=String(p.shelfHeights??'').trim();if(!raw)throw Error('Enter shelf heights in millimetres, e.g. 100, 220.');
    shelves=raw.split(/[\s,;]+/).map(Number).sort((a,b)=>a-b);if(shelves.length>6)throw Error('Use at most six shelf heights.');
-   const kept=[];for(const h of shelves){if(!fits(h,kept))throw Error(`Shelf at ${h} mm is too close to a floor, top, other shelf, connector or cable exit. Leave 14 mm around faces, 16 mm between shelves and 7.5 mm from connector centres.`);kept.push(h);}
+   const kept=[];for(const h of shelves){if(!fits(h,kept))throw Error(`Shelf at ${h} mm is too close to a floor, top, other shelf, connector, hinge mount or cable exit. Leave 14 mm around faces, 16 mm between shelves and 7.5 mm from connector centres.`);kept.push(h);}
   }else{
    const targets=p.shelfLayout==='thirds'?[total/3,total*2/3]:[total/2];
    for(const target of targets){let found;for(let offset=0;offset<total&&found===undefined;offset++)for(const sign of offset?[1,-1]:[1]){const z=Math.round(target)+offset*sign;if(fits(z,shelves)){found=z;break;}}if(found===undefined)throw Error('There is not enough clear height for this shelf layout. Use custom heights or fewer shelves.');shelves.push(found);}

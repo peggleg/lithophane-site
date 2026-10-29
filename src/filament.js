@@ -15,7 +15,7 @@ export function meshMaterial(mesh,kind){
 export const plasticVolume=(volume,shell,density=.08)=>{const skin=Math.min(volume,Math.max(0,shell));return skin+density*(volume-skin);};
 export const meshVolume=mesh=>meshMaterial(mesh).volume;
 export function panelGrams(width,height,thickness){const volume=width*height*thickness,shell=1.6*(width*height+width*thickness+height*thickness);return plasticVolume(volume,shell)*1.24/1000;}
-export const filamentParts=(parts,kind)=>parts.map(p=>{const m=meshMaterial(p.mesh,kind);return {name:p.name,grams:m.plastic*1.24/1000,solidGrams:m.volume*1.24/1000};});
+export const filamentParts=(parts,kind)=>parts.map(p=>{const m=meshMaterial(p.mesh,p.printKind||kind);return {name:p.name,...(p.printKind?{printKind:p.printKind}:{}),grams:m.plastic*1.24/1000,solidGrams:m.volume*1.24/1000};});
 export const gramsText=grams=>grams>0&&grams<.1?'<0.1 g':`${grams.toFixed(1)} g`;
 export function filamentReport(parts,kind){return filamentReportFromWeights(filamentParts(parts,kind),kind);}
-export function filamentReportFromWeights(weights,kind){return `ESTIMATED FILAMENT\nTotal: ${gramsText(weights.reduce((sum,p)=>sum+p.grams,0))}\n${weights.map(p=>`${p.name}: ${gramsText(p.grams)}`).join('\n')}\n${filamentAssumptionsFor(kind)}\n`;}
+export function filamentReportFromWeights(weights,kind){return `ESTIMATED FILAMENT\nTotal: ${gramsText(weights.reduce((sum,p)=>sum+p.grams,0))}\n${weights.map(p=>`${p.name}: ${gramsText(p.grams)}`).join('\n')}\n${filamentAssumptionsFor(kind)}\n${[...new Set(weights.map(p=>p.printKind).filter(Boolean))].map(k=>`Part-specific ${k}: ${profileSummary(k)}`).join('\n')}\n`;}
