@@ -7,16 +7,16 @@ import {seoAssets,seoHead} from './src/seo.js';
 export default defineConfig(({mode})=>{
  const env=loadEnv(mode,process.cwd(),'SITE_');
  const siteUrl=mode==='pages-preview'?'':(process.env.SITE_URL??env.SITE_URL??'');
- const pages=Object.fromEntries(['home','lithophane','fan','nameplates','keyrings','clickers','desk','coasters','kitchen','bathroom','mounts'].map(key=>[key,seoAssets(siteUrl,key)]));
+ const pages=Object.fromEntries(['home','lithophane','fan','nameplates','keyrings','clickers','desk','coasters','kitchen','bathroom','mounts','pegboards'].map(key=>[key,seoAssets(siteUrl,key)]));
  const assets=pages.home;
  if(mode==='production'&&!assets.url)console.warn('SITE_URL is unset: building a noindex preview. Set the production HTTPS origin to enable the canonical URL and sitemap.');
  const themeBoot=readFileSync(new URL('./src/theme-boot.js',import.meta.url),'utf8');
  const themeHash="'sha256-"+createHash('sha256').update(themeBoot).digest('base64')+"'";
  const schemaHashes=Object.values(pages).map(p=>"'sha256-"+createHash('sha256').update(p.schema).digest('base64')+"'").join(' ');
  const base=assets.url?new URL(assets.url).pathname:'/';
- return {base,build:{rollupOptions:{input:{home:"index.html",lithophane:"lithophane/index.html",fan:"folding-fan/index.html",nameplates:"nameplates/index.html",keyrings:"keyrings/index.html",clickers:"clickers/index.html",desk:"desk/index.html",coasters:"coasters/index.html",kitchen:"kitchen/index.html",bathroom:"bathroom/index.html",mounts:"mounts/index.html"}}},plugins:[{
+ return {base,build:{rollupOptions:{input:{home:"index.html",lithophane:"lithophane/index.html",fan:"folding-fan/index.html",nameplates:"nameplates/index.html",keyrings:"keyrings/index.html",clickers:"clickers/index.html",desk:"desk/index.html",coasters:"coasters/index.html",kitchen:"kitchen/index.html",bathroom:"bathroom/index.html",mounts:"mounts/index.html",pegboards:"pegboards/index.html"}}},plugins:[{
   name:'static-site-seo',
-  transformIndexHtml(html,ctx){const page=ctx.path.includes("mounts/")?"mounts":ctx.path.includes("kitchen/")?"kitchen":ctx.path.includes("bathroom/")?"bathroom":ctx.path.includes("coasters/")?"coasters":ctx.path.includes("desk/")?"desk":ctx.path.includes("clickers/")?"clickers":ctx.path.includes("nameplates/")?"nameplates":ctx.path.includes("keyrings/")?"keyrings":ctx.path.includes("folding-fan/")?"fan":ctx.path.includes("lithophane/")?"lithophane":"home";return {html:html.replace(/(<main\b[^>]*>)/,`$1<p class="plate-note">${plateNote}</p>`),tags:[{tag:"script",children:themeBoot,injectTo:"head-prepend"},...seoHead(pages[page])]};},
+  transformIndexHtml(html,ctx){const page=ctx.path.includes("pegboards/")?"pegboards":ctx.path.includes("mounts/")?"mounts":ctx.path.includes("kitchen/")?"kitchen":ctx.path.includes("bathroom/")?"bathroom":ctx.path.includes("coasters/")?"coasters":ctx.path.includes("desk/")?"desk":ctx.path.includes("clickers/")?"clickers":ctx.path.includes("nameplates/")?"nameplates":ctx.path.includes("keyrings/")?"keyrings":ctx.path.includes("folding-fan/")?"fan":ctx.path.includes("lithophane/")?"lithophane":"home";return {html:html.replace(/(<main\b[^>]*>)/,`$1<p class="plate-note">${plateNote}</p>`),tags:[{tag:"script",children:themeBoot,injectTo:"head-prepend"},...seoHead(pages[page])]};},
   generateBundle(){
    this.emitFile({type:'asset',fileName:'robots.txt',source:assets.robots});
    if(assets.sitemap)this.emitFile({type:'asset',fileName:'sitemap.xml',source:assets.sitemap});

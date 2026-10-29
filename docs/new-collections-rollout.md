@@ -26,3 +26,9 @@ Remote pocket validated at 50/160 mm A1 mini and 240 mm A1 widths, 25/80 mm dept
 Remote pocket deployed at ea044fbe3ba9edafa6c7bc49800fe8e773f8d2db, Cloudflare success. Cable guide in progress: open round channels with full-depth cable paths and a self-supporting angled underside, using the common integral catch and strengthened print settings.
 
 Cable guide validated for 2/6 channels, 2/8 mm wires and 15/30 mm depth, including full wire paths, positive retention, released removal clearance and both printer projects/native slices/desktop round trips. Ready for individual preview release. First mount category complete after this deployment; next modular pegboards.
+
+Cable guide deployed at 5306ecc40709b2c9e06cb98cf7883a75dcaf0515; Cloudflare success. Mount category complete: clamp, headphone hook, controller cradle, remote pocket and cable guide. Pegboard panel kit in progress: front-accessible alignment keys, 4 independent mounting points per panel (6/8 on panels over 170 mm), soft outer edges and chamfered grid bores.
+
+Pegboard hardware review before release: use true 90° countersinks sized for 4 mm screws with heads up to 9 mm, not a shallow cylindrical recess. Increase wall spacers to 10 mm so rear accessory fasteners can fit without touching the wall. Native fixtures and layout checks must use this final geometry.
+
+Pegboard panel kit validated: closed/connected modules, front key clearances, automatic independent support counts, proper 90-degree screw seats, 10 mm wall spacers, native slicing, both printer desktop round trips and a real 2×2 layout desktop round trip. Navigation, homepage, mobile and indexing/CSP checks pass for the new page. Ready for individual preview release. Next universal accessory adapter and matching pegboard accessories, then seed starters, crochet storage and board games.

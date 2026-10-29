@@ -6,7 +6,7 @@ toggle.onclick=()=>{apply(root.dataset.theme==='dark'?'light':'dark');try{localS
 window.addEventListener('storage',e=>{if(e.key===key)apply(e.newValue);});apply(root.dataset.theme);
 const nav=document.querySelector('header nav');
 if(nav){
- const desk=nav.querySelector('a[href*="desk/"]');if(desk&&!nav.querySelector('a[href*="mounts/"]')){const a=document.createElement('a');a.href=desk.getAttribute('href').replace('desk/','mounts/');a.textContent='Desk mounts';nav.append(a);}
+ const desk=nav.querySelector('a[href*="desk/"]');if(desk)for(const [path,label]of [['mounts','Desk mounts'],['pegboards','Pegboards']]){if(nav.querySelector(`a[href*="${path}/"]`))continue;const a=document.createElement('a');a.href=desk.getAttribute('href').replace('desk/',path+'/');a.textContent=label;nav.append(a);}
  const button=document.createElement('button');button.type='button';button.className='nav-toggle quiet';button.textContent='Menu';button.setAttribute('aria-expanded','false');nav.id='site-navigation';button.setAttribute('aria-controls',nav.id);nav.before(button);
  const close=(focus=false)=>{nav.classList.remove('is-open');button.setAttribute('aria-expanded','false');if(focus)button.focus();};
  button.onclick=()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);};
