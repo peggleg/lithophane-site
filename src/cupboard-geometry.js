@@ -4,8 +4,23 @@ import {cupboardInterior} from './cupboard-interior.js';
 import {makeStorageLabel} from './storage-labels.js';
 import {openworkCells} from './desk-openwork.js';
 
-export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
+export function makeCupboard(module,own,p,{round,box,add:emit,fontBuffer}){
  const {CrossSection:C,Manifold:M}=module,W=p.width/p.cupboardColumns,H=p.height,D=p.depth,back=D/2,front=-D/2,axisY=front+3.6,faceY=front,thickness=p.wall+(p.finish==='smooth'?0:['ribbed','scalloped','wave'].includes(p.finish)?p.detailDepth:p.finish==='fluted'?.55:.4),margin=Math.max(8+p.wall+p.clearance,11+p.clearance),pinRadius=1.4,bore=pinRadius+p.clearance,R=4,ports=connectorAxes(p.cupboardPorts),hinges=[H*.25-9,H*.75-9],doorRecords=[],joining=[],portMap=new Map(),cases=[],notes=[];
+ // Crop the actual finished parts, never a separately rebuilt hinge. Keep the
+ // entire case depth so the overhang begins at precisely the full-case layer.
+ function add(name,role,solid,assembly,rotation){
+  if(!p.cupboardHingeTest)return emit(name,role,solid,assembly,rotation);
+  if(name==='cupboard-case-r1-c1'){
+   const side=p.hingeSide==='left'?-1:1;
+   solid=own(solid.intersect(box(30,36,D+.2,side*(W/2-15),hinges[0]+9-H/2,-.1)));
+  }else if(name==='cupboard-door-r1-c1-d1'){
+   const caps=cupboardCaps(p,0),dc=((caps.floor?p.wall:0)+p.clearance+H-(caps.top?p.wall:0)-p.clearance)/2;
+   solid=own(solid.intersect(box(30,36,thickness+12,(p.hingeSide==='left'?-1:1)*(W/2-15),dc-hinges[0]-9,-.1)));
+  }else if(name!=='hinge-pin-r1-c1-d1-lower')return;
+  emit('hinge-test-'+name,role,solid,assembly,rotation);
+ }
+ add.hidden=(...args)=>{if(!p.cupboardHingeTest)emit.hidden(...args);};
+ add.door=(...args)=>{if(!p.cupboardHingeTest)emit.door(...args);};
  const interior=cupboardInterior(module,own,p,{round,box,add});
  const circle=(r,h,z=0)=>own(C.circle(r,64).extrude(h).translate([0,0,z]));
  const boreSection=direction=>own(own(C.circle(bore,64)).add(own(new C([[[-bore/Math.SQRT2,direction*bore/Math.SQRT2],[bore/Math.SQRT2,direction*bore/Math.SQRT2],[0,direction*bore*Math.SQRT2]]],'NonZero'))));
@@ -143,5 +158,5 @@ export function makeCupboard(module,own,p,{round,box,add,fontBuffer}){
  }
  for(const [i,j]of joining.entries())add(`case-${j.axis}-locking-key-${i+1}`,'connector-key',snapBridge(module,own,p,{horizontal:j.axis==='sides'}),[j.x,back+2.4,j.z],[Math.PI/2,0,0]);
  for(const [axis,on]of Object.entries(ports))if(on)for(let i=1;i<=2;i++){add(`spare-${axis}-locking-key-${i}`,'connector-key',snapBridge(module,own,p,{horizontal:axis==='sides'}),[0,0,0]);add.hidden();}
- return {width:p.width,depth:p.depth+7.4,faceY,axisY,hingeInset:5,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
+ return {hingeTest:!!p.cupboardHingeTest,hingePrintHeight:D-3.6,width:p.width,depth:p.depth+7.4,faceY,axisY,hingeInset:5,height:H*p.cupboardRows,caseWidth:W,interior:interior.levels,modules:cases,doors:doorRecords,opening:110,hingeRadius:R,pinDiameter:2*pinRadius,boreDiameter:2*bore,doorThickness:thickness,connectorCount:joining.length,magnet:p.doorMagnets?{diameter:6,thickness:2,pocket:6.2}:null,notes};
 }

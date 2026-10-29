@@ -1,5 +1,5 @@
 
-export const cupboardDefaults={cupboardRows:2,cupboardColumns:1,doorMode:'single',hingeSide:'left',cupboardFloor:'auto',cupboardTop:'auto',doorMagnets:false,cupboardPorts:'both',drawerConnectors:'none'};
+export const cupboardDefaults={cupboardHingeTest:false,cupboardRows:2,cupboardColumns:1,doorMode:'single',hingeSide:'left',cupboardFloor:'auto',cupboardTop:'auto',doorMagnets:false,cupboardPorts:'both',drawerConnectors:'none'};
 export const cupboardPreset={width:170,depth:130,height:170,wall:2.4,columns:1,rows:1,finish:'fluted'};
 export function validateCupboard(p){
  for(const id of ['cupboardPorts','drawerConnectors'])if(!['none','vertical','sides','both'].includes(p[id]))throw Error('Choose no connectors, vertical, side-by-side, or both.');
