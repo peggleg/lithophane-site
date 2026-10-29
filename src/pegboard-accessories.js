@@ -40,6 +40,6 @@ export function makePegboardAccessory(K,p){
   info.guide+=' '+adapterGuide(p);info.previewDirection=[1,-1.8,.7];return info;
  }
  if(['pegboard-cup','pegboard-shelf'].includes(p.kind)){const info=makePegboardHolder(K,p);info.guide+=' '+adapterGuide(p);return info;}
- if(p.kind==='pegboard-spool'){const info=makePegboardSpindle(K,p);info.guide+=' '+adapterGuide(p);return info;}
+ if(['pegboard-spool','pegboard-tape'].includes(p.kind)){const info=makePegboardSpindle(K,p);info.guide+=' '+adapterGuide(p);return info;}
  throw Error('Choose an available pegboard accessory.');
 }

@@ -42,9 +42,9 @@ test('lift-off storage bins keep the shared interface clear at size extremes',()
  checkParts(generateProduct(m,{mountType:'fixed',kind:'pegboard-bin',printer:'256',width:240}));
 });
 
-test('spool spindle and retaining disc have matching threads and remain removable',()=>{
- for(const rodDiameter of [8,32])for(const outreach of [15,100]){
-  const g=generateProduct(m,{mountType:'fixed',kind:'pegboard-spool',rodDiameter,outreach,capDiameter:rodDiameter+10});checkParts(g);assert.equal(g.parts.length,3);const K=productKernel(m,g.settings);try{const s=spindleSolids(K,g.settings),adapter=pegboardAdapterSolid(K,g.settings);assert.ok(hit(s.socket,adapter)<.003);assert.ok(hit(s.socket,s.rod)<.003);assert.ok(hit(s.rod,s.cap)<.003);const release=mountShoe(K,g.settings,pegboardRailFrame,36,{release:1.5}),fixed=K.own(s.socket.subtract(s.shoe.tongue)),open=K.own(fixed.add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);
+test('tape and spool spindle and retaining disc have matching threads and remain removable',()=>{
+ for(const kind of ['pegboard-spool','pegboard-tape'])for(const rodDiameter of [8,32])for(const outreach of [15,100]){
+  const g=generateProduct(m,{mountType:'fixed',kind,rodDiameter,outreach,capDiameter:rodDiameter+10});checkParts(g);assert.equal(g.parts.length,3);const K=productKernel(m,g.settings);try{const s=spindleSolids(K,g.settings),adapter=pegboardAdapterSolid(K,g.settings);assert.ok(hit(s.socket,adapter)<.003);assert.ok(hit(s.socket,s.rod)<.003);assert.ok(hit(s.rod,s.cap)<.003);const release=mountShoe(K,g.settings,pegboardRailFrame,36,{release:1.5}),fixed=K.own(s.socket.subtract(s.shoe.tongue)),open=K.own(fixed.add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);
   const move=(solid,angle,advance)=>K.own(solid.translate([0,-s.axis.y,-s.axis.z]).rotate([-90,0,0]).rotate([0,0,angle]).translate([0,0,advance]).rotate([90,0,0]).translate([0,s.axis.y,s.axis.z]));for(const a of [90,180,270]){assert.ok(hit(s.socket,move(s.rod,a,a/360*3.6))<.01,'rear thread advances freely');assert.ok(hit(s.rod,move(s.cap,a,a/360*1.8))<.01,'disc thread advances freely');}
   }finally{K.dispose();}
  }
