@@ -13,8 +13,8 @@ test('pegboard adapter fits panel and standard latch, and M4 hardware clears the
  }
 });
 
-test('short rounded hooks remain connected and clear adapter during release',()=>{
- for(const width of [28,50])for(const outreach of [20,40]){
-  const g=generateProduct(m,{kind:'pegboard-short-hook',width,outreach});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const blocked=part.translate([0,0,1]);assert.ok(hit(blocked,adapter)>.05);blocked.delete();part.delete();adapter.delete();
+test('short and long rounded hooks remain connected and clear adapter during release',()=>{
+ for(const [kind,reaches]of [['pegboard-short-hook',[20,40]],['pegboard-long-hook',[35,80]]])for(const width of [28,50])for(const outreach of reaches){
+  const g=generateProduct(m,{kind,width,outreach});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const blocked=part.translate([0,0,1]);assert.ok(hit(blocked,adapter)>.05);blocked.delete();part.delete();adapter.delete();
  }
 });
