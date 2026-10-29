@@ -14,3 +14,7 @@ All item dimensions adjustable where mechanically appropriate. Standard interfac
 Deployed: desk clamp (884109633096ac769261ed56e2b6e1abb3dd1d5c), Cloudflare success. Headphone hook completed with integral catch and optional PLA/PETG coupons; validated and ready for its preview deployment. Next: controller cradle, remote pocket, cable guide. User correction: NO loose locking pin. Use an integral broad release tab/catch; include an optional PLA/PETG connector test. Reuse the deployed clamp rail.
 
 Current steering: strengthen existing mounted items before releasing the controller cradle. Controller work is preserved in /workspace/scratch/controller-before-strength-review.patch. Do not publish its catalogue entry until the strengthened existing mounts have deployed.
+
+Strength review deployed at 055298c2054e9cc40c4d0892a9f9d3f74d5bbc8d; Cloudflare success. Controller cradle implementation resumed using the reinforced profile. Its centre relief has 45-degree transitions for the side printing orientation; rounded horns and the standard integral release latch remain.
+
+Controller cradle validated with closed meshes at 70/160 mm A1 mini and 240 mm Bambu A1 widths, both fit clearances, positive catch engagement, mobile/download checks, native slicing and both desktop project round trips. Ready for its individual preview release; next remote pocket and cable guide.
