@@ -9,6 +9,7 @@ Apply this policy to current generators and every future addition:
 - Lithophanes and fans: preserve their existing 4 top and 4 bottom layers.
 - Coasters: 5 top layers and 5 bottom layers (user-approved moisture-coverage exception). Coaster holders keep 3/3.
 - The quick-move pegboard adapter retains 30% gyroid, 4 walls and 5/5 skins, with normal automatic supports enabled for its rear hooks and rail in its supplied side orientation. Other products retain their own support defaults. Its guide and exported project must agree.
+- Direct peg-in pegboard accessory variants also use normal automatic supports for integral rear hooks; retain 30% gyroid, 4 walls and 5/5 skins. Pass the full settings object to the 3MF profile and ZIP sidecar so support settings follow the selected direct/shared connection.
 - Every other non-load-bearing generator, including future additions: 3 top and 3 bottom layers.
 
 Use `src/print-profile.js` as the shared source. Pass the generator kind to profile, export, filament estimate and display helpers; do not hard-code a universal skin-layer count. Keep UI, guides, 3MF settings, ZIP sidecars and estimates consistent. Confirm profile coverage in tests when adding a generator.
