@@ -61,3 +61,9 @@ test('quick-move mount seats and withdraws through both board thicknesses withou
   assert.equal(printProfile(g.settings.kind).enable_support,'1');
  }
 });
+
+test('pegboard headphone holder shares the desk rail and both movable and fixed mounts',()=>{
+ for(const mountType of ['quick','fixed'])for(const width of [28,60]){
+  const g=generateProduct(m,{kind:'pegboard-headphones',mountType,width,outreach:75});checkParts(g);const part=posed(g.parts[0]),adapter=posed(g.references.find(p=>p.name==='context-universal-adapter'));assert.ok(hit(part,adapter)<.003);const K=productKernel(m,g.settings);try{const rest=mountShoe(K,g.settings,pegboardRailFrame,width),release=mountShoe(K,g.settings,pegboardRailFrame,width,{release:1.5}),open=K.own(part.subtract(rest.tongue).add(release.tongue));for(const dz of [0,1,45,70])assert.ok(hit(K.own(open.translate([0,0,dz])),adapter)<.003);}finally{K.dispose();}part.delete();adapter.delete();
+ }
+});
