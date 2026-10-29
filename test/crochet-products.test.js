@@ -6,3 +6,15 @@ test('fluted yarn bowl, cover and curved drawer fit throughout drawer travel',()
  }
 });
 test('yarn bowl guards size, curvature and compartment counts before generation',()=>{assert.throws(()=>validateProduct({kind:'crochet-yarn',bowlDiameter:170}),/Reduce the bowl/);assert.throws(()=>validateProduct({kind:'crochet-yarn',printer:'256',bowlDiameter:240,bowlHeight:65}),/at least/);assert.throws(()=>validateProduct({kind:'crochet-yarn',drawerSections:2.5}),/whole number/);});
+import {crochetCabinetSolids,placeDoor} from '../src/crochet-cabinet.js';
+test('cabinet door, printed pin, catch and bins operate on left and right hinges',()=>{
+ for(const hingeSide of ['left','right'])for(const input of [{width:110,height:140,depth:55,drawerRows:4,hooks:2,hookDiameter:14,clearance:.25},{width:150,height:165,depth:70,drawerRows:3,hooks:3,hookDiameter:10,clearance:.6}]){
+  const p=validateProduct({kind:'crochet-cabinet',hingeSide,doorAngle:0,drawerPreview:0,...input}),K=productKernel(m,p);try{const s=crochetCabinetSolids(K,p),release=crochetCabinetSolids(K,p,{release:1.6});for(const a of [s.frame,s.door,s.pin,s.pull,...s.bins]){const pieces=a.decompose();assert.equal(a.status(),'NoError');assert.equal(pieces.length,1);pieces.forEach(x=>x.delete());}assert.ok(hit(s.frame,s.pin)<.003);assert.ok(hit(s.frame,placeDoor(K,p,s.door))<.003);assert.ok(hit(s.pin,placeDoor(K,p,s.door))<.003);assert.ok(hit(placeDoor(K,p,s.door),placeDoor(K,p,s.pull))<.003);assert.ok(hit(s.frame,placeDoor(K,{...p,doorAngle:.2},s.door))>.05,'edge catch holds before release');for(const a of [0,.2,1,15,60,110]){const door=placeDoor(K,{...p,doorAngle:a},release.door);assert.ok(hit(door,s.frame)<.003,`released door angle ${a}`);assert.ok(hit(door,s.pin)<.003);for(const bin of s.bins)assert.ok(hit(door,bin)<.003);}for(const b of s.bins)for(const distance of [0,s.binDepth*.8])assert.ok(hit(s.frame,K.own(b.translate([0,-distance,0])))<.003,'bins slide freely');}finally{K.dispose();}
+ }
+});
+test('cabinet print poses and automatic bin retraction match the articulated assembly',()=>{
+ for(const hingeSide of ['left','right'])for(const doorAngle of [0,5,15,105]){
+  const g=generateProduct(m,{kind:'crochet-cabinet',hingeSide,doorAngle,drawerPreview:70}),solids=g.parts.map(posed);try{for(const part of g.parts)assert.ok(part.printSize.every(v=>v<=170));const door=solids[1];assert.equal(g.parts[1].rotationOrder,'ZYX');assert.ok(hit(door,solids[0])<.003);for(const b of solids.slice(4))assert.ok(hit(door,b)<.003,'bins retract before closing door');assert.ok(hit(solids[0],solids[2])<.003);assert.ok(hit(door,solids[2])<.003);assert.ok(hit(door,solids[3])<.003);}finally{solids.forEach(x=>x.delete());}
+ }
+ const big=generateProduct(m,{kind:'crochet-cabinet',printer:'256',width:240,height:240,depth:100,hooks:5,hookDiameter:14});for(const p of big.parts)assert.ok(p.printSize.every(v=>v<=256));assert.throws(()=>validateProduct({kind:'crochet-cabinet',width:170}),/hinge projections/);assert.throws(()=>validateProduct({kind:'crochet-cabinet',width:110,hooks:5,hookDiameter:14}),/fewer hooks/);
+});
