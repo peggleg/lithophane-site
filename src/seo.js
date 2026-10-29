@@ -7,7 +7,7 @@ export function siteOrigin(value){
  return u.origin+u.pathname.replace(/\/$/,'')+'/';
 }
 export const pageInfo={
- games:{path:'games/',title:'Resizable Board-game Accessories · Design Studio',description:'Make a rounded dice tower, detachable landing tray or card holder. Resize game-night accessories for A1 mini or optional Bambu A1, with filament estimates and complete print projects.'},
+ games:{path:'games/',title:'Resizable Board-game Accessories · Design Studio',description:'Make a rounded dice tower, detachable landing tray, card holder or token cup set. Resize game-night accessories for A1 mini or optional Bambu A1, with filament estimates and complete print projects.'},
  crochet:{path:'crochet/',title:'Resizable Crochet & Yarn Storage · Design Studio',description:'Make a fluted yarn bowl, hook and notions cabinet or project pod with a lift-out organiser. Resize each piece for A1 mini or optional Bambu A1, with filament estimates, STL parts and complete 3MF projects.'},
  seeds:{path:'seeds/',title:'Resizable Seed Starting Trays & Cells · Design Studio',description:'Make resizable removable-cell nurseries, wick-fed reservoir starters, connecting grow rows and write-on plant labels. Fluted trays size automatically around the cells. A1 mini by default, with optional Bambu A1 projects and filament estimates.'},
  pegboards:{path:'pegboards/',title:'Resizable Modular Pegboards · Design Studio',description:'Create resizable pegboards with quick-move hooks, cups, shelves, bins, tape/spool and gaming/cable holders. Lift-off or screw-fixed mounts share the desk-clamp connection. A1 mini by default; optional Bambu A1. Reinforced 30% gyroid, 4 walls and 5/5 skins.'},
