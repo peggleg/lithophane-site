@@ -1,5 +1,5 @@
 import {printerKey,printLimit,printerSpec} from './printer-settings.js';
-export const releasedOrnamentCollections=['christmas','pets','birthday','baby','wedding'];
+export const releasedOrnamentCollections=['christmas','pets','birthday','baby','wedding','easter'];
 export const ornamentCollections={
  christmas:{name:'Christmas',nameExample:'Lucas',wording:[['Merry','Christmas'],['Merry','Xmas'],['Let It','Snow'],['Joy to','the World']],designs:[['bells','Bells & foliage'],['bow','Bow & holly'],['forest','Winter forest'],['poinsettia','Poinsettia wreath'],['reindeer','Reindeer & stars'],['snowflake','Snowflake branches']]},
  pets:{name:'Pets',nameExample:'Buddy',wording:[['Pawsome',''],['Best','Friend'],['Cat','Lover'],['Forever','Loved']],designs:[['dog','Dog & leaves'],['paw','Paw print & foliage'],['cat','Cat & moon'],['memorial','Memorial heart'],['bone','Bone & foliage']]},
