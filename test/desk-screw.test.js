@@ -8,6 +8,7 @@ test('screw container and lid are connected closed parts with clear right-handed
   const model=build({width,height,clearance,finish:'smooth'});assert.equal(model.parts.length,2);
   const [body,lid]=model.parts.map(restore);for(const s of [body,lid]){assert.equal(s.status(),'NoError');const pieces=s.decompose();assert.equal(pieces.length,1);pieces.forEach(p=>p.delete());assert.ok(s.volume()>0);}for(const part of model.parts)assert.ok(part.printSize.every(x=>x<=170.001));
   for(const dz of [0,.3,.9,1.8,3.6,7.2,12]){const pose=lid.rotate([180,0,0]).translate([0,0,height]).rotate([0,0,360*dz/model.screwFit.pitch]).translate([0,0,dz]),hit=body.intersect(pose);assert.ok(hit.volume()<.002,`width ${width}, height ${height}, gap ${clearance}, opening ${dz}: ${hit.volume()}`);pose.delete();hit.delete();}
+  const roof=lid.slice(.1),outline=m.CrossSection.circle(model.screwFit.radius,128);assert.ok(Math.abs(roof.area()-outline.area())<.002,'unlettered lid top must be a complete flat disk');roof.delete();outline.delete();
   const floor=body.slice(1);assert.ok(floor.area()>Math.PI*(width/2-1)**2);floor.delete();body.delete();lid.delete();
  }
 });

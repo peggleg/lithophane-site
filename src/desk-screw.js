@@ -28,7 +28,11 @@ export function makeScrewContainer(module,own,p,ribs,add,fontBuffer){
  // Work in the assembled coordinates to share precisely the same thread phase.
  const lidFit={...f,shoulder:0};
  const bore=cylinder(f.neckRadius+f.radialClearance,f.neckHeight+f.axialClearance+.1,-.1);
- lid=own(lid.subtract(own(bore.add(screwRidge(module,own,lidFit,{female:true})))));
+ // Stop the thread cutter at the cavity ceiling; the extended helix must
+ // never cut a directional groove through the closed top of the lid.
+ const threadLimit=cylinder(f.radius+2,f.neckHeight+f.axialClearance+.1,-.1);
+ const thread=own(screwRidge(module,own,lidFit,{female:true}).intersect(threadLimit));
+ lid=own(lid.subtract(own(bore.add(thread))));
  // Top-down prints a closed roof first and the open thread cavity above it.
  lid=own(lid.rotate([180,0,0]).translate([0,0,12]));
  if(p.lidText){
