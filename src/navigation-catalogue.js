@@ -20,6 +20,8 @@ export const navigationGroups = [
       { page: 'coasters', path: 'coasters/', label: 'Coasters' },
       { page: 'kitchen', path: 'kitchen/', label: 'Kitchen' },
       { page: 'bathroom', path: 'bathroom/', label: 'Bathroom' },
+      { page: 'pets', path: 'pets/', label: 'Pets' },
+      { page: 'photography', path: 'photography/', label: 'Photography & display' },
     ],
   },
   {
@@ -38,6 +40,7 @@ export const navigationGroups = [
       { page: 'seeds', path: 'seeds/', label: 'Seed starting' },
       { page: 'crochet', path: 'crochet/', label: 'Crochet' },
       { page: 'games', path: 'games/', label: 'Board games' },
+      { page: 'reading', path: 'reading/', label: 'Reading & stationery' },
     ],
   },
 ];
