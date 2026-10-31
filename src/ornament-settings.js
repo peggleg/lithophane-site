@@ -1,3 +1,4 @@
+import {ornamentEdges} from './ornament-wreath.js';
 import {printerKey,printLimit,printerSpec} from './printer-settings.js';
 export const releasedOrnamentCollections=['christmas','pets','birthday','baby','wedding','easter','halloween'];
 export const ornamentCollections={
@@ -9,10 +10,11 @@ export const ornamentCollections={
  easter:{name:'Easter',nameExample:'Lily',wording:[['Happy','Easter'],['Hello','Spring'],['Easter','Wishes'],['Some Bunny','Loves You']],designs:[['bunny','Bunny & tulips'],['eggs','Decorated eggs'],['bunny-hearts','Bunny & hearts'],['butterfly','Butterfly & blossom'],['chick','Chick & flowers']]},
  halloween:{name:'Halloween',nameExample:'Oscar',wording:[['Happy','Halloween'],['Trick or','Treat'],['Boo',''],['Stay','Spooky']],designs:[['pumpkin','Pumpkin & vines'],['ghost','Friendly ghost'],['boo','Ghost, bat & stars'],['forest','Spooky forest'],['house','Haunted cottage']]}
 };
-export const ornamentDefaults={kind:'ornament',printer:'a1-mini',collection:'christmas',design:'bells',frameStyle:'ring',diameter:100,thickness:3,line1:'Merry',line2:'Christmas',wording:'0',ams:false,inlayLayers:3,frameColour:'#eee2c9',textColour:'#8a3b2b',palette:'ivory'};
+export const ornamentDefaults={kind:'ornament',printer:'a1-mini',collection:'christmas',design:'bells',frameStyle:'ring',edgePattern:'auto',diameter:100,thickness:3,line1:'Merry',line2:'Christmas',wording:'0',ams:false,inlayLayers:3,frameColour:'#eee2c9',textColour:'#8a3b2b',palette:'ivory'};
 export const ornamentDiameterLimit=p=>Math.min(246,p.ams?printerSpec(p).bed-60:printLimit(p)-10);
 export function validateOrnament(input={}){
  const p={...ornamentDefaults,...input};p.printer=printerKey(p);
+ if(!Object.hasOwn(ornamentEdges,p.edgePattern))throw Error('Choose an available decorative edge.');
  if(!['ring','leafy'].includes(p.frameStyle))throw Error('Choose a solid ring or leafy wreath frame.');
  if(!releasedOrnamentCollections.includes(p.collection))throw Error('Choose an available ornament collection.');
  if(!ornamentCollections[p.collection].designs.some(([id])=>id===p.design))throw Error('Choose a design in this collection.');
