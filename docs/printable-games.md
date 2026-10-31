@@ -24,7 +24,7 @@ Packing checks reserve the 3 mm floor, lid clearance and space beneath the inwar
 
 ## Dots and Boxes
 
-150 mm defaults to 36 boxes (6 × 6) and 49 short dots integrated into the board. Only 84 notched bars and 36 claim tiles are loose. Total export: 122 parts including board and box. Dots stand 3.8 mm above the playing face. Bar end notches allow adjacent connectors without overlap. Whole-cell counts follow board size with a minimum 21 mm pitch and 12 mm border.
+150 mm defaults to 36 boxes (6 × 6) and 49 short dots integrated into the board. Only 84 notched bars and 36 claim tiles are loose. Total export: 122 parts including board and box. Dots stand 3.8 mm above the playing face. Bar end notches allow adjacent connectors without overlap. Each connection has a 0.8 mm-deep groove; width is 3.2 mm plus twice the selected side clearance (3.9 mm at the default 0.35 mm clearance). Existing bars seat 0.8 mm into the board and remain 2.4 mm proud for finger removal. The board retains 5.2 mm nominal thickness beneath the groove floors. Fixed dots, separate-piece exports, reversible lids and the slim box height are retained. Whole-cell counts follow board size with a minimum 21 mm pitch and 12 mm border.
 
 ## Seasonal Peg Solitaire
 
@@ -67,3 +67,5 @@ Current native slice audits passed with no skipped objects: Dots and Boxes 122 p
 Dots and Boxes has Parts to print choices for the complete game, connecting bars only, claim tiles only, or bars and tiles together. At the default 150 mm board these export 84, 36 or 120 pieces respectively. Four in a Row offers the complete game or discs only (42). Each selected piece remains its own STL in the ZIP; the 3MF includes only those pieces with prepared plates and the selected printer profile. Parts-only filenames identify the selection.
 
 Excluded boards, boxes and mechanisms remain preview context and are omitted from printable part counts, filament estimates and downloads. Dimension and clearance controls still match the pieces to the original game. Unit checks inspect actual export contents and complete-set compatibility; browser downloads and native Bambu profile import passed for each option on both printers.
+
+Groove validation covers every bar at 100, 150 and 250 mm board sizes and clearances of 0.25, 0.35 and 0.6 mm: connected board geometry, collision-free seating, preserved groove floors, lateral retention and vertical removal. Browser checks cover both printer downloads and mobile; separate-piece export regression checks remain passing.
