@@ -61,3 +61,9 @@ Desktop GUI Open/Save remains unavailable: the official extracted Bambu Studio e
 Useful commands: npm run test:games, test:games-browser, test:games-native, test:compact-games-browser and test:slim-games-browser. Native checks require BAMBU_STUDIO_PATH; browser checks use the local preview at port 4175 and create the native fixtures.
 
 Current native slice audits passed with no skipped objects: Dots and Boxes 122 parts / 3 plates; Tic-tac-toe 11 / 3; Peg Solitaire 34 / 3; Four in a Row 51 / 4; Marble Run 86 / 6. Both selected printer projects preserve the agreed process settings. Final Four in a Row browser fixtures include the countersunk hardware reference meshes, captured pins, open release view, 28 mm default and 42 mm working depth at 250 mm width. Geometry regressions additionally verify all seven outlets, counter/hardware clearance at fit offsets, axial pin retention, hardware/lid clearance and full-counter drop envelopes across both printer sizes.
+
+## Separate piece downloads
+
+Dots and Boxes has Parts to print choices for the complete game, connecting bars only, claim tiles only, or bars and tiles together. At the default 150 mm board these export 84, 36 or 120 pieces respectively. Four in a Row offers the complete game or discs only (42). Each selected piece remains its own STL in the ZIP; the 3MF includes only those pieces with prepared plates and the selected printer profile. Parts-only filenames identify the selection.
+
+Excluded boards, boxes and mechanisms remain preview context and are omitted from printable part counts, filament estimates and downloads. Dimension and clearance controls still match the pieces to the original game. Unit checks inspect actual export contents and complete-set compatibility; browser downloads and native Bambu profile import passed for each option on both printers.

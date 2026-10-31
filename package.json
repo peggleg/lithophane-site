@@ -49,11 +49,12 @@
     "test:product-slicer": "node scripts/check-product-slicer.mjs",
     "test:pegboards": "node scripts/check-pegboard-layout-browser.mjs",
     "test:studio-layout": "node scripts/check-studio-layout-browser.mjs",
-    "test:games": "node --test --test-concurrency=1 test/game-boards.test.js test/game-seasonal-pegs.test.js test/game-products.test.js test/game-shuffler.test.js test/print-profile.test.js test/product-plates.test.js test/game-compact-storage.test.js test/game-slim-release.test.js",
+    "test:games": "node --test --test-concurrency=1 test/game-boards.test.js test/game-seasonal-pegs.test.js test/game-products.test.js test/game-shuffler.test.js test/print-profile.test.js test/product-plates.test.js test/game-compact-storage.test.js test/game-slim-release.test.js test/game-piece-exports.test.js",
     "test:games-browser": "node scripts/check-game-boards-browser.mjs",
     "test:games-native": "node scripts/check-games-native.mjs",
     "test:compact-games-browser": "node scripts/check-compact-games-browser.mjs",
-    "test:slim-games-browser": "node scripts/check-slim-games-browser.mjs"
+    "test:slim-games-browser": "node scripts/check-slim-games-browser.mjs",
+    "test:game-pieces-browser": "node scripts/check-game-piece-exports.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
