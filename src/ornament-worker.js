@@ -1,6 +1,6 @@
 import init from 'manifold-3d/manifold';
 import wasmUrl from 'manifold-3d/manifold.wasm?url';
-import fontUrl from './fonts/DancingScript.ttf?url';
+import fontUrl from './fonts/Lobster-Regular.ttf?url';
 import {generateOrnament} from './ornament-geometry.js';
 import {solid3mf,ornamentZip,ornamentGuide} from './ornament-export.js';
 import {strToU8} from './zip.js';

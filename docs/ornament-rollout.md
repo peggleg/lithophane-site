@@ -1,8 +1,8 @@
 # Ornament collections
 
-Approved: circular connected openwork frames with botanical/themed silhouettes and flowing lettering. Names, standard wording without a name, or custom wording; maximum two lines. Christmas first, Pets second, then Birthday, New Baby, Weddings & Anniversaries, Easter and Halloween. Six Christmas and six Birthday designs; four designs in each other collection (32 total). No bookends or unrelated items in these releases.
+Approved: circular connected openwork frames with botanical/themed silhouettes and flowing lettering. Names, standard wording without a name, or custom wording; maximum two lines. Christmas first, Pets second, then Birthday, New Baby, Weddings & Anniversaries, Easter and Halloween. Six Christmas and six Birthday designs; five designs in each other collection (37 total). No bookends or unrelated items in these releases.
 
-Every item is one connected print. Text has left/right frame anchors and disconnected letter dots/motif elements receive short round structural bridges. Font: locally bundled Dancing Script, SIL OFL. Gallery thumbnails are derived from the actual generated cross-sections, not concept renders.
+Every item is one connected print. Text has short curved anchors to its nearest surrounding artwork and disconnected letter dots/motif elements receive short round structural bridges. Shared AMS interfaces retain their original vertices rather than being simplified independently. Custom-text font: locally bundled Lobster, SIL OFL. Standard wording and thematic outlines are derived from the approved artwork, with printable continuity repairs. Gallery thumbnails are derived from the actual generated cross-sections, not concept renders.
 
 Single colour: full connected geometry. Optional AMS: lettering is a flush inlay in the first 2 or 3 layers, face-down; the rest remains frame colour. Complete grouped two-filament Bambu 3MF plus a complete single-colour STL and aligned AMS STL components. Colours are assigned in the project. Existing 8% gyroid / 2 wall loops / 3 top and 3 bottom layers unchanged.
 
@@ -11,3 +11,9 @@ Default A1 mini / optional Bambu A1, both 0.4 mm nozzle and 0.2 mm layers. Indiv
 Validation: closed connected geometry for every design at 80 and 160 mm, real open area, all standard wording presets, AMS 2/3-layer bounds, complementary volumes, grouping and colours, both printer sizes, rejected invalid text/dimensions; browser all-design previews, custom/preset wording, AMS and single-colour downloads, Light/Dark 1440/900/390/320, stale-download disabling and reset. Native Bambu import/slicing and desktop Open/Save validate process/AMS/project compatibility. Physical use is not established by these digital checks.
 
 Releases are tracked in the preview branch commit history. `releasedOrnamentCollections` controls which collections are exposed and validated as available.
+
+Correction after user comparison: generic motif substitutions were rejected. Ornament geometry now requires an artwork template; no procedural placeholder fallback is permitted. Reference wording/decorations are stored as reusable vector contours, with curve cleanup, small engraved detail, continuity repair and exact shared AMS interfaces. Actual printable model screenshots—not new generated concept pictures—are the visual review artifacts.
+
+Final artwork pipeline: clean monochrome manufacturing stencils are converted into smooth, dimensioned vector templates before extrusion. Photo-threshold experiments were discarded because their surface/shadow artefacts were not suitable production outlines. All 37 designs have explicit artwork templates; gallery silhouettes, preview meshes and downloads use those same templates. The two-colour print-orientation view keeps the body and lettering aligned as one object.
+
+Personalisation correction: every design has a separate text-free frame layer. Replacement wording is scaled/positioned against the preserved motif geometry, with short curved joins; it does not blank a rectangle through the decorations. Shared colour geometry is complementary, and the native slicer checks confirm the second filament ends after layer 3.

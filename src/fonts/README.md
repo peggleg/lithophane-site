@@ -8,3 +8,5 @@ The accompanying SIL Open Font Licences are also served under `font-licences/`. 
 Nine additional static Noto faces (Sans/Serif Regular, Italic and BoldItalic, Sans/Serif Display Bold and Sans Mono Bold) are from the system Noto distribution, under the bundled Noto SIL OFL. All 12 choices use their actual font outlines in exports.
 
 DancingScript.ttf — Dancing Script (Google Fonts), variable weight font used for connected ornament lettering. SIL Open Font License: DancingScript-OFL.txt.
+
+Lobster-Regular.ttf — Lobster (Google Fonts), SIL Open Font License in Lobster-OFL.txt. Used for custom ornament wording alongside the artwork-derived standard lettering.
