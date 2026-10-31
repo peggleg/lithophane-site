@@ -1,39 +1,63 @@
-# Printable games implementation
+# Printable games
 
-Approved scope: Dots and Boxes, seasonal Peg Solitaire, Tic-tac-toe, folding Four in a Row and expandable marble run, in that delivery order. Commit each addition to preview/lithophane separately.
+Games: Dots and Boxes, Peg Solitaire, Tic-tac-toe, Four in a Row and a configurable marble run. Reversi is excluded.
 
-All boards double as storage-box lids. Close with the playing face inward and smooth back outward. Four internal nominal Ø6 × 2 mm magnet pockets per box and four matching lid pockets; generated diameter is 6.2 mm to allow adhesive/fit. Rounded corners and softened edges. A1 mini default retains the existing 170 mm per-part allowance; optional Bambu A1 boards stop at 250 mm. Ordinary game profiles stay 8% gyroid, 2 walls, 3/3 skin layers.
+All playing-board lids flip to close with the smooth back facing outward. Loose parts store in the board box. Corners and exposed edges are rounded. Each box/lid pair has four internal corner pockets per face: nominal Ø6 × 2 mm magnets, modelled as 6.2 mm diameter × 2 mm deep pockets for fit/adhesive. Check polarity with the lid flipped closed before gluing.
+
+Every generator defaults to A1 mini, retaining the existing 170 mm per-part design allowance on its 180 mm bed. Optional Bambu A1 game boards stop at 250 mm. Print settings remain 8% gyroid, 2 walls and 3 top/bottom layers through the shared profile source.
+
+## Slim storage
+
+Automatic height finds the smallest whole-millimetre height accepted by the packing checks, using actual mesh bounds, side rotations and several deterministic packing orders. It does not scale height in proportion to board width. Custom taller heights remain available, subject to mechanical and packing constraints.
+
+Default 150 × 150 mm configurations:
+
+| Game | Box body | Closed with 6 mm lid |
+| --- | --- | --- |
+| Dots and Boxes | 12 mm | 18 mm |
+| Tic-tac-toe | 10 mm | 16 mm |
+| Peg Solitaire, pumpkin pegs | 15 mm | 21 mm |
+| Four in a Row | 28 mm | 34 mm |
+| Marble run, one layer per board | 25 mm | 31 mm |
+
+Packing checks reserve the 3 mm floor, lid clearance and space beneath the inward-facing fixed dots. Pegs and long marble-run parts may lie on their sides in storage while retaining their original printing orientations. Heights recalculate when footprint, seasonal style, spare quantities, track pieces or storage layers change. These are practical layouts of non-overlapping rectangular envelopes, not a claim of globally optimal irregular-shape packing.
 
 ## Dots and Boxes
 
-150 mm default, 6 × 6 boxes, 7 × 7 short fixed dots built into the board, 84 loose bars and 36 claim tiles. Dots stand 3.8 mm above the board; no peg parts or peg-height control are supplied. Automatic whole-cell counts use a minimum 21 mm pitch and 12 mm border. Generated packed preview validates storage envelope; all pieces export individually in printing orientations and prepared plates. Box height defaults to 25 mm for bars and tiles. The inward-facing fixed dots have reserved storage clearance.
+150 mm defaults to 36 boxes (6 × 6) and 49 short dots integrated into the board. Only 84 notched bars and 36 claim tiles are loose. Total export: 122 parts including board and box. Dots stand 3.8 mm above the playing face. Bar end notches allow adjacent connectors without overlap. Whole-cell counts follow board size with a minimum 21 mm pitch and 12 mm border.
 
-Validation: focused Manifold geometry, pocket depth, reversible lid/box collision, storage packing, automatic counts, both printer limits, profile coverage; browser downloads of STL ZIP / recognised Bambu 3MF / guide on both printers, mobile layout, invalid inputs, stale export disabling, reset. Native slicer/desktop validation tracked with generated artifacts.
+## Seasonal Peg Solitaire
 
-## Remaining delivered games
+Classic English 33-hole cross with an empty centre and 32 pegs, plus optional spares. Five single-colour one-piece peg styles: tulip, strawberry, pumpkin, snowman and fir tree, all with the same fitting stems. Decorative heads stay clear of adjacent positions. Complete-kit and pegs-only replacement exports are available. Pegs print stem-down and pack on their sides.
 
-Peg Solitaire: 33-hole English cross, 32 pegs plus optional spares, five monolithic seasonal styles (tulip, strawberry, pumpkin, snowman, fir tree), common fitting stems, complete-kit or pegs-only export.
+## Tic-tac-toe
 
-Tic-tac-toe: 3 × 3 recessed board and five X/four O symbols, all stored inside the reversible board box.
+3 × 3 recessed board, five chunky X pieces and four O pieces. All nine symbols store flat inside the reversible board box.
 
-Four in a Row: 7 × 6 twin-shell grid with open counter channels, 42 counters, base hinge ears, printed pins, detachable upright stops and sliding bottom release bar. Four M3 assembly bolts/nuts are supplied by the user. Folded-state tests bound the grid inside the storage base.
+## Four in a Row: counter release
 
-Marble run: up to 3 × 3 connecting board modules, 1–6 storage layers per module, independent quantities of straight/curve/ramp/T-junction/funnel tracks, risers and cross-braces. Module pitch and channel clearance follow marble diameter and board size. Expansion-only export omits boards/boxes while retaining them as preview context. Printable marbles comprise two equator-down hemispheres plus a separate printed alignment pin. All selected parts are digitally packed across the selected storage spaces; capacity errors request more storage. The play preview places an automatic serpentine route using available pieces and shows unused parts stored inside.
+Seven columns and six rows. The two channel shells print outer-face-down and join with four user-supplied M3 × 10 mm countersunk screws and standard 2.4 mm-high M3 hex nuts. Forty-two counters print flat. Printed hinge pins are captured between the two bolted grid halves; removable stops support the upright grid. Place the pins in the base ears first, then bring the two grid shells around them and seat the heads in their retaining pockets before fitting the bolts.
 
-## Verification limits
+A flat shutter slides through integrated C-shaped bottom guides. Its rounded central pull tab projects toward the front of the box. Pull it straight toward you until the shutter comes free: every column outlet opens and the counters drop into the base. A shallow forward slope below the grid directs the falling counters away from the outlets. Side shoulders establish the closed insertion position when the shutter is pushed back home. The preview includes open/closed release states while the grid is upright.
 
-Focused geometry/profile/printer/plate and existing game regression tests pass. Browser fixtures cover all five games, both printers, actual ZIP/3MF/guide downloads, mobile layout, reset and stale-export invalidation. Native Bambu project import preserves printer/process settings for all five games and both printers. Native slicing verifies supplied orientations and skipped-object counts; logs live in ignored artifacts/products directories.
+The window centres match the actual stacked counter diameter. The minimum working depth also gives each counter enough room to fully clear its outlet before hitting the catch ramp: 28 mm at 120/150 mm footprints, 31 mm at 170 mm, and 42 mm at 250 mm. This functional clearance replaces proportional height scaling. Functional channel and shutter-slot cuts have explicit clearance without bevels narrowing their mouths. Guide additions preserve the hinge bores. Remove the shutter and upright stops, pack them flat with the counters, then fold the empty grid and close the lid. The countersunk-head half faces upward when folded; the nuts and screw tips face into the case and have at least 1.2 mm clearance above packed parts. Heads and nuts are preview-only reference meshes, excluded from print files and filament estimates. Use the specified standard hardware rather than raised heads or taller locknuts. The hinge sits 5 mm below the box rim to avoid unused space above the folded grid. Minimum height checks include separate low/front and raised/rear storage zones, keeping pieces clear of the catch ramp, hinge mounts, folded grid and lid.
 
-Desktop GUI Open/Save could not run: the extracted official Bambu Studio executable launches WebKit helpers from a hard-coded /usr/lib path unavailable in this non-root runtime. Native CLI import is not a substitute for desktop preset-inheritance coverage. The broad default test invocation encountered a clicker-test worker failure and was stopped during an unrelated long-running geometry test; focused sequential game regressions were run instead.
+## Expandable marble run
 
-Final native slice audits passed with no skipped objects: Dots and Boxes 171 parts / 4 plates; Peg Solitaire 34 / 3; Tic-tac-toe 11 / 3; Four in a Row 51 / 4; Marble Run 90 / 10. The larger marble slice exceeded the original four-minute test budget and passed with the configurable ten-minute budget. Seasonal peg necks were corrected after native slicing exposed an empty-layer gap; connected-component and continuous-neck regression checks now cover all five styles.
+Up to 3 × 3 connecting board modules; default two boards side by side. The slim default is one storage layer per board. Users can add matching storage layers and individually select straight, curved, ramp, T-junction and funnel track pieces, risers and cross-braces. Automatic layer height follows the selected kit. Expansion-only exports omit boards/boxes while retaining them as preview context.
 
-Final browser state checks passed for closed views, dynamic 170/250 mm game-board limits, stale exports, storage layer counts, expansion-only 3MF content, all seasonal styles and pegs-only exports. Use npm run test:games, test:games-browser and test:games-native to repeat the checks (native check requires BAMBU_STUDIO_PATH and browser/native fixtures).
+Module pitch follows board size and marble diameter. Match those settings when printing expansion packs. Height supports use separate connector studs and cross-braces. The play preview places an automatic serpentine route from available pieces; unused parts remain packed inside.
 
-## Compact storage update
+Printable marbles use two equator-down hemispheres plus a separate printed alignment pin. Glue both halves and smooth the equator seam. All parts, including marbles, pack inside the selected boxes/layers.
 
-Dots and Boxes now prints 122 parts at 150 mm: board with 49 integrated dots, box, 84 notched bars and 36 tiles. Adjacent connectors do not overlap at the fixed dots. The dot board is one connected solid; packed bars/tiles clear the inward-facing dots.
+## Verification
 
-Four in a Row defaults to Automatic height: round(35 × board width / 150), raised if the computed storage minimum requires it. Examples: 120 → 30 mm, 150 → 35 mm, 170 → 40 mm, 250 → 58 mm. The 6 mm lid adds to the closed height. Custom mode retains the chosen height when footprint changes, subject to the current minimum and actual packing checks. Stops print/store on their broad 8 mm sides, ahead of the counters; hinge pins stay fitted. Packing centres each mesh by its actual bounds, including the offset side-printed stops. Geometric tests cover the stored vertices at multiple footprints, fixed-dot connectivity, adjacent-bar clearance and automatic/custom height validation.
+Geometry checks cover fixed-dot connectivity and bar clearance; packing envelopes and rotations; floors, ramps and lid clearance; all seasonal head/stem connections; folded Four in a Row and hinge clearance; closed shutter retention in all seven columns; open outlet clearance; stop shoulders; counter/channel clearance; native printer limits and shared print-profile coverage.
 
-Compact-update validation passed: native Bambu import for both selected printers; fixed-dot board 122 parts / 3 plates and slim Four in a Row 51 parts / 5 plates, no skipped objects. Actual browser downloads, mobile layouts, automatic/custom heights, invalid input disabling, peg-free exports and flipped-lid previews passed. Focused geometry tests also cover a 90 mm custom-height box at the smallest footprint and reserve a 15 mm inset to avoid the hinge ears. Print profiles remain 8% gyroid, 2 walls and 3/3 skins. Desktop GUI Open/Save remains unavailable for the previously recorded WebKit helper reason.
+Browser checks cover actual ZIP/3MF/guide downloads on both printers, minimum heights, custom/automatic controls, packed views, release preview, quantities, invalid/stale exports, reset and mobile overflow. Native Bambu project import and slicing check supplied printing orientations and skipped-object counts. Artifacts and logs are stored under ignored artifacts directories.
+
+Desktop GUI Open/Save remains unavailable: the official extracted Bambu Studio executable requests WebKit helpers from a hard-coded /usr/lib path unavailable in this non-root runtime. Native CLI import does not cover desktop preset inheritance. The broad default test invocation previously encountered an unrelated clicker-test worker failure and was stopped during an unrelated long-running geometry test; targeted sequential game regressions are used here.
+
+Useful commands: npm run test:games, test:games-browser, test:games-native, test:compact-games-browser and test:slim-games-browser. Native checks require BAMBU_STUDIO_PATH; browser checks use the local preview at port 4175 and create the native fixtures.
+
+Current native slice audits passed with no skipped objects: Dots and Boxes 122 parts / 3 plates; Tic-tac-toe 11 / 3; Peg Solitaire 34 / 3; Four in a Row 51 / 4; Marble Run 86 / 6. Both selected printer projects preserve the agreed process settings. Final Four in a Row browser fixtures include the countersunk hardware reference meshes, captured pins, open release view, 28 mm default and 42 mm working depth at 250 mm width. Geometry regressions additionally verify all seven outlets, counter/hardware clearance at fit offsets, axial pin retention, hardware/lid clearance and full-counter drop envelopes across both printer sizes.
