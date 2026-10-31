@@ -6,7 +6,7 @@ export function seasonalPeg(K,style,r){const {own,M}=K,sphere=(rad,x,y,z,scale=[
  else if(style==='pumpkin'){head=own(M.union(Array.from({length:7},(_,i)=>{const a=i*Math.PI*2/7;return sphere(r*.65,Math.cos(a)*r*.38,Math.sin(a)*r*.38,headZ,[1,1,1.15]);}))).add(K.cyl(1,2,0,0,headZ+r*.65));head=own(head);}
  else if(style==='snowman'){head=own(M.union([sphere(r,0,0,5+r),sphere(r*.73,0,0,5+r*2.2),sphere(r*.52,0,0,5+r*3.15),K.cyl(r*.6,.8,0,0,5+r*3.5),K.cyl(r*.4,r*.55,0,0,5+r*3.55)]));}
  else {head=own(M.union([own(M.cylinder(r*1.25,r,0,40).translate([0,0,4])),own(M.cylinder(r*1.15,r*.8,0,40).translate([0,0,4+r*.8])),own(M.cylinder(r*1.1,r*.6,0,40).translate([0,0,4+r*1.55]))]));}
- return own(stem.add(head));}
+ return own(stem.add(K.cyl(1.9,headZ+r*.8)).add(head));}
 export function makeSolitaire(K,p){const {own,M}=K,s=boardBoxSolids(K,p),pitch=(p.boardSize-26)/6,positions=solitairePositions(),holes=positions.map(([x,y])=>K.cyl(1.9+p.clearance/2,4.01,x*pitch,y*pitch,2)),board=own(s.lid.subtract(own(M.union(holes)))),v=p.exportSet==='pegs'?{closed:false,top:6,boardY:0}:addBoardBox(K,p,s,board),r=Math.min(5,(pitch-3)/2),peg=seasonalPeg(K,p.pegStyle,r),count=32+p.extraPegs,packed=[];let template;
  const used=positions.filter(([x,y])=>x||y);for(let i=0;i<count;i++){const [x,y]=used[i%32],pos=[x*pitch,v.boardY+y*pitch,v.top-4],part=template?repeatGamePart(K,template,`${p.pegStyle}-peg-${i+1}`,pos):template=gamePart(K,`${p.pegStyle}-peg-1`,'game-seasonal-peg',peg,pos);packed.push({part,size:part.printSize});if(i>=32&&!v.closed)part.assembly=[p.boardSize/2+12+(i-32)%4*14,Math.floor((i-32)/4)*14,0];}
  const original=packed.map(i=>[i.part,[...i.part.assembly]]);packGamePieces(p,packed);if(!v.closed)for(const [part,pos]of original)part.assembly=pos;
