@@ -35,3 +35,62 @@ header nav a[aria-current=page]{text-decoration:underline;text-underline-offset:
 .plate-note{font-size:12px;line-height:1.6;color:var(--muted);padding:12px 0;margin:0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
 
 .nav-group-label{display:block;padding:12px 14px 4px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;border-top:1px solid var(--line)}
+
+/* Design Studio: a shared visual system for the wider maker catalogue. */
+@font-face{font-family:Studio Sans;src:url('./fonts/NotoSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Studio Sans;src:url('./fonts/NotoSans-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Studio Display;src:url('./fonts/Nunito-ExtraBold.ttf') format('truetype');font-weight:800;font-display:swap}
+:root{--page:#f7f6f2;--surface:#fff;--surface-alt:#f0f1ed;--field:#fff;--ink:#242e2b;--muted:#56635e;--line:#d8dfd9;--accent:#276c57;--soft:#e5eee8;--collection-wash:#e8f1ea;--shadow:0 12px 36px #263d2f0b}
+body{font-family:Studio Sans,Arial,sans-serif;background-color:var(--page);background-image:none;color:var(--ink)}
+body[data-page=clickers]{--accent:#9b365b;--collection-wash:#f9e8ef;--soft:#f4dfe8}
+body[data-page=keyrings],body[data-page=nameplates]{--accent:#76509b;--collection-wash:#eee8f7;--soft:#e8dff3}
+body[data-page=desk],body[data-page=kitchen],body[data-page=bathroom],body[data-page=coasters]{--accent:#a34e32;--collection-wash:#faeee5;--soft:#f1e3d8}
+body[data-page=mounts],body[data-page=pegboards]{--accent:#2b6195;--collection-wash:#e7f0f8;--soft:#dfeaf5}
+body[data-page=seeds]{--accent:#39764c;--collection-wash:#e8f3e6;--soft:#dfeddc}
+body[data-page=crochet]{--accent:#8b4b79;--collection-wash:#f4e9f2;--soft:#efdeeb}
+body[data-page=games]{--accent:#735f19;--collection-wash:#f6f0d8;--soft:#eee6bf}
+:root[data-theme=dark]{--page:#161d1b;--surface:#222d28;--surface-alt:#1b2520;--field:#2a352f;--ink:#f4f4eb;--muted:#bac7bd;--line:#4c6054;--accent:#a9d5b9;--soft:#33493d;--collection-wash:#233c30;--shadow:0 12px 36px #0002}
+:root[data-theme=dark] body{background-image:none}
+:root[data-theme=dark] body[data-page=clickers]{--accent:#f2a8c7;--collection-wash:#3c2631;--soft:#4a2f3d}
+:root[data-theme=dark] body[data-page=keyrings],:root[data-theme=dark] body[data-page=nameplates]{--accent:#ccb4ee;--collection-wash:#30283d;--soft:#40364f}
+:root[data-theme=dark] body[data-page=desk],:root[data-theme=dark] body[data-page=kitchen],:root[data-theme=dark] body[data-page=bathroom],:root[data-theme=dark] body[data-page=coasters]{--accent:#f0b191;--collection-wash:#382c25;--soft:#49372c}
+:root[data-theme=dark] body[data-page=mounts],:root[data-theme=dark] body[data-page=pegboards]{--accent:#a7cfee;--collection-wash:#233443;--soft:#2d4356}
+:root[data-theme=dark] body[data-page=seeds]{--accent:#acd6a6;--collection-wash:#243826;--soft:#344b32}
+:root[data-theme=dark] body[data-page=crochet]{--accent:#e5b4d8;--collection-wash:#392b36;--soft:#4b3747}
+:root[data-theme=dark] body[data-page=games]{--accent:#e9d47d;--collection-wash:#383320;--soft:#49422b}
+header{min-height:82px;max-width:none;padding:18px max(24px,calc((100vw - 1320px)/2));background:var(--surface);border-bottom:1px solid var(--line);gap:12px}
+header .brand{display:inline-flex;align-items:center;gap:13px;font-family:Studio Display,Arial,sans-serif;font-size:27px;font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--ink)}
+header .brand::before{content:'';flex:0 0 14px;width:14px;height:14px;border-radius:4px;background:#dd855e;box-shadow:17px 0 #8daacb,0 17px #a4bb8f,17px 17px #c3a2c8;margin:0 20px 17px 0;transform:rotate(-8deg)}
+header .brand span{display:none}.nav-toggle,.theme-control{min-height:42px;border-radius:12px;border-color:var(--line);color:var(--ink);font:700 12px Studio Sans,Arial,sans-serif;background:var(--surface)}
+header #site-navigation{right:max(24px,calc((100vw - 1320px)/2));width:min(310px,calc(100vw - 32px));max-height:min(760px,calc(100dvh - 105px));overflow-y:auto;overscroll-behavior:contain;padding:12px;border-radius:18px;box-shadow:0 18px 50px #172b2624;scrollbar-width:thin}
+header #site-navigation .nav-group{padding:8px 0 4px;border-top:1px solid var(--line)}
+header #site-navigation .nav-group-label{margin:0;padding:8px 12px 4px;border:0;color:var(--muted);font:700 10px Studio Sans,Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;opacity:1}
+header #site-navigation a{font-size:13px;padding:10px 12px;border-radius:10px;white-space:normal;line-height:1.4}
+header #site-navigation a:hover,header #site-navigation a[aria-current=page]{background:var(--collection-wash);color:var(--accent)}
+header #site-navigation .nav-home{margin-bottom:5px;font-weight:700}
+main{max-width:1440px}.plate-note{margin:0 5%;padding:12px 0;border-bottom:1px solid var(--line);font-size:11px;line-height:1.6;color:var(--muted)}
+.text-heading{position:relative;margin:24px 5% 0;padding:34px 36px 28px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(115deg,var(--surface),var(--collection-wash));overflow:hidden}
+.text-heading::after{content:'';position:absolute;width:150px;height:150px;border:24px solid var(--accent);border-radius:40px;opacity:.06;right:5%;top:26px;transform:rotate(18deg);pointer-events:none}
+.text-heading h1{position:relative;z-index:1;font-family:Studio Display,Arial,sans-serif;font-weight:800;font-size:clamp(34px,4vw,55px);line-height:1.08;letter-spacing:-1.8px;margin:14px 0 18px;max-width:800px}
+.text-heading>p{position:relative;z-index:1;max-width:770px;color:var(--muted)}
+.text-heading .eyebrow{color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.14em}
+.text-heading .privacy{font-size:11px!important;margin-top:18px}
+.section-title h2,.text-studio h2,.text-studio h3{font-family:Studio Display,Arial,sans-serif;font-weight:800;letter-spacing:-.6px}.section-title h2{font-size:30px}
+.text-studio{border-radius:20px;border-color:var(--line);box-shadow:var(--shadow);background:var(--surface)}
+.text-studio .controls{background:var(--surface-alt);padding:24px}.text-studio .workspace{background:var(--surface);padding:26px}
+.text-studio legend{font-family:Studio Display,Arial,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.25px;color:var(--ink)}
+.text-studio label{font-size:12px;color:var(--ink)}
+.text-studio input:not([type=checkbox]):not([type=range]):not([type=file]):not([type=color]),.text-studio select,.text-studio textarea{min-height:42px;font:13px Studio Sans,Arial,sans-serif;border-radius:9px;border-color:var(--line);background:var(--field);color:var(--ink)}
+.text-studio button,.text-studio .button{border-radius:12px;font-family:Studio Sans,Arial,sans-serif}.text-studio .quiet{color:var(--ink)}
+.text-studio .model-preview{border-radius:16px;outline:1px solid #00000008;background:#e5ddcf}
+.text-studio .preview-toolbar{font-weight:700;font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.text-studio .export{padding-top:20px}.text-studio .export>button{min-height:46px;font-weight:700}
+.text-studio #feedback{border-radius:12px;padding:12px 14px;min-height:42px;margin-bottom:14px;background:var(--collection-wash);color:var(--ink);font-size:12px;line-height:1.6}
+.text-studio .fixed{border-radius:14px;border-color:var(--line)}.text-studio .fixed strong{font-family:Studio Display,Arial,sans-serif}
+.text-guide,.home-guide{background:var(--surface-alt)}.text-guide .steps h3{font-family:Studio Display,Arial,sans-serif;font-size:24px;font-weight:800}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+footer{font-family:Studio Sans,Arial,sans-serif;color:var(--muted);background:var(--surface)}
+@media(max-width:760px){header{min-height:74px;padding:16px 20px}header .brand{font-size:23px;gap:8px}header .brand::before{transform:scale(.8) rotate(-8deg);margin-right:13px}header #site-navigation{right:16px}.text-heading{margin:18px 20px 0;padding:26px 24px;border-radius:20px}.text-heading h1{letter-spacing:-1.2px}.text-heading::after{right:-50px}.plate-note{margin:0 20px}#studio{padding-left:20px;padding-right:20px}.text-studio .workspace{padding:20px}.text-studio .controls{padding:20px}}
+@media(max-width:380px){header{padding:14px 16px;gap:7px}header .brand{font-size:20px;gap:5px}header .brand::before{transform:scale(.65) rotate(-8deg);margin-right:7px}.nav-toggle,.theme-control{padding:8px 10px;font-size:11px}.text-heading{margin-left:16px;margin-right:16px;padding:24px 20px}#studio{padding-left:16px;padding-right:16px}.text-studio .workspace,.text-studio .controls{padding:16px}}
+footer .brand{font-family:Studio Display,Arial,sans-serif;font-weight:800;letter-spacing:-.7px}
+body:not([data-page=lithophane]):not([data-page=fan]) :is(h1,h2,h3){font-family:Studio Display,Arial,sans-serif;font-weight:800}

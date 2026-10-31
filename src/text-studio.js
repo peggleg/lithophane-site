@@ -1,5 +1,6 @@
 import {compactQRSize} from './qr-code.js';
 import {mountPrinterPicker} from './printer-picker.js';
+import './studio-layout.js';
 
 import {createFilamentDisplay} from './filament-display.js';
 import {createSymbolEditor} from './symbol-editor.js';

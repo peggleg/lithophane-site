@@ -47,7 +47,8 @@
     "test:coaster-veins-slicer": "node scripts/check-coaster-veins-slicer.mjs",
     "test:products": "node scripts/check-product-browser.mjs",
     "test:product-slicer": "node scripts/check-product-slicer.mjs",
-    "test:pegboards": "node scripts/check-pegboard-layout-browser.mjs"
+    "test:pegboards": "node scripts/check-pegboard-layout-browser.mjs",
+    "test:studio-layout": "node scripts/check-studio-layout-browser.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

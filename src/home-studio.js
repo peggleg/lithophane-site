@@ -1,4 +1,5 @@
 import {mountPrinterPicker} from './printer-picker.js';
+import './studio-layout.js';
 import {printLimit,printerSizeText} from './printer-settings.js';
 import './theme.js';
 import './desk.css';

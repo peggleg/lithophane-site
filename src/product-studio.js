@@ -1,4 +1,5 @@
 import {profileFileTag}from './print-profile.js';
+import './studio-layout.js';
 import './theme.js';import './desk.css';import {mountPrinterPicker}from './printer-picker.js';import {printerSizeText}from './printer-settings.js';import {createDeskPreview}from './desk-preview.js';import {createFilamentDisplay}from './filament-display.js';import {productCollections,productItems,productDefaults,validateProduct}from './product-settings.js';
 const $=id=>document.getElementById(id),collection=document.body.dataset.collection,items=Object.entries(productItems).filter(([,v])=>v.collection===collection);let state,model=null,worker=null,timer,revision=0,busy=false;const preview=createDeskPreview($('model-canvas')),filament=createFilamentDisplay($('feedback'));
 const picker=mountPrinterPicker(value=>{state.printer=value;generate();});for(const [id,item]of items){const o=document.createElement('option');o.value=id;o.textContent=item.name;$('kind').append(o);}

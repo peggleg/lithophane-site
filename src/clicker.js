@@ -1,4 +1,5 @@
 import {mountPrinterPicker} from './printer-picker.js';
+import './studio-layout.js';
 
 import {createFilamentDisplay} from './filament-display.js';
 import {symbolCollections,symbolNames} from './clicker-symbols.js';

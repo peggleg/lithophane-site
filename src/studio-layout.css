@@ -1,0 +1,150 @@
+.studio-jumps {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 6px;
+  padding: 6px;
+  margin: 0 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.studio-jumps a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border-radius: 11px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.studio-jumps a:hover {
+  background: var(--surface-alt);
+}
+
+.studio-jump-step {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.maker-studio > .controls,
+.maker-studio > .workspace,
+.maker-studio .export {
+  scroll-margin-top: 24px;
+}
+
+.maker-studio > .controls {
+  padding: 16px;
+}
+
+.maker-studio .controls > .studio-control-section,
+.maker-studio .controls > .studio-control-section:first-child {
+  min-width: 0;
+  margin: 0 0 12px;
+  padding: 0 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.maker-studio .studio-control-section > legend {
+  float: none;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.maker-studio .studio-control-section > legend + * {
+  clear: both;
+}
+
+.maker-studio .studio-section-toggle,
+:root[data-theme=dark] .maker-studio .studio-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 15px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.maker-studio .studio-section-title {
+  min-width: 0;
+}
+
+.maker-studio .studio-section-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--accent);
+  font: 16px Arial, sans-serif;
+}
+
+.maker-studio .studio-control-section.is-collapsed > legend {
+  margin-bottom: 0;
+}
+
+.maker-studio .studio-control-section.is-collapsed > :not(legend) {
+  display: none !important;
+}
+
+.maker-studio .controls > .studio-control-section:last-child {
+  margin-bottom: 0;
+}
+
+.maker-studio :is(.controls, .workspace, .export):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
+@media (max-width: 650px) {
+  .studio-jumps {
+    position: sticky;
+    top: 8px;
+    z-index: 20;
+    width: 100%;
+    gap: 2px;
+    padding: 5px;
+    box-shadow: 0 5px 18px #00000012;
+  }
+
+  .studio-jumps a {
+    flex: 1;
+    gap: 6px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 5px;
+    font-size: 11px;
+  }
+
+  .maker-studio > .controls,
+  .maker-studio > .workspace,
+  .maker-studio .export {
+    scroll-margin-top: 80px;
+  }
+
+  .maker-studio .export > button {
+    flex: 1 1 140px;
+    min-height: 44px;
+  }
+}
