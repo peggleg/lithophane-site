@@ -1,3 +1,4 @@
+import {leafyWreath} from './ornament-wreath.js';
 import opentype from 'opentype.js';
 import {flattenPath} from './text-geometry.js';
 import {productKernel} from './product-kernel.js';
@@ -28,11 +29,12 @@ export function generateOrnament(module,fontBuffer,input){
   const radius=p.diameter/2,scale=p.diameter/100;
   for(const char of p.line1+p.line2)if(char!==' '&&!font.charToGlyphIndex(char))throw Error(`The lettering font cannot print “${char}”. Choose another character.`);
   const circle=(r,x=0,y=0)=>own(C.circle(r,192).translate([x,y]));
-  const frame=own(circle(radius).subtract(circle(radius-3.6*scale)));
+  const leafy=p.frameStyle==='leafy',frame=leafy?leafyWreath(C,own,scale):own(circle(radius).subtract(circle(radius-3.6*scale)));
+  const trim=shape=>leafy?own(shape.intersect(circle(radius-6*scale))):shape;
   const eyelet=own(circle(5,0,radius+3).subtract(circle(2.2,0,radius+3)));
   const template=ornamentArtwork(p),traced=contours=>{if(!contours?.length)return own(C.square([0,0]));let shape=own(new C(contours,'EvenOdd'));for(const delta of (template?.source==='approved-clean-stencil'?[.08]:[.48,-.28,-.16,.16]))shape=own(shape.offset(delta,'Round',2,24));return own(shape.scale([scale,scale]));};
   if(!template)throw Error('This design needs an approved artwork template.');
-  const source={profile:own(traced(template.frame).add(traced(template.etching||[]))),etching:traced(template.etching||[])};
+  const source={profile:own(trim(traced(template.frame)).add(traced(template.etching||[]))),etching:traced(template.etching||[])};
   const motifs=own(source.profile.intersect(circle(radius))),etching=source.etching;
   const lines=[p.line1,p.line2].filter(Boolean),textSections=[];
   for(let i=0;i<lines.length;i++){
@@ -71,11 +73,10 @@ export function generateOrnament(module,fontBuffer,input){
    for(let i=0;i<=24;i++){const t=i/24,u=1-t;dots.push([u*u*u*end[0]+3*u*u*t*(end[0]+dx*.35)+3*u*t*t*(target[0]-dx*.2)+t*t*t*target[0],u*u*u*end[1]+3*u*u*t*(end[1]-drop)+3*u*t*t*(target[1]-drop)+t*t*t*target[1]]);}
    const pieces=dots.slice(1).map((point,i)=>own(C.hull([dots[i],point].map(pt=>own(C.circle(.85*scale,24).translate(pt))))));anchors.push(own(C.union(pieces)));
   }}
-  // Keep botanical details out of the central lettering area: the cut-out name
-  // remains readable, while a slim structural edge follows its silhouette.
+  // Preserve the themed interior; short joins connect it to the selected edge.
   const decoration=motifs;
   const envelope=own(C.union([circle(radius),circle(5,0,radius+3)]));
-  const profile=own(connectedSection(C,own,exactWording?own(C.union([frame,eyelet,own(traced(template.surface).intersect(circle(radius))),traced(template.etching||[])])):own(C.union([frame,eyelet,decoration,text,...anchors]))).intersect(envelope));
+  const profile=own(connectedSection(C,own,exactWording?own(C.union([frame,eyelet,own(trim(traced(template.surface)).intersect(circle(radius))),...(leafy?[text]:[]),traced(template.etching||[])])):own(C.union([frame,eyelet,decoration,text,...anchors]))).intersect(envelope));
   const engravings=own(etching.subtract(own(text.offset(.7*scale,'Round',2,32))).intersect(profile));
   const blank=own(profile.extrude(p.thickness)),full=engravings.area()>.00001?own(blank.subtract(own(engravings.extrude(.24).translate([0,0,p.thickness-.24])))):blank,inlayDepth=p.inlayLayers*.2;
   let frontText=own(C.union([text,...(exactWording?[]:anchors)]).intersect(profile));
@@ -90,7 +91,7 @@ export function generateOrnament(module,fontBuffer,input){
   const mesh=full.getMesh(),vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);
   // Single-colour STL uses the same face-down pose as the 3MF assembly.
   for(let i=0;i<vertices.length/3;i++){vertices[i*3]=mesh.vertProperties[i*mesh.numProp];vertices[i*3+1]=-mesh.vertProperties[i*mesh.numProp+1];vertices[i*3+2]=p.thickness-mesh.vertProperties[i*mesh.numProp+2];}
-  const model=K.finish({printPlates:true,filamentColours:[p.frameColour,p.textColour],productFit:{connected:true,inlayDepth:p.ams?inlayDepth:0,colourOverlapArea:p.ams?own(profile.subtract(frontText).intersect(frontText)).area():0,colourCoverageError:p.ams?Math.abs(own(profile.subtract(frontText).add(frontText)).area()-profile.area()):0},previewDirection:[0,-.15,1],note:`One connected openwork ornament. ${p.ams?`Flush lettering uses filament 2 in the first ${p.inlayLayers} layers (${inlayDepth.toFixed(1)} mm); the rest uses filament 1.`:'Single-colour lettering is part of the openwork silhouette.'} Hanging cord is supplied separately.`,guide:`${ornamentCollections[p.collection].name}: ${p.design}. Text: ${lines.join(' / ')}.\nPrint face-down as supplied on a clean plate. The front lettering and frame start together on the bed; no supports are needed. ${p.ams?`Open the 3MF as a project and assign frame to filament 1 and text to filament 2. The flush inlay occupies only the first ${p.inlayLayers} × 0.2 mm layers. Keep both components aligned as one object. AMS purge/waste is additional to the part estimate.`:'The single-colour STL and 3MF contain the complete connected ornament.'}\nSupply a cord or ribbon through the integral eyelet. Keep the delicate foliage and lettering free of heavy loads.\nUp to two text lines; font and all outlines are processed locally. Custom-text font: Lobster, SIL Open Font License. Preset wording uses the matching ornament artwork outlines.`});
+  const model=K.finish({printPlates:true,filamentColours:[p.frameColour,p.textColour],productFit:{connected:true,inlayDepth:p.ams?inlayDepth:0,colourOverlapArea:p.ams?own(profile.subtract(frontText).intersect(frontText)).area():0,colourCoverageError:p.ams?Math.abs(own(profile.subtract(frontText).add(frontText)).area()-profile.area()):0},previewDirection:[0,-.15,1],note:`One connected openwork ornament. ${p.ams?`Flush lettering uses filament 2 in the first ${p.inlayLayers} layers (${inlayDepth.toFixed(1)} mm); the rest uses filament 1.`:'Single-colour lettering is part of the openwork silhouette.'} Hanging cord is supplied separately.`,guide:`${ornamentCollections[p.collection].name}: ${p.design}. Frame: ${leafy?'leafy branch wreath':'solid ring'}. Text: ${lines.join(' / ')}.\nPrint face-down as supplied on a clean plate. The front lettering and frame start together on the bed; no supports are needed. ${p.ams?`Open the 3MF as a project and assign frame to filament 1 and text to filament 2. The flush inlay occupies only the first ${p.inlayLayers} × 0.2 mm layers. Keep both components aligned as one object. AMS purge/waste is additional to the part estimate.`:'The single-colour STL and 3MF contain the complete connected ornament.'}\nSupply a cord or ribbon through the integral eyelet. Keep the delicate foliage and lettering free of heavy loads.\nUp to two text lines; font and all outlines are processed locally. Custom-text font: Lobster, SIL Open Font License. Preset wording uses the matching ornament artwork outlines.`});
   if(p.ams)for(const part of model.parts){part.x=model.parts[0].x;part.y=model.parts[0].y;}
   model.singleColourMesh={vertices,faces:new Uint32Array(mesh.triVerts)};
   model.outlineContours=own(profile.simplify(.04)).toPolygons();
