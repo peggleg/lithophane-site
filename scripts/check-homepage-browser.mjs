@@ -15,7 +15,7 @@ try {
  // Every existing generator remains reachable through a project card.
  for(const [key,info] of Object.entries(pageInfo)) if(key!=='home')
   assert.ok(await page.locator(`.project-link[href="./${info.path}"]`).count(),key);
- for(const [group,count] of [['personalise',5],['home-living',3],['workspace',4],['hobbies-games',3]]) {
+ for(const [group,count] of [['personalise',6],['home-living',3],['workspace',4],['hobbies-games',3]]) {
   await page.locator(`[data-filter="${group}"]`).click();
   assert.equal(await page.locator('.tool-card:visible').count(),count);
   assert.equal(await page.locator('[data-collection]:visible').count(),1);
@@ -48,7 +48,7 @@ try {
  await page.click('#reset');await ready();assert.equal(await page.inputValue('#kind'),'cupboard');
  await page.goto('http://localhost:4175/desk/?item=unknown');await ready();assert.equal(await page.inputValue('#kind'),'drawers');
  const context=await browser.newContext({javaScriptEnabled:false});const fallback=await context.newPage();
- await fallback.goto('http://localhost:4175/');assert.equal(await fallback.locator('.tool-card:visible').count(),15);
+ await fallback.goto('http://localhost:4175/');assert.equal(await fallback.locator('.tool-card:visible').count(),Object.keys(pageInfo).length);
  assert.equal(await fallback.locator('.finder-controls').isVisible(),false);await context.close();
  assert.deepEqual(errors,[]);
  console.log('Homepage: complete catalogue, four collection filters, combined search, empty state, image decoding, no-JS fallback, theme persistence, responsive layouts and cupboard deep links passed.');

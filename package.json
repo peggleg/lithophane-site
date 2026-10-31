@@ -54,7 +54,9 @@
     "test:games-native": "node scripts/check-games-native.mjs",
     "test:compact-games-browser": "node scripts/check-compact-games-browser.mjs",
     "test:slim-games-browser": "node scripts/check-slim-games-browser.mjs",
-    "test:game-pieces-browser": "node scripts/check-game-piece-exports.mjs"
+    "test:game-pieces-browser": "node scripts/check-game-piece-exports.mjs",
+    "test:ornaments": "node scripts/check-ornaments-browser.mjs",
+    "test:ornament-slicer": "node scripts/check-ornament-slicer.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

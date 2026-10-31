@@ -94,3 +94,6 @@ footer{font-family:Studio Sans,Arial,sans-serif;color:var(--muted);background:va
 @media(max-width:380px){header{padding:14px 16px;gap:7px}header .brand{font-size:20px;gap:5px}header .brand::before{transform:scale(.65) rotate(-8deg);margin-right:7px}.nav-toggle,.theme-control{padding:8px 10px;font-size:11px}.text-heading{margin-left:16px;margin-right:16px;padding:24px 20px}#studio{padding-left:16px;padding-right:16px}.text-studio .workspace,.text-studio .controls{padding:16px}}
 footer .brand{font-family:Studio Display,Arial,sans-serif;font-weight:800;letter-spacing:-.7px}
 body:not([data-page=lithophane]):not([data-page=fan]) :is(h1,h2,h3){font-family:Studio Display,Arial,sans-serif;font-weight:800}
+
+body[data-page=ornaments]{--accent:#76509b;--collection-wash:#eee8f7;--soft:#e8dff3}:root[data-theme=dark] body[data-page=ornaments]{--accent:#ccb4ee;--collection-wash:#30283d;--soft:#40364f}
+header #site-navigation{flex-wrap:nowrap}header #site-navigation>.nav-group,header #site-navigation>.nav-home{flex-shrink:0}

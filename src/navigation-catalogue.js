@@ -10,6 +10,7 @@ export const navigationGroups = [
       { page: 'nameplates', path: 'nameplates/', label: 'Nameplates' },
       { page: 'keyrings', path: 'keyrings/', label: 'Keyrings' },
       { page: 'clickers', path: 'clickers/', label: 'Clickers' },
+      { page: 'ornaments', path: 'ornaments/', label: 'Ornaments' },
     ],
   },
   {
