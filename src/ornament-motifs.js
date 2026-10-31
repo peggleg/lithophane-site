@@ -1,7 +1,7 @@
 // All motifs are real 2D cross-sections, in a shared 100 mm drawing space.
 // Curved stems and rounded strokes join silhouettes into the surrounding ring.
 export function ornamentMotifs(C,own,design){
- const shapes=[],put=s=>(shapes.push(s),s),circle=(r,x=0,y=0)=>own(C.circle(r,48).translate([x,y]));
+ const shapes=[],cuts=[],put=s=>(shapes.push(s),s),circle=(r,x=0,y=0)=>own(C.circle(r,48).translate([x,y]));
  const poly=points=>own(new C([points],'NonZero'));
  const oval=(rx,ry,x,y,a=0)=>own(C.circle(1,48).scale([rx,ry]).rotate(a).translate([x,y]));
  const union=ss=>own(C.union(ss));
@@ -57,5 +57,8 @@ export function ornamentMotifs(C,own,design){
  case 'house':sprig(-1);put(poly([[-19,-44],[-19,-29],[-23,-29],[-11,-15],[-1,-27],[5,-20],[20,-34],[17,-34],[17,-44]]));put(stroke([[27,-44],[26,-20],[21,-13]],2.1));put(stroke([[26,-29],[35,-23],[34,-15]],1.8));put(star(19,31,6));break;
  default:throw Error('Unknown ornament motif.');
  }
- return union(shapes);
+ if(design==='dog')cuts.push(circle(1.2,12,-26.5));
+ if(design==='cat')for(const x of [2.5,7.5])cuts.push(oval(1.2,1.4,x,-21));
+ if(design==='memorial'){cuts.push(oval(3.25,2.6,0,-30.3));for(const [x,y]of [[-3.25,-27.05],[-1.3,-25.1],[1.3,-25.1],[3.25,-27.05]])cuts.push(oval(1.1,1.3,x,y));}
+ const result=union(shapes);return cuts.length?own(result.subtract(union(cuts))):result;
 }
