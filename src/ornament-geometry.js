@@ -46,13 +46,12 @@ export function generateOrnament(module,fontBuffer,input){
   const exactWording=template&&p.line1===template.wording[0]&&p.line2===template.wording[1];
   let standardText=null;
   if(exactWording){
-   const wordWidth=line=>p.diameter*(line.replace(/\s/g,'').length>7?.9:line.replace(/\s/g,'').length>5?.78:.7)/2;
-   const top=wordWidth(lines[0]),bottom=wordWidth(lines[1]||lines[0]);
-   const zones=lines.length===1?[own(C.square([top*2,p.diameter*.46],true))]:[
-    own(new C([[[-top,.21*p.diameter],[-top*.82,.34*p.diameter],[-top*.3,.32*p.diameter],[0,.25*p.diameter],[top*.76,.3*p.diameter],[top,.17*p.diameter],[top*.92,0],[top*.55,-.06*p.diameter],[-top*.85,0]]],'NonZero')),
-    own(new C([[[-bottom,-.02*p.diameter],[-bottom*.8,.075*p.diameter],[-bottom*.35,0],[bottom*.8,0],[bottom,-.08*p.diameter],[bottom,-.24*p.diameter],[bottom*.55,-.22*p.diameter],[0,-.205*p.diameter],[-bottom*.55,-.22*p.diameter],[-bottom,-.25*p.diameter]]],'NonZero'))
-   ];
-   const envelope=own(C.union(zones)),candidate=own(traced(template.surface).subtract(own(traced(template.frame).offset(.65*scale,'Round',2,24))).intersect(circle(radius-6*scale)).intersect(envelope)),centre=own(C.square([p.diameter*.6,p.diameter*.4],true)),pieces=candidate.decompose().map(own),letters=pieces.filter(piece=>{const b=piece.bounds(),midX=(b.min[0]+b.max[0])/2;return own(piece.intersect(centre)).area()>4*scale*scale||(piece.area()<6*scale*scale&&Math.abs(midX)<p.diameter*.33);});standardText=letters.length?own(C.union(letters)):candidate;
+   // Recover the whole authored script. A text-shaped difference against the
+   // separate frame avoids clipping ascenders and swashes with fixed boxes.
+   const raw=own(traced(template.surface).subtract(own(traced(template.frame).offset(.35*scale,'Round',2,24))).intersect(circle(radius-3.8*scale)));
+   const candidate=own(raw.offset(-.3*scale,'Round',2,24).offset(.3*scale,'Round',2,24).simplify(.03*scale));
+   const centre=own(C.square([p.diameter*.86,p.diameter*.7],true)),pieces=candidate.decompose().map(own),letters=pieces.filter(piece=>own(piece.intersect(centre)).area()>.2*scale*scale);
+   standardText=letters.length?own(C.union(letters)):candidate;
   }
 
   // Fit replacement lettering inside the preserved artwork, rather than
