@@ -6,6 +6,7 @@ export function boardBoxSolids(K,p,{height=p.storageHeight||40}={}){const {own,M
  for(const [x,y]of centres)base=own(base.add(K.cyl(5,height-3,x,y,3)));
  const holes=(z)=>centres.map(([x,y])=>K.cyl(magnetRadius,2.01,x,y,z));
  base=own(base.subtract(own(M.union(holes(height-2)))));
+ const locating=own(K.round(s-1.8,s-1.8,6.1).subtract(K.round(s-6.2,s-6.2,3.9)));base=own(base.add(own(locating.extrude(1).translate([0,0,height]))));
  // Two shallow, matching grooves accept the box's wall rim in either lid orientation.
  const rimOuter=K.round(s-1.4,s-1.4,6.3),rimInner=K.round(s-6.6,s-6.6,3.7),ring=own(rimOuter.subtract(rimInner));
  let lid=K.box(s,s,t,0,0,0,7);
