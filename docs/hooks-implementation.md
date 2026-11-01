@@ -21,7 +21,7 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 - [x] Ocean
 - [x] Dinosaurs & Dragons
 - [x] Garden
-- [ ] Space
+- [x] Space
 - [ ] Transport
 - [ ] Minimal & Sculptural
 - [ ] Hobbies
@@ -87,3 +87,9 @@ Dino Tail, Tricera Hook, Dragon Curl, Stego Spike and T-Rex Grin use individual 
 ## Garden release
 
 Tulip Turn, Sunny Bloom, Cactus Curl, Leaf Loop and Vine Twist add botanical forms. Tulip petals form the actual outline instead of being clipped to a circular head; per-design palettes give Sunny Bloom yellow petals and a dark centre. Geometry and browser checks passed after these refinements. Native import retained both printers and the reinforced profile; separate slicing included all 17 objects over 9 plates, AMS all 10 objects over 8 plates. All four desktop Open/Save checks passed. The five printable mesh views were inspected against the Garden board.
+
+## Space release and support clearance
+
+Rocket Rest, Saturn Loop, Moon Cradle, Space Buddy and Comet Curl add rounded space designs, with curved comet trails and coloured rocket fins. The complete geometry and browser checks passed, including a fresh mixed-row export after the packing correction. Native slicing initially detected colliding support paths between the rocket and crescent at the old 6 mm part gap. Hook projects now leave 20 mm between packed objects, preserving normal supports, print orientation, colour-separated plates and the AMS tower strip. Other products retain their 6 mm gap. Both printer sizes and colour modes pass packing regression checks.
+
+The corrected Space fixtures imported both printer profiles, sliced all 27 separate-colour objects and all 10 AMS objects across 10 plates each, with zero skipped objects, and passed all four desktop Open/Save checks. Actual mesh previews were inspected against the Space board. Increased support clearance can add prepared plates to hook projects.

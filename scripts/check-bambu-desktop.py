@@ -41,6 +41,7 @@ def text(value):
         xtest.fake_input(d, X.KeyPress, code)
         xtest.fake_input(d, X.KeyRelease, code)
         if shifted: key('Shift_L', False)
+        time.sleep(.01)  # GTK completion must consume each path character before the next.
     d.sync()
 
 def visible_windows():
