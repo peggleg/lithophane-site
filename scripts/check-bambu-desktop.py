@@ -126,6 +126,7 @@ for kind in args.kinds:
     time.sleep(.7)
     hotkey('Control_L', 'l')
     text(incoming)
+    time.sleep(.7)  # Let GTK resolve the absolute path before activation.
     hotkey('Return')
     time.sleep(1)
     wait_ready(kind)
@@ -135,6 +136,7 @@ for kind in args.kinds:
     time.sleep(.7)
     hotkey('Control_L', 'a')
     text(saved)
+    time.sleep(.7)
     hotkey('Return')
     deadline = time.monotonic() + 15
     while True:

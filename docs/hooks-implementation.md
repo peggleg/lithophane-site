@@ -17,7 +17,7 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 ## Categories
 
 - [x] Pets + shared mounts/editor + hide retired sections
-- [ ] Woodland
+- [x] Woodland
 - [ ] Ocean
 - [ ] Dinosaurs & Dragons
 - [ ] Garden
@@ -53,3 +53,15 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 The original 20–30 mm projection left inadequate space between the character and hook tip. Hooks now default to 48 mm projection (44–56 mm control), with a deeper U-shaped cradle, broad root, tapered 11 mm rounded end and a release tab exposed 10 mm below the mount. Mechanical regression checks use a 10 mm hanging-loop insertion path and an 18 mm inside-diameter keyring at both character-height limits and minimum projection. These are geometry/access checks, not a load rating. Native slicing and desktop profile roundtrips cover both printer sizes and colour modes.
 
 The release leaf now anchors above the catch, leaving 23 mm of flexing length rather than the original 6.5 mm. Its narrower 6 mm blade clears the male dovetail instead of touching its edge.
+
+## Woodland release
+
+Five independently authored designs: Fox Curl, Bear Hug, Night Owl, Mushroom Nook and Branch Buddy. Curled characters use a sampled 3D hook path that reaches the front clearance early, leaving an accessible throat instead of forming a blocked decorative loop. Character faces, ears and branch junctions use volumetric ellipsoid hulls. Mushroom caps and leaves have separate colour seats.
+
+The access regression follows each real tip position from above to 6 mm below the tip, rather than assuming every design has the same vertical position. It checks a 10 mm hanging strand and 18 mm internal-diameter keyring at minimum projection and both height limits. Separate colour seats include a 0.02 mm adhesive space beneath and a 0.05 mm buffer around the fitted profile to survive float32 export without overlapping the core. Serialization retains nonzero enclosed voids while requiring one positive physical component. Pets passes the shared geometry regression.
+
+Engraving cuts a 0.9 mm forward-facing skin from the actual curved surface rather than using a single maximum-height plane. Facial lines, feather marks and leaf veins therefore follow the printable sculpture.
+
+Conforming engraving preserves the base and excludes the hook-root keepout. This prevents ornamental grooves from detaching thin edges or weakening the root.
+
+Float32 export can leave paper-thin fragments: the 100 mm owl produced a 0.00027 mm³ skin after a conformal cut. Cleanup removes components below 0.001 mm³, less than 1/30 of a 0.4 × 0.4 × 0.2 mm print voxel; it still rejects larger detached solids. Nonzero enclosed voids above that threshold remain in the exported mesh.
