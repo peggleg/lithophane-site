@@ -18,7 +18,7 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 
 - [x] Pets + shared mounts/editor + hide retired sections
 - [x] Woodland
-- [ ] Ocean
+- [x] Ocean
 - [ ] Dinosaurs & Dragons
 - [ ] Garden
 - [ ] Space
@@ -65,3 +65,17 @@ Engraving cuts a 0.9 mm forward-facing skin from the actual curved surface rathe
 Conforming engraving preserves the base and excludes the hook-root keepout. This prevents ornamental grooves from detaching thin edges or weakening the root.
 
 Float32 export can leave paper-thin fragments: the 100 mm owl produced a 0.00027 mm³ skin after a conformal cut. Cleanup removes components below 0.001 mm³, less than 1/30 of a 0.4 × 0.4 × 0.2 mm print voxel; it still rejects larger detached solids. Nonzero enclosed voids above that threshold remain in the exported mesh.
+
+## Rounded geometry and remaining collections
+
+The shared receiver now has an ellipsoidal back and a rounded catch boss rather than an exposed rectangular spine. A continuous silhouette underlay joins the sculpture to the receiver; swept roots curve directly into the cradle. Bent decorative masses join adjacent ellipsoids rather than filling the entire bend with one convex hull. Finished part spans enforce a real 6 mm neighbour gap, including curls outside the artwork silhouette.
+
+Engraving ignores sketches removed completely by the structural root keepout. Extruding those empty sketches produced invalid solids at smaller sizes. Single-colour mode retains the sculpted core and engraved lines without building the separate paint caps. Flat name lettering stays as embossed detail in that mode. The large City Arch extends its receiver to meet the arch crown continuously.
+
+Collection and individual-design palettes follow the approved boards. A bounded 32 MiB / 12-model browser cache reuses identical settings while parameter changes still invalidate downloads. Personalised designs use the bundled font, with minimum lettering height, supported-character checks and fitted separate or AMS letters.
+
+## Ocean release
+
+Octo Curl, Whale Tail, Turtle Tide, Curling Wave and Seahorse Swirl include rounded sculptures, seated colour details and individual curled cradles. Seahorse details include a contrasting eye and segmented belly bands. The turtle starts with a green/cream palette.
+
+Validation: eight geometry tests; individual and mixed-row browser exports in both colour modes and printer sizes; native profile imports for both printers; A1 mini native slicing with zero skipped objects (separate: 9 plates / 32 objects; AMS: see native audit artifact); four Bambu Studio 2.8.2.61 desktop Open/Save profile checks. Gallery regression retains all 56 seasonal pictures. Actual printable mesh previews were inspected against the Ocean board.

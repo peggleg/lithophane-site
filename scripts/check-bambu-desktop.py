@@ -138,7 +138,7 @@ for kind in args.kinds:
     text(saved)
     time.sleep(.7)
     hotkey('Return')
-    deadline = time.monotonic() + 15
+    deadline = time.monotonic() + 60
     while True:
         try:
             actual = settings(saved)

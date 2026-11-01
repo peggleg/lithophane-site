@@ -1,0 +1,4 @@
+import{spawn}from'node:child_process';import fs from'node:fs/promises';
+const queue=process.argv.slice(2),results=[];let next=0;
+async function worker(){while(next<queue.length){const category=queue[next++];await fs.mkdir('artifacts/hooks/'+category,{recursive:true});const file=await fs.open('artifacts/hooks/'+category+'/geometry-tests.log','w');const child=spawn(process.execPath,['--test','test/hooks.test.js'],{env:{...process.env,HOOK_CATEGORY:category},stdio:['ignore',file.fd,file.fd]});const code=await new Promise(resolve=>child.on('exit',resolve));await file.close();results.push({category,code});await fs.writeFile('artifacts/hooks/batch-geometry-results.json',JSON.stringify(results,null,2));console.log((code===0?'PASS':'FAIL')+' '+category);}}
+await Promise.all([worker(),worker()]);if(results.some(r=>r.code!==0))process.exitCode=1;
