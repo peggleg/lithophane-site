@@ -20,7 +20,7 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 - [x] Woodland
 - [x] Ocean
 - [x] Dinosaurs & Dragons
-- [ ] Garden
+- [x] Garden
 - [ ] Space
 - [ ] Transport
 - [ ] Minimal & Sculptural
@@ -83,3 +83,7 @@ Validation: eight geometry tests; individual and mixed-row browser exports in bo
 ## Dinosaurs & Dragons release
 
 Dino Tail, Tricera Hook, Dragon Curl, Stego Spike and T-Rex Grin use individual sculpted forms and swept tail/horn cradles. The revised Dino Tail leaves a clear hanging gap at both size limits. Geometry, browser exports, native imports/slicing and all four desktop roundtrips passed. Separate projects sliced all 24 objects across 10 plates; AMS also reported zero skipped objects. Actual mesh views were compared with the approved category board.
+
+## Garden release
+
+Tulip Turn, Sunny Bloom, Cactus Curl, Leaf Loop and Vine Twist add botanical forms. Tulip petals form the actual outline instead of being clipped to a circular head; per-design palettes give Sunny Bloom yellow petals and a dark centre. Geometry and browser checks passed after these refinements. Native import retained both printers and the reinforced profile; separate slicing included all 17 objects over 9 plates, AMS all 10 objects over 8 plates. All four desktop Open/Save checks passed. The five printable mesh views were inspected against the Garden board.
