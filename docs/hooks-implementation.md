@@ -47,3 +47,9 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 - AMS packing reserves a full side strip for its variable-depth prime tower. Wider parts rotate in XY with inverse preview transforms. Tower coordinates must repeat for every prepared plate.
 - Generic wall-mount-only and hook-only downloads retain excluded items as preview context. Non-AMS plates are separated by palette colour, including single-colour cores.
 - Coats use screws; adhesive-pad recesses are a lighter-item alternative.
+
+## Pets usability correction
+
+The original 20–30 mm projection left inadequate space between the character and hook tip. Hooks now default to 48 mm projection (44–56 mm control), with a deeper U-shaped cradle, broad root, tapered 11 mm rounded end and a release tab exposed 10 mm below the mount. Mechanical regression checks use a 10 mm hanging-loop insertion path and an 18 mm inside-diameter keyring at both character-height limits and minimum projection. These are geometry/access checks, not a load rating. Native slicing and desktop profile roundtrips cover both printer sizes and colour modes.
+
+The release leaf now anchors above the catch, leaving 23 mm of flexing length rather than the original 6.5 mm. Its narrower 6 mm blade clears the male dovetail instead of touching its edge.
