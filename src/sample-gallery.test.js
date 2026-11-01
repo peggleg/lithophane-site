@@ -2,14 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {sampleCollections,collectionSamples,sampleOrientation} from './sample-gallery.js';
 import {seasonalDesigns} from './postcards.js';
+import {readFileSync} from 'node:fs';
+const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-2026-11-01.json',import.meta.url),'utf8'));
 test('gallery defaults to Christmas and preserves every existing sample',()=>{
  const collections=sampleCollections();
  assert.equal(collections[0].name,'Christmas');
  assert.equal(collections.length,8);
  for(const collection of collections){
-  assert.equal(collectionSamples(collection).length,6);
-  assert.equal(collectionSamples(collection,'portrait').length,4);
-  assert.equal(collectionSamples(collection,'landscape').length,2);
+  const prior=baseline.designs.filter(d=>d.season===collection.name);
+  assert.ok(collectionSamples(collection).length>=prior.length+1);
+  for(const orientation of ['portrait','landscape']){
+   const visible=collectionSamples(collection,orientation);
+   for(const old of prior.filter(d=>d.orientation===orientation))assert.ok(visible.some(d=>d.id===old.id),old.id);
+  }
  }
  assert.deepEqual(new Set(collections.flatMap(c=>c.designs.map(d=>d.id))),new Set(seasonalDesigns.map(d=>d.id)));
 });

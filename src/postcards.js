@@ -66,15 +66,131 @@ const landscapeGroups=[
   ['thanksgiving-table','Thanksgiving','Gather the harvest','A cornucopia, pumpkins, fruit and wheat on a rustic table.'],
   ['thanksgiving-farm','Thanksgiving','Home for the harvest','A welcoming farmhouse and barn among autumn trees and pumpkins.']]]
 ];
+// Original daily additions are appended; existing atlas cells remain unchanged.
+const additions20261101=[
+  {
+    "id": "christmas-carousel-2026-11-01",
+    "name": "The Christmas Carousel",
+    "season": "Christmas",
+    "description": "Carved carousel horses, festive lights and a family watching beneath snow-laden firs.",
+    "orientation": "landscape",
+    "atlas": "christmas-carousel-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-orchard-lambs-2026-11-01",
+    "name": "Lambs in the Blossom Orchard",
+    "season": "Easter",
+    "description": "A ewe and two lambs beneath apple blossom, with decorated Easter eggs beside a brook.",
+    "orientation": "portrait",
+    "atlas": "easter-orchard-lambs-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-owl-apothecary-2026-11-01",
+    "name": "The Owl’s Apothecary",
+    "season": "Halloween",
+    "description": "A barn owl, botanical books and glowing mushrooms in a moonlit gothic apothecary.",
+    "orientation": "portrait",
+    "atlas": "halloween-owl-apothecary-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-heartwood-foxes-2026-11-01",
+    "name": "Foxes beneath the Heartwood Tree",
+    "season": "Valentine’s Day",
+    "description": "Two affectionate foxes beneath heart-shaped branches in a tranquil moonlit forest.",
+    "orientation": "portrait",
+    "atlas": "valentine-heartwood-foxes-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-harbour-first-light-2026-11-01",
+    "name": "First Light of 2027",
+    "season": "New Year 2027",
+    "description": "A brass compass and 2027 ribbon greet sunrise over a harbour beneath fading fireworks.",
+    "orientation": "landscape",
+    "atlas": "newyear-harbour-first-light-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-elephant-trunk-2026-11-01",
+    "name": "A Gentle Trunk to Hold",
+    "season": "Mother’s Day",
+    "description": "A mother elephant and her calf touch trunks beside a reflective, lily-lined waterhole.",
+    "orientation": "portrait",
+    "atlas": "mother-elephant-trunk-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-stargazing-2026-11-01",
+    "name": "Stargazing with Dad",
+    "season": "Father’s Day",
+    "description": "A father and child explore the Milky Way with a brass telescope above a mountain lake.",
+    "orientation": "landscape",
+    "atlas": "father-stargazing-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-cider-press-2026-11-01",
+    "name": "The Cider Press Gathering",
+    "season": "Thanksgiving",
+    "description": "A family shares the apple harvest around an oak cider press in an autumn orchard.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-cider-press-2026-11-01",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
- ...landscapeGroups.flatMap(([atlas,designs])=>designs.map(([id,season,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'landscape'})))
+ ...landscapeGroups.flatMap(([atlas,designs])=>designs.map(([id,season,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'landscape'}))),
+ ...additions20261101
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 
 export function artworkCell(design,imageWidth,imageHeight){
- const columns=design.atlas==='original'?3:2;
- const rows=design.atlas==='original'?4:2;
- return {x:design.column*imageWidth/columns,y:design.row*imageHeight/rows,width:imageWidth/columns,height:imageHeight/rows};
+ const columns=design.columns??(design.atlas==='original'?3:2);
+ const rows=design.rows??(design.atlas==='original'?4:2);
+ const cell={x:design.column*imageWidth/columns,y:design.row*imageHeight/rows,width:imageWidth/columns,height:imageHeight/rows};
+ // Only new standalone artwork opts in; historical atlas crops stay identical.
+ if(design.cropToPostcard){
+  const size=sampleSize(design),aspect=size.width/size.height;
+  const width=Math.min(cell.width,cell.height*aspect),height=width/aspect;
+  return {x:cell.x+(cell.width-width)/2,y:cell.y+(cell.height-height)/2,width,height};
+ }
+ return cell;
 }

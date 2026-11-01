@@ -1,0 +1,787 @@
+{
+  "capturedFrom": "bd05258650f08af35b16f24ac40e86bc4dc50ab4",
+  "designs": [
+    {
+      "id": "cottage",
+      "name": "Moonlit manor",
+      "season": "Halloween",
+      "column": 0,
+      "row": 0,
+      "description": "A moonlit Victorian cottage with glowing porch pumpkins.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "harvest",
+      "name": "Harvest lanterns",
+      "season": "Halloween",
+      "column": 0,
+      "row": 1,
+      "description": "Carved pumpkins and an antique lantern among autumn leaves.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "ghost",
+      "name": "Garden ghost",
+      "season": "Halloween",
+      "column": 0,
+      "row": 2,
+      "description": "A friendly ghost drifting through a moonlit garden.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "witch-cat",
+      "name": "Midnight magic",
+      "season": "Halloween",
+      "column": 0,
+      "row": 3,
+      "description": "A black cat, witch hat and bubbling cauldron.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "village",
+      "name": "Christmas village",
+      "season": "Christmas",
+      "column": 1,
+      "row": 0,
+      "description": "Snowy cottages, a stone bridge and a decorated tree.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "woodland",
+      "name": "Winter woodland",
+      "season": "Christmas",
+      "column": 1,
+      "row": 1,
+      "description": "A deer and fawn among snowy firs and a woodland cabin.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "sleigh",
+      "name": "Christmas Eve",
+      "season": "Christmas",
+      "column": 1,
+      "row": 2,
+      "description": "Santa and his reindeer above a snowy village.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "wreath",
+      "name": "Festive welcome",
+      "season": "Christmas",
+      "column": 1,
+      "row": 3,
+      "description": "A wreath of holly, bells and candlelight.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "bunny",
+      "name": "Easter bunny",
+      "season": "Easter",
+      "column": 2,
+      "row": 0,
+      "description": "A rabbit nestled among daffodils and decorated eggs.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "basket",
+      "name": "Easter basket",
+      "season": "Easter",
+      "column": 2,
+      "row": 1,
+      "description": "Patterned eggs in a woven basket with spring flowers.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "chicks",
+      "name": "Spring chicks",
+      "season": "Easter",
+      "column": 2,
+      "row": 2,
+      "description": "Two fluffy chicks beside eggs and blooming tulips.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "spring-garden",
+      "name": "Blossom garden",
+      "season": "Easter",
+      "column": 2,
+      "row": 3,
+      "description": "A bunny family in a cottage garden beneath spring blossom.",
+      "atlas": "original",
+      "orientation": "portrait"
+    },
+    {
+      "id": "swan-heart",
+      "name": "Swan hearts",
+      "description": "Two swans form a heart on a quiet lily pond.",
+      "season": "Valentine’s Day",
+      "atlas": "valentine",
+      "column": 0,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "rose-heart",
+      "name": "Heart of roses",
+      "description": "A heart-shaped wreath of roses and trailing ivy.",
+      "season": "Valentine’s Day",
+      "atlas": "valentine",
+      "column": 1,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "lovebirds",
+      "name": "Blossom lovebirds",
+      "description": "Two lovebirds nestled together beneath spring blossom.",
+      "season": "Valentine’s Day",
+      "atlas": "valentine",
+      "column": 0,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "love-letter",
+      "name": "Sealed with love",
+      "description": "A heart-sealed envelope with roses and ribbon.",
+      "season": "Valentine’s Day",
+      "atlas": "valentine",
+      "column": 1,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "midnight-clock",
+      "name": "Midnight wishes",
+      "description": "An ornate clock welcomes midnight amid stars and festive ribbons.",
+      "season": "New Year 2027",
+      "atlas": "newyear",
+      "column": 0,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "newyear-door",
+      "name": "Welcome, 2027",
+      "description": "A snowy cottage doorway with a festive wreath and a 2027 plaque.",
+      "season": "New Year 2027",
+      "atlas": "newyear",
+      "column": 1,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "celebration-glasses",
+      "name": "A sparkling toast",
+      "description": "Two engraved celebration glasses with bubbles and curling ribbons.",
+      "season": "New Year 2027",
+      "atlas": "newyear",
+      "column": 0,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "newyear-lantern",
+      "name": "Light up 2027",
+      "description": "A candlelit lantern with evergreen sprigs and a 2027 medallion.",
+      "season": "New Year 2027",
+      "atlas": "newyear",
+      "column": 1,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "mother-bouquet",
+      "name": "Flowers for Mum",
+      "description": "Peonies and tulips in a patterned ceramic vase.",
+      "season": "Mother’s Day",
+      "atlas": "mother",
+      "column": 0,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "mother-nest",
+      "name": "Under her wing",
+      "description": "A mother bird shelters her chicks in a blossom-framed nest.",
+      "season": "Mother’s Day",
+      "atlas": "mother",
+      "column": 1,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "mother-teacup",
+      "name": "A moment for Mum",
+      "description": "A delicate teacup beside a letter, roses and ribbon.",
+      "season": "Mother’s Day",
+      "atlas": "mother",
+      "column": 0,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "mother-rabbits",
+      "name": "Garden cuddles",
+      "description": "A mother rabbit nestled with her young among wildflowers.",
+      "season": "Mother’s Day",
+      "atlas": "mother",
+      "column": 1,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "father-watch",
+      "name": "Timeless moments",
+      "description": "A vintage pocket watch beside oak leaves and acorns.",
+      "season": "Father’s Day",
+      "atlas": "father",
+      "column": 0,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "father-bears",
+      "name": "Following Dad",
+      "description": "A father bear and cub on a woodland trail.",
+      "season": "Father’s Day",
+      "atlas": "father",
+      "column": 1,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "father-fishing",
+      "name": "Gone fishing",
+      "description": "Fishing rods and a tackle basket beside a reed-lined lake.",
+      "season": "Father’s Day",
+      "atlas": "father",
+      "column": 0,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "father-workshop",
+      "name": "Made with care",
+      "description": "A hand plane, chisel and curled shavings on a wooden workbench.",
+      "season": "Father’s Day",
+      "atlas": "father",
+      "column": 1,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "harvest-horn",
+      "name": "Harvest abundance",
+      "description": "A cornucopia filled with pumpkins, apples, grapes and wheat.",
+      "season": "Thanksgiving",
+      "atlas": "thanksgiving",
+      "column": 0,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "thankful-turkey",
+      "name": "Autumn turkey",
+      "description": "A turkey with a magnificent fanned tail among autumn leaves.",
+      "season": "Thanksgiving",
+      "atlas": "thanksgiving",
+      "column": 1,
+      "row": 0,
+      "orientation": "portrait"
+    },
+    {
+      "id": "harvest-light",
+      "name": "Harvest glow",
+      "description": "A lantern surrounded by pumpkins, corn and maple leaves.",
+      "season": "Thanksgiving",
+      "atlas": "thanksgiving",
+      "column": 0,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "harvest-pie",
+      "name": "Fresh from the oven",
+      "description": "A lattice pie beside apples on a farmhouse table.",
+      "season": "Thanksgiving",
+      "atlas": "thanksgiving",
+      "column": 1,
+      "row": 1,
+      "orientation": "portrait"
+    },
+    {
+      "id": "christmas-bridge",
+      "name": "Snowfall village",
+      "description": "A snowy village and decorated tree beside a stone bridge.",
+      "season": "Christmas",
+      "atlas": "land-existing",
+      "column": 0,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "christmas-flight",
+      "name": "Across the winter sky",
+      "description": "Santa and his reindeer above a panoramic snowy forest.",
+      "season": "Christmas",
+      "atlas": "land-existing",
+      "column": 1,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "easter-cottage",
+      "name": "Easter garden",
+      "description": "A rabbit family and decorated eggs in a flowering cottage garden.",
+      "season": "Easter",
+      "atlas": "land-existing",
+      "column": 0,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "easter-meadow",
+      "name": "Springtime meadow",
+      "description": "Chicks, tulips and daffodils around a basket of decorated eggs.",
+      "season": "Easter",
+      "atlas": "land-existing",
+      "column": 1,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "halloween-hill",
+      "name": "Manor by moonlight",
+      "description": "A haunted hilltop manor, winding path and pumpkins under the moon.",
+      "season": "Halloween",
+      "atlas": "land-autumn-love",
+      "column": 0,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "halloween-patch",
+      "name": "The pumpkin patch",
+      "description": "A scarecrow watches over pumpkins and an old lantern beside a barn.",
+      "season": "Halloween",
+      "atlas": "land-autumn-love",
+      "column": 1,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "valentine-lake",
+      "name": "Lake of roses",
+      "description": "Two swans on a tranquil lake beneath an arch of roses.",
+      "season": "Valentine’s Day",
+      "atlas": "land-autumn-love",
+      "column": 0,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "valentine-garden",
+      "name": "Our quiet corner",
+      "description": "Lovebirds, a garden bench and trailing roses.",
+      "season": "Valentine’s Day",
+      "atlas": "land-autumn-love",
+      "column": 1,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "newyear-fireworks",
+      "name": "Hello, 2027",
+      "description": "Fireworks and 2027 numerals over a river and old-town skyline.",
+      "season": "New Year 2027",
+      "atlas": "land-newyear-mother",
+      "column": 0,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "newyear-mantel",
+      "name": "The midnight mantel",
+      "description": "An ornate clock, candles and ribbons welcome 2027.",
+      "season": "New Year 2027",
+      "atlas": "land-newyear-mother",
+      "column": 1,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "mother-ducks",
+      "name": "Together on the pond",
+      "description": "A mother duck leads her ducklings across a flower-lined pond.",
+      "season": "Mother’s Day",
+      "atlas": "land-newyear-mother",
+      "column": 0,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "mother-tea",
+      "name": "Tea in the garden",
+      "description": "A welcoming garden table with flowers, a teapot and two cups.",
+      "season": "Mother’s Day",
+      "atlas": "land-newyear-mother",
+      "column": 1,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "father-lake",
+      "name": "Adventure together",
+      "description": "A father bear and cub beside a pine-lined mountain lake.",
+      "season": "Father’s Day",
+      "atlas": "land-father-thanks",
+      "column": 0,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "father-rowboat",
+      "name": "A day by the lake",
+      "description": "Two fishing rods, a rowboat and a tackle basket at the lakeside.",
+      "season": "Father’s Day",
+      "atlas": "land-father-thanks",
+      "column": 1,
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "thanksgiving-table",
+      "name": "Gather the harvest",
+      "description": "A cornucopia, pumpkins, fruit and wheat on a rustic table.",
+      "season": "Thanksgiving",
+      "atlas": "land-father-thanks",
+      "column": 0,
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "thanksgiving-farm",
+      "name": "Home for the harvest",
+      "description": "A welcoming farmhouse and barn among autumn trees and pumpkins.",
+      "season": "Thanksgiving",
+      "atlas": "land-father-thanks",
+      "column": 1,
+      "row": 1,
+      "orientation": "landscape"
+    }
+  ],
+  "assets": {
+    "src/assets/holiday-postcards.png": "eb078d5e931411bf495af8a6a218c16584b658d59c695a92e5249e2d09160bf9",
+    "src/assets/valentine-portraits.png": "69f749dbc794631f478a21cba109e67162ebae185026b0e003d0ed8026b00be9",
+    "src/assets/newyear-portraits.png": "a59868a87b347395efb43a99a75879d11fdb6c3a46a2b5aa103bf55a6f4e7c39",
+    "src/assets/mother-portraits.png": "b69ecd15ce948b2dc845bb09e4a3e2fc32bfea74aafe4c681ff75de11b722a6e",
+    "src/assets/father-portraits.png": "51b8532e6d09221c817dcea6d4c6b879a2f8659780f182c989148f4b74819cbd",
+    "src/assets/thanksgiving-portraits.png": "eb943862c8f24f683d73da1dccce2e98d2e9795c7cbaec0c18e841ed64963282",
+    "src/assets/land-existing.png": "81a7d1b0059e205fd01801df8735f6bebc4a94912545f73529a2638b69bb2b6d",
+    "src/assets/land-autumn-love.png": "50d9bf20ed7dbd3a2210adacb5f5aa6a77bcb59474a334e97e8f4c71df1819cf",
+    "src/assets/land-newyear-mother.png": "4ed82e16c36c4d6194916c59214c956bee1b5e3b1f2b653ba7ecd827ef50147d",
+    "src/assets/land-father-thanks.png": "7ff8c165d90b1d15d9103f44a2fd495b11d4a6d02241b217623241d5cb31d0b9"
+  },
+  "cells": {
+    "cottage": {
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 400
+    },
+    "harvest": {
+      "x": 0,
+      "y": 400,
+      "width": 400,
+      "height": 400
+    },
+    "ghost": {
+      "x": 0,
+      "y": 800,
+      "width": 400,
+      "height": 400
+    },
+    "witch-cat": {
+      "x": 0,
+      "y": 1200,
+      "width": 400,
+      "height": 400
+    },
+    "village": {
+      "x": 400,
+      "y": 0,
+      "width": 400,
+      "height": 400
+    },
+    "woodland": {
+      "x": 400,
+      "y": 400,
+      "width": 400,
+      "height": 400
+    },
+    "sleigh": {
+      "x": 400,
+      "y": 800,
+      "width": 400,
+      "height": 400
+    },
+    "wreath": {
+      "x": 400,
+      "y": 1200,
+      "width": 400,
+      "height": 400
+    },
+    "bunny": {
+      "x": 800,
+      "y": 0,
+      "width": 400,
+      "height": 400
+    },
+    "basket": {
+      "x": 800,
+      "y": 400,
+      "width": 400,
+      "height": 400
+    },
+    "chicks": {
+      "x": 800,
+      "y": 800,
+      "width": 400,
+      "height": 400
+    },
+    "spring-garden": {
+      "x": 800,
+      "y": 1200,
+      "width": 400,
+      "height": 400
+    },
+    "swan-heart": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "rose-heart": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "lovebirds": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "love-letter": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "midnight-clock": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "newyear-door": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "celebration-glasses": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "newyear-lantern": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "mother-bouquet": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "mother-nest": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "mother-teacup": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "mother-rabbits": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "father-watch": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "father-bears": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "father-fishing": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "father-workshop": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "harvest-horn": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "thankful-turkey": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "harvest-light": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "harvest-pie": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "christmas-bridge": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "christmas-flight": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "easter-cottage": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "easter-meadow": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "halloween-hill": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "halloween-patch": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "valentine-lake": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "valentine-garden": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "newyear-fireworks": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "newyear-mantel": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "mother-ducks": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "mother-tea": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "father-lake": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "father-rowboat": {
+      "x": 600,
+      "y": 0,
+      "width": 600,
+      "height": 800
+    },
+    "thanksgiving-table": {
+      "x": 0,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    },
+    "thanksgiving-farm": {
+      "x": 600,
+      "y": 800,
+      "width": 600,
+      "height": 800
+    }
+  }
+}
