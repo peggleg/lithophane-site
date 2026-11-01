@@ -19,7 +19,7 @@ A continuous structural core carries hook loads. Decorative fitted inserts locat
 - [x] Pets + shared mounts/editor + hide retired sections
 - [x] Woodland
 - [x] Ocean
-- [ ] Dinosaurs & Dragons
+- [x] Dinosaurs & Dragons
 - [ ] Garden
 - [ ] Space
 - [ ] Transport
@@ -79,3 +79,7 @@ Collection and individual-design palettes follow the approved boards. A bounded 
 Octo Curl, Whale Tail, Turtle Tide, Curling Wave and Seahorse Swirl include rounded sculptures, seated colour details and individual curled cradles. Seahorse details include a contrasting eye and segmented belly bands. The turtle starts with a green/cream palette.
 
 Validation: eight geometry tests; individual and mixed-row browser exports in both colour modes and printer sizes; native profile imports for both printers; A1 mini native slicing with zero skipped objects (separate: 9 plates / 32 objects; AMS: see native audit artifact); four Bambu Studio 2.8.2.61 desktop Open/Save profile checks. Gallery regression retains all 56 seasonal pictures. Actual printable mesh previews were inspected against the Ocean board.
+
+## Dinosaurs & Dragons release
+
+Dino Tail, Tricera Hook, Dragon Curl, Stego Spike and T-Rex Grin use individual sculpted forms and swept tail/horn cradles. The revised Dino Tail leaves a clear hanging gap at both size limits. Geometry, browser exports, native imports/slicing and all four desktop roundtrips passed. Separate projects sliced all 24 objects across 10 plates; AMS also reported zero skipped objects. Actual mesh views were compared with the approved category board.
