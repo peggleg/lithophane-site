@@ -1,12 +1,12 @@
 # Pets, Photography and Reading collections
 
-Twenty-eight browser-local, resizable products share the existing product editor, actual-mesh preview, printer picker, filament estimates, STL ZIP and complete Bambu 3MF exporter. The homepage and grouped navigation link to three new pages. Default printer: A1 mini, 170 mm finished-part allowance; optional Bambu A1, 256 mm. Each part is checked in its supplied printing pose and multi-part products receive prepared plates.
+Twenty-nine browser-local products (resizable accessories plus the original fixed-size Circa calendar) share the existing product editor, actual-mesh preview, printer picker, filament estimates, STL ZIP and complete Bambu 3MF exporter. The homepage and grouped navigation link to three new pages. Default printer: A1 mini, 170 mm finished-part allowance; optional Bambu A1, 256 mm. Each part is checked in its supplied printing pose and multi-part products receive prepared plates.
 
 | Collection | Items |
 | --- | --- |
 | Pets | Lift-off treat pot, wall-mounted lead rack, refillable waste-bag dispenser, grooming organiser, bowl riser, treat scoop, toy basket, personalised tag, ball rack |
 | Photography & display | Angled photo/card stand, interchangeable picture frame and cradle, tapered miniature plinth, hand-turned display stand, lens-cap rack, SD/microSD case, battery caddy, multi-window strip frame, riser set |
-| Reading & stationery | Plain/window bookmarks, thumb page holder, open book stand, ring-bound notebook covers, lift-off pen case, glasses tray, drawing stencil, sticky-note holder, stackable paper tray, pen rest |
+| Reading & stationery | Plain/window bookmarks, thumb page holder, open book stand, ring-bound notebook covers, lift-off pen case, glasses tray, drawing stencil, sticky-note holder, stackable paper tray, pen rest, Circa perpetual calendar |
 
 Six geometric surface choices are shared by suitable pots, cases and display pieces. Preview body/detail colours follow the existing palette selector. They do not create multi-filament print assignments. Notebook covers have smooth or finely grooved outside surfaces. No bookends are included.
 
@@ -31,3 +31,5 @@ The card case has fixed nominal SD/microSD sizes, exposed card tops and a deep r
 The glasses tray and sticky-note holder retain solid floors below their finger scoops. Stencil ticks have true millimetre spacing and a defined zero tick. Paper trays have four integral stacking pegs and matching underside sockets, with a lowered front and full-height corners. Pen rests use two aligned open saddles. All additions retain the printer picker, dimensional validation and individual part exports.
 
 Expansion checks cover nominal cards and covers, physical tray stacking, bowl clearance and rim overlap, cap saddles, all tag outlines and fitted lettering, square paper corners, round battery pockets, stencil spacing and invalid/large-printer layouts.
+
+Circa retains the exact original geometry, four AMS slots and interchangeable stands. See `docs/circa-calendar.md` for source provenance, diagonal spine orientation and its support/prime-tower settings.
