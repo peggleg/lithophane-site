@@ -15,7 +15,7 @@ try {
  // Every existing generator remains reachable through a project card.
  for(const [key,info] of Object.entries(pageInfo)) if(key!=='home')
   assert.ok(await page.locator(`.project-link[href="./${info.path}"]`).count(),key);
- for(const [group,count] of [['personalise',6],['home-living',5],['workspace',4],['hobbies-games',4]]) {
+ for(const [group,count] of [['personalise',6],['home-living',4],['workspace',4],['hobbies-games',3]]) {
   await page.locator(`[data-filter="${group}"]`).click();
   assert.equal(await page.locator('.tool-card:visible').count(),count);
   assert.equal(await page.locator('[data-collection]:visible').count(),1);

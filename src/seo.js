@@ -7,9 +7,7 @@ export function siteOrigin(value){
  return u.origin+u.pathname.replace(/\/$/,'')+'/';
 }
 export const pageInfo={
- pets:{path:"pets/",title:"Resizable Pets \u00b7 Design Studio",description:"Make resizable pet storage, bowl risers, food scoops, toy baskets, personalised collar tags and ball racks. A1 mini or Bambu A1, STL parts, filament estimates and complete Bambu 3MF projects."},
- photography:{path:"photography/",title:"Resizable Photography & display \u00b7 Design Studio",description:"Create resizable lens-cap racks, SD and microSD cases, battery caddies, photo frames and display risers. A1 mini or Bambu A1 with STL parts, filament estimates and complete Bambu 3MF projects."},
- reading:{path:"reading/",title:"Resizable Reading & stationery \u00b7 Design Studio",description:"Make the original Circa perpetual calendar or resizable page helpers, reading stands, glasses trays, journal stencils, note holders, stacking paper trays and pen storage. A1 mini or Bambu A1 with STL parts and complete Bambu 3MF projects."},
+ hooks:{path:'hooks/',title:'Character Wall Hooks · Design Studio',description:'Build one to five compact character hooks. Mix designs on modular wall rails, print colour pieces separately or choose AMS. Reinforced Bambu A1 mini and A1 projects, STL and matching inserts.'},
 
  ornaments:{path:'ornaments/',title:'Personalised Openwork Ornaments · Design Studio',description:'Make resizable openwork ornaments with flowing names or standard wording, up to two lines and optional flush AMS lettering. A1 mini by default, optional Bambu A1. Free STL and complete Bambu 3MF projects.'},
  games:{path:'games/',title:'Printable Games & Accessories · Design Studio',description:'Make resizable Tic-tac-toe, folding Four in a Row, seasonal Peg Solitaire, Dots and Boxes and expandable marble runs with printable marbles and magnetic storage. A1 mini or Bambu A1, STL and complete print projects.'},
