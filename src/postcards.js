@@ -281,12 +281,120 @@ const additions20261102=[
   }
 ];
 
+const additions20261102Nature=[
+  {
+    "id": "christmas-squirrel-post-2026-11-02",
+    "name": "Woodland Christmas Post",
+    "season": "Christmas",
+    "description": "Two squirrels deliver Christmas letters to a holly-draped postbox among snowy firs.",
+    "orientation": "landscape",
+    "atlas": "christmas-squirrel-post-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-hedgehog-greenhouse-2026-11-02",
+    "name": "The Easter Greenhouse",
+    "season": "Easter",
+    "description": "A hedgehog discovers patterned Easter eggs and spring flowers in an ornate greenhouse wheelbarrow.",
+    "orientation": "portrait",
+    "atlas": "easter-hedgehog-greenhouse-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-deserted-observatory-2026-11-02",
+    "name": "The Moonlit Observatory",
+    "season": "Halloween",
+    "description": "Bats circle an ivy-covered observatory above glowing toadstools and misty stone steps.",
+    "orientation": "portrait",
+    "atlas": "halloween-deserted-observatory-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-seahorse-embrace-2026-11-02",
+    "name": "An Ocean Embrace",
+    "season": "Valentine’s Day",
+    "description": "Two seahorses entwine their tails beneath heart-shaped bubbles and sunlit sea grasses.",
+    "orientation": "landscape",
+    "atlas": "valentine-seahorse-embrace-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-lighthouse-bell-2026-11-02",
+    "name": "Ringing in the Coastal New Year",
+    "season": "New Year 2027",
+    "description": "Midnight fireworks illuminate a lighthouse, silver waves and a ribbon-draped ship bell.",
+    "orientation": "landscape",
+    "atlas": "newyear-lighthouse-bell-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-red-panda-magnolia-2026-11-02",
+    "name": "Magnolia Cuddles",
+    "season": "Mother’s Day",
+    "description": "A mother red panda shelters her cub on a mossy magnolia branch above a misty bamboo forest.",
+    "orientation": "portrait",
+    "atlas": "mother-red-panda-magnolia-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-stag-dawn-ridge-2026-11-02",
+    "name": "Together at Dawn",
+    "season": "Father’s Day",
+    "description": "A stag and fawn greet sunrise on a fern-lined ridge overlooking a pine forest and mountain lake.",
+    "orientation": "landscape",
+    "atlas": "father-stag-dawn-ridge-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-quail-harvest-gate-2026-11-02",
+    "name": "The Harvest Gate",
+    "season": "Thanksgiving",
+    "description": "Two quail rest beside a harvest wreath, wheat, squash and chestnuts at an orchard gate.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-quail-harvest-gate-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
  ...landscapeGroups.flatMap(([atlas,designs])=>designs.map(([id,season,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'landscape'}))),
  ...additions20261101,
- ...additions20261102
+ ...additions20261102,
+ ...additions20261102Nature
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

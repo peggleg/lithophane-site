@@ -1,3 +1,11 @@
+import nature202611020 from './assets/seasonal-christmas-squirrel-post-2026-11-02.png';
+import nature202611021 from './assets/seasonal-easter-hedgehog-greenhouse-2026-11-02.png';
+import nature202611022 from './assets/seasonal-halloween-deserted-observatory-2026-11-02.png';
+import nature202611023 from './assets/seasonal-valentine-seahorse-embrace-2026-11-02.png';
+import nature202611024 from './assets/seasonal-newyear-lighthouse-bell-2026-11-02.png';
+import nature202611025 from './assets/seasonal-mother-red-panda-magnolia-2026-11-02.png';
+import nature202611026 from './assets/seasonal-father-stag-dawn-ridge-2026-11-02.png';
+import nature202611027 from './assets/seasonal-thanksgiving-quail-harvest-gate-2026-11-02.png';
 import added202611020 from './assets/seasonal-christmas-snowbound-toymaker-2026-11-02.png';
 import added202611021 from './assets/seasonal-easter-watermill-2026-11-02.png';
 import added202611022 from './assets/seasonal-halloween-raven-belltower-2026-11-02.png';
@@ -28,6 +36,14 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-squirrel-post-2026-11-02':nature202611020,
+ 'easter-hedgehog-greenhouse-2026-11-02':nature202611021,
+ 'halloween-deserted-observatory-2026-11-02':nature202611022,
+ 'valentine-seahorse-embrace-2026-11-02':nature202611023,
+ 'newyear-lighthouse-bell-2026-11-02':nature202611024,
+ 'mother-red-panda-magnolia-2026-11-02':nature202611025,
+ 'father-stag-dawn-ridge-2026-11-02':nature202611026,
+ 'thanksgiving-quail-harvest-gate-2026-11-02':nature202611027,
  'christmas-snowbound-toymaker-2026-11-02':added202611020,
  'easter-watermill-2026-11-02':added202611021,
  'halloween-raven-belltower-2026-11-02':added202611022,
