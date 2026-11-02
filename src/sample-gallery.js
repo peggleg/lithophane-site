@@ -19,25 +19,47 @@ export const sampleOrientation=design=>design.orientation||'portrait';
 export function collectionSamples(collection,orientation='all'){
  return collection.designs.filter(d=>orientation==='all'||sampleOrientation(d)===orientation);
 }
+// Pictures accumulate at the end of the catalogue, including multiple runs on one date.
+export function sampleGroups(collection,orientation='all'){
+ const newest=collectionSamples(collection,orientation).slice().reverse();
+ return {recent:newest.slice(0,6),older:newest.slice(6)};
+}
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function mountSampleGallery(root,{drawArtwork,onUse,collections=sampleCollections()}){
- let active=collections[0],orientation='all';
- root.innerHTML=`<div class="holiday-buttons" role="group" aria-label="Choose a holiday">${collections.map((c,i)=>`<button type="button" data-holiday="${i}" aria-pressed="${i===0}" aria-controls="holiday-gallery">${escape(c.name)}</button>`).join('')}</div><label class="holiday-mobile">Choose a holiday<select id="holiday-select" aria-controls="holiday-gallery">${collections.map((c,i)=>`<option value="${i}">${escape(c.name)}</option>`).join('')}</select></label><div class="collection-heading"><div><h3 id="holiday-heading"></h3><p id="holiday-description"></p></div><p id="holiday-count" role="status" aria-live="polite" aria-atomic="true"></p></div><div class="sample-filters" role="group" aria-label="Sample orientation" hidden>${['all','portrait','landscape'].map(v=>`<button type="button" data-filter="${v}" aria-pressed="${v==='all'}" aria-controls="holiday-gallery">${v[0].toUpperCase()+v.slice(1)}</button>`).join('')}</div><div id="holiday-gallery" class="seasonal-grid" role="region" aria-labelledby="holiday-heading"></div>`;
+ let active=collections[0],orientation='all',expanded=false,older=[];
+ root.innerHTML=`<div class="holiday-buttons" role="group" aria-label="Choose a holiday">${collections.map((c,i)=>`<button type="button" data-holiday="${i}" aria-pressed="${i===0}" aria-controls="holiday-gallery">${escape(c.name)}</button>`).join('')}</div><label class="holiday-mobile">Choose a holiday<select id="holiday-select" aria-controls="holiday-gallery">${collections.map((c,i)=>`<option value="${i}">${escape(c.name)}</option>`).join('')}</select></label><div class="collection-heading"><div><h3 id="holiday-heading"></h3><p id="holiday-description"></p></div><p id="holiday-count" role="status" aria-live="polite" aria-atomic="true"></p></div><div class="sample-filters" role="group" aria-label="Sample orientation" hidden>${['all','portrait','landscape'].map(v=>`<button type="button" data-filter="${v}" aria-pressed="${v==='all'}" aria-controls="holiday-gallery">${v[0].toUpperCase()+v.slice(1)}</button>`).join('')}</div><div id="holiday-gallery" class="seasonal-grid" role="region" aria-labelledby="holiday-heading"></div><button type="button" id="holiday-more" class="secondary" aria-expanded="false" aria-controls="holiday-older" hidden></button><div id="holiday-older" hidden><h3 id="holiday-older-heading">Older pictures</h3><div id="holiday-older-gallery" class="seasonal-grid seasonal-grid--older" role="region" aria-labelledby="holiday-older-heading"></div></div>`;
  const find=s=>root.querySelector(s);
+ function card(d,compact=false){
+  const art=`<div class="seasonal-art"><canvas data-seasonal-preview="${escape(d.id)}" role="img" aria-label="${escape(d.description)}"></canvas></div>`;
+  if(compact)return `<article class="seasonal-card seasonal-card--compact"><button type="button" class="seasonal-thumb-choice" data-seasonal="${escape(d.id)}" aria-label="Use ${escape(d.name)}">${art}<span>${escape(d.name)} ↗</span></button></article>`;
+  return `<article class="seasonal-card">${art}<span class="tag">${escape(active.name.toUpperCase())} · ${sampleOrientation(d)==='landscape'?'148 × 105':'105 × 148'} × 3 MM MAX</span><h3>${escape(d.name)}</h3><p>${escape(d.description)}</p><button type="button" data-seasonal="${escape(d.id)}">Use ${escape(d.name)} ↗</button></article>`;
+ }
+
+ function draw(container){container.querySelectorAll('[data-seasonal-preview]').forEach(canvas=>{
+  drawArtwork(canvas,canvas.dataset.seasonalPreview).then(()=>{canvas.dataset.ready='true';}).catch(()=>{
+   if(!canvas.isConnected)return;
+   const message=document.createElement('p');message.textContent='Artwork preview unavailable. Please reload to retry.';canvas.parentElement.replaceChildren(message);
+  });
+ });}
+ function updateCount(){const total=collectionSamples(active,orientation).length;find('#holiday-count').textContent=`${active.name} · Showing ${expanded?total:Math.min(6,total)} of ${total} pictures`;}
  function render(){
-  const designs=collectionSamples(active,orientation);
+  const groups=sampleGroups(active,orientation);older=groups.older;expanded=false;
   find('#holiday-heading').textContent=active.name;
   find('#holiday-description').textContent=active.description;
-  find('#holiday-count').textContent=`${active.name} · ${designs.length} ${designs.length===1?'sample':'samples'}`;
+  updateCount();
   find('.sample-filters').hidden=!active.designs.some(d=>sampleOrientation(d)==='landscape');
   root.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===orientation)));
-  find('#holiday-gallery').innerHTML=designs.map(d=>`<article class="seasonal-card"><div class="seasonal-art"><canvas data-seasonal-preview="${escape(d.id)}" role="img" aria-label="${escape(d.description)}"></canvas></div><span class="tag">${escape(active.name.toUpperCase())} · ${sampleOrientation(d)==='landscape'?'148 × 105':'105 × 148'} × 3 MM MAX</span><h3>${escape(d.name)}</h3><p>${escape(d.description)}</p><button type="button" data-seasonal="${escape(d.id)}">Use ${escape(d.name)} ↗</button></article>`).join('')||'<p>No samples in this orientation yet.</p>';
-  root.querySelectorAll('[data-seasonal-preview]').forEach(canvas=>{
-   drawArtwork(canvas,canvas.dataset.seasonalPreview).then(()=>{canvas.dataset.ready='true';}).catch(()=>{
-    if(!canvas.isConnected)return;
-    const message=document.createElement('p');message.textContent='Artwork preview unavailable. Please reload to retry.';canvas.parentElement.replaceChildren(message);
-   });
-  });
+  find('#holiday-gallery').innerHTML=groups.recent.map(d=>card(d)).join('')||'<p>No samples in this orientation yet.</p>';
+  find('#holiday-older').hidden=true;find('#holiday-older-gallery').replaceChildren();
+  const more=find('#holiday-more');more.hidden=!older.length;more.textContent=`Show older pictures (${older.length})`;more.setAttribute('aria-expanded','false');
+  draw(find('#holiday-gallery'));
+ }
+ function toggleOlder(){
+  expanded=!expanded;find('#holiday-older').hidden=!expanded;
+  find('#holiday-more').setAttribute('aria-expanded',String(expanded));
+  find('#holiday-more').textContent=`${expanded?'Hide':'Show'} older pictures (${older.length})`;
+  const container=find('#holiday-older-gallery');container.innerHTML=expanded?older.map(d=>card(d,true)).join(''):'';
+  if(expanded)draw(container);updateCount();
  }
  function select(index){
   active=collections[index];orientation='all';find('#holiday-select').value=String(index);
@@ -46,7 +68,8 @@ export function mountSampleGallery(root,{drawArtwork,onUse,collections=sampleCol
  }
  root.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button||!root.contains(button))return;
-  if(button.dataset.holiday!==undefined)select(Number(button.dataset.holiday));
+  if(button.id==='holiday-more')toggleOlder();
+  else if(button.dataset.holiday!==undefined)select(Number(button.dataset.holiday));
   else if(button.dataset.filter){orientation=button.dataset.filter;render();}
   else if(button.dataset.seasonal)onUse(button);
  });

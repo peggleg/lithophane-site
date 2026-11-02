@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sampleCollections,collectionSamples,sampleOrientation} from './sample-gallery.js';
+import {sampleCollections,collectionSamples,sampleOrientation,sampleGroups} from './sample-gallery.js';
 import {seasonalDesigns} from './postcards.js';
 import {readFileSync} from 'node:fs';
 const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-2026-11-02.json',import.meta.url),'utf8'));
@@ -27,4 +27,13 @@ test('eight collections and mixed orientations need only collection data',()=>{
  assert.equal(collectionSamples(collection,'portrait').length,0);
  assert.equal(sampleOrientation(seasonalDesigns[0]),'portrait');
  assert.equal(sampleCollections().length,8);
+});
+
+test('six newest pictures precede the complete older archive without mutating catalogue order',()=>{
+ for(const collection of sampleCollections())for(const orientation of ['all','portrait','landscape']){
+  const original=collection.designs.map(d=>d.id),expected=collectionSamples(collection,orientation).slice().reverse(),groups=sampleGroups(collection,orientation);
+  assert.deepEqual(groups.recent,expected.slice(0,6));assert.deepEqual(groups.older,expected.slice(6));
+  assert.equal(groups.recent.length,Math.min(6,expected.length));assert.deepEqual([...groups.recent,...groups.older],expected);assert.deepEqual(collection.designs.map(d=>d.id),original);
+ }
+ const designs=Array.from({length:5},(_,i)=>({id:'sample-'+i,orientation:'portrait'}));assert.deepEqual(sampleGroups({designs}).older,[]);assert.deepEqual(sampleGroups({designs},'landscape'),{recent:[],older:[]});
 });

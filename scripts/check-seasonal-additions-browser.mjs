@@ -13,12 +13,14 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url());});
+ const showAll=async()=>{const more=page.locator('#holiday-more');if(await more.isVisible()&&await more.getAttribute('aria-expanded')==='false')await more.click();await page.waitForFunction(()=>[...document.querySelectorAll('#seasonal-collections canvas')].every(c=>c.dataset.ready==='true'));};
  await page.goto(origin+'/lithophane/');
  assert.equal(await page.inputValue('#printer-size'),'a1-mini');
  for(const design of batch){
   await page.getByRole('button',{name:design.season,exact:true}).click();
   await page.waitForFunction(()=>[...document.querySelectorAll('#holiday-gallery canvas')].every(c=>c.dataset.ready==='true'));
-  const visible=await page.locator('#holiday-gallery [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
+  await showAll();
+  const visible=await page.locator('#seasonal-collections [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
   assert.deepEqual(new Set(visible),new Set(seasonalDesigns.filter(d=>d.season===design.season).map(d=>d.id)));
   for(const old of baseline.designs.filter(d=>d.season===design.season))assert.ok(visible.includes(old.id));
   const canvas=page.locator(`[data-seasonal-preview="${design.id}"]`),size=sampleSize(design);
@@ -36,7 +38,8 @@ try{
   await page.locator('#preview').screenshot({path:dir+'/'+design.id+'-studio.png'});
   for(const orientation of ['portrait','landscape']){
    await page.locator(`[data-filter="${orientation}"]`).click();
-   const actual=await page.locator('#holiday-gallery [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
+   await showAll();
+   const actual=await page.locator('#seasonal-collections [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
    assert.deepEqual(new Set(actual),new Set(seasonalDesigns.filter(d=>d.season===design.season&&d.orientation===orientation).map(d=>d.id)));
   }
   report.push({id:design.id,season:design.season,priorPreserved:visible.length-1,loaded:true,width:size.width,height:size.height});

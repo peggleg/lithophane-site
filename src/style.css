@@ -40,3 +40,14 @@ dialog{max-width:460px;width:calc(100% - 32px);border:1px solid var(--line);bord
 .collection-heading h3{margin:0;font-size:28px}.collection-heading p{margin:8px 0 0}.collection-heading>p{flex-shrink:0;font-size:12px;color:#52644a}
 .seasonal-card{min-width:0}.seasonal-art{aspect-ratio:105/148;background:#eee8de}
 @media(max-width:650px){.holiday-buttons{display:none}.holiday-mobile{display:block;margin-top:24px}.collection-heading{align-items:start;flex-direction:column;gap:4px}.seasonal-grid{grid-template-columns:minmax(0,1fr)}.holiday-mobile select{font-size:16px}}
+/* Recent pictures stay prominent; the archive opens as a compact thumbnail grid. */
+#holiday-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+#holiday-gallery .seasonal-art{aspect-ratio:4/3}
+#holiday-more{margin-bottom:24px}
+#holiday-older-heading{margin:12px 0;font-size:24px}
+.seasonal-grid--older{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:16px}
+.seasonal-card--compact{padding:10px}
+.seasonal-card--compact .seasonal-art{margin:-10px -10px 8px;aspect-ratio:4/3}
+#holiday-older-gallery .seasonal-thumb-choice{display:flex;flex:1;flex-direction:column;align-self:stretch;background:transparent;color:inherit;text-align:left;padding:0;border-radius:5px;font:16px/1.3 Georgia,serif}
+@media(max-width:1000px){#holiday-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonal-grid--older{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:650px){#holiday-gallery{grid-template-columns:minmax(0,1fr)}.seasonal-grid--older{grid-template-columns:repeat(2,minmax(0,1fr))}}
