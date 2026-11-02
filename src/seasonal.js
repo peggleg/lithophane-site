@@ -1,3 +1,11 @@
+import added202611020 from './assets/seasonal-christmas-snowbound-toymaker-2026-11-02.png';
+import added202611021 from './assets/seasonal-easter-watermill-2026-11-02.png';
+import added202611022 from './assets/seasonal-halloween-raven-belltower-2026-11-02.png';
+import added202611023 from './assets/seasonal-valentine-tandem-canal-2026-11-02.png';
+import added202611024 from './assets/seasonal-newyear-midnight-station-2026-11-02.png';
+import added202611025 from './assets/seasonal-mother-otter-iris-pool-2026-11-02.png';
+import added202611026 from './assets/seasonal-father-kite-afternoon-2026-11-02.png';
+import added202611027 from './assets/seasonal-thanksgiving-covered-bridge-2026-11-02.png';
 import added202611010 from './assets/seasonal-christmas-carousel-2026-11-01.png';
 import added202611011 from './assets/seasonal-easter-orchard-lambs-2026-11-01.png';
 import added202611012 from './assets/seasonal-halloween-owl-apothecary-2026-11-01.png';
@@ -19,7 +27,16 @@ import fatherThanks from './assets/land-father-thanks.png';
 import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
-const atlases={original,valentine,newyear,mother,father,thanksgiving,
+const atlases={
+ 'christmas-snowbound-toymaker-2026-11-02':added202611020,
+ 'easter-watermill-2026-11-02':added202611021,
+ 'halloween-raven-belltower-2026-11-02':added202611022,
+ 'valentine-tandem-canal-2026-11-02':added202611023,
+ 'newyear-midnight-station-2026-11-02':added202611024,
+ 'mother-otter-iris-pool-2026-11-02':added202611025,
+ 'father-kite-afternoon-2026-11-02':added202611026,
+ 'thanksgiving-covered-bridge-2026-11-02':added202611027,
+ original,valentine,newyear,mother,father,thanksgiving,
  'land-existing':existingLandscapes,'land-autumn-love':autumnLove,
  'land-newyear-mother':newyearMother,'land-father-thanks':fatherThanks,
  'christmas-carousel-2026-11-01':added202611010,

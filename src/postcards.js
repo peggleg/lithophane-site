@@ -174,11 +174,119 @@ const additions20261101=[
   }
 ];
 
+const additions20261102=[
+  {
+    "id": "christmas-snowbound-toymaker-2026-11-02",
+    "name": "The Snowbound Toymaker",
+    "season": "Christmas",
+    "description": "An artisan carves a rocking horse in a lantern-lit Christmas workshop while snow falls outside.",
+    "orientation": "landscape",
+    "atlas": "christmas-snowbound-toymaker-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-watermill-2026-11-02",
+    "name": "The Easter Watermill",
+    "season": "Easter",
+    "description": "Painted Easter eggs and a chick beside a blossom-framed stone watermill and spring brook.",
+    "orientation": "portrait",
+    "atlas": "easter-watermill-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-raven-belltower-2026-11-02",
+    "name": "The Raven’s Bell Tower",
+    "season": "Halloween",
+    "description": "A raven rests on a stone gargoyle beside an engraved bell above a moonlit Gothic town.",
+    "orientation": "portrait",
+    "atlas": "halloween-raven-belltower-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-tandem-canal-2026-11-02",
+    "name": "A Tandem Ride for Two",
+    "season": "Valentine’s Day",
+    "description": "A rose-filled tandem bicycle and two straw hats beside a peaceful canal and stone bridge.",
+    "orientation": "landscape",
+    "atlas": "valentine-tandem-canal-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-midnight-station-2026-11-02",
+    "name": "The Midnight Departure",
+    "season": "New Year 2027",
+    "description": "A steam train, waving travellers and fireworks at a festive winter station as the clock strikes midnight.",
+    "orientation": "landscape",
+    "atlas": "newyear-midnight-station-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-otter-iris-pool-2026-11-02",
+    "name": "Otters in the Iris Pool",
+    "season": "Mother’s Day",
+    "description": "A mother otter cradles her pup on a mossy log beside irises, water lilies and a tranquil woodland pool.",
+    "orientation": "portrait",
+    "atlas": "mother-otter-iris-pool-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-kite-afternoon-2026-11-02",
+    "name": "The Kite-Making Afternoon",
+    "season": "Father’s Day",
+    "description": "A father helps his daughter finish a patterned kite on a dune-side bench overlooking sailing boats.",
+    "orientation": "landscape",
+    "atlas": "father-kite-afternoon-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-covered-bridge-2026-11-02",
+    "name": "The Covered Bridge Homecoming",
+    "season": "Thanksgiving",
+    "description": "A harvest wagon crosses a timber bridge with pumpkins, apples and wheat as family welcomes it home.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-covered-bridge-2026-11-02",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
  ...landscapeGroups.flatMap(([atlas,designs])=>designs.map(([id,season,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'landscape'}))),
- ...additions20261101
+ ...additions20261101,
+ ...additions20261102
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

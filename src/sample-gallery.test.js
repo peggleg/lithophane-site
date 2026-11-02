@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {sampleCollections,collectionSamples,sampleOrientation} from './sample-gallery.js';
 import {seasonalDesigns} from './postcards.js';
 import {readFileSync} from 'node:fs';
-const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-2026-11-01.json',import.meta.url),'utf8'));
+const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-2026-11-02.json',import.meta.url),'utf8'));
 test('gallery defaults to Christmas and preserves every existing sample',()=>{
  const collections=sampleCollections();
  assert.equal(collections[0].name,'Christmas');
