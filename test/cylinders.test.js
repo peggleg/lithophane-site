@@ -45,3 +45,10 @@ test('invalid geometry and fit settings reject before export',()=>{
 test('all eight holiday atlases are landscape and the previous catalogue stays untouched',()=>{
  const sources=JSON.parse(fs.readFileSync('src/fixtures/cylinder-artwork-sources.json','utf8'));assert.equal(sources.length,8);for(const {slug,scenes}of sources){assert.equal(scenes.length,2);assert.ok(fs.statSync('src/assets/cylinders/'+slug+'.webp').size>10000);}
 });
+
+test('stand-only and fit-test 3MFs contain only requested parts with lightweight printer profiles',()=>{
+ for(const printer of ['a1-mini','256']){
+  for(const stand of cylinderStands){const model=generateCylinderStand(m,{printer,stand:stand.id}),originalKind=model.settings.kind,archive=files(solid3mf(model)),profile=JSON.parse(archive['Metadata/project_settings.config']),xml=archive['3D/3dmodel.model'].toString();assert.equal(profile.top_shell_layers,'3');assert.equal(profile.bottom_shell_layers,'3');assert.equal(profile.printer_settings_id,projectProfile('cylinder-stand',{printer}).printer_settings_id);assert.equal((xml.match(/<mesh>/g)||[]).length,stand.id==='tall-tripod'?4:1);assert.doesNotMatch(xml,/name="lithophane-cylinder"/);assert.equal(model.settings.kind,originalKind);}
+  const model=generateCylinderStand(m,{printer,fitDiameter:39.4},true),archive=files(solid3mf(model)),profile=JSON.parse(archive['Metadata/project_settings.config']),xml=archive['3D/3dmodel.model'].toString();assert.equal(profile.top_shell_layers,'3');assert.equal(profile.bottom_shell_layers,'3');assert.equal(profile.top_shell_thickness,'0');assert.equal(profile.printer_settings_id,projectProfile('cylinder-stand',{printer}).printer_settings_id);assert.equal((xml.match(/<mesh>/g)||[]).length,1);assert.match(xml,/name="tealight-fit-39.4mm"/);assert.equal(model.fit.diameter,39.4);
+ }
+});

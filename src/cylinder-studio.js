@@ -10,7 +10,7 @@ const $=id=>document.getElementById(id),thumbs=import.meta.glob('./assets/cylind
 let state={...cylinderDefaults},design=cylinderDesigns[0],model=null,worker=null,timer,revision=0,busy=false,art=null;
 const preview=cylinderPreview($('model-canvas'));
 const picker=mountPrinterPicker(printer=>{state.printer=printer;generate();});
-const buttons=['stl','three-mf','stand-download','test-fit','print-guide'];
+const buttons=['stl','three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide'];
 function controls(){for(const id of buttons)$(id).disabled=!model||busy;$('panorama-download').disabled=!art||busy;$('cancel').hidden=!busy;}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;controls();}
 function workerFor(token){const w=new Worker(new URL('./cylinder-worker.js',import.meta.url),{type:'module'});worker=w;w.onerror=()=>{if(token===revision){stop();$('feedback').textContent='Could not build the design. Change a setting to retry.';}};return w;}
@@ -57,17 +57,18 @@ for(const id of ['height','min','max','fitDiameter','brightness','rotation'])$(i
 $('lit').onchange=()=>preview.setLit($('lit').checked);$('parts-view').onchange=()=>preview.setParts($('parts-view').checked);$('reset-view').onclick=()=>preview.reset();
 $('cancel').onclick=()=>{++revision;stop();model=null;art=null;controls();$('feedback').textContent='Cancelled. Change a setting to rebuild.';};
 $('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','brightness','rotation','stand'])$(id).value=state[id];$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
-function exportFile(format,standOnly=false){
+function exportFile(format,standOnly=false,test=false){
  if(!model||busy)return;const token=revision,original=model;stop();busy=true;controls();$('export-status').textContent='Preparing your download…';
  const w=workerFor(token);const send=m=>w.postMessage({action:'export',format,model:m});
  w.onmessage=({data})=>{if(token!==revision)return;if(data.error){stop();$('export-status').textContent=data.error;return;}if(data.model){send(data.model);return;}
-  const suffix=format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':standOnly?state.stand:design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'?'stl':'zip';
+  const suffix=test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':standOnly?state.stand:design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'?'stl':'zip';
   save(data.chunks,'peggleg-'+suffix+'.'+ext);stop();$('export-status').textContent='File generated. Check your browser downloads.';
  };
- if(format==='fit')w.postMessage({action:'generate',settings:original.settings,options:{test:true}});
+ if(test||format==='fit')w.postMessage({action:'generate',settings:original.settings,options:{test:true}});
  else if(standOnly)send({...original,parts:original.parts.filter(p=>p.role!=='cylinder')});else send(original);
 }
 $('stl').onclick=()=>exportFile('stl');$('three-mf').onclick=()=>exportFile('3mf');$('stand-download').onclick=()=>exportFile('stl',true);$('test-fit').onclick=()=>exportFile('fit');$('print-guide').onclick=()=>exportFile('guide');
+$('stand-three-mf').onclick=()=>exportFile('3mf',true);$('fit-three-mf').onclick=()=>exportFile('3mf',false,true);
 $('panorama-download').onclick=()=>{if(!art||busy)return;art.canvas.toBlob(blob=>{if(blob)save([blob],'peggleg-'+design.id+'-seamless-landscape.png','image/png');},'image/png');};
 window.addEventListener('pagehide',()=>{++revision;stop();preview.dispose();});
 selectCollection('christmas');
