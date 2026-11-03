@@ -1,0 +1,20 @@
+[
+  {
+    "id": "christmas-midnight-express-2026-11-03",
+    "name": "The Midnight Christmas Express",
+    "scene": "An old steam train crossing a long curved stone viaduct through a snowy fir forest beneath distant mountains, a tiny railway station with festive garlands and warm window lights, stars and moonlit snow. No figures, no Santa, no passengers visible.",
+    "path": "/workspace/generated_images/exec-5ae989d8-4360-41f1-be00-f43ccc7366b5.png"
+  },
+  {
+    "id": "christmas-frozen-lake-2026-11-03",
+    "name": "Christmas by the Frozen Lake",
+    "scene": "A broad frozen mountain lake bordered by snowy fir trees, a remote lakeside cabin with a Christmas wreath and warm windows, distant rugged peaks and a subtle northern lights sky reflected on patches of ice. No skaters, no people.",
+    "path": "/workspace/generated_images/exec-4ba7174a-1b6c-4b1a-a4ab-22962c87d0a4.png"
+  },
+  {
+    "id": "christmas-reindeer-valley-2026-11-03",
+    "name": "Reindeer in the Winter Valley",
+    "scene": "A small group of reindeer including one graceful antlered adult and a calf in a snowy open valley, layered fir forests and distant alpine peaks, a decorated evergreen far in the middle distance, delicate falling snow and winter moonlight. No people, no sleigh, no buildings.",
+    "path": "/workspace/generated_images/exec-5132aa64-b8c4-4d1c-bce2-212f74d796cc.png"
+  }
+]

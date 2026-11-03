@@ -1,0 +1,32 @@
+[
+  {
+    "id": "christmas-midnight-express-2026-11-03",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Midnight Christmas Express",
+    "asset": "christmas-midnight-express-2026-11-03.webp",
+    "row": 0,
+    "rows": 2,
+    "orientation": "landscape"
+  },
+  {
+    "id": "christmas-frozen-lake-2026-11-03",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Christmas by the Frozen Lake",
+    "asset": "christmas-frozen-lake-2026-11-03.webp",
+    "row": 0,
+    "rows": 2,
+    "orientation": "landscape"
+  },
+  {
+    "id": "christmas-reindeer-valley-2026-11-03",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Reindeer in the Winter Valley",
+    "asset": "christmas-reindeer-valley-2026-11-03.webp",
+    "row": 0,
+    "rows": 2,
+    "orientation": "landscape"
+  }
+]

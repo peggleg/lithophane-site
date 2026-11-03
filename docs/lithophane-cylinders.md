@@ -1,6 +1,6 @@
 # Lithophane cylinders
 
-The `/cylinders/` studio adds 16 purpose-made panoramic designs: two each for Christmas, Easter, Halloween, Valentine’s Day, New Year, Mother’s Day, Father’s Day and Thanksgiving. Existing flat lithophane artwork and catalogue entries are unchanged. The schedule has not been modified.
+The `/cylinders/` studio starts with two purpose-made panoramic designs each for Christmas, Easter, Halloween, Valentine’s Day, New Year, Mother’s Day, Father’s Day and Thanksgiving. Dated additions in `src/cylinder-additions.json` accumulate without replacing the original catalogue. Three more Christmas panoramas were added on 3 November 2026. Existing flat lithophane artwork and catalogue entries are unchanged. The scheduled gallery task also covers the cylinder collection; its timing is managed separately from the site.
 
 The 90 mm cylinder is open at both ends. Its internal diameter is 84 mm; the image varies the outer wall from 0.8 to 3 mm by default. Height is 70–150 mm, with a 94 mm default. Explicit axial rings preserve the 3 mm bottom seating band and the tapered top rim at every mesh spacing. Angular indices wrap directly without a disconnected mesh boundary. All geometry uses millimetres.
 
@@ -21,7 +21,7 @@ Downloads include a full STL ZIP, stand-only STL ZIP and Bambu 3MF, individual f
 ## Validation
 
 - `node --test test/cylinders.test.js` checks connected and manifold meshes, both printer sizes, the shared LED clearance, the fit cup dimensions, open annular cylinder sections, fixed seating band, periodic texture, rejected inputs and per-part export settings.
-- `npm run test:cylinders` checks all 16 panoramas, all eight stands, eight downloads on both printers, lit/unlit and print-parts views, clearance changes, rotation, mobile themes, cancellation and reset. It saves wrapped previews and join close-ups under `artifacts/cylinders/`.
+- `npm run test:cylinders` checks every catalogue panorama, all eight stands, eight downloads on both printers, lit/unlit and print-parts views, clearance changes, rotation, mobile themes, cancellation and reset. It saves wrapped previews and join close-ups under `artifacts/cylinders/`.
 - `BAMBU_STUDIO_PATH=... npm run test:cylinders-native` imports both printers' cylinder and stand projects into the official slicer, then slices both cylinder kits, all eight A1 mini stands and the fit cup. Native outputs contain plate G-code.
 - The existing shared profile import check, catalogue preservation tests, site navigation checks, preview checks and production/preview builds also run.
 - Desktop Open Project / Save Project is checked with `scripts/check-bambu-desktop.py` against the native fixtures. Results are retained under `artifacts/cylinders/desktop/`.
@@ -29,3 +29,7 @@ Downloads include a full STL ZIP, stand-only STL ZIP and Bambu 3MF, individual f
 Digital fit and toolpaths do not establish physical fit or light quality. Print the small cup with the intended filament and printer before committing to the complete stands. This internal validation note records that limit; the product UI provides fit-test and assembly instructions.
 
 Stand-only and fit-cup Bambu projects use the shared lightweight 3/3 skin profile as the project default, retain the selected printer and contain only the requested parts. Full kits keep the cylinder 4/4 profile and stand object overrides.
+
+## Additive cylinder artwork
+
+Discover collections and entries in `src/cylinder-catalogue.js`, with dated additions appended to `src/cylinder-additions.json`. `src/cylinder-artwork.js` resolves assets and reconciles the wrap boundary. Each entry supplies its own asset, row and row count (1 for an individual panorama, 2 for the original two-row atlases). Never append extra names to an existing atlas or change its row count/crops. Use a new asset and entry instead. Preservation fixtures protect every original ID, image byte and the existing periodic texture implementation. The browser test derives its expected IDs from the catalogue and saves full panoramas, wrapped views and join close-ups for inspection.

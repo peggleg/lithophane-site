@@ -1,0 +1,143 @@
+{
+  "designs": [
+    {
+      "id": "christmas-1",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Christmas Mountains",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "christmas-2",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Christmas Village",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "easter-1",
+      "collection": "easter",
+      "season": "Easter",
+      "name": "Daffodil Stream",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "easter-2",
+      "collection": "easter",
+      "season": "Easter",
+      "name": "Blossom Bridge",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "halloween-1",
+      "collection": "halloween",
+      "season": "Halloween",
+      "name": "Moonlit Manor",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "halloween-2",
+      "collection": "halloween",
+      "season": "Halloween",
+      "name": "Pumpkin Woodland",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "valentine-1",
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "name": "The Rose Garden",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "valentine-2",
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "name": "Swans at Dusk",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "newyear-1",
+      "collection": "newyear",
+      "season": "New Year",
+      "name": "Midnight by the Lake",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "newyear-2",
+      "collection": "newyear",
+      "season": "New Year",
+      "name": "The Hilltop Observatory",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "mother-1",
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "name": "The Cottage Garden",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "mother-2",
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "name": "Blossom Meadow",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "father-1",
+      "collection": "father",
+      "season": "Father’s Day",
+      "name": "The Lakeside Canoe",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "father-2",
+      "collection": "father",
+      "season": "Father’s Day",
+      "name": "The Mountain Railway",
+      "row": 1,
+      "orientation": "landscape"
+    },
+    {
+      "id": "thanksgiving-1",
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "name": "Harvest Farm",
+      "row": 0,
+      "orientation": "landscape"
+    },
+    {
+      "id": "thanksgiving-2",
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "name": "The Autumn Watermill",
+      "row": 1,
+      "orientation": "landscape"
+    }
+  ],
+  "assets": {
+    "christmas.webp": "12349355a7f89045c0a4de6a5a0d6635a7a60a5a7120d34c7b9453a9a84b090e",
+    "easter.webp": "ed9398aef28474c0108d590c956f571bd6ab540174690daac05613018b78e51b",
+    "father.webp": "752e35d7fa785605a913f22139c7357df247951c5e2bcd335f07624e02fabf02",
+    "halloween.webp": "991c6616baca693a7cf7814ec084467f487d72687b3972f88744eaca14034886",
+    "mother.webp": "5ffc8b6e00c74720e4c6b9319a195af7998008d6fd0d57a07a14ebe66b6a2512",
+    "newyear.webp": "e8a7136e219e7e716ed4375039dabbe212bf9b41f139a70be978db54b5eba445",
+    "thanksgiving.webp": "e23ec20a1f7ba49b40a358383680021ea2c67b4baabda670377ff8be08bb14e9",
+    "valentine.webp": "e9bd757a3f9ea8f5ae517d583f90360232da7b8151a9923edff6c5da5d0a60ea"
+  },
+  "textureSha256": "6600e2814c2a6bf161388ab94eac32eb6b565fddd8212242a5bf0f87114fdf87"
+}
