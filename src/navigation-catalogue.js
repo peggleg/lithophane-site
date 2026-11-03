@@ -6,6 +6,7 @@ export const navigationGroups = [
     label: 'Personalise',
     items: [
       { page: 'lithophane', path: 'lithophane/', label: 'Lithophanes' },
+      { page: 'cylinders', path: 'cylinders/', label: 'Lithophane cylinders' },
       { page: 'fan', path: 'folding-fan/', label: 'Fans' },
       { page: 'nameplates', path: 'nameplates/', label: 'Nameplates' },
       { page: 'keyrings', path: 'keyrings/', label: 'Keyrings' },

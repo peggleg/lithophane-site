@@ -108,6 +108,15 @@ def screenshot(file):
     raw = root.get_image(0, 0, g.width, g.height, X.ZPixmap, 0xffffffff)
     Image.frombytes('RGB', (g.width, g.height), raw.data, 'raw', 'BGRX').save(file)
 
+def focus_dialog():
+    # A bare X11 test display may not transfer keyboard focus to GTK dialogs.
+    time.sleep(.3)
+    windows = [w for w in visible_windows() if transient_for(w) is not None]
+    if windows:
+        windows[-1].configure(stack_mode=X.Above)
+        windows[-1].set_input_focus(X.RevertToParent, X.CurrentTime)
+        d.sync()
+
 def settings(file):
     with zipfile.ZipFile(file) as archive:
         return json.loads(archive.read('Metadata/project_settings.config'))
@@ -125,6 +134,7 @@ for kind in args.kinds:
     focus_canvas()
     hotkey('Control_L', 'o')
     time.sleep(.7)
+    focus_dialog()
     hotkey('Control_L', 'l')
     text(incoming)
     time.sleep(.7)  # Let GTK resolve the absolute path before activation.
@@ -135,6 +145,7 @@ for kind in args.kinds:
     focus_canvas()
     hotkey('Control_L', 'Shift_L', 's')
     time.sleep(.7)
+    focus_dialog()
     hotkey('Control_L', 'a')
     text(saved)
     time.sleep(.7)

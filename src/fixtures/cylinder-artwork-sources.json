@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "christmas",
+    "season": "Christmas",
+    "scenes": [
+      "Snowy alpine mountains and a fir forest with a remote small chalet under a starry sky",
+      "A snowy Christmas village with a church, cottages and a decorated evergreen tree, distant winter hills"
+    ],
+    "path": "/workspace/generated_images/exec-9b2c03d1-c26e-4b3f-b5be-65c9b959b8e1.png"
+  },
+  {
+    "slug": "easter",
+    "season": "Easter",
+    "scenes": [
+      "Spring meadow of daffodils and blossom trees beside a gently curving stream with small decorated eggs nestled in grass",
+      "A cottage garden with flowering apple trees, tulips, rabbits and an old stone bridge in rolling spring countryside"
+    ],
+    "path": "/workspace/generated_images/exec-1fd4c995-87be-4a43-94b0-ae6fec01732d.png"
+  },
+  {
+    "slug": "halloween",
+    "season": "Halloween",
+    "scenes": [
+      "A moonlit Victorian manor behind a pumpkin patch, bare trees, old stone walls and misty autumn hills",
+      "A winding woodland path with carved glowing pumpkins, ancient oak trees and a distant gothic tower under a bright moon"
+    ],
+    "path": "/workspace/generated_images/exec-3568ae3f-81be-4840-83c8-b517f142e549.png"
+  },
+  {
+    "slug": "valentine",
+    "season": "Valentine’s Day",
+    "scenes": [
+      "A romantic rose garden with an ornamental stone bridge over a still pond and climbing roses on an arbor",
+      "A countryside landscape of flowering cherry trees, a lakeside gazebo and two swans under soft evening clouds"
+    ],
+    "path": "/workspace/generated_images/exec-a40a0759-68ac-429c-93c2-75cc52578f71.png"
+  },
+  {
+    "slug": "newyear",
+    "season": "New Year",
+    "scenes": [
+      "Fireworks above a quiet alpine lakeside town with a clock tower, snowy hills and reflecting water",
+      "A snowy hilltop observatory and a village clock tower beneath a starry sky with celebratory fireworks"
+    ],
+    "path": "/workspace/generated_images/exec-8df68fba-b3f5-46d8-8feb-b28e94c1229a.png"
+  },
+  {
+    "slug": "mother",
+    "season": "Mother’s Day",
+    "scenes": [
+      "A tranquil English cottage garden filled with roses, foxgloves and apple blossom, winding path and rolling hills",
+      "A flowering meadow with a mother deer and fawn beside a stream, blossom branches and distant gentle hills"
+    ],
+    "path": "/workspace/generated_images/exec-2002028e-dc36-46af-b659-d6d88860de8e.png"
+  },
+  {
+    "slug": "father",
+    "season": "Father’s Day",
+    "scenes": [
+      "A mountain lake with a wooden canoe at the shore, pine trees, rugged peaks and a small fishing cabin",
+      "A rolling countryside landscape with an old steam railway over a stone viaduct, woodland and distant mountains"
+    ],
+    "path": "/workspace/generated_images/exec-5e333de9-605f-432e-a575-fa079c24b21d.png"
+  },
+  {
+    "slug": "thanksgiving",
+    "season": "Thanksgiving",
+    "scenes": [
+      "An autumn harvest farm with pumpkins, wheat fields, a barn, maple trees and distant rolling hills",
+      "An old watermill beside a river with autumn oak woodland, a stone bridge, harvest baskets and golden fields"
+    ],
+    "path": "/workspace/generated_images/exec-149bb221-65a1-4d3e-a18b-1dd16e2e6134.png"
+  }
+]

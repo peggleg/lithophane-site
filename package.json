@@ -56,7 +56,9 @@
     "test:slim-games-browser": "node scripts/check-slim-games-browser.mjs",
     "test:game-pieces-browser": "node scripts/check-game-piece-exports.mjs",
     "test:ornaments": "node scripts/check-ornaments-browser.mjs",
-    "test:ornament-slicer": "node scripts/check-ornament-slicer.mjs"
+    "test:ornament-slicer": "node scripts/check-ornament-slicer.mjs",
+    "test:cylinders": "node scripts/check-cylinders-browser.mjs",
+    "test:cylinders-native": "node scripts/check-cylinders-native.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",
