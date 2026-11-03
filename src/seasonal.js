@@ -1,3 +1,11 @@
+import added202611030 from './assets/seasonal-christmas-glasshouse-2026-11-03.png';
+import added202611031 from './assets/seasonal-easter-duckling-bridge-2026-11-03.png';
+import added202611032 from './assets/seasonal-halloween-moonlit-conservatory-2026-11-03.png';
+import added202611033 from './assets/seasonal-valentine-rose-locket-2026-11-03.png';
+import added202611034 from './assets/seasonal-newyear-mountain-bell-2026-11-03.png';
+import added202611035 from './assets/seasonal-mother-hedgehog-family-2026-11-03.png';
+import added202611036 from './assets/seasonal-father-canoe-adventure-2026-11-03.png';
+import added202611037 from './assets/seasonal-thanksgiving-harvest-windmill-2026-11-03.png';
 import nature202611020 from './assets/seasonal-christmas-squirrel-post-2026-11-02.png';
 import nature202611021 from './assets/seasonal-easter-hedgehog-greenhouse-2026-11-02.png';
 import nature202611022 from './assets/seasonal-halloween-deserted-observatory-2026-11-02.png';
@@ -36,6 +44,15 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-glasshouse-2026-11-03':added202611030,
+ 'easter-duckling-bridge-2026-11-03':added202611031,
+ 'halloween-moonlit-conservatory-2026-11-03':added202611032,
+ 'valentine-rose-locket-2026-11-03':added202611033,
+ 'newyear-mountain-bell-2026-11-03':added202611034,
+ 'mother-hedgehog-family-2026-11-03':added202611035,
+ 'father-canoe-adventure-2026-11-03':added202611036,
+ 'thanksgiving-harvest-windmill-2026-11-03':added202611037,
+
  'christmas-squirrel-post-2026-11-02':nature202611020,
  'easter-hedgehog-greenhouse-2026-11-02':nature202611021,
  'halloween-deserted-observatory-2026-11-02':nature202611022,

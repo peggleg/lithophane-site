@@ -388,13 +388,121 @@ const additions20261102Nature=[
   }
 ];
 
+const additions20261103=[
+  {
+    "id": "christmas-glasshouse-2026-11-03",
+    "name": "Christmas in the Glasshouse",
+    "season": "Christmas",
+    "description": "Robins visit a snow-covered glasshouse filled with festive greenery and a Christmas tree.",
+    "orientation": "landscape",
+    "atlas": "christmas-glasshouse-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-duckling-bridge-2026-11-03",
+    "name": "Ducklings by the Spring Bridge",
+    "season": "Easter",
+    "description": "Ducklings nest beside decorated eggs, daffodils and a stone bridge over a spring stream.",
+    "orientation": "portrait",
+    "atlas": "easter-duckling-bridge-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-moonlit-conservatory-2026-11-03",
+    "name": "The Moonlit Conservatory",
+    "season": "Halloween",
+    "description": "Bats circle an ivy-covered conservatory among pumpkins under a bright autumn moon.",
+    "orientation": "landscape",
+    "atlas": "halloween-moonlit-conservatory-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-rose-locket-2026-11-03",
+    "name": "The Rose Locket",
+    "season": "Valentine’s Day",
+    "description": "An ornate heart-shaped locket rests among roses, lace, antique keys and candlelight.",
+    "orientation": "portrait",
+    "atlas": "valentine-rose-locket-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-mountain-bell-2026-11-03",
+    "name": "A Bell for Midnight",
+    "season": "New Year 2027",
+    "description": "Fireworks illuminate a mountain observatory beside an engraved antique bell.",
+    "orientation": "landscape",
+    "atlas": "newyear-mountain-bell-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-hedgehog-family-2026-11-03",
+    "name": "Hedgehogs beneath the Blossom",
+    "season": "Mother’s Day",
+    "description": "A mother hedgehog nestles with her young beneath an apple tree in blossom.",
+    "orientation": "portrait",
+    "atlas": "mother-hedgehog-family-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-canoe-adventure-2026-11-03",
+    "name": "The Riverside Canoe",
+    "season": "Father’s Day",
+    "description": "A wooden canoe, compass and walking boots await an adventure beside a mountain river.",
+    "orientation": "landscape",
+    "atlas": "father-canoe-adventure-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-harvest-windmill-2026-11-03",
+    "name": "The Harvest Windmill",
+    "season": "Thanksgiving",
+    "description": "A windmill overlooks a cornfield with heirloom squash, corn and autumn leaves.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-harvest-windmill-2026-11-03",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
  ...landscapeGroups.flatMap(([atlas,designs])=>designs.map(([id,season,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'landscape'}))),
  ...additions20261101,
  ...additions20261102,
- ...additions20261102Nature
+ ...additions20261102Nature,
+ ...additions20261103
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 
