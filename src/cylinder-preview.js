@@ -7,7 +7,7 @@ export function cylinderPreview(canvas){
  scene.add(new THREE.HemisphereLight('#ffffff','#8b7760',2));const light=new THREE.DirectionalLight('#ffffff',3);light.position.set(-150,-200,300);scene.add(light);
  let group=new THREE.Group(),model=null,parts=false,lit=true;scene.add(group);
  const render=()=>renderer.render(scene,camera);
- function fit(){const box=new THREE.Box3().setFromObject(group);if(box.isEmpty()){render();return;}const size=box.getSize(new THREE.Vector3()),centre=box.getCenter(new THREE.Vector3());group.position.sub(centre);const d=Math.max(size.x/camera.aspect,size.y,size.z)*2.3;controls.target.set(0,0,0);camera.position.set(d*.8,-d,d*.65);camera.lookAt(0,0,0);controls.update();render();}
+ function fit(){const box=new THREE.Box3().setFromObject(group);if(box.isEmpty()){render();return;}const size=box.getSize(new THREE.Vector3()),centre=box.getCenter(new THREE.Vector3());group.position.sub(centre);const d=Math.max(size.x/camera.aspect,size.y,size.z)*2.3;controls.target.set(0,0,0);camera.position.copy(new THREE.Vector3(.8,-1,.65).normalize().multiplyScalar(d));camera.lookAt(0,0,0);controls.update();render();}
  function paint(){
   renderer.setClearColor(lit?'#302c29':'#e5ddcf');
   for(const child of group.children){child.geometry?.dispose();child.material?.dispose();}scene.remove(group);group=new THREE.Group();scene.add(group);if(!model){render();return;}
@@ -19,7 +19,7 @@ export function cylinderPreview(canvas){
     const v=part.mesh.vertices,colours=new Float32Array(v.length),count=v.length/6,p=model.settings;
     for(let i=0;i<v.length/3;i++){
      const radius=Math.hypot(v[i*3],v[i*3+1]),z=v[i*3+2],tone=i>=count?.65:Math.max(0,Math.min(1,(p.max-(radius-42))/(p.max-p.min||1)));
-     const b=z<3||z>p.height-1?.7:.23+.77*tone**.65;colours.set([b,b*.79,b*.49],i*3);
+     const b=i>=count?.12+.45*(1-z/p.height)+.05*(1+Math.sin(Math.atan2(v[i*3+1],v[i*3]))):z<3||z>p.height-1?.7:.23+.77*tone**.65;colours.set([b,b*.79,b*.49],i*3);
     }
     g.setAttribute('color',new THREE.BufferAttribute(colours,3));material=new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide});
    }else material=new THREE.MeshStandardMaterial({color:part.colour||'#e9dfcc',roughness:.86,side:THREE.DoubleSide});
