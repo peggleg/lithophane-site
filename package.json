@@ -58,7 +58,9 @@
     "test:ornaments": "node scripts/check-ornaments-browser.mjs",
     "test:ornament-slicer": "node scripts/check-ornament-slicer.mjs",
     "test:cylinders": "node scripts/check-cylinders-browser.mjs",
-    "test:cylinders-native": "node scripts/check-cylinders-native.mjs"
+    "test:cylinders-native": "node scripts/check-cylinders-native.mjs",
+    "test:tripod-fit": "node scripts/check-tripod-fit-browser.mjs",
+    "test:tripod-fit-native": "node scripts/check-tripod-fit-native.mjs"
   },
   "devDependencies": {
     "jsqr": "^1.4.0",

@@ -1,4 +1,4 @@
-import {cylinderSettings,cylinderStands,cylinderSpec as S} from './cylinder-settings.js';
+import {cylinderSettings,cylinderStands,cylinderSpec as S,tripodFitSpec as T} from './cylinder-settings.js';
 import {assertPrintSize} from './printer-settings.js';
 import {productKernel} from './product-kernel.js';
 
@@ -75,18 +75,45 @@ function generateTripod(module,p){
   const lip=own(cyl(47.3,2,0,0,H).subtract(cyl(S.seatDiameter/2,2.2,0,0,H-.1)));deck=own(deck.add(lip));
   for(let j=0;j<3;j++){
    const a=j*120,rad=a*Math.PI/180,x=36*Math.cos(rad),y=36*Math.sin(rad);
-   deck=own(deck.subtract(own(own(C.square([10.4,10.4],true)).extrude(4.1).rotate([0,0,a]).translate([x,y,H-8-.1]))));
-   const profile=own(new C([[[43,0],[53,0],[41,77],[41,81],[31,81],[31,77]]],'NonZero'));
-   const leg=own(profile.extrude(10).rotate([90,0,0]).translate([0,5,0]));
+   deck=own(deck.subtract(own(own(C.square([T.socketWidth,T.socketWidth],true)).extrude(T.socketDepth+.1).rotate([0,0,a]).translate([x,y,H-8-.1]))));
+   const w=p.tripodPegWidth;
+   const profile=own(new C([[[48-w/2,0],[48+w/2,0],[36+w/2,H-8],[36-w/2,H-8]]],'NonZero'));
+   const body=own(profile.extrude(w).rotate([90,0,0]).translate([0,w/2,0]));
+   const leg=own(body.add(tripodPeg(K,w,36,0,H-8)));
    const part=add('tripod-leg-'+(j+1),'stand-leg',leg,[90,0,0],'#c5a37c');part.printKind='cylinder-stand';
    const [ax,ay]=part.assembly;part.assembly[0]=ax*Math.cos(rad)-ay*Math.sin(rad);part.assembly[1]=ax*Math.sin(rad)+ay*Math.cos(rad);part.rotation[2]=rad;part.rotationOrder='ZYX';
   }
   const part=add('tripod-deck','stand-deck',deck,[0,0,0],'#c5a37c');part.printKind='cylinder-stand';
-  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:3,seatDiameter:S.seatDiameter},printPlates:true,note:'Print the deck flat underside down and the three legs on their supplied broad sides. Push the square leg ends fully into the underside sockets; use a small amount of PLA-compatible glue to secure them. Place the LED tealight in the recess and lower the cylinder into the locating lip.'});
+  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:3,seatDiameter:S.seatDiameter},tripodFit:{...T,pegWidth:p.tripodPegWidth,tipWidth:p.tripodPegWidth-T.leadIn},printPlates:true,note:`Print the tripod joint test first. The tapered pegs are ${p.tripodPegWidth.toFixed(2)} mm wide at the root and ${(p.tripodPegWidth-T.leadIn).toFixed(2)} mm at the tip, for the existing 10.4 mm nominal sockets. Choose the smallest test peg that holds firmly and can be seated by hand. Increase the peg width if loose; reduce it if too tight. Replacement legs fit the existing plate. Print the deck flat underside down and legs on their supplied broad sides at 100% scale. Seat each leg shoulder against the underside of the deck. Place the LED tealight in its recess and lower the cylinder into the locating lip.`});
  }finally{K.dispose();}
 }
 
-export function buildCylinderModel(module,input,tones,cols,rows,{test=false,standOnly=false}={}){
+function tripodPeg(K,width,x=0,y=0,z=0){
+ const tip=width-T.leadIn;
+ return K.own(K.M.cylinder(T.pegDepth,width/Math.SQRT2,tip/Math.SQRT2,4).rotate([0,0,45]).translate([x,y,z]));
+}
+
+export function generateTripodFitTest(module,input){
+ const p=cylinderSettings({...input,stand:'tall-tripod'}),K=productKernel(module,p),{C,own,box,add}=K;
+ try{
+  let block=box(66,24,8,0,0,0,2);
+  const centre=Math.max(10.3,Math.min(10.7,p.tripodPegWidth));
+  const widths=[-.1,0,.1].map(delta=>Math.round((centre+delta)*100)/100);
+  for(let i=0;i<3;i++){
+   const x=(i-1)*22,w=widths[i];
+   block=own(block.subtract(own(C.square([T.socketWidth,T.socketWidth],true).extrude(T.socketDepth+.1).translate([x,0,-.1]))));
+   for(let j=0;j<=i;j++)block=own(block.add(box(.9,6,.6,x+(j-i/2)*2,0,8,.1)));
+   let pin=own(own(C.square([w,w],true)).extrude(12).add(tripodPeg(K,w,0,0,12)));
+   for(let j=0;j<=i;j++)pin=own(pin.add(own(C.square([w-2,.8],true).extrude(.6).rotate([90,0,0]).translate([0,w/2+.4,3+j*1.5]))));
+   const part=add(`tripod-test-pin-${i+1}-${w.toFixed(2).replace('.','p')}mm`,'tripod-fit-pin',pin,[90,0,0],'#c5a37c');part.printKind='cylinder-stand';part.pegWidth=w;part.ridges=i+1;
+  }
+  const socket=add('tripod-socket-test-10p4mm','tripod-fit-sockets',block,[0,0,0],'#e9dfcc');socket.printKind='cylinder-stand';
+  return K.finish({printPlates:true,tripodFit:{...T,pegWidths:widths},note:`Tripod joint test for existing 10.4 mm nominal sockets. Print the socket block underside down and the pins on their supplied broad sides, at 100% scale with the same filament and settings as the legs. Pins with 1, 2 and 3 ridges have root widths ${widths.map(w=>w.toFixed(2)+' mm').join(', ')} respectively. Try them in the test block or your existing plate. Choose the smallest width that holds firmly and seats by hand, then set Tripod peg width to that value and download Replacement tripod legs. Each tapered peg enters 3.8 mm, leaving 0.2 mm roof clearance.`});
+ }finally{K.dispose();}
+}
+
+export function buildCylinderModel(module,input,tones,cols,rows,{test=false,standOnly=false,tripodTest=false}={}){
+ if(tripodTest)return generateTripodFitTest(module,input);
  const p=cylinderSettings(input),model=generateCylinderStand(module,p,test);if(test||standOnly)return model;
  const mesh=makeCylinder(p,tones,cols,rows),bounds={min:[-45,-45,0],max:[45,45,p.height]};
  model.parts.unshift({name:'lithophane-cylinder',role:'cylinder',printKind:'lithophane',mesh,bounds,printSize:[90,90,p.height],assembly:[0,0,model.seatZ],rotation:[0,0,0],x:45,y:45,colour:'#fff4dd'});

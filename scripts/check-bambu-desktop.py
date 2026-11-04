@@ -74,6 +74,8 @@ def focus_canvas():
         try:
             if windows:
                 window = max(reversed(windows), key=lambda w: w.get_geometry().width)
+                window.configure(stack_mode=X.Above)
+                window.set_input_focus(X.RevertToParent, X.CurrentTime)
                 g = window.get_geometry()
                 xtest.fake_input(d, X.MotionNotify, x=g.x + int(g.width * .7),
                                  y=g.y + int(g.height * .25))
@@ -111,7 +113,8 @@ def screenshot(file):
 def focus_dialog():
     # A bare X11 test display may not transfer keyboard focus to GTK dialogs.
     time.sleep(.3)
-    windows = [w for w in visible_windows() if transient_for(w) is not None]
+    windows = [w for w in visible_windows() if transient_for(w) is not None or
+               (window_name(w) or '').startswith(('Choose one file', 'Save', 'Open'))]
     if windows:
         windows[-1].configure(stack_mode=X.Above)
         windows[-1].set_input_focus(X.RevertToParent, X.CurrentTime)

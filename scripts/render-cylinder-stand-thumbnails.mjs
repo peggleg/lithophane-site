@@ -20,7 +20,7 @@ try{
   const {cylinderPreview}=await import('/src/cylinder-preview.js');
   window.standRenderer=cylinderPreview(document.querySelector('#stand-render'),{thumbnail:true});
  });
- for(const stand of cylinderStands){
+ for(const stand of cylinderStands.filter(s=>!process.env.CYLINDER_STAND||s.id===process.env.CYLINDER_STAND)){
   const model=generateCylinderStand(m,{stand:stand.id});
   const serial={...model,parts:model.parts.map(p=>({...p,mesh:{vertices:Array.from(p.mesh.vertices),faces:Array.from(p.mesh.faces)}}))};
   await page.evaluate(model=>{for(const p of model.parts){p.mesh.vertices=new Float32Array(p.mesh.vertices);p.mesh.faces=new Uint32Array(p.mesh.faces);}window.standRenderer.setModel(model);},serial);

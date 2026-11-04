@@ -10,7 +10,7 @@ const $=id=>document.getElementById(id),thumbs=import.meta.glob('./assets/cylind
 let state={...cylinderDefaults},design=cylinderDesigns[0],model=null,worker=null,timer,revision=0,busy=false,art=null;
 const preview=cylinderPreview($('model-canvas'));
 const picker=mountPrinterPicker(printer=>{state.printer=printer;generate();});
-const buttons=['stl','three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide'];
+const buttons=['stl','three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide','tripod-joint-test','tripod-legs'];
 function showStand(value){$('stand-only').checked=value;$('lit').disabled=value;preview.setStandOnly(value);$('parts-view').checked=false;preview.setParts(false);}
 function controls(){for(const id of buttons)$(id).disabled=!model||busy;$('panorama-download').disabled=!art||busy;$('cancel').hidden=!busy;}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;controls();}
@@ -22,6 +22,7 @@ function drawArt(value){
  $('seam-status').textContent=`${design.name} · full landscape · 360° wrap · boundary difference ${value.seam.maximum}/255. Expand below to inspect the join.`;
 }
 function generate(){
+ $('tripod-fit-options').hidden=state.stand!=='tall-tripod';
  const token=++revision;stop();model=null;art=null;controls();preview.setModel(null);$('dimensions').textContent='';$('filament-estimate').textContent='';$('export-status').textContent='';$('rotation-value').textContent=state.rotation+'°';
  for(const b of $('stand-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.stand===state.stand));
  for(const b of $('design-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.design===design.id));
@@ -54,23 +55,27 @@ for(const group of ['Desktop','Elevated']){const g=document.createElement('optgr
 $('collection').oninput=()=>selectCollection($('collection').value);
 $('design').oninput=()=>{design=cylinderDesigns.find(d=>d.id===$('design').value);showStand(false);generate();};
 $('stand').oninput=()=>{state.stand=$('stand').value;showStand(true);generate();};
-for(const id of ['height','min','max','fitDiameter','brightness','rotation'])$(id).oninput=()=>{state[id]=Number($(id).value);generate();};
+for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation'])$(id).oninput=()=>{state[id]=Number($(id).value);generate();};
 $('stand-only').onchange=()=>{$('lit').disabled=$('stand-only').checked;preview.setStandOnly($('stand-only').checked);};
 $('lit').onchange=()=>preview.setLit($('lit').checked);$('parts-view').onchange=()=>preview.setParts($('parts-view').checked);$('reset-view').onclick=()=>preview.reset();
 $('cancel').onclick=()=>{++revision;stop();model=null;art=null;controls();$('feedback').textContent='Cancelled. Change a setting to rebuild.';};
-$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','brightness','rotation','stand'])$(id).value=state[id];$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
-function exportFile(format,standOnly=false,test=false){
+$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand'])$(id).value=state[id];$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
+function exportFile(format,{standOnly=false,test=false,tripodTest=false,legsOnly=false}={}){
  if(!model||busy)return;const token=revision,original=model;stop();busy=true;controls();$('export-status').textContent='Preparing your download…';
  const w=workerFor(token);const send=m=>w.postMessage({action:'export',format,model:m});
  w.onmessage=({data})=>{if(token!==revision)return;if(data.error){stop();$('export-status').textContent=data.error;return;}if(data.model){send(data.model);return;}
-  const suffix=test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':standOnly?state.stand:design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'?'stl':'zip';
+  const peg=state.tripodPegWidth.toFixed(2).replace('.','p');
+  const suffix=tripodTest?'tripod-joint-test-'+peg+'mm':legsOnly?'tripod-replacement-legs-'+peg+'mm':test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':standOnly?state.stand+(state.stand==='tall-tripod'?'-pegs-'+peg+'mm':''):design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'?'stl':'zip';
   save(data.chunks,'peggleg-'+suffix+'.'+ext);stop();$('export-status').textContent='File generated. Check your browser downloads.';
  };
- if(test||format==='fit')w.postMessage({action:'generate',settings:original.settings,options:{test:true}});
+ if(tripodTest)w.postMessage({action:'generate',settings:original.settings,options:{tripodTest:true}});
+ else if(legsOnly)send({...original,parts:original.parts.filter(p=>p.role==='stand-leg')});
+ else if(test||format==='fit')w.postMessage({action:'generate',settings:original.settings,options:{test:true}});
  else if(standOnly)send({...original,parts:original.parts.filter(p=>p.role!=='cylinder')});else send(original);
 }
-$('stl').onclick=()=>exportFile('stl');$('three-mf').onclick=()=>exportFile('3mf');$('stand-download').onclick=()=>exportFile('stl',true);$('test-fit').onclick=()=>exportFile('fit');$('print-guide').onclick=()=>exportFile('guide');
-$('stand-three-mf').onclick=()=>exportFile('3mf',true);$('fit-three-mf').onclick=()=>exportFile('3mf',false,true);
+$('stl').onclick=()=>exportFile('stl');$('three-mf').onclick=()=>exportFile('3mf');$('stand-download').onclick=()=>exportFile('stl',{standOnly:true});$('test-fit').onclick=()=>exportFile('fit');$('print-guide').onclick=()=>exportFile('guide');
+$('stand-three-mf').onclick=()=>exportFile('3mf',{standOnly:true});$('fit-three-mf').onclick=()=>exportFile('3mf',{test:true});
+$('tripod-joint-test').onclick=()=>exportFile('3mf',{tripodTest:true});$('tripod-legs').onclick=()=>exportFile('3mf',{legsOnly:true});
 $('panorama-download').onclick=()=>{if(!art||busy)return;art.canvas.toBlob(blob=>{if(blob)save([blob],'peggleg-'+design.id+'-seamless-landscape.png','image/png');},'image/png');};
 window.addEventListener('pagehide',()=>{++revision;stop();preview.dispose();});
 selectCollection('christmas');
