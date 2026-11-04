@@ -26,7 +26,7 @@ function generate(){
  for(const id of ['tripod-fit-options','tripod-joint-test','tripod-legs'])$(id).hidden=!tripod;
  const token=++revision;stop();model=null;art=null;controls();preview.setModel(null);$('dimensions').textContent='';$('filament-estimate').textContent='';$('export-status').textContent='';$('rotation-value').textContent=state.rotation+'°';
  for(const b of $('stand-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.stand===state.stand));
- for(const b of $('design-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.design===design.id));
+ for(const b of document.querySelectorAll('[data-design]'))b.setAttribute('aria-pressed',String(b.dataset.design===design.id));
  let settings;try{settings={...cylinderSettings(state),designId:design.id,designName:design.name};}catch(e){$('feedback').textContent=e.message;return;}
  $('feedback').textContent='Preparing your panorama and print parts…';busy=true;controls();
  timer=setTimeout(async()=>{try{
@@ -41,20 +41,28 @@ function generate(){
   };w.postMessage({action:'generate',settings,tones:grid.tones,cols,rows});
  }catch(e){if(token===revision){stop();$('feedback').textContent=e.message;}}},160);
 }
+function toggleOlder(expanded){
+ const older=$('cylinder-older-gallery').children.length;
+ $('cylinder-older').hidden=!expanded;$('cylinder-more').setAttribute('aria-expanded',String(expanded));
+ $('cylinder-more').textContent=`${expanded?'Hide':'Show'} older pictures (${older})`;
+}
 async function selectCollection(id){
- showStand(false);$('collection').value=id;const choices=cylinderDesigns.filter(d=>d.collection===id);design=choices[0];$('design').replaceChildren();$('design-gallery').replaceChildren();
- for(const d of choices){
-  const option=new Option(d.name,d.id);$('design').append(option);
-  const b=document.createElement('button');b.type='button';b.className='cylinder-choice quiet';b.dataset.design=d.id;b.setAttribute('aria-pressed',String(d===design));const c=document.createElement('canvas');c.width=450;c.height=150;c.setAttribute('aria-hidden','true');b.append(c,document.createTextNode(d.name));$('design-gallery').append(b);
+ showStand(false);$('collection').value=id;const choices=cylinderDesigns.filter(d=>d.collection===id),newest=choices.slice().reverse();design=newest[0];
+ $('design').replaceChildren();$('design-gallery').replaceChildren();$('cylinder-older-gallery').replaceChildren();
+ for(const d of choices)$('design').append(new Option(d.name,d.id));
+ $('design').value=design.id;
+ for(const [index,d] of newest.entries()){
+  const b=document.createElement('button');b.type='button';b.className='cylinder-choice quiet';b.dataset.design=d.id;b.setAttribute('aria-pressed',String(d===design));const c=document.createElement('canvas');c.width=450;c.height=150;c.setAttribute('aria-hidden','true');b.append(c,document.createTextNode(d.name));(index<5?$('design-gallery'):$('cylinder-older-gallery')).append(b);
   cylinderArtwork(d,450,150).then(a=>{c.getContext('2d').drawImage(a.canvas,0,0);}).catch(()=>{b.title='Panorama could not load; select to retry.';});
   b.onclick=()=>{design=d;$('design').value=d.id;showStand(false);generate();};
  }
- generate();
+ $('cylinder-more').hidden=newest.length<=5;toggleOlder(false);generate();
 }
+$('cylinder-more').onclick=()=>toggleOlder($('cylinder-older').hidden);
 for(const c of cylinderCollections)$('collection').append(new Option(c.name,c.id));
 for(const group of ['Desktop','Elevated']){const g=document.createElement('optgroup');g.label=group;for(const s of cylinderStands.filter(s=>s.group===group)){g.append(new Option(s.name,s.id));const b=document.createElement('button');b.type='button';b.className='stand-choice quiet';b.dataset.stand=s.id;const image=document.createElement('img');image.src=thumbs[`./assets/cylinder-stands/${s.id}.webp`];image.alt='';image.width=640;image.height=480;image.loading='lazy';image.decoding='async';const label=document.createElement('span');label.textContent=s.name;const detail=document.createElement('small');detail.textContent=s.group+' · '+s.height+' mm';b.append(image,label,detail);b.onclick=()=>{state.stand=s.id;$('stand').value=s.id;showStand(true);generate();};$('stand-gallery').append(b);}$('stand').append(g);}
 $('collection').oninput=()=>selectCollection($('collection').value);
-$('design').oninput=()=>{design=cylinderDesigns.find(d=>d.id===$('design').value);showStand(false);generate();};
+$('design').oninput=()=>{design=cylinderDesigns.find(d=>d.id===$('design').value);if($('cylinder-older-gallery').querySelector(`[data-design="${design.id}"]`))toggleOlder(true);showStand(false);generate();};
 $('stand').oninput=()=>{state.stand=$('stand').value;showStand(true);generate();};
 for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation'])$(id).oninput=()=>{state[id]=Number($(id).value);generate();};
 $('stand-only').onchange=()=>{$('lit').disabled=$('stand-only').checked;preview.setStandOnly($('stand-only').checked);};
