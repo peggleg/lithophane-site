@@ -33,3 +33,7 @@ Stand-only and fit-cup Bambu projects use the shared lightweight 3/3 skin profil
 ## Additive cylinder artwork
 
 Discover collections and entries in `src/cylinder-catalogue.js`, with dated additions appended to `src/cylinder-additions.json`. `src/cylinder-artwork.js` resolves assets and reconciles the wrap boundary. Each entry supplies its own asset, row and row count (1 for an individual panorama, 2 for the original two-row atlases). Never append extra names to an existing atlas or change its row count/crops. Use a new asset and entry instead. Preservation fixtures protect every original ID, image byte and the existing periodic texture implementation. The browser test derives its expected IDs from the catalogue and saves full panoramas, wrapped views and join close-ups for inspection.
+
+## Stand presentation
+
+Stand thumbnails are 640 × 480 WebP renders of the actual printable meshes, using the same room lighting, crease-aware surface normals and blurred contact shadows as the interactive preview. Regenerate them with `node scripts/render-cylinder-stand-thumbnails.mjs` while Vite runs on port 4176. Selecting a stand opens the stand-only preview; selecting a landscape returns to the assembled lamp. The Stand only checkbox also works with Print parts to inspect the tripod deck and legs. Preview shading and thumbnail generation do not change exported meshes.
