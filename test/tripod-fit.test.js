@@ -21,7 +21,7 @@ test('adjustable legs remain connected and print flat within the selected printe
  for(const tripodPegWidth of [NaN,10.19,10.81])assert.throws(()=>cylinderSettings({stand:'tall-tripod',tripodPegWidth}));
 });
 test('joint-test pins share the real leg taper and socket block matches the plate pocket',()=>{
- const g=generateTripodFitTest(m,{});assert.equal(g.parts.length,4);assert.deepEqual(g.tripodFit.pegWidths,[10.3,10.4,10.5]);
+ const g=generateTripodFitTest(m,{});assert.equal(g.parts.length,4);assert.deepEqual(g.tripodFit.pegWidths,[10.4,10.5,10.6]);
  for(const p of g.parts){const s=assembled(p);if(p.role==='tripod-fit-pin'){const root=widthAt(s,12.001),tip=widthAt(s,15.799);assert.ok(Math.abs(root[0]-p.pegWidth)<.002);assert.ok(Math.abs(root[1]-p.pegWidth)<.002);assert.ok(Math.abs(tip[0]-(p.pegWidth-T.leadIn))<.002);}else{const section=s.slice(2),polygons=section.toPolygons();assert.equal(polygons.length,4);section.delete();}s.delete();}
 });
 test('joint test and replacement legs export as complete lightweight Bambu projects for either printer',()=>{
@@ -30,4 +30,4 @@ test('joint test and replacement legs export as complete lightweight Bambu proje
 
 test('joint-test choices stay selectable at both adjustment limits',()=>{for(const tripodPegWidth of [10.2,10.8]){const model=generateTripodFitTest(m,{tripodPegWidth});assert.equal(new Set(model.tripodFit.pegWidths).size,3);assert.ok(model.tripodFit.pegWidths.includes(tripodPegWidth));assert.ok(model.tripodFit.pegWidths.every(w=>w>=10.2&&w<=10.8));}});
 
-test('default fit accounts for the reported printed peg and hole dimensions',()=>{const g=generateCylinderStand(m,{stand:'tall-tripod'}),s=assembled(g.parts.find(p=>p.role==='stand-leg')),root=widthAt(s,77.001)[0],tip=widthAt(s,80.799)[0],pegBias=9.9-10,printedHole=10.2;assert.equal(g.settings.tripodPegWidth,10.4);assert.ok(root+pegBias-printedHole>.05&&root+pegBias-printedHole<.15);assert.ok(tip+pegBias<printedHole-.2);s.delete();});
+test('default fit uses the user confirmed option 3 width',()=>{const g=generateCylinderStand(m,{stand:'tall-tripod'}),s=assembled(g.parts.find(p=>p.role==='stand-leg')),root=widthAt(s,77.001)[0],tip=widthAt(s,80.799)[0],pegBias=9.9-10,printedHole=10.2;assert.equal(g.settings.tripodPegWidth,10.5);assert.ok(root+pegBias-printedHole>.15&&root+pegBias-printedHole<.25);assert.ok(tip+pegBias<printedHole-.1);s.delete();});

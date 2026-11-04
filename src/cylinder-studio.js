@@ -22,7 +22,8 @@ function drawArt(value){
  $('seam-status').textContent=`${design.name} · full landscape · 360° wrap · boundary difference ${value.seam.maximum}/255. Expand below to inspect the join.`;
 }
 function generate(){
- $('tripod-fit-options').hidden=state.stand!=='tall-tripod';
+ const tripod=state.stand==='tall-tripod';
+ for(const id of ['tripod-fit-options','tripod-joint-test','tripod-legs'])$(id).hidden=!tripod;
  const token=++revision;stop();model=null;art=null;controls();preview.setModel(null);$('dimensions').textContent='';$('filament-estimate').textContent='';$('export-status').textContent='';$('rotation-value').textContent=state.rotation+'°';
  for(const b of $('stand-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.stand===state.stand));
  for(const b of $('design-gallery').children)b.setAttribute('aria-pressed',String(b.dataset.design===design.id));

@@ -12,7 +12,7 @@ export const cylinderStands=Object.freeze([
  {id:'tall-tripod',name:'Three-leg stand',group:'Elevated',height:85,colour:'#c5a37c',style:'tripod'},
  {id:'tall-woodland',name:'Winter woodland pedestal',group:'Elevated',height:85,colour:'#e9dfcc',style:'woodland'},
 ]);
-export const cylinderDefaults=Object.freeze({kind:'cylinder',printer:'a1-mini',stand:'desktop-plain',height:94,min:.8,max:3,fitDiameter:39,tripodPegWidth:10.4,brightness:0,rotation:0});
+export const cylinderDefaults=Object.freeze({kind:'cylinder',printer:'a1-mini',stand:'desktop-plain',height:94,min:.8,max:3,fitDiameter:39,tripodPegWidth:10.5,brightness:0,rotation:0});
 export function cylinderSettings(input={}){
  const p={...cylinderDefaults,...input,kind:'cylinder'};p.printer=printerKey(p);
  if(!cylinderStands.some(s=>s.id===p.stand))throw Error('Choose one of the eight stands.');

@@ -8,8 +8,8 @@ for(const printer of ['a1-mini','256'])for(const item of ['tripod-joint','tripod
  const name=item+'-'+printer,file=path.join(dir,name+'.3mf');fs.copyFileSync(`artifacts/cylinders/${printer}-${item}.3mf`,file);
  const archive=files(fs.readFileSync(file)),xml=archive['3D/3dmodel.model'].toString();
  assert.equal((xml.match(/<mesh>/g)||[]).length,item==='tripod-joint'?4:3);assert.doesNotMatch(xml,/lithophane-cylinder|name="tripod-deck"/);
- if(item==='tripod-joint')assert.match(xml,/tripod-test-pin-2-10p40mm/);
- else{const z=Array.from(xml.matchAll(/<vertex[^>]* z="([^"]+)"/g),m=>Number(m[1]));assert.ok(Math.abs(Math.max(...z)-10.4)<.002);}
+ if(item==='tripod-joint')assert.match(xml,/tripod-test-pin-2-10p50mm/);
+ else{const z=Array.from(xml.matchAll(/<vertex[^>]* z="([^"]+)"/g),m=>Number(m[1]));assert.ok(Math.abs(Math.max(...z)-10.5)<.002);}
  const settings=path.join(dir,name+'-effective.json');
  const imported=spawnSync(executable,['--datadir',path.join(dir,'cli'),'--export-settings',settings,file],{cwd:dir,encoding:'utf8',timeout:60000,maxBuffer:10e6});
  fs.writeFileSync(path.join(dir,name+'-import.log'),imported.stdout+imported.stderr);assert.equal(imported.status,0,name+' import');
