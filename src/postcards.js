@@ -495,6 +495,113 @@ const additions20261103=[
   }
 ];
 
+const additions20261104=[
+  {
+    "id": "christmas-gingerbread-christmas-village-2026-11-04",
+    "name": "Gingerbread Christmas Village",
+    "season": "Christmas",
+    "description": "A miniature gingerbread village glows on a festive windowsill.",
+    "orientation": "portrait",
+    "atlas": "christmas-gingerbread-christmas-village-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-the-easter-lily-window-2026-11-04",
+    "name": "The Easter Lily Window",
+    "season": "Easter",
+    "description": "Sunlight shines through an Easter lily stained-glass window.",
+    "orientation": "portrait",
+    "atlas": "easter-the-easter-lily-window-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-the-midnight-cemetery-gate-2026-11-04",
+    "name": "The Midnight Cemetery Gate",
+    "season": "Halloween",
+    "description": "A gothic clock tower rises beyond a misty cemetery gate.",
+    "orientation": "landscape",
+    "atlas": "halloween-the-midnight-cemetery-gate-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-the-heart-garden-maze-2026-11-04",
+    "name": "The Heart Garden Maze",
+    "season": "Valentine’s Day",
+    "description": "Heart-shaped hedges and lanterns surround an elegant garden maze.",
+    "orientation": "landscape",
+    "atlas": "valentine-the-heart-garden-maze-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-fireworks-over-the-mountain-lake-2026-11-04",
+    "name": "Fireworks over the Mountain Lake",
+    "season": "New Year 2027",
+    "description": "Fireworks and lanterns illuminate a snowy mountain lake.",
+    "orientation": "landscape",
+    "atlas": "newyear-fireworks-over-the-mountain-lake-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-the-butterfly-music-box-2026-11-04",
+    "name": "The Butterfly Music Box",
+    "season": "Mother’s Day",
+    "description": "An enamelled music box rests among embroidery and a patchwork quilt.",
+    "orientation": "portrait",
+    "atlas": "mother-the-butterfly-music-box-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-the-bicycle-workshop-2026-11-04",
+    "name": "The Bicycle Workshop",
+    "season": "Father’s Day",
+    "description": "An antique bicycle stands in a sunlit workshop among tools.",
+    "orientation": "portrait",
+    "atlas": "father-the-bicycle-workshop-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-the-harvest-bread-oven-2026-11-04",
+    "name": "The Harvest Bread Oven",
+    "season": "Thanksgiving",
+    "description": "Fresh loaves, wheat and squash surround a rustic outdoor oven.",
+    "orientation": "portrait",
+    "atlas": "thanksgiving-the-harvest-bread-oven-2026-11-04",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -502,7 +609,8 @@ export const seasonalDesigns=[
  ...additions20261101,
  ...additions20261102,
  ...additions20261102Nature,
- ...additions20261103
+ ...additions20261103,
+ ...additions20261104
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

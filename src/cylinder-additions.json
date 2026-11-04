@@ -28,5 +28,85 @@
     "row": 0,
     "rows": 2,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-the-christmas-tree-farm-2026-11-04",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Christmas Tree Farm",
+    "asset": "christmas-the-christmas-tree-farm-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-glasshouse-garden-2026-11-04",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Easter Glasshouse",
+    "asset": "easter-glasshouse-garden-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-the-moonlit-apothecary-courtyard-2026-11-04",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Apothecary Courtyard",
+    "asset": "halloween-the-moonlit-apothecary-courtyard-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-heart-lantern-pavilion-2026-11-04",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Heart Lantern Pavilion",
+    "asset": "valentine-heart-lantern-pavilion-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-fireworks-at-the-lighthouse-2026-11-04",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Fireworks at the Lighthouse",
+    "asset": "newyear-fireworks-at-the-lighthouse-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-afternoon-tea-garden-2026-11-04",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "Afternoon Tea in the Garden",
+    "asset": "mother-afternoon-tea-garden-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-the-model-ship-workshop-2026-11-04",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Model Ship Workshop",
+    "asset": "father-the-model-ship-workshop-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-harvest-barn-2026-11-04",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Harvest Barn",
+    "asset": "thanksgiving-harvest-barn-2026-11-04.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

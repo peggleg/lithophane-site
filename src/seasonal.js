@@ -1,3 +1,11 @@
+import added202611040 from './assets/seasonal-christmas-gingerbread-christmas-village-2026-11-04.png';
+import added202611041 from './assets/seasonal-easter-the-easter-lily-window-2026-11-04.png';
+import added202611042 from './assets/seasonal-halloween-the-midnight-cemetery-gate-2026-11-04.png';
+import added202611043 from './assets/seasonal-valentine-the-heart-garden-maze-2026-11-04.png';
+import added202611044 from './assets/seasonal-newyear-fireworks-over-the-mountain-lake-2026-11-04.png';
+import added202611045 from './assets/seasonal-mother-the-butterfly-music-box-2026-11-04.png';
+import added202611046 from './assets/seasonal-father-the-bicycle-workshop-2026-11-04.png';
+import added202611047 from './assets/seasonal-thanksgiving-the-harvest-bread-oven-2026-11-04.png';
 import added202611030 from './assets/seasonal-christmas-glasshouse-2026-11-03.png';
 import added202611031 from './assets/seasonal-easter-duckling-bridge-2026-11-03.png';
 import added202611032 from './assets/seasonal-halloween-moonlit-conservatory-2026-11-03.png';
@@ -44,6 +52,14 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-gingerbread-christmas-village-2026-11-04':added202611040,
+ 'easter-the-easter-lily-window-2026-11-04':added202611041,
+ 'halloween-the-midnight-cemetery-gate-2026-11-04':added202611042,
+ 'valentine-the-heart-garden-maze-2026-11-04':added202611043,
+ 'newyear-fireworks-over-the-mountain-lake-2026-11-04':added202611044,
+ 'mother-the-butterfly-music-box-2026-11-04':added202611045,
+ 'father-the-bicycle-workshop-2026-11-04':added202611046,
+ 'thanksgiving-the-harvest-bread-oven-2026-11-04':added202611047,
  'christmas-glasshouse-2026-11-03':added202611030,
  'easter-duckling-bridge-2026-11-03':added202611031,
  'halloween-moonlit-conservatory-2026-11-03':added202611032,

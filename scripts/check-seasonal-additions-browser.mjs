@@ -18,6 +18,7 @@ try{
  assert.equal(await page.inputValue('#printer-size'),'a1-mini');
  for(const design of batch){
   await page.getByRole('button',{name:design.season,exact:true}).click();
+  await page.waitForSelector(`[data-seasonal="${design.id}"]`);
   await page.waitForFunction(()=>[...document.querySelectorAll('#holiday-gallery canvas')].every(c=>c.dataset.ready==='true'));
   await showAll();
   const visible=await page.locator('#seasonal-collections [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
