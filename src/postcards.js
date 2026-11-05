@@ -602,6 +602,113 @@ const additions20261104=[
   }
 ];
 
+const additions20261105=[
+  {
+    "id": "christmas-the-christmas-mantel-clock-2026-11-05",
+    "name": "The Christmas Mantel Clock",
+    "season": "Christmas",
+    "description": "A festive antique clock with gifts and frosted decorations.",
+    "orientation": "portrait",
+    "atlas": "christmas-the-christmas-mantel-clock-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-the-iris-sundial-2026-11-05",
+    "name": "The Iris Sundial",
+    "season": "Easter",
+    "description": "A decorated Easter egg and irises beside a stone sundial.",
+    "orientation": "landscape",
+    "atlas": "easter-the-iris-sundial-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-the-midnight-library-2026-11-05",
+    "name": "The Midnight Library",
+    "season": "Halloween",
+    "description": "A bubbling cauldron in a moonlit gothic library.",
+    "orientation": "portrait",
+    "atlas": "halloween-the-midnight-library-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-the-heart-keys-2026-11-05",
+    "name": "The Heart Keys",
+    "season": "Valentine’s Day",
+    "description": "Two ornamental heart-shaped keys among flowers.",
+    "orientation": "landscape",
+    "atlas": "valentine-the-heart-keys-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-the-midnight-pocket-watch-2026-11-05",
+    "name": "The Midnight Pocket Watch",
+    "season": "New Year 2027",
+    "description": "A pocket watch and champagne glasses beneath fireworks.",
+    "orientation": "portrait",
+    "atlas": "newyear-the-midnight-pocket-watch-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-the-embroidered-bouquet-2026-11-05",
+    "name": "The Embroidered Bouquet",
+    "season": "Mother’s Day",
+    "description": "A floral embroidery hoop with ribbons and sewing tools.",
+    "orientation": "landscape",
+    "atlas": "mother-the-embroidered-bouquet-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-the-stargazer-s-map-2026-11-05",
+    "name": "The Stargazer’s Map",
+    "season": "Father’s Day",
+    "description": "A telescope and star chart on a mountain at night.",
+    "orientation": "landscape",
+    "atlas": "father-the-stargazer-s-map-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-the-autumn-cornucopia-2026-11-05",
+    "name": "The Autumn Cornucopia",
+    "season": "Thanksgiving",
+    "description": "A woven cornucopia overflows with autumn produce.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-the-autumn-cornucopia-2026-11-05",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -610,7 +717,8 @@ export const seasonalDesigns=[
  ...additions20261102,
  ...additions20261102Nature,
  ...additions20261103,
- ...additions20261104
+ ...additions20261104,
+ ...additions20261105
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

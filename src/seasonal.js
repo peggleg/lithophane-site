@@ -1,3 +1,11 @@
+import added202611050 from './assets/seasonal-christmas-the-christmas-mantel-clock-2026-11-05.png';
+import added202611051 from './assets/seasonal-easter-the-iris-sundial-2026-11-05.png';
+import added202611052 from './assets/seasonal-halloween-the-midnight-library-2026-11-05.png';
+import added202611053 from './assets/seasonal-valentine-the-heart-keys-2026-11-05.png';
+import added202611054 from './assets/seasonal-newyear-the-midnight-pocket-watch-2026-11-05.png';
+import added202611055 from './assets/seasonal-mother-the-embroidered-bouquet-2026-11-05.png';
+import added202611056 from './assets/seasonal-father-the-stargazer-s-map-2026-11-05.png';
+import added202611057 from './assets/seasonal-thanksgiving-the-autumn-cornucopia-2026-11-05.png';
 import added202611040 from './assets/seasonal-christmas-gingerbread-christmas-village-2026-11-04.png';
 import added202611041 from './assets/seasonal-easter-the-easter-lily-window-2026-11-04.png';
 import added202611042 from './assets/seasonal-halloween-the-midnight-cemetery-gate-2026-11-04.png';
@@ -52,6 +60,14 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-the-christmas-mantel-clock-2026-11-05':added202611050,
+ 'easter-the-iris-sundial-2026-11-05':added202611051,
+ 'halloween-the-midnight-library-2026-11-05':added202611052,
+ 'valentine-the-heart-keys-2026-11-05':added202611053,
+ 'newyear-the-midnight-pocket-watch-2026-11-05':added202611054,
+ 'mother-the-embroidered-bouquet-2026-11-05':added202611055,
+ 'father-the-stargazer-s-map-2026-11-05':added202611056,
+ 'thanksgiving-the-autumn-cornucopia-2026-11-05':added202611057,
  'christmas-gingerbread-christmas-village-2026-11-04':added202611040,
  'easter-the-easter-lily-window-2026-11-04':added202611041,
  'halloween-the-midnight-cemetery-gate-2026-11-04':added202611042,

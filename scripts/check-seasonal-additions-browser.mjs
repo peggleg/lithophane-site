@@ -11,6 +11,7 @@ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'
 const report=[],pictures=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];
+ await page.emulateMedia({reducedMotion:'reduce'});
  page.on('pageerror',error=>errors.push(error.message));
  page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url());});
  const showAll=async()=>{const more=page.locator('#holiday-more');if(await more.isVisible()&&await more.getAttribute('aria-expanded')==='false')await more.click();await page.waitForFunction(()=>[...document.querySelectorAll('#seasonal-collections canvas')].every(c=>c.dataset.ready==='true'));};

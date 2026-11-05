@@ -108,5 +108,85 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-the-lantern-sleigh-clear-natural-2026-11-05",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Christmas Sleigh",
+    "asset": "christmas-the-lantern-sleigh-clear-natural-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-the-spring-abbey-clear-natural-edited-2026-11-05",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Spring Abbey",
+    "asset": "easter-the-spring-abbey-clear-natural-edited-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-the-ruined-castle-moor-clear-natural-2026-11-05",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Ruined Castle Moor",
+    "asset": "halloween-the-ruined-castle-moor-clear-natural-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-the-coastal-heart-garden-clear-natural-edited-2026-11-05",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Coastal Heart Garden",
+    "asset": "valentine-the-coastal-heart-garden-clear-natural-edited-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-the-midnight-mountain-village-clear-natural-edited-2026-11-05",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "The Midnight Mountain Village",
+    "asset": "newyear-the-midnight-mountain-village-clear-natural-edited-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-the-lavender-fountain-clear-natural-edited-2026-11-05",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Lavender Fountain",
+    "asset": "mother-the-lavender-fountain-clear-natural-edited-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-the-mountain-campsite-clear-natural-2026-11-05",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Mountain Campsite",
+    "asset": "father-the-mountain-campsite-clear-natural-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-the-riverside-granary-clear-natural-edited-2026-11-05",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Harvest Granary",
+    "asset": "thanksgiving-the-riverside-granary-clear-natural-edited-2026-11-05.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]
