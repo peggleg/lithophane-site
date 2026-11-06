@@ -188,5 +188,85 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-the-snowy-christmas-market-2026-11-06",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Snowy Christmas Market",
+    "asset": "christmas-the-snowy-christmas-market-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-the-tulip-windmill-2026-11-06",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Tulip Windmill",
+    "asset": "easter-the-tulip-windmill-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-the-moonlit-shipwreck-seam-2026-11-06",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Shipwreck",
+    "asset": "halloween-the-moonlit-shipwreck-seam-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-the-vineyard-arbour-seam-2026-11-06",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Vineyard Arbour",
+    "asset": "valentine-the-vineyard-arbour-seam-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-the-midnight-rooftop-seam-2026-11-06",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "The Midnight Rooftop",
+    "asset": "newyear-the-midnight-rooftop-seam-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-the-walled-rose-garden-seam-2026-11-06",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Walled Rose Garden",
+    "asset": "mother-the-walled-rose-garden-seam-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-the-countryside-pickup-2026-11-06",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Countryside Pickup",
+    "asset": "father-the-countryside-pickup-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-the-apple-orchard-wagon-2026-11-06",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Apple Orchard Wagon",
+    "asset": "thanksgiving-the-apple-orchard-wagon-2026-11-06.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

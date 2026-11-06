@@ -1,0 +1,29 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {seasonalDesigns,artworkCell} from '../src/postcards.js';
+import {cylinderCatalogue,cylinderCollections} from '../src/cylinder-catalogue.js';
+
+const baseline=JSON.parse(fs.readFileSync('src/fixtures/gallery-baseline-2026-11-06.json'));
+const additions=JSON.parse(fs.readFileSync('src/fixtures/gallery-additions-2026-11-06.json'));
+const hash=path=>createHash('sha256').update(fs.readFileSync(path)).digest('hex');
+
+test('all previous gallery entries, image bytes, flat crops and cylinder row mappings are preserved',()=>{
+ assert.deepEqual(seasonalDesigns.slice(0,baseline.flat.length),baseline.flat);
+ assert.deepEqual(cylinderCatalogue.slice(0,baseline.cylinders.length),baseline.cylinders);
+ for(const d of baseline.flat)assert.deepEqual(artworkCell(d,1200,1600),baseline.flatCells[d.id],d.id);
+ for(const [path,sha] of Object.entries(baseline.assets))assert.equal(hash(path),sha,path);
+ assert.equal(hash('src/cylinder-texture.js'),baseline.textureSha256);
+});
+
+test('one distinct flat and one standalone panorama accumulate per holiday',()=>{
+ assert.equal(additions.flat.length,8);assert.equal(additions.cylinders.length,8);
+ assert.deepEqual(new Set(additions.cylinders.map(d=>d.collection)),new Set(cylinderCollections.map(c=>c.id)));
+ assert.deepEqual(new Set(additions.flat.map(d=>d.season)),new Set(baseline.flat.map(d=>d.season)));
+ assert.equal(new Set(seasonalDesigns.map(d=>d.id)).size,seasonalDesigns.length);
+ assert.equal(new Set(cylinderCatalogue.map(d=>d.id)).size,cylinderCatalogue.length);
+ const hashes=new Set(Object.values(baseline.assets));
+ for(const entry of additions.flat){const {asset,sha256,...d}=entry;assert.deepEqual(seasonalDesigns.find(x=>x.id===d.id),d);assert.match(d.id,/2026-11-06$/);assert.equal(hash(asset),sha256);assert.ok(!hashes.has(sha256),asset);hashes.add(sha256);}
+ for(const entry of additions.cylinders){const {sha256,...d}=entry;assert.deepEqual(cylinderCatalogue.find(x=>x.id===d.id),d);assert.match(d.id,/2026-11-06$/);assert.equal(d.row,0);assert.equal(d.rows,1);assert.equal(d.orientation,'landscape');const path='src/assets/cylinders/'+d.asset;assert.equal(hash(path),sha256);assert.ok(!hashes.has(sha256),path);hashes.add(sha256);}
+});

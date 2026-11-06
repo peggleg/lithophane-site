@@ -709,6 +709,113 @@ const additions20261105=[
   }
 ];
 
+const additions20261106=[
+  {
+    "id": "christmas-the-citrus-christmas-wreath-2026-11-06",
+    "name": "The Citrus Christmas Wreath",
+    "season": "Christmas",
+    "description": "A festive wreath with citrus, cinnamon and a brass bell.",
+    "orientation": "landscape",
+    "atlas": "christmas-the-citrus-christmas-wreath-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-the-porcelain-easter-egg-2026-11-06",
+    "name": "The Porcelain Easter Egg",
+    "season": "Easter",
+    "description": "A decorated egg and tulips on a spring windowsill.",
+    "orientation": "portrait",
+    "atlas": "easter-the-porcelain-easter-egg-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-the-haunted-pipe-organ-2026-11-06",
+    "name": "The Haunted Pipe Organ",
+    "season": "Halloween",
+    "description": "A pipe organ in a candlelit abandoned hall.",
+    "orientation": "landscape",
+    "atlas": "halloween-the-haunted-pipe-organ-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-the-chocolate-heart-box-2026-11-06",
+    "name": "The Chocolate Heart Box",
+    "season": "Valentine’s Day",
+    "description": "A heart-shaped box of chocolates and strawberries.",
+    "orientation": "landscape",
+    "atlas": "valentine-the-chocolate-heart-box-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-the-midnight-astrolabe-2026-11-06",
+    "name": "The Midnight Astrolabe",
+    "season": "New Year 2027",
+    "description": "A brass astrolabe, glasses and confetti beneath the stars.",
+    "orientation": "landscape",
+    "atlas": "newyear-the-midnight-astrolabe-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-the-gardener-s-watering-can-2026-11-06",
+    "name": "The Gardener’s Watering Can",
+    "season": "Mother’s Day",
+    "description": "Flowering herbs beside a decorated watering can and gloves.",
+    "orientation": "portrait",
+    "atlas": "mother-the-gardener-s-watering-can-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-the-woodworker-s-bench-2026-11-06",
+    "name": "The Woodworker’s Bench",
+    "season": "Father’s Day",
+    "description": "Hand tools and curled shavings on a wooden workbench.",
+    "orientation": "landscape",
+    "atlas": "father-the-woodworker-s-bench-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-the-harvest-table-2026-11-06",
+    "name": "The Harvest Table",
+    "season": "Thanksgiving",
+    "description": "A braided loaf, apples and wheat on a harvest table.",
+    "orientation": "portrait",
+    "atlas": "thanksgiving-the-harvest-table-2026-11-06",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -718,7 +825,8 @@ export const seasonalDesigns=[
  ...additions20261102Nature,
  ...additions20261103,
  ...additions20261104,
- ...additions20261105
+ ...additions20261105,
+ ...additions20261106
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

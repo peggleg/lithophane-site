@@ -1,3 +1,11 @@
+import added202611060 from './assets/seasonal-christmas-the-citrus-christmas-wreath-2026-11-06.png';
+import added202611061 from './assets/seasonal-easter-the-porcelain-easter-egg-2026-11-06.png';
+import added202611062 from './assets/seasonal-halloween-the-haunted-pipe-organ-2026-11-06.png';
+import added202611063 from './assets/seasonal-valentine-the-chocolate-heart-box-2026-11-06.png';
+import added202611064 from './assets/seasonal-newyear-the-midnight-astrolabe-2026-11-06.png';
+import added202611065 from './assets/seasonal-mother-the-gardener-s-watering-can-2026-11-06.png';
+import added202611066 from './assets/seasonal-father-the-woodworker-s-bench-2026-11-06.png';
+import added202611067 from './assets/seasonal-thanksgiving-the-harvest-table-2026-11-06.png';
 import added202611050 from './assets/seasonal-christmas-the-christmas-mantel-clock-2026-11-05.png';
 import added202611051 from './assets/seasonal-easter-the-iris-sundial-2026-11-05.png';
 import added202611052 from './assets/seasonal-halloween-the-midnight-library-2026-11-05.png';
@@ -60,6 +68,14 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-the-citrus-christmas-wreath-2026-11-06':added202611060,
+ 'easter-the-porcelain-easter-egg-2026-11-06':added202611061,
+ 'halloween-the-haunted-pipe-organ-2026-11-06':added202611062,
+ 'valentine-the-chocolate-heart-box-2026-11-06':added202611063,
+ 'newyear-the-midnight-astrolabe-2026-11-06':added202611064,
+ 'mother-the-gardener-s-watering-can-2026-11-06':added202611065,
+ 'father-the-woodworker-s-bench-2026-11-06':added202611066,
+ 'thanksgiving-the-harvest-table-2026-11-06':added202611067,
  'christmas-the-christmas-mantel-clock-2026-11-05':added202611050,
  'easter-the-iris-sundial-2026-11-05':added202611051,
  'halloween-the-midnight-library-2026-11-05':added202611052,

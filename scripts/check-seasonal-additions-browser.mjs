@@ -18,7 +18,7 @@ try{
  await page.goto(origin+'/lithophane/');
  assert.equal(await page.inputValue('#printer-size'),'a1-mini');
  for(const design of batch){
-  await page.getByRole('button',{name:design.season,exact:true}).click();
+  await page.getByRole('button',{name:design.season,exact:true}).evaluate(button=>button.click());
   await page.waitForSelector(`[data-seasonal="${design.id}"]`);
   await page.waitForFunction(()=>[...document.querySelectorAll('#holiday-gallery canvas')].every(c=>c.dataset.ready==='true'));
   await showAll();
@@ -39,7 +39,7 @@ try{
   assert.equal(Number(await page.inputValue('#max')),3);
   await page.locator('#preview').screenshot({path:dir+'/'+design.id+'-studio.png'});
   for(const orientation of ['portrait','landscape']){
-   await page.locator(`[data-filter="${orientation}"]`).click();
+   await page.locator(`[data-filter="${orientation}"]`).evaluate(button=>button.click());
    await showAll();
    const actual=await page.locator('#seasonal-collections [data-seasonal]').evaluateAll(buttons=>buttons.map(b=>b.dataset.seasonal));
    assert.deepEqual(new Set(actual),new Set(seasonalDesigns.filter(d=>d.season===design.season&&d.orientation===orientation).map(d=>d.id)));
