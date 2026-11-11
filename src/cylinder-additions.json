@@ -268,5 +268,85 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-harbour-2026-11-11",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Christmas Harbour",
+    "asset": "christmas-harbour-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "spring-egg-hunt-meadow-2026-11-11",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Spring Egg Hunt Meadow",
+    "asset": "spring-egg-hunt-meadow-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "forest-watchtower-2026-11-11",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Forest Watchtower",
+    "asset": "forest-watchtower-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "orchard-bench-2026-11-11",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Orchard Bench",
+    "asset": "orchard-bench-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "fireworks-old-town-2026-11-11",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Fireworks over the Old Town",
+    "asset": "fireworks-old-town-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "hydrangea-pond-2026-11-11",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Hydrangea Pond",
+    "asset": "hydrangea-pond-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "fishing-cabin-2026-11-11",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Fishing Cabin",
+    "asset": "fishing-cabin-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "harvest-feast-outdoors-2026-11-11",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Harvest Feast Outdoors",
+    "asset": "harvest-feast-outdoors-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

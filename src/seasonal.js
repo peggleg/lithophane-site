@@ -1,3 +1,11 @@
+import added202611110 from './assets/seasonal-advent-cottage-2026-11-11.png';
+import added202611111 from './assets/seasonal-easter-bread-wreath-2026-11-11.png';
+import added202611112 from './assets/seasonal-lantern-and-spellbooks-2026-11-11.png';
+import added202611113 from './assets/seasonal-stained-glass-heart-2026-11-11.png';
+import added202611114 from './assets/seasonal-midnight-toast-2026-11-11.png';
+import added202611115 from './assets/seasonal-peonies-sewing-basket-2026-11-11.png';
+import added202611116 from './assets/seasonal-camera-and-tools-2026-11-11.png';
+import added202611117 from './assets/seasonal-pears-lantern-light-2026-11-11.png';
 import added202611060 from './assets/seasonal-christmas-the-citrus-christmas-wreath-2026-11-06.png';
 import added202611061 from './assets/seasonal-easter-the-porcelain-easter-egg-2026-11-06.png';
 import added202611062 from './assets/seasonal-halloween-the-haunted-pipe-organ-2026-11-06.png';
@@ -68,6 +76,14 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'advent-cottage-2026-11-11':added202611110,
+ 'easter-bread-wreath-2026-11-11':added202611111,
+ 'lantern-and-spellbooks-2026-11-11':added202611112,
+ 'stained-glass-heart-2026-11-11':added202611113,
+ 'midnight-toast-2026-11-11':added202611114,
+ 'peonies-sewing-basket-2026-11-11':added202611115,
+ 'camera-and-tools-2026-11-11':added202611116,
+ 'pears-lantern-light-2026-11-11':added202611117,
  'christmas-the-citrus-christmas-wreath-2026-11-06':added202611060,
  'easter-the-porcelain-easter-egg-2026-11-06':added202611061,
  'halloween-the-haunted-pipe-organ-2026-11-06':added202611062,

@@ -816,6 +816,113 @@ const additions20261106=[
   }
 ];
 
+const additions20261111=[
+  {
+    "id": "advent-cottage-2026-11-11",
+    "name": "Advent Cottage",
+    "season": "Christmas",
+    "description": "Advent Cottage seasonal lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "advent-cottage-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-bread-wreath-2026-11-11",
+    "name": "Easter Bread Wreath",
+    "season": "Easter",
+    "description": "Easter Bread Wreath seasonal lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "easter-bread-wreath-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "lantern-and-spellbooks-2026-11-11",
+    "name": "The Lantern and Spellbooks",
+    "season": "Halloween",
+    "description": "The Lantern and Spellbooks seasonal lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "lantern-and-spellbooks-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "stained-glass-heart-2026-11-11",
+    "name": "Stained Glass Heart",
+    "season": "Valentine’s Day",
+    "description": "Stained Glass Heart seasonal lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "stained-glass-heart-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "midnight-toast-2026-11-11",
+    "name": "A Midnight Toast",
+    "season": "New Year 2027",
+    "description": "A Midnight Toast seasonal lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "midnight-toast-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "peonies-sewing-basket-2026-11-11",
+    "name": "Peonies and Sewing Basket",
+    "season": "Mother’s Day",
+    "description": "Peonies and Sewing Basket seasonal lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "peonies-sewing-basket-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "camera-and-tools-2026-11-11",
+    "name": "Camera and Tools",
+    "season": "Father’s Day",
+    "description": "Camera and Tools seasonal lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "camera-and-tools-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "pears-lantern-light-2026-11-11",
+    "name": "Pears by Lantern Light",
+    "season": "Thanksgiving",
+    "description": "Pears by Lantern Light seasonal lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "pears-lantern-light-2026-11-11",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -826,7 +933,8 @@ export const seasonalDesigns=[
  ...additions20261103,
  ...additions20261104,
  ...additions20261105,
- ...additions20261106
+ ...additions20261106,
+ ...additions20261111
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 
