@@ -348,5 +348,35 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-snowflake-lantern-gonk-2026-11-11",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Snowflake Lantern Gonk",
+    "asset": "christmas-snowflake-lantern-gonk-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "christmas-woodland-gonk-friends-2026-11-11",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Woodland Gonk Friends",
+    "asset": "christmas-woodland-gonk-friends-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "christmas-gift-wrapping-gonk-2026-11-11",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Gift-Wrapping Gonk",
+    "asset": "christmas-gift-wrapping-gonk-2026-11-11.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]
