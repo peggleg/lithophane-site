@@ -1,4 +1,4 @@
-import {cylinderSettings,cylinderStands,cylinderSpec as S,tripodFitSpec as T} from './cylinder-settings.js';
+import {cylinderSettings,cylinderStands,cylinderSpec as S,cylinderLightFits,tripodFitSpec as T} from './cylinder-settings.js';
 import {assertPrintSize} from './printer-settings.js';
 import {productKernel} from './product-kernel.js';
 
@@ -27,15 +27,18 @@ export function makeCylinder(input,tones,cols,rows){
 }
 
 export function generateCylinderStand(module,input,test=false){
- const p=cylinderSettings(input),stand=cylinderStands.find(s=>s.id===p.stand);
+ const p=cylinderSettings(input),stand=cylinderStands.find(s=>s.id===p.stand),fit=cylinderLightFits[p.lightSource];
  if(!test&&stand.style==='tripod')return generateTripod(module,p);
  const K=productKernel(module,p),{C,M,own,cyl,add}=K;
  const union=solids=>own(M.union(solids)),sub=(a,b)=>own(a.subtract(b));
  const revolve=points=>own(own(new C([points],'NonZero')).revolve(160));
  try{
   if(test){
-   const part=add('tealight-fit-'+p.fitDiameter.toFixed(1)+'mm','tealight-fit',sub(cyl(p.fitDiameter/2+3,5),cyl(p.fitDiameter/2,4,0,0,2)));
-   part.colour='#e9dfcc';return K.finish({fit:{diameter:p.fitDiameter,depth:3},note:'Print this small cup first. The 38 × 19 mm LED tealight should drop in and lift out easily.',printPlates:true});
+   const kit=p.lightSource==='bambu001',height=kit?7:5,depth=kit?5:3;
+   let cup=sub(cyl(p.fitDiameter/2+3,height),cyl(p.fitDiameter/2,depth+1,0,0,height-depth));
+   if(kit)cup=sub(cup,cableChannel(K,height,fit.cableWidth,depth));
+   const part=add((kit?'bambu-led-001-fit-':'tealight-fit-')+p.fitDiameter.toFixed(1)+'mm','tealight-fit',cup);
+   part.colour='#e9dfcc';return K.finish({fit:{diameter:p.fitDiameter,depth},note:kit?'Check the 59 × 8 mm LED Kit 001 in the recess and route its cable through the open 5 mm channel. The LED projects 3 mm above the seating surface.':'Print this small cup first. The 38 × 19 mm LED tealight should drop in and lift out easily.',printPlates:true});
   }
   const H=stand.height;
   let body;
@@ -62,17 +65,18 @@ export function generateCylinderStand(module,input,test=false){
    }
   }
   if(motifs.length)body=union([body,...motifs]);
-  const recess=cyl(p.fitDiameter/2,4,0,0,H-3),lip=sub(cyl(47.3,2,0,0,H),cyl(S.seatDiameter/2,2.2,0,0,H-.1));
-  body=union([sub(body,recess),lip]);const part=add(stand.id,'stand',body,[0,0,0],stand.colour);part.printKind='cylinder-stand';
-  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:3,seatDiameter:S.seatDiameter},printPlates:true,note:'Place the LED tealight in the centre recess, then lower the open-bottom cylinder into the outer locating lip. Lift the cylinder off to reach the switch.'});
+  const recess=cyl(p.fitDiameter/2,fit.recessDepth+1,0,0,H-fit.recessDepth),lip=sub(cyl(47.3,2,0,0,H),cyl(S.seatDiameter/2,2.2,0,0,H-.1));
+  body=union([sub(body,recess),lip]);if(p.lightSource==='bambu001')body=sub(body,cableChannel(K,H,fit.cableWidth,fit.recessDepth));const part=add(stand.id,'stand',body,[0,0,0],stand.colour);part.printKind='cylinder-stand';
+  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:fit.recessDepth,seatDiameter:S.seatDiameter},printPlates:true,note:p.lightSource==='bambu001'?'Seat the 59 × 8 mm Bambu LED Kit 001 in the 5 mm recess and route its cable through the open 5 mm channel, then lower the cylinder into the locating lip. The light projects 3 mm above the deck.':'Place the LED tealight in the centre recess, then lower the open-bottom cylinder into the outer locating lip. Lift the cylinder off to reach the switch.'});
  }finally{K.dispose();}
 }
 
 function generateTripod(module,p){
- const K=productKernel(module,p),{C,own,cyl,add}=K,H=85;
+ const K=productKernel(module,p),{C,own,cyl,add}=K,H=85,fit=cylinderLightFits[p.lightSource];
  try{
-  let deck=own(cyl(48,8,0,0,H-8).subtract(cyl(p.fitDiameter/2,4,0,0,H-3)));
+  let deck=own(cyl(48,8,0,0,H-8).subtract(cyl(p.fitDiameter/2,fit.recessDepth+1,0,0,H-fit.recessDepth)));
   const lip=own(cyl(47.3,2,0,0,H).subtract(cyl(S.seatDiameter/2,2.2,0,0,H-.1)));deck=own(deck.add(lip));
+  if(p.lightSource==='bambu001')deck=own(deck.subtract(cableChannel(K,H,fit.cableWidth,fit.recessDepth)));
   for(let j=0;j<3;j++){
    const a=j*120,rad=a*Math.PI/180,x=36*Math.cos(rad),y=36*Math.sin(rad);
    deck=own(deck.subtract(own(own(C.square([T.socketWidth,T.socketWidth],true)).extrude(T.socketDepth+.1).rotate([0,0,a]).translate([x,y,H-8-.1]))));
@@ -84,9 +88,13 @@ function generateTripod(module,p){
    const [ax,ay]=part.assembly;part.assembly[0]=ax*Math.cos(rad)-ay*Math.sin(rad);part.assembly[1]=ax*Math.sin(rad)+ay*Math.cos(rad);part.rotation[2]=rad;part.rotationOrder='ZYX';
   }
   const part=add('tripod-deck','stand-deck',deck,[0,0,0],'#c5a37c');part.printKind='cylinder-stand';
-  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:3,seatDiameter:S.seatDiameter},tripodFit:{...T,pegWidth:p.tripodPegWidth,tipWidth:p.tripodPegWidth-T.leadIn},printPlates:true,note:`Print the tripod joint test first. The tapered pegs are ${p.tripodPegWidth.toFixed(2)} mm wide at the root and ${(p.tripodPegWidth-T.leadIn).toFixed(2)} mm at the tip, for the existing 10.4 mm nominal sockets. Choose the smallest test peg that holds firmly and can be seated by hand. Increase the peg width if loose; reduce it if too tight. Replacement legs fit the existing plate. Print the deck flat underside down and legs on their supplied broad sides at 100% scale. Seat each leg shoulder against the underside of the deck. Place the LED tealight in its recess and lower the cylinder into the locating lip.`});
+  return K.finish({seatZ:H,fit:{diameter:p.fitDiameter,depth:fit.recessDepth,seatDiameter:S.seatDiameter},tripodFit:{...T,pegWidth:p.tripodPegWidth,tipWidth:p.tripodPegWidth-T.leadIn},printPlates:true,note:`Print the tripod joint test first. The tapered pegs are ${p.tripodPegWidth.toFixed(2)} mm wide at the root and ${(p.tripodPegWidth-T.leadIn).toFixed(2)} mm at the tip, for the existing 10.4 mm nominal sockets. Choose the smallest test peg that holds firmly and can be seated by hand. Increase the peg width if loose; reduce it if too tight. Replacement legs fit the existing plate. Print the deck flat underside down and legs on their supplied broad sides at 100% scale. Seat each leg shoulder against the underside of the deck. ${p.lightSource==='bambu001'?'Seat the 59 × 8 mm Bambu LED Kit 001 in the 5 mm recess, route its cable through the open 5 mm channel and lower the cylinder into the locating lip. The light projects 3 mm above the deck.':'Place the LED tealight in its recess and lower the cylinder into the locating lip.'}`});
  }finally{K.dispose();}
 }
+
+// The open radial slot lets the attached cable be placed from above. At 60° it
+// passes between the tripod sockets at 0°, 120° and 240°.
+function cableChannel(K,top,width,depth){return K.own(K.own(K.C.square([60,width],true)).extrude(depth+2.2).translate([50,0,top-depth]).rotate([0,0,60]));}
 
 function tripodPeg(K,width,x=0,y=0,z=0){
  const tip=width-T.leadIn;

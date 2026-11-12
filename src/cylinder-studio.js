@@ -1,5 +1,5 @@
 import './style.css';import './theme.js';import './cylinder.css';
-import {cylinderSettings,cylinderDefaults,cylinderStands} from './cylinder-settings.js';
+import {cylinderSettings,cylinderDefaults,cylinderStands,cylinderLightFits} from './cylinder-settings.js';
 import {cylinderCollections,cylinderDesigns,cylinderArtwork} from './cylinder-artwork.js';
 import {cylinderPreview} from './cylinder-preview.js';
 import {mountPrinterPicker} from './printer-picker.js';
@@ -12,6 +12,7 @@ let state={...cylinderDefaults},design=cylinderDesigns[0],model=null,worker=null
 const preview=cylinderPreview($('model-canvas'));
 const picker=mountPrinterPicker(printer=>{state.printer=printer;generate();});
 const buttons=['stl','three-mf','cylinder-stl','cylinder-three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide','tripod-joint-test','tripod-legs'];
+function showLightFit(){const fit=cylinderLightFits[state.lightSource],kit=state.lightSource==='bambu001',input=$('fitDiameter');input.min=fit.minDiameter;input.max=fit.maxDiameter;input.value=state.fitDiameter;$('light-fit-help').textContent=kit?'The 59 × 8 mm kit sits in a 5 mm deep recess with a 5 mm open cable channel; it projects 3 mm above the deck. Default diameter: 59.6 mm. Print the small fit cup first.':'Default 39 mm gives 1 mm total diameter clearance. The recess is 3 mm deep. Print the small fit cup first.';}
 function showStand(value){$('stand-only').checked=value;$('lit').disabled=value;preview.setStandOnly(value);$('parts-view').checked=false;preview.setParts(false);}
 function controls(){for(const id of buttons)$(id).disabled=!model||busy;$('panorama-download').disabled=!art||busy;$('cancel').hidden=!busy;}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;controls();}
@@ -65,17 +66,18 @@ for(const group of ['Desktop','Elevated']){const g=document.createElement('optgr
 $('collection').oninput=()=>selectCollection($('collection').value);
 $('design').oninput=()=>{design=cylinderDesigns.find(d=>d.id===$('design').value);if($('cylinder-older-gallery').querySelector(`[data-design="${design.id}"]`))toggleOlder(true);showStand(false);generate();};
 $('stand').oninput=()=>{state.stand=$('stand').value;showStand(true);generate();};
+$('lightSource').oninput=()=>{state.lightSource=$('lightSource').value;state.fitDiameter=cylinderLightFits[state.lightSource].recessDiameter;showLightFit();generate();};
 for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation'])$(id).oninput=()=>{state[id]=Number($(id).value);generate();};
 $('stand-only').onchange=()=>{$('lit').disabled=$('stand-only').checked;preview.setStandOnly($('stand-only').checked);};
 $('lit').onchange=()=>preview.setLit($('lit').checked);$('parts-view').onchange=()=>preview.setParts($('parts-view').checked);$('reset-view').onclick=()=>preview.reset();
 $('cancel').onclick=()=>{++revision;stop();model=null;art=null;controls();$('feedback').textContent='Cancelled. Change a setting to rebuild.';};
-$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand'])$(id).value=state[id];$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
+$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand','lightSource'])$(id).value=state[id];showLightFit();$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
 function exportFile(format,{standOnly=false,cylinderOnly:onlyCylinder=false,test=false,tripodTest=false,legsOnly=false}={}){
  if(!model||busy)return;const token=revision,original=model;stop();busy=true;controls();$('export-status').textContent='Preparing your download…';
  const w=workerFor(token);const send=m=>w.postMessage({action:'export',format,model:m});
  w.onmessage=({data})=>{if(token!==revision)return;if(data.error){stop();$('export-status').textContent=data.error;return;}if(data.model){send(data.model);return;}
   const peg=state.tripodPegWidth.toFixed(2).replace('.','p');
-  const suffix=tripodTest?'tripod-joint-test-'+peg+'mm':legsOnly?'tripod-replacement-legs-'+peg+'mm':test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':onlyCylinder?design.id+'-cylinder-only':standOnly?state.stand+(state.stand==='tall-tripod'?'-pegs-'+peg+'mm':''):design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'||format==='single-stl'?'stl':'zip';
+  const suffix=tripodTest?'tripod-joint-test-'+peg+'mm':legsOnly?'tripod-replacement-legs-'+peg+'mm':test||format==='fit'?(state.lightSource==='bambu001'?'bambu-led-001-fit-':'tealight-fit-')+state.fitDiameter.toFixed(1)+'mm':onlyCylinder?design.id+'-cylinder-only':standOnly?state.stand+(state.lightSource==='bambu001'?'-bambu-led-001':'')+(state.stand==='tall-tripod'?'-pegs-'+peg+'mm':''):design.id+'-'+state.stand+(state.lightSource==='bambu001'?'-bambu-led-001':''),ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'||format==='single-stl'?'stl':'zip';
   save(data.chunks,'peggleg-'+suffix+'.'+ext);stop();$('export-status').textContent='File generated. Check your browser downloads.';
  };
  if(tripodTest)w.postMessage({action:'generate',settings:original.settings,options:{tripodTest:true}});

@@ -104,8 +104,9 @@ export function cylinderPreview(canvas,{thumbnail=false}={}){
   }
   canvas.dataset.visibleParts=String(count);
   if(!parts&&!standOnly&&model.seatZ){
-   const tealight=new THREE.Mesh(new THREE.CylinderGeometry(19,19,19,48).rotateX(Math.PI/2),new THREE.MeshStandardMaterial({color:'#fff7e5',roughness:.6}));tealight.position.z=model.seatZ-3+9.5;tealight.castShadow=true;group.add(tealight);
-   const flame=new THREE.Mesh(new THREE.SphereGeometry(3,16,12).scale(1,1,2),new THREE.MeshBasicMaterial({color:lit?'#ffdb83':'#fff4dc'}));flame.position.z=model.seatZ+21;group.add(flame);
+   const kit=model.settings.lightSource==='bambu001',diameter=kit?59:38,height=kit?8:19,depth=kit?5:3;
+   const light=new THREE.Mesh(new THREE.CylinderGeometry(diameter/2,diameter/2,height,64).rotateX(Math.PI/2),new THREE.MeshStandardMaterial({color:'#fff7e5',roughness:.6}));light.position.z=model.seatZ-depth+height/2;light.castShadow=true;group.add(light);
+   if(!kit){const flame=new THREE.Mesh(new THREE.SphereGeometry(3,16,12).scale(1,1,2),new THREE.MeshBasicMaterial({color:lit?'#ffdb83':'#fff4dc'}));flame.position.z=model.seatZ+21;group.add(flame);}
   }
   fit();
  }
