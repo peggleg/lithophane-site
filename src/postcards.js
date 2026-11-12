@@ -1056,7 +1056,8 @@ export const seasonalDesigns=[
  ...additions20261106,
  ...additions20261111,
  {id:'gonk-spring-gardener-2026-11-12',name:'The Spring Gardener Gonk',season:'Gonk',description:'A cheerful gonk tends spring flowers at a garden potting bench.',orientation:'portrait',atlas:'gonk-spring-gardener-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true},
- ...additions20261112
+ ...additions20261112,
+ {id:'animals-capuchin-rainforest-2026-11-12',name:'Capuchin in the Rainforest',season:'Animals',description:'A capuchin monkey rests on a branch in a tropical rainforest.',orientation:'portrait',atlas:'animals-capuchin-rainforest-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true}
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

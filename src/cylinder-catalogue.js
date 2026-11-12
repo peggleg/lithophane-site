@@ -10,7 +10,7 @@ const collections=[
  ['father','Father’s Day','The Lakeside Canoe','The Mountain Railway'],
  ['thanksgiving','Thanksgiving','Harvest Farm','The Autumn Watermill'],
 ];
-export const cylinderCollections=[...collections.map(([id,name])=>({id,name})),{id:'gonk',name:'Gonk'}];
+export const cylinderCollections=[...collections.map(([id,name])=>({id,name})),{id:'gonk',name:'Gonk'},{id:'animals',name:'Animals'}];
 export const cylinderCatalogue=[
  ...collections.flatMap(([collection,season,...names])=>names.map((name,row)=>({id:collection+'-'+(row+1),collection,season,name,row,rows:2,orientation:'landscape',asset:collection+'.webp'}))),
  ...additions,

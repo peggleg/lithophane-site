@@ -9,7 +9,8 @@ const descriptions={
  'Mother’s Day':'Flowers, garden moments and a little love for Mum.',
  'Father’s Day':'Woodland adventures, favourite pastimes and moments with Dad.',
  Thanksgiving:'Autumn harvests, welcoming homes and time to give thanks.',
- Gonk:'Playful gonks, adventures and scenes for every season.'
+ Gonk:'Playful gonks, adventures and scenes for every season.',
+ Animals:'Wildlife portraits and animal scenes from around the world.'
 };
 export function sampleCollections(designs=seasonalDesigns){
  const names=[...new Set(designs.map(d=>d.season))];

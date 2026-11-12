@@ -508,5 +508,15 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "animals-capuchin-canopy-2026-11-12",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Capuchins in the Canopy",
+    "asset": "animals-capuchin-canopy-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

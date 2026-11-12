@@ -1,3 +1,4 @@
+import animalsCapuchin from './assets/seasonal-animals-capuchin-rainforest-2026-11-12.png';
 import added202611120 from './assets/seasonal-christmas-christmas-handbells-2026-11-12.png';
 import added202611121 from './assets/seasonal-easter-chocolate-easter-egg-2026-11-12.png';
 import added202611122 from './assets/seasonal-halloween-witchs-broom-2026-11-12.png';
@@ -86,6 +87,7 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'animals-capuchin-rainforest-2026-11-12':animalsCapuchin,
  'christmas-christmas-handbells-2026-11-12':added202611120,
  'easter-chocolate-easter-egg-2026-11-12':added202611121,
  'halloween-witchs-broom-2026-11-12':added202611122,

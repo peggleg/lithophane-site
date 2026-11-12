@@ -7,7 +7,7 @@ const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-202
 test('gallery defaults to Christmas and preserves every existing sample',()=>{
  const collections=sampleCollections();
  assert.equal(collections[0].name,'Christmas');
- assert.deepEqual(new Set(collections.map(c=>c.name)),new Set([...baseline.designs.map(d=>d.season),'Gonk']));
+ assert.deepEqual(new Set(collections.map(c=>c.name)),new Set([...baseline.designs.map(d=>d.season),'Gonk','Animals']));
  for(const collection of collections){
   const prior=baseline.designs.filter(d=>d.season===collection.name);
   assert.ok(collectionSamples(collection).length>=prior.length+1);
