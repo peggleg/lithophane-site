@@ -5,12 +5,13 @@ import {cylinderPreview} from './cylinder-preview.js';
 import {mountPrinterPicker} from './printer-picker.js';
 import {filamentParts,gramsText} from './filament.js';
 import {profileSummary} from './print-profile.js';
+import {cylinderOnly} from './cylinder-export.js';
 
 const $=id=>document.getElementById(id),thumbs=import.meta.glob('./assets/cylinder-stands/*.webp',{eager:true,query:'?url',import:'default'});
 let state={...cylinderDefaults},design=cylinderDesigns[0],model=null,worker=null,timer,revision=0,busy=false,art=null;
 const preview=cylinderPreview($('model-canvas'));
 const picker=mountPrinterPicker(printer=>{state.printer=printer;generate();});
-const buttons=['stl','three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide','tripod-joint-test','tripod-legs'];
+const buttons=['stl','three-mf','cylinder-stl','cylinder-three-mf','stand-download','stand-three-mf','test-fit','fit-three-mf','print-guide','tripod-joint-test','tripod-legs'];
 function showStand(value){$('stand-only').checked=value;$('lit').disabled=value;preview.setStandOnly(value);$('parts-view').checked=false;preview.setParts(false);}
 function controls(){for(const id of buttons)$(id).disabled=!model||busy;$('panorama-download').disabled=!art||busy;$('cancel').hidden=!busy;}
 function stop(){clearTimeout(timer);worker?.terminate();worker=null;busy=false;controls();}
@@ -69,20 +70,22 @@ $('stand-only').onchange=()=>{$('lit').disabled=$('stand-only').checked;preview.
 $('lit').onchange=()=>preview.setLit($('lit').checked);$('parts-view').onchange=()=>preview.setParts($('parts-view').checked);$('reset-view').onclick=()=>preview.reset();
 $('cancel').onclick=()=>{++revision;stop();model=null;art=null;controls();$('feedback').textContent='Cancelled. Change a setting to rebuild.';};
 $('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand'])$(id).value=state[id];$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
-function exportFile(format,{standOnly=false,test=false,tripodTest=false,legsOnly=false}={}){
+function exportFile(format,{standOnly=false,cylinderOnly:onlyCylinder=false,test=false,tripodTest=false,legsOnly=false}={}){
  if(!model||busy)return;const token=revision,original=model;stop();busy=true;controls();$('export-status').textContent='Preparing your download…';
  const w=workerFor(token);const send=m=>w.postMessage({action:'export',format,model:m});
  w.onmessage=({data})=>{if(token!==revision)return;if(data.error){stop();$('export-status').textContent=data.error;return;}if(data.model){send(data.model);return;}
   const peg=state.tripodPegWidth.toFixed(2).replace('.','p');
-  const suffix=tripodTest?'tripod-joint-test-'+peg+'mm':legsOnly?'tripod-replacement-legs-'+peg+'mm':test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':standOnly?state.stand+(state.stand==='tall-tripod'?'-pegs-'+peg+'mm':''):design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'?'stl':'zip';
+  const suffix=tripodTest?'tripod-joint-test-'+peg+'mm':legsOnly?'tripod-replacement-legs-'+peg+'mm':test||format==='fit'?'tealight-fit-'+state.fitDiameter.toFixed(1)+'mm':onlyCylinder?design.id+'-cylinder-only':standOnly?state.stand+(state.stand==='tall-tripod'?'-pegs-'+peg+'mm':''):design.id+'-'+state.stand,ext=format==='3mf'?'3mf':format==='guide'?'txt':format==='fit'||format==='single-stl'?'stl':'zip';
   save(data.chunks,'peggleg-'+suffix+'.'+ext);stop();$('export-status').textContent='File generated. Check your browser downloads.';
  };
  if(tripodTest)w.postMessage({action:'generate',settings:original.settings,options:{tripodTest:true}});
  else if(legsOnly)send({...original,parts:original.parts.filter(p=>p.role==='stand-leg')});
  else if(test||format==='fit')w.postMessage({action:'generate',settings:original.settings,options:{test:true}});
+ else if(onlyCylinder)send(cylinderOnly(original));
  else if(standOnly)send({...original,parts:original.parts.filter(p=>p.role!=='cylinder')});else send(original);
 }
 $('stl').onclick=()=>exportFile('stl');$('three-mf').onclick=()=>exportFile('3mf');$('stand-download').onclick=()=>exportFile('stl',{standOnly:true});$('test-fit').onclick=()=>exportFile('fit');$('print-guide').onclick=()=>exportFile('guide');
+$('cylinder-stl').onclick=()=>exportFile('single-stl',{cylinderOnly:true});$('cylinder-three-mf').onclick=()=>exportFile('3mf',{cylinderOnly:true});
 $('stand-three-mf').onclick=()=>exportFile('3mf',{standOnly:true});$('fit-three-mf').onclick=()=>exportFile('3mf',{test:true});
 $('tripod-joint-test').onclick=()=>exportFile('3mf',{tripodTest:true});$('tripod-legs').onclick=()=>exportFile('3mf',{legsOnly:true});
 $('panorama-download').onclick=()=>{if(!art||busy)return;art.canvas.toBlob(blob=>{if(blob)save([blob],'peggleg-'+design.id+'-seamless-landscape.png','image/png');},'image/png');};

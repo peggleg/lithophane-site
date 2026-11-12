@@ -11,7 +11,7 @@ self.onmessage=async({data})=>{try{
   const model=buildCylinderModel(await kernel,data.settings,data.tones,data.cols,data.rows,data.options);
   self.postMessage({model});
  }else{
-  const chunks=data.format==='3mf'?solid3mf(data.model):data.format==='guide'?[strToU8(cylinderGuide(data.model))]:data.format==='fit'?[stlBytes(data.model.parts[0].mesh)]:cylinderZip(data.model);
+  const chunks=data.format==='3mf'?solid3mf(data.model):data.format==='guide'?[strToU8(cylinderGuide(data.model))]:data.format==='fit'||data.format==='single-stl'?[stlBytes(data.model.parts[0].mesh)]:cylinderZip(data.model);
   self.postMessage({chunks});
  }
 }catch(e){self.postMessage({error:e.message||'Could not create this cylinder.'});}};

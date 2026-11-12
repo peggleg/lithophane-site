@@ -3,11 +3,21 @@ import init from 'manifold-3d/manifold';
 import {cylinderStands,cylinderSettings} from '../src/cylinder-settings.js';
 import {makeCylinder,generateCylinderStand,buildCylinderModel} from '../src/cylinder-geometry.js';
 import {periodicTones,seamMetrics} from '../src/cylinder-texture.js';
-import {solid3mf,cylinderZip} from '../src/cylinder-export.js';
+import {solid3mf,cylinderZip,cylinderOnly} from '../src/cylinder-export.js';
+import {stlBytes} from '../src/geometry.js';
 import {printProfile,projectProfile} from '../src/print-profile.js';
 const m=await init();m.setup();
 const restore=mesh=>new m.Manifold(new m.Mesh({numProp:3,vertProperties:mesh.vertices,triVerts:mesh.faces}));
 function files(chunks){const b=Buffer.concat(chunks.map(c=>Buffer.from(c))),result={};for(let i=0;i+4<b.length&&b.readUInt32LE(i)===0x04034b50;){const size=b.readUInt32LE(i+18),n=b.readUInt16LE(i+26),extra=b.readUInt16LE(i+28),start=i+30+n+extra;result[b.subarray(i+30,i+30+n).toString()]=b.subarray(start,start+size);i=start+size;}return result;}
+test('cylinder-only downloads preserve the kit mesh and selected printer profile',()=>{
+ for(const printer of ['a1-mini','256'])for(const stand of ['desktop-plain','tall-tripod']){
+  const kit=buildCylinderModel(m,{printer,stand,height:94,fitDiameter:39.4},new Uint8Array(64*24).fill(128),64,24),original=kit.parts.find(p=>p.role==='cylinder'),only=cylinderOnly(kit);
+  assert.equal(only.parts.length,1);assert.equal(only.parts[0],original);assert.ok(kit.parts.length>1);assert.deepEqual(stlBytes(only.parts[0].mesh),stlBytes(original.mesh));
+  const archive=files(solid3mf(only)),profile=JSON.parse(archive['Metadata/project_settings.config']),xml=archive['3D/3dmodel.model'].toString();
+  assert.equal(profile.printer_settings_id,projectProfile('cylinder',{printer}).printer_settings_id);assert.equal(profile.top_shell_layers,'4');assert.equal(profile.bottom_shell_layers,'4');assert.equal((xml.match(/<mesh>/g)||[]).length,1);assert.match(xml,/lithophane-cylinder/);assert.doesNotMatch(xml,/tripod|stand-deck|stand-leg/);
+ }
+ assert.throws(()=>cylinderOnly({parts:[]}));
+});
 test('eight connected stands fit both printers, share a clear tealight recess and a cylinder seat',()=>{
  assert.equal(cylinderStands.filter(s=>s.group==='Desktop').length,4);assert.equal(cylinderStands.filter(s=>s.group==='Elevated').length,4);
  for(const printer of ['a1-mini','256'])for(const stand of cylinderStands){

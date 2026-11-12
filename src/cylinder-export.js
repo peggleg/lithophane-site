@@ -3,6 +3,11 @@ import {stlBytes} from './geometry.js';
 import {zipParts,strToU8} from './zip.js';
 import {profileSidecar,printerFiles,printerProfileImport,profileSummary} from './print-profile.js';
 import {filamentReport} from './filament.js';
+export function cylinderOnly(model){
+ const parts=model.parts.filter(part=>part.role==='cylinder');
+ if(parts.length!==1)throw Error('The cylinder is not available for download.');
+ return {...model,parts};
+}
 export function solid3mf(model){
  const hasCylinder=model.parts.some(part=>part.role==='cylinder');
  return writeSolid3mf(hasCylinder?model:{...model,settings:{...model.settings,kind:'cylinder-stand'}});
