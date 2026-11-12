@@ -19,7 +19,7 @@ test('all previous gallery entries, image bytes, flat crops and cylinder row map
 
 test('one distinct flat and one standalone panorama accumulate per holiday',()=>{
  assert.equal(additions.flat.length,8);assert.equal(additions.cylinders.length,8);
- assert.deepEqual(new Set(additions.cylinders.map(d=>d.collection)),new Set(cylinderCollections.map(c=>c.id)));
+ assert.deepEqual(new Set(additions.cylinders.map(d=>d.collection)),new Set(baseline.cylinders.map(d=>d.collection)));
  assert.deepEqual(new Set(additions.flat.map(d=>d.season)),new Set(baseline.flat.map(d=>d.season)));
  assert.equal(new Set(seasonalDesigns.map(d=>d.id)).size,seasonalDesigns.length);
  assert.equal(new Set(cylinderCatalogue.map(d=>d.id)).size,cylinderCatalogue.length);

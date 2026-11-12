@@ -934,7 +934,8 @@ export const seasonalDesigns=[
  ...additions20261104,
  ...additions20261105,
  ...additions20261106,
- ...additions20261111
+ ...additions20261111,
+ {id:'gonk-spring-gardener-2026-11-12',name:'The Spring Gardener Gonk',season:'Gonk',description:'A cheerful gonk tends spring flowers at a garden potting bench.',orientation:'portrait',atlas:'gonk-spring-gardener-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true}
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

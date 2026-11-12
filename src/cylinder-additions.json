@@ -408,5 +408,15 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "gonk-lighthouse-keeper-2026-11-12",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Lighthouse Keeper Gonk",
+    "asset": "gonk-lighthouse-keeper-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

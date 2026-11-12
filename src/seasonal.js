@@ -1,3 +1,4 @@
+import gonkSpringGardener from './assets/seasonal-gonk-spring-gardener-2026-11-12.png';
 import added202611110 from './assets/seasonal-advent-cottage-2026-11-11.png';
 import added202611111 from './assets/seasonal-easter-bread-wreath-2026-11-11.png';
 import added202611112 from './assets/seasonal-lantern-and-spellbooks-2026-11-11.png';
@@ -76,6 +77,7 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'gonk-spring-gardener-2026-11-12':gonkSpringGardener,
  'advent-cottage-2026-11-11':added202611110,
  'easter-bread-wreath-2026-11-11':added202611111,
  'lantern-and-spellbooks-2026-11-11':added202611112,

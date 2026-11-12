@@ -7,7 +7,7 @@ const baseline=JSON.parse(readFileSync(new URL('./fixtures/seasonal-baseline-202
 test('gallery defaults to Christmas and preserves every existing sample',()=>{
  const collections=sampleCollections();
  assert.equal(collections[0].name,'Christmas');
- assert.equal(collections.length,8);
+ assert.deepEqual(new Set(collections.map(c=>c.name)),new Set([...baseline.designs.map(d=>d.season),'Gonk']));
  for(const collection of collections){
   const prior=baseline.designs.filter(d=>d.season===collection.name);
   assert.ok(collectionSamples(collection).length>=prior.length+1);
@@ -26,7 +26,7 @@ test('eight collections and mixed orientations need only collection data',()=>{
  assert.equal(collectionSamples(collection,'landscape').length,1);
  assert.equal(collectionSamples(collection,'portrait').length,0);
  assert.equal(sampleOrientation(seasonalDesigns[0]),'portrait');
- assert.equal(sampleCollections().length,8);
+ assert.ok(sampleCollections().some(c=>c.name==='Gonk'));
 });
 
 test('six newest pictures precede the complete older archive without mutating catalogue order',()=>{
