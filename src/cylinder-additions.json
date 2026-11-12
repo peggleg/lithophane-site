@@ -418,5 +418,95 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-lantern-skating-pond-2026-11-12",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Lantern Skating Pond",
+    "asset": "christmas-lantern-skating-pond-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-cherry-orchard-cottage-2026-11-12",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Cherry Orchard Cottage",
+    "asset": "easter-cherry-orchard-cottage-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-moonlit-pumpkin-farm-2026-11-12",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Pumpkin Farm",
+    "asset": "halloween-moonlit-pumpkin-farm-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-riverside-rose-pergola-2026-11-12",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Riverside Rose Pergola",
+    "asset": "valentine-riverside-rose-pergola-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-fireworks-winter-fjord-2026-11-12",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Fireworks over the Winter Fjord",
+    "asset": "newyear-fireworks-winter-fjord-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-peony-greenhouse-2026-11-12",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Peony Greenhouse",
+    "asset": "mother-peony-greenhouse-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-country-traction-engine-2026-11-12",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Country Traction Engine",
+    "asset": "father-country-traction-engine-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-harvest-vineyard-2026-11-12",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Harvest Vineyard",
+    "asset": "thanksgiving-harvest-vineyard-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "gonk-alpine-hiking-gonk-2026-11-12",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Alpine Hiking Gonk",
+    "asset": "gonk-alpine-hiking-gonk-2026-11-12.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

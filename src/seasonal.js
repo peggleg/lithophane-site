@@ -1,3 +1,12 @@
+import added202611120 from './assets/seasonal-christmas-christmas-handbells-2026-11-12.png';
+import added202611121 from './assets/seasonal-easter-chocolate-easter-egg-2026-11-12.png';
+import added202611122 from './assets/seasonal-halloween-witchs-broom-2026-11-12.png';
+import added202611123 from './assets/seasonal-valentine-locks-of-love-2026-11-12.png';
+import added202611124 from './assets/seasonal-newyear-midnight-hourglass-2026-11-12.png';
+import added202611125 from './assets/seasonal-mother-lilac-embroidery-2026-11-12.png';
+import added202611126 from './assets/seasonal-father-mountain-radio-2026-11-12.png';
+import added202611127 from './assets/seasonal-thanksgiving-bread-autumn-apples-2026-11-12.png';
+import added202611128 from './assets/seasonal-gonk-fishing-gonk-2026-11-12.png';
 import gonkSpringGardener from './assets/seasonal-gonk-spring-gardener-2026-11-12.png';
 import added202611110 from './assets/seasonal-advent-cottage-2026-11-11.png';
 import added202611111 from './assets/seasonal-easter-bread-wreath-2026-11-11.png';
@@ -77,6 +86,15 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-christmas-handbells-2026-11-12':added202611120,
+ 'easter-chocolate-easter-egg-2026-11-12':added202611121,
+ 'halloween-witchs-broom-2026-11-12':added202611122,
+ 'valentine-locks-of-love-2026-11-12':added202611123,
+ 'newyear-midnight-hourglass-2026-11-12':added202611124,
+ 'mother-lilac-embroidery-2026-11-12':added202611125,
+ 'father-mountain-radio-2026-11-12':added202611126,
+ 'thanksgiving-bread-autumn-apples-2026-11-12':added202611127,
+ 'gonk-fishing-gonk-2026-11-12':added202611128,
  'gonk-spring-gardener-2026-11-12':gonkSpringGardener,
  'advent-cottage-2026-11-11':added202611110,
  'easter-bread-wreath-2026-11-11':added202611111,

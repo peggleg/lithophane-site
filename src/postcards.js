@@ -923,6 +923,126 @@ const additions20261111=[
   }
 ];
 
+const additions20261112=[
+  {
+    "id": "christmas-christmas-handbells-2026-11-12",
+    "name": "Christmas Handbells",
+    "season": "Christmas",
+    "description": "Christmas Handbells lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "christmas-christmas-handbells-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-chocolate-easter-egg-2026-11-12",
+    "name": "The Chocolate Easter Egg",
+    "season": "Easter",
+    "description": "The Chocolate Easter Egg lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "easter-chocolate-easter-egg-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-witchs-broom-2026-11-12",
+    "name": "The Witch’s Broom",
+    "season": "Halloween",
+    "description": "The Witch’s Broom lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "halloween-witchs-broom-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-locks-of-love-2026-11-12",
+    "name": "Locks of Love",
+    "season": "Valentine’s Day",
+    "description": "Locks of Love lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "valentine-locks-of-love-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-midnight-hourglass-2026-11-12",
+    "name": "The Midnight Hourglass",
+    "season": "New Year 2027",
+    "description": "The Midnight Hourglass lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "newyear-midnight-hourglass-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-lilac-embroidery-2026-11-12",
+    "name": "Lilac and Embroidery",
+    "season": "Mother’s Day",
+    "description": "Lilac and Embroidery lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "mother-lilac-embroidery-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-mountain-radio-2026-11-12",
+    "name": "The Mountain Radio",
+    "season": "Father’s Day",
+    "description": "The Mountain Radio lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "father-mountain-radio-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-bread-autumn-apples-2026-11-12",
+    "name": "Bread and Autumn Apples",
+    "season": "Thanksgiving",
+    "description": "Bread and Autumn Apples lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "thanksgiving-bread-autumn-apples-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "gonk-fishing-gonk-2026-11-12",
+    "name": "The Fishing Gonk",
+    "season": "Gonk",
+    "description": "The Fishing Gonk lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "gonk-fishing-gonk-2026-11-12",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -935,7 +1055,8 @@ export const seasonalDesigns=[
  ...additions20261105,
  ...additions20261106,
  ...additions20261111,
- {id:'gonk-spring-gardener-2026-11-12',name:'The Spring Gardener Gonk',season:'Gonk',description:'A cheerful gonk tends spring flowers at a garden potting bench.',orientation:'portrait',atlas:'gonk-spring-gardener-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true}
+ {id:'gonk-spring-gardener-2026-11-12',name:'The Spring Gardener Gonk',season:'Gonk',description:'A cheerful gonk tends spring flowers at a garden potting bench.',orientation:'portrait',atlas:'gonk-spring-gardener-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true},
+ ...additions20261112
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 
