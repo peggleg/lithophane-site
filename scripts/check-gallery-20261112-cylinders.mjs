@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const batch=JSON.parse(await fs.readFile('src/fixtures/gallery-additions-2026-11-12.json','utf8')).cylinders;
 const dir='artifacts/cylinders-2026-11-12';await fs.mkdir(dir,{recursive:true});
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--enable-unsafe-swiftshader']});
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || (process.platform === 'win32' ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : '/usr/bin/chromium'),args:['--no-sandbox','--enable-unsafe-swiftshader']});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const origin=process.env.CYLINDER_ORIGIN||'http://localhost:4175';await page.goto(origin+'/cylinders/');

@@ -7,7 +7,7 @@ const batch=JSON.parse(await fs.readFile(new URL('../src/fixtures/seasonal-addit
 const baseline=JSON.parse(await fs.readFile(new URL('../src/fixtures/seasonal-baseline-'+date+'.json',import.meta.url),'utf8'));
 const origin=process.env.SEASONAL_ORIGIN||'http://localhost:4176',dir='artifacts/seasonal-'+date;
 await fs.mkdir(dir,{recursive:true});
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--enable-unsafe-swiftshader']});
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || (process.platform === 'win32' ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : '/usr/bin/chromium'),args:['--no-sandbox','--enable-unsafe-swiftshader']});
 const report=[],pictures=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];

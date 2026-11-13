@@ -4,7 +4,7 @@ test('cylinder additions preserve every previous ID, source asset, row selection
  assert.ok(cylinderCatalogue.length>=baseline.designs.length+3);assert.equal(new Set(cylinderCatalogue.map(d=>d.id)).size,cylinderCatalogue.length);
  for(const old of baseline.designs){const current=cylinderCatalogue.find(d=>d.id===old.id);assert.ok(current,old.id);for(const [key,value]of Object.entries(old))assert.deepEqual(current[key],value,old.id+':'+key);assert.equal(current.asset,old.collection+'.webp');assert.equal(current.rows,2);}
  for(const [file,sha]of Object.entries(baseline.assets))assert.equal(hash(fs.readFileSync('src/assets/cylinders/'+file)),sha,file);
- assert.equal(hash(fs.readFileSync('src/cylinder-texture.js')),baseline.textureSha256);
+ assert.equal(hash(fs.readFileSync('src/cylinder-texture.js', 'utf8').replace(/\r\n/g, '\n')),baseline.textureSha256);
 });
 test('three original dated Christmas scenes accumulate as landscape panoramas with unique new assets',()=>{
  const priorHashes=new Set(Object.values(baseline.assets));for(const suffix of ['midnight-express','frozen-lake','reindeer-valley']){

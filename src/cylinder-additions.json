@@ -518,5 +518,105 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-winter-woodland-cottages-2026-11-13",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Winter Woodland Cottages",
+    "asset": "christmas-winter-woodland-cottages-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-blossom-meadow-eggs-2026-11-13",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Blossom Meadow Eggs",
+    "asset": "easter-blossom-meadow-eggs-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-moonlit-pumpkin-woodland-2026-11-13",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Moonlit Pumpkin Woodland",
+    "asset": "halloween-moonlit-pumpkin-woodland-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-heart-rose-garden-2026-11-13",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Heart Rose Garden",
+    "asset": "valentine-heart-rose-garden-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-winter-village-fireworks-2026-11-13",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Winter Village Fireworks",
+    "asset": "newyear-winter-village-fireworks-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-the-flower-garden-arbour-2026-11-13",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Flower Garden Arbour",
+    "asset": "mother-the-flower-garden-arbour-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-the-woodland-fishing-lake-2026-11-13",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Woodland Fishing Lake",
+    "asset": "father-the-woodland-fishing-lake-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-autumn-harvest-fields-2026-11-13",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Autumn Harvest Fields",
+    "asset": "thanksgiving-autumn-harvest-fields-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "gonk-gonk-garden-panorama-2026-11-13",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "Gonk Garden Panorama",
+    "asset": "gonk-gonk-garden-panorama-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "animals-otters-by-the-river-2026-11-13",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Otters by the River",
+    "asset": "animals-otters-by-the-river-2026-11-13.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

@@ -1,3 +1,13 @@
+import daily20261113_0 from './assets/seasonal-christmas-snowbound-chapel-2026-11-13.png';
+import daily20261113_1 from './assets/seasonal-easter-daffodil-egg-garden-2026-11-13.png';
+import daily20261113_2 from './assets/seasonal-halloween-pumpkin-garden-gate-2026-11-13.png';
+import daily20261113_3 from './assets/seasonal-valentine-ribbon-hearts-and-roses-2026-11-13.png';
+import daily20261113_4 from './assets/seasonal-newyear-fireworks-over-the-lake-2026-11-13.png';
+import daily20261113_5 from './assets/seasonal-mother-garden-teapot-bouquet-2026-11-13.png';
+import daily20261113_6 from './assets/seasonal-father-fishing-by-the-lake-2026-11-13.png';
+import daily20261113_7 from './assets/seasonal-thanksgiving-harvest-cornucopia-2026-11-13.png';
+import daily20261113_8 from './assets/seasonal-gonk-garden-gonk-2026-11-13.png';
+import daily20261113_9 from './assets/seasonal-animals-red-panda-in-bamboo-2026-11-13.png';
 import animalsCapuchin from './assets/seasonal-animals-capuchin-rainforest-2026-11-12.png';
 import added202611120 from './assets/seasonal-christmas-christmas-handbells-2026-11-12.png';
 import added202611121 from './assets/seasonal-easter-chocolate-easter-egg-2026-11-12.png';
@@ -87,6 +97,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-snowbound-chapel-2026-11-13':daily20261113_0,
+ 'easter-daffodil-egg-garden-2026-11-13':daily20261113_1,
+ 'halloween-pumpkin-garden-gate-2026-11-13':daily20261113_2,
+ 'valentine-ribbon-hearts-and-roses-2026-11-13':daily20261113_3,
+ 'newyear-fireworks-over-the-lake-2026-11-13':daily20261113_4,
+ 'mother-garden-teapot-bouquet-2026-11-13':daily20261113_5,
+ 'father-fishing-by-the-lake-2026-11-13':daily20261113_6,
+ 'thanksgiving-harvest-cornucopia-2026-11-13':daily20261113_7,
+ 'gonk-garden-gonk-2026-11-13':daily20261113_8,
+ 'animals-red-panda-in-bamboo-2026-11-13':daily20261113_9,
  'animals-capuchin-rainforest-2026-11-12':animalsCapuchin,
  'christmas-christmas-handbells-2026-11-12':added202611120,
  'easter-chocolate-easter-egg-2026-11-12':added202611121,
