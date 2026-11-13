@@ -1176,6 +1176,139 @@ const additions20261113=[
   }
 ];
 
+const additionsRun2=[
+  {
+    "id": "christmas-snowbound-station-2026-11-13-run2",
+    "name": "Snowbound Station",
+    "season": "Christmas",
+    "description": "Snowbound Station lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "christmas-snowbound-station-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-nest-of-spring-2026-11-13-run2",
+    "name": "Nest of Spring",
+    "season": "Easter",
+    "description": "Nest of Spring lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "easter-nest-of-spring-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-the-gothic-greenhouse-2026-11-13-run2",
+    "name": "The Gothic Greenhouse",
+    "season": "Halloween",
+    "description": "The Gothic Greenhouse lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "halloween-the-gothic-greenhouse-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-keys-and-roses-2026-11-13-run2",
+    "name": "Keys and Roses",
+    "season": "Valentine’s Day",
+    "description": "Keys and Roses lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "valentine-keys-and-roses-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-midnight-clock-tower-2026-11-13-run2",
+    "name": "Midnight Clock Tower",
+    "season": "New Year 2027",
+    "description": "Midnight Clock Tower lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "newyear-midnight-clock-tower-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-peony-pitcher-2026-11-13-run2",
+    "name": "Peony Pitcher",
+    "season": "Mother’s Day",
+    "description": "Peony Pitcher lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "mother-peony-pitcher-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-woodworker-s-window-2026-11-13-run2",
+    "name": "Woodworker’s Window",
+    "season": "Father’s Day",
+    "description": "Woodworker’s Window lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "father-woodworker-s-window-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-harvest-basket-and-lantern-2026-11-13-run2",
+    "name": "Harvest Basket and Lantern",
+    "season": "Thanksgiving",
+    "description": "Harvest Basket and Lantern lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "thanksgiving-harvest-basket-and-lantern-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "gonk-beekeeper-gonk-2026-11-13-run2",
+    "name": "Beekeeper Gonk",
+    "season": "Gonk",
+    "description": "Beekeeper Gonk lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "gonk-beekeeper-gonk-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "animals-snow-leopard-on-the-ledge-2026-11-13-run2",
+    "name": "Snow Leopard on the Ledge",
+    "season": "Animals",
+    "description": "Snow Leopard on the Ledge lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "animals-snow-leopard-on-the-ledge-2026-11-13-run2",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -1191,7 +1324,8 @@ export const seasonalDesigns=[
  {id:'gonk-spring-gardener-2026-11-12',name:'The Spring Gardener Gonk',season:'Gonk',description:'A cheerful gonk tends spring flowers at a garden potting bench.',orientation:'portrait',atlas:'gonk-spring-gardener-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true},
  ...additions20261112,
  {id:'animals-capuchin-rainforest-2026-11-12',name:'Capuchin in the Rainforest',season:'Animals',description:'A capuchin monkey rests on a branch in a tropical rainforest.',orientation:'portrait',atlas:'animals-capuchin-rainforest-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true},
- ...additions20261113
+ ...additions20261113,
+ ...additionsRun2
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

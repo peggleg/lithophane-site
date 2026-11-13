@@ -618,5 +618,105 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-alpine-christmas-village-2026-11-13-run2",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Alpine Christmas Village",
+    "asset": "christmas-alpine-christmas-village-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-spring-orchard-bridge-2026-11-13-run2",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Spring Orchard Bridge",
+    "asset": "easter-spring-orchard-bridge-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-moonlit-marsh-mill-2026-11-13-run2",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Moonlit Marsh Mill",
+    "asset": "halloween-moonlit-marsh-mill-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-heart-trellis-garden-2026-11-13-run2",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Heart Trellis Garden",
+    "asset": "valentine-heart-trellis-garden-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-fireworks-harbour-2026-11-13-run2",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Fireworks Harbour",
+    "asset": "newyear-fireworks-harbour-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-peony-fountain-garden-2026-11-13-run2",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "Peony Fountain Garden",
+    "asset": "mother-peony-fountain-garden-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-mountain-lake-campsite-clear-2026-11-13-run2",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "Mountain Lake Campsite",
+    "asset": "father-mountain-lake-campsite-clear-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-harvest-farm-clear-2026-11-13-run2",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Harvest Farm",
+    "asset": "thanksgiving-harvest-farm-clear-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "gonk-beekeeper-meadow-2026-11-13-run2",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "Beekeeper Meadow",
+    "asset": "gonk-beekeeper-meadow-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "animals-puffin-coast-clear-2026-11-13-run2",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Puffin Coast",
+    "asset": "animals-puffin-coast-clear-2026-11-13-run2.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

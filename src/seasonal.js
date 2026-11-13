@@ -1,3 +1,13 @@
+import run2_0 from './assets/seasonal-christmas-snowbound-station-2026-11-13-run2.png';
+import run2_1 from './assets/seasonal-easter-nest-of-spring-2026-11-13-run2.png';
+import run2_2 from './assets/seasonal-halloween-the-gothic-greenhouse-2026-11-13-run2.png';
+import run2_3 from './assets/seasonal-valentine-keys-and-roses-2026-11-13-run2.png';
+import run2_4 from './assets/seasonal-newyear-midnight-clock-tower-2026-11-13-run2.png';
+import run2_5 from './assets/seasonal-mother-peony-pitcher-2026-11-13-run2.png';
+import run2_6 from './assets/seasonal-father-woodworker-s-window-2026-11-13-run2.png';
+import run2_7 from './assets/seasonal-thanksgiving-harvest-basket-and-lantern-2026-11-13-run2.png';
+import run2_8 from './assets/seasonal-gonk-beekeeper-gonk-2026-11-13-run2.png';
+import run2_9 from './assets/seasonal-animals-snow-leopard-on-the-ledge-2026-11-13-run2.png';
 import daily20261113_0 from './assets/seasonal-christmas-snowbound-chapel-2026-11-13.png';
 import daily20261113_1 from './assets/seasonal-easter-daffodil-egg-garden-2026-11-13.png';
 import daily20261113_2 from './assets/seasonal-halloween-pumpkin-garden-gate-2026-11-13.png';
@@ -97,6 +107,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-snowbound-station-2026-11-13-run2':run2_0,
+ 'easter-nest-of-spring-2026-11-13-run2':run2_1,
+ 'halloween-the-gothic-greenhouse-2026-11-13-run2':run2_2,
+ 'valentine-keys-and-roses-2026-11-13-run2':run2_3,
+ 'newyear-midnight-clock-tower-2026-11-13-run2':run2_4,
+ 'mother-peony-pitcher-2026-11-13-run2':run2_5,
+ 'father-woodworker-s-window-2026-11-13-run2':run2_6,
+ 'thanksgiving-harvest-basket-and-lantern-2026-11-13-run2':run2_7,
+ 'gonk-beekeeper-gonk-2026-11-13-run2':run2_8,
+ 'animals-snow-leopard-on-the-ledge-2026-11-13-run2':run2_9,
  'christmas-snowbound-chapel-2026-11-13':daily20261113_0,
  'easter-daffodil-egg-garden-2026-11-13':daily20261113_1,
  'halloween-pumpkin-garden-gate-2026-11-13':daily20261113_2,
