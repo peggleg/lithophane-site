@@ -1,3 +1,9 @@
+import thanksgiving0 from './ornament-artwork/thanksgiving-maple.json' with {type:'json'};
+import thanksgiving1 from './ornament-artwork/thanksgiving-pumpkin.json' with {type:'json'};
+import thanksgiving2 from './ornament-artwork/thanksgiving-cornucopia.json' with {type:'json'};
+import thanksgiving3 from './ornament-artwork/thanksgiving-turkey.json' with {type:'json'};
+import thanksgiving4 from './ornament-artwork/thanksgiving-apples.json' with {type:'json'};
+import thanksgiving5 from './ornament-artwork/thanksgiving-sunflower.json' with {type:'json'};
 import art0 from './ornament-artwork/baby-dreams.json' with {type:'json'};
 import art1 from './ornament-artwork/baby-feet.json' with {type:'json'};
 import art2 from './ornament-artwork/baby-moon.json' with {type:'json'};
@@ -36,4 +42,5 @@ import art34 from './ornament-artwork/wedding-linked-hearts.json' with {type:'js
 import art35 from './ornament-artwork/wedding-rings.json' with {type:'json'};
 import art36 from './ornament-artwork/wedding-roses.json' with {type:'json'};
 const artwork={'baby-dreams':art0,'baby-feet':art1,'baby-moon':art2,'baby-stork':art3,'baby-teddy':art4,'birthday-badge':art5,'birthday-balloons':art6,'birthday-cake':art7,'birthday-candles':art8,'birthday-crown':art9,'birthday-present':art10,'christmas-bells':art11,'christmas-bow':art12,'christmas-forest':art13,'christmas-poinsettia':art14,'christmas-reindeer':art15,'christmas-snowflake':art16,'easter-bunny-hearts':art17,'easter-bunny':art18,'easter-butterfly':art19,'easter-chick':art20,'easter-eggs':art21,'halloween-boo':art22,'halloween-forest':art23,'halloween-ghost':art24,'halloween-house':art25,'halloween-pumpkin':art26,'pets-bone':art27,'pets-cat':art28,'pets-dog':art29,'pets-memorial':art30,'pets-paw':art31,'wedding-bells':art32,'wedding-hearts':art33,'wedding-linked-hearts':art34,'wedding-rings':art35,'wedding-roses':art36};
-export function ornamentArtwork(p){return artwork[p.collection+'-'+p.design]||null;}
+const thanksgivingArtwork={'maple':thanksgiving0,'pumpkin':thanksgiving1,'cornucopia':thanksgiving2,'turkey':thanksgiving3,'apples':thanksgiving4,'sunflower':thanksgiving5};
+export function ornamentArtwork(p){return (p.collection==='thanksgiving'?thanksgivingArtwork[p.design]:artwork[p.collection+'-'+p.design])||null;}

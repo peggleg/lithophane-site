@@ -32,7 +32,7 @@ export function generateOrnament(module,fontBuffer,input){
   const leafy=p.frameStyle==='leafy',frame=leafy?leafyWreath(C,own,scale,p):own(circle(radius).subtract(circle(radius-3.6*scale)));
   const trim=shape=>leafy?own(shape.intersect(circle(radius-6*scale))):shape;
   const eyelet=own(circle(5,0,radius+3).subtract(circle(2.2,0,radius+3)));
-  const template=ornamentArtwork(p),traced=contours=>{if(!contours?.length)return own(C.square([0,0]));let shape=own(new C(contours,'EvenOdd'));for(const delta of (template?.source==='approved-clean-stencil'?[.08]:[.48,-.28,-.16,.16]))shape=own(shape.offset(delta,'Round',2,24));return own(shape.scale([scale,scale]));};
+  const template=ornamentArtwork(p),traced=contours=>{if(!contours?.length)return own(C.square([0,0]));let shape=own(new C(contours,'EvenOdd'));for(const delta of (['approved-clean-stencil','original-clean-stencil'].includes(template?.source)?[.08]:[.48,-.28,-.16,.16]))shape=own(shape.offset(delta,'Round',2,24));return own(shape.scale([scale,scale]));};
   if(!template)throw Error('This design needs an approved artwork template.');
   const source={profile:own(trim(traced(template.frame)).add(traced(template.etching||[]))),etching:traced(template.etching||[])};
   const motifs=own(source.profile.intersect(circle(radius))),etching=source.etching;
