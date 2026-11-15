@@ -1,3 +1,13 @@
+import daily20261115_0 from './assets/seasonal-christmas-lantern-bridge-in-snow-2026-11-15.png';
+import daily20261115_1 from './assets/seasonal-easter-daffodil-garden-gate-2026-11-15.png';
+import daily20261115_2 from './assets/seasonal-halloween-cauldron-in-the-ruins-2026-11-15.png';
+import daily20261115_3 from './assets/seasonal-valentine-roses-and-chocolate-hearts-2026-11-15.png';
+import daily20261115_4 from './assets/seasonal-newyear-fireworks-at-the-observatory-2026-11-15.png';
+import daily20261115_5 from './assets/seasonal-mother-peony-teacup-2026-11-15.png';
+import daily20261115_6 from './assets/seasonal-father-alpine-compass-and-boots-2026-11-15.png';
+import daily20261115_7 from './assets/seasonal-thanksgiving-harvest-porch-2026-11-15.png';
+import daily20261115_8 from './assets/seasonal-gonk-the-stargazing-gonk-2026-11-15.png';
+import daily20261115_9 from './assets/seasonal-animals-koala-in-the-eucalyptus-2026-11-15.png';
 import run2_0 from './assets/seasonal-christmas-snowbound-station-2026-11-13-run2.png';
 import run2_1 from './assets/seasonal-easter-nest-of-spring-2026-11-13-run2.png';
 import run2_2 from './assets/seasonal-halloween-the-gothic-greenhouse-2026-11-13-run2.png';
@@ -107,6 +117,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-lantern-bridge-in-snow-2026-11-15':daily20261115_0,
+ 'easter-daffodil-garden-gate-2026-11-15':daily20261115_1,
+ 'halloween-cauldron-in-the-ruins-2026-11-15':daily20261115_2,
+ 'valentine-roses-and-chocolate-hearts-2026-11-15':daily20261115_3,
+ 'newyear-fireworks-at-the-observatory-2026-11-15':daily20261115_4,
+ 'mother-peony-teacup-2026-11-15':daily20261115_5,
+ 'father-alpine-compass-and-boots-2026-11-15':daily20261115_6,
+ 'thanksgiving-harvest-porch-2026-11-15':daily20261115_7,
+ 'gonk-the-stargazing-gonk-2026-11-15':daily20261115_8,
+ 'animals-koala-in-the-eucalyptus-2026-11-15':daily20261115_9,
  'christmas-snowbound-station-2026-11-13-run2':run2_0,
  'easter-nest-of-spring-2026-11-13-run2':run2_1,
  'halloween-the-gothic-greenhouse-2026-11-13-run2':run2_2,

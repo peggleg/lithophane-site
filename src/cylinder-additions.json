@@ -718,5 +718,105 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-winter-forest-cabins-2026-11-15",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Winter Forest Cabins",
+    "asset": "christmas-winter-forest-cabins-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-spring-meadow-stream-2026-11-15",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Spring Meadow Stream",
+    "asset": "easter-spring-meadow-stream-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-moonlit-pumpkin-hamlet-2026-11-15",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Moonlit Abbey Ruins",
+    "asset": "halloween-moonlit-pumpkin-hamlet-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-heart-garden-at-sunset-2026-11-15",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Heart Garden at Sunset",
+    "asset": "valentine-heart-garden-at-sunset-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-riverside-midnight-fireworks-2026-11-15",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Riverside Midnight Fireworks",
+    "asset": "newyear-riverside-midnight-fireworks-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-the-peony-garden-2026-11-15",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Peony Garden",
+    "asset": "mother-the-peony-garden-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-camp-by-the-forest-lake-2026-11-15",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "Camp by the Forest Lake",
+    "asset": "father-camp-by-the-forest-lake-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-orchard-harvest-2026-11-15",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Orchard Harvest",
+    "asset": "thanksgiving-orchard-harvest-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "gonk-gonk-observatory-garden-2026-11-15",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "Gonk Observatory Garden",
+    "asset": "gonk-gonk-observatory-garden-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "animals-koalas-in-the-woodland-2026-11-15",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Koalas in the Woodland",
+    "asset": "animals-koalas-in-the-woodland-2026-11-15.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]
