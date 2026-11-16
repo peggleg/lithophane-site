@@ -999,5 +999,71 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "gaming-super-mario-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Super Mario",
+    "asset": "gaming-super-mario-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-sonic-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Sonic the Hedgehog",
+    "asset": "gaming-sonic-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-pokemon-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Pokémon",
+    "asset": "gaming-pokemon-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-animal-crossing-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Animal Crossing",
+    "asset": "gaming-animal-crossing-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-stardew-valley-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Stardew Valley",
+    "asset": "gaming-stardew-valley-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-portal-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Portal",
+    "asset": "gaming-portal-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

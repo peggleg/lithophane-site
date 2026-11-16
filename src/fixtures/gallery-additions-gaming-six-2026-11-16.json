@@ -1,0 +1,77 @@
+{
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "gaming-super-mario-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Super Mario",
+      "asset": "gaming-super-mario-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "3e06453edf92bdc0b096e22e35d997037f6fc1435f9ba7ab38f8ddff1947732e"
+    },
+    {
+      "id": "gaming-sonic-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Sonic the Hedgehog",
+      "asset": "gaming-sonic-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "55693cb3972a1933f043d11ffc2f16c78d45fbf4d8427a3f608f75495011f7ad"
+    },
+    {
+      "id": "gaming-pokemon-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Pokémon",
+      "asset": "gaming-pokemon-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "38801d2b6913b150bcc18d0f7050614c5a606dcd1e41a66c7022316e7210b000"
+    },
+    {
+      "id": "gaming-animal-crossing-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Animal Crossing",
+      "asset": "gaming-animal-crossing-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "954741af87a0c8eb12e7e9d318f8a86e7906f72529b798c7ab20dce2cecb72fc"
+    },
+    {
+      "id": "gaming-stardew-valley-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Stardew Valley",
+      "asset": "gaming-stardew-valley-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "a6083722f7bd9cf39dd20488a91f0ef1cfe30013ff62f213d3b0ad71cd6c908e"
+    },
+    {
+      "id": "gaming-portal-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Portal",
+      "asset": "gaming-portal-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "f662b4068c75a190244751045eb0119268718eb283b9dd74942b59950edd1df8"
+    }
+  ]
+}
