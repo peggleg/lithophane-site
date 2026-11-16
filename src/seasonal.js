@@ -1,3 +1,14 @@
+import daily20261116_0 from './assets/seasonal-christmas-star-lantern-and-citrus-2026-11-16.png';
+import daily20261116_1 from './assets/seasonal-easter-spring-wheelbarrow-2026-11-16.png';
+import daily20261116_2 from './assets/seasonal-halloween-moonlit-spellbooks-2026-11-16.png';
+import daily20261116_3 from './assets/seasonal-valentine-lavender-love-letters-2026-11-16.png';
+import daily20261116_4 from './assets/seasonal-newyear-midnight-pocket-watch-2026-11-16.png';
+import daily20261116_5 from './assets/seasonal-mother-anemones-in-porcelain-2026-11-16.png';
+import daily20261116_6 from './assets/seasonal-father-mountain-lookout-2026-11-16.png';
+import daily20261116_7 from './assets/seasonal-thanksgiving-bread-and-cider-2026-11-16.png';
+import daily20261116_8 from './assets/seasonal-gonk-the-pottery-gonk-2026-11-16.png';
+import daily20261116_9 from './assets/seasonal-animals-snowshoe-hare-in-bluebells-2026-11-16.png';
+import daily20261116_10 from './assets/seasonal-cartoons-hedgehog-postmaster-2026-11-16.png';
 import cartoon20261116_0 from './assets/seasonal-cartoons-fox-astronaut-flat-2026-11-16.png';
 import cartoon20261116_1 from './assets/seasonal-cartoons-dragon-baker-flat-2026-11-16.png';
 import cartoon20261116_2 from './assets/seasonal-cartoons-rabbit-airship-flat-2026-11-16.png';
@@ -123,6 +134,17 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-star-lantern-and-citrus-2026-11-16':daily20261116_0,
+ 'easter-spring-wheelbarrow-2026-11-16':daily20261116_1,
+ 'halloween-moonlit-spellbooks-2026-11-16':daily20261116_2,
+ 'valentine-lavender-love-letters-2026-11-16':daily20261116_3,
+ 'newyear-midnight-pocket-watch-2026-11-16':daily20261116_4,
+ 'mother-anemones-in-porcelain-2026-11-16':daily20261116_5,
+ 'father-mountain-lookout-2026-11-16':daily20261116_6,
+ 'thanksgiving-bread-and-cider-2026-11-16':daily20261116_7,
+ 'gonk-the-pottery-gonk-2026-11-16':daily20261116_8,
+ 'animals-snowshoe-hare-in-bluebells-2026-11-16':daily20261116_9,
+ 'cartoons-hedgehog-postmaster-2026-11-16':daily20261116_10,
  'cartoons-fox-astronaut-flat-2026-11-16':cartoon20261116_0,
  'cartoons-dragon-baker-flat-2026-11-16':cartoon20261116_1,
  'cartoons-rabbit-airship-flat-2026-11-16':cartoon20261116_2,

@@ -878,5 +878,115 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "christmas-snowbound-alpine-railway-2026-11-16",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Snowbound Alpine Railway",
+    "asset": "christmas-snowbound-alpine-railway-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "easter-apple-blossom-orchard-2026-11-16",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Apple Blossom Orchard",
+    "asset": "easter-apple-blossom-orchard-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "halloween-the-haunted-lighthouse-2026-11-16",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Haunted Lighthouse",
+    "asset": "halloween-the-haunted-lighthouse-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "valentine-rose-garden-arches-2026-11-16",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Rose Garden Arches",
+    "asset": "valentine-rose-garden-arches-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "newyear-fireworks-over-the-snowy-village-2026-11-16",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Fireworks over the Snowy Village",
+    "asset": "newyear-fireworks-over-the-snowy-village-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "mother-iris-garden-greenhouse-2026-11-16",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "Iris Garden Greenhouse",
+    "asset": "mother-iris-garden-greenhouse-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "father-alpine-railway-observatory-2026-11-16",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "Alpine Railway Observatory",
+    "asset": "father-alpine-railway-observatory-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "thanksgiving-orchard-and-harvest-fields-2026-11-16",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Orchard and Harvest Fields",
+    "asset": "thanksgiving-orchard-and-harvest-fields-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "gonk-pottery-garden-gonks-2026-11-16",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "Pottery Garden Gonks",
+    "asset": "gonk-pottery-garden-gonks-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "animals-hares-in-the-bluebell-woods-2026-11-16",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Hares in the Bluebell Woods",
+    "asset": "animals-hares-in-the-bluebell-woods-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-hedgehog-post-in-the-village-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Hedgehog Post in the Village",
+    "asset": "cartoons-hedgehog-post-in-the-village-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

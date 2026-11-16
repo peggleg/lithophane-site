@@ -1523,6 +1523,152 @@ const cartoonAdditions=[
   }
 ];
 
+const daily20261116=[
+  {
+    "id": "christmas-star-lantern-and-citrus-2026-11-16",
+    "name": "Star Lantern and Citrus",
+    "season": "Christmas",
+    "description": "Star Lantern and Citrus lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "christmas-star-lantern-and-citrus-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "easter-spring-wheelbarrow-2026-11-16",
+    "name": "Spring Wheelbarrow",
+    "season": "Easter",
+    "description": "Spring Wheelbarrow lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "easter-spring-wheelbarrow-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "halloween-moonlit-spellbooks-2026-11-16",
+    "name": "Moonlit Spellbooks",
+    "season": "Halloween",
+    "description": "Moonlit Spellbooks lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "halloween-moonlit-spellbooks-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "valentine-lavender-love-letters-2026-11-16",
+    "name": "Lavender Love Letters",
+    "season": "Valentine’s Day",
+    "description": "Lavender Love Letters lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "valentine-lavender-love-letters-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "newyear-midnight-pocket-watch-2026-11-16",
+    "name": "Midnight Pocket Watch",
+    "season": "New Year 2027",
+    "description": "Midnight Pocket Watch lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "newyear-midnight-pocket-watch-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "mother-anemones-in-porcelain-2026-11-16",
+    "name": "Anemones in Porcelain",
+    "season": "Mother’s Day",
+    "description": "Anemones in Porcelain lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "mother-anemones-in-porcelain-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "father-mountain-lookout-2026-11-16",
+    "name": "Mountain Lookout",
+    "season": "Father’s Day",
+    "description": "Mountain Lookout lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "father-mountain-lookout-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "thanksgiving-bread-and-cider-2026-11-16",
+    "name": "Bread and Cider",
+    "season": "Thanksgiving",
+    "description": "Bread and Cider lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "thanksgiving-bread-and-cider-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "gonk-the-pottery-gonk-2026-11-16",
+    "name": "The Pottery Gonk",
+    "season": "Gonk",
+    "description": "The Pottery Gonk lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "gonk-the-pottery-gonk-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "animals-snowshoe-hare-in-bluebells-2026-11-16",
+    "name": "Snowshoe Hare in Bluebells",
+    "season": "Animals",
+    "description": "Snowshoe Hare in Bluebells lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "animals-snowshoe-hare-in-bluebells-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-hedgehog-postmaster-2026-11-16",
+    "name": "Hedgehog Postmaster",
+    "season": "Cartoons",
+    "description": "Hedgehog Postmaster lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "cartoons-hedgehog-postmaster-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -1541,7 +1687,8 @@ export const seasonalDesigns=[
  ...additions20261113,
  ...additionsRun2,
  ...additions20261115,
- ...cartoonAdditions
+ ...cartoonAdditions,
+ ...daily20261116
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 
