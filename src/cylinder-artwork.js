@@ -16,7 +16,7 @@ export async function cylinderArtwork(design,width=1024,height=341,brightness=0)
  ctx.drawImage(image,0,design.row*h,image.naturalWidth,h,0,0,width,height);
  const rgba=ctx.getImageData(0,0,width,height),source=new Uint8Array(width*height);
  for(let i=0;i<source.length;i++)source[i]=Math.round(rgba.data[i*4]*.2126+rgba.data[i*4+1]*.7152+rgba.data[i*4+2]*.0722);
- const tones=design.seamMode==='divider'?dividerTones(source,width,height,brightness,.006):periodicTones(source,width,height,brightness);
+ const tones=design.seamMode==='divider'?dividerTones(source,width,height,brightness):periodicTones(source,width,height,brightness);
  for(let i=0;i<tones.length;i++){rgba.data[i*4]=rgba.data[i*4+1]=rgba.data[i*4+2]=tones[i];rgba.data[i*4+3]=255;}
  ctx.putImageData(rgba,0,0);return {canvas,tones,width,height,seam:seamMetrics(tones,width,height)};
 }
