@@ -1,0 +1,149 @@
+{
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "gaming-pac-man-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Pac-Man",
+      "asset": "gaming-pac-man-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "14441e55d062c5b1aaf69ec007d992cf58b6e95085fc3d9187b2a5e2a46e2d89"
+    },
+    {
+      "id": "gaming-space-invaders-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Space Invaders",
+      "asset": "gaming-space-invaders-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "eb90cb67b6a6ac87b309b391fe67a4fd4ef4cf022a0a4a0a07ae8f2a1c88d00f"
+    },
+    {
+      "id": "gaming-donkey-kong-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Donkey Kong",
+      "asset": "gaming-donkey-kong-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "bbc3d43850dbb39d141631e8e59c73ec34a9a825997b080dcc47c48f5c181e42"
+    },
+    {
+      "id": "gaming-splatoon-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Splatoon",
+      "asset": "gaming-splatoon-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "6f6c02f28715c4374ce2de1ec8cff7cfbbe55afbb08f9741198ffb824f891c9c"
+    },
+    {
+      "id": "gaming-crash-bandicoot-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Crash Bandicoot",
+      "asset": "gaming-crash-bandicoot-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "676b20d886306fe5b8a9fc64f5f4453647a9d5adb55e15617883cbdf9777d7a2"
+    },
+    {
+      "id": "gaming-spyro-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Spyro the Dragon",
+      "asset": "gaming-spyro-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "4c675e2d13106bf0ccf90807e72ffe9c43de85017cd0d578cf91dd1a91af24a5"
+    },
+    {
+      "id": "gaming-ratchet-clank-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Ratchet & Clank",
+      "asset": "gaming-ratchet-clank-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "e1ebe805ab7cfa9ebf58244375a259e1aa8c6cb589ef117e38b8de909d9c83d7"
+    },
+    {
+      "id": "gaming-sackboy-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Sackboy",
+      "asset": "gaming-sackboy-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "ae6e199a1793d8a540b843314ce95296bc47dc93cc377ab29c736f9f158f1d36"
+    },
+    {
+      "id": "gaming-cuphead-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Cuphead",
+      "asset": "gaming-cuphead-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "e012e0e90546779b5c28a591cda20f6ba98b1899a758b761ef95716b29f5311e"
+    },
+    {
+      "id": "gaming-rayman-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Rayman",
+      "asset": "gaming-rayman-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "cc07599415633b23509f729a99fc0e7199a4a410f7a218c2466717004d3e47fe"
+    },
+    {
+      "id": "gaming-ori-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Ori and the Blind Forest",
+      "asset": "gaming-ori-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "9e2037b3507cb8af1088508c02c9c1aebc8345c62013bdd856df306cc4be86d5"
+    },
+    {
+      "id": "gaming-journey-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Journey",
+      "asset": "gaming-journey-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "d0e0ca3ca6c6dcac5a036571b88a876a8b55a73258349867245e13e5429361c3"
+    }
+  ]
+}
