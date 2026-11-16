@@ -1442,6 +1442,87 @@ const additions20261115=[
   }
 ];
 
+const cartoonAdditions=[
+  {
+    "id": "cartoons-fox-astronaut-flat-2026-11-16",
+    "name": "Fox Astronaut's Moon Garden",
+    "season": "Cartoons",
+    "description": "Fox Astronaut's Moon Garden cartoon lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "cartoons-fox-astronaut-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-dragon-baker-flat-2026-11-16",
+    "name": "The Dragon's Bakery",
+    "season": "Cartoons",
+    "description": "The Dragon's Bakery cartoon lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "cartoons-dragon-baker-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-rabbit-airship-flat-2026-11-16",
+    "name": "Rabbit's Cloud Voyage",
+    "season": "Cartoons",
+    "description": "Rabbit's Cloud Voyage cartoon lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "cartoons-rabbit-airship-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-robot-gardener-flat-2026-11-16",
+    "name": "The Robot Gardener",
+    "season": "Cartoons",
+    "description": "The Robot Gardener cartoon lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "cartoons-robot-gardener-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-dinosaur-waterfall-flat-2026-11-16",
+    "name": "Dinosaur's Waterfall",
+    "season": "Cartoons",
+    "description": "Dinosaur's Waterfall cartoon lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "cartoons-dinosaur-waterfall-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "cartoons-cat-wizard-flat-2026-11-16",
+    "name": "The Cat Wizard's Library",
+    "season": "Cartoons",
+    "description": "The Cat Wizard's Library cartoon lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "cartoons-cat-wizard-flat-2026-11-16",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+];
+
 export const seasonalDesigns=[
  ...originalDesigns.map(d=>({...d,atlas:'original',orientation:'portrait'})),
  ...newPortraits.flatMap(([atlas,season,designs])=>designs.map(([id,name,description],i)=>({id,name,description,season,atlas,column:i%2,row:Math.floor(i/2),orientation:'portrait'}))),
@@ -1459,7 +1540,8 @@ export const seasonalDesigns=[
  {id:'animals-capuchin-rainforest-2026-11-12',name:'Capuchin in the Rainforest',season:'Animals',description:'A capuchin monkey rests on a branch in a tropical rainforest.',orientation:'portrait',atlas:'animals-capuchin-rainforest-2026-11-12',column:0,row:0,columns:1,rows:1,cropToPostcard:true},
  ...additions20261113,
  ...additionsRun2,
- ...additions20261115
+ ...additions20261115,
+ ...cartoonAdditions
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

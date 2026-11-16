@@ -818,5 +818,65 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-fox-astronaut-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Fox Astronaut's Lunar Adventure",
+    "asset": "cartoons-fox-astronaut-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-dragon-baker-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Dragon's Pastry Shop",
+    "asset": "cartoons-dragon-baker-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-rabbit-airship-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Rabbit's Airship Adventure",
+    "asset": "cartoons-rabbit-airship-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-robot-gardener-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Robot's Greenhouse Garden",
+    "asset": "cartoons-robot-gardener-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-dinosaur-waterfall-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Dinosaur Valley Adventure",
+    "asset": "cartoons-dinosaur-waterfall-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "cartoons-cat-wizard-panorama-2026-11-16",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "Cat Wizard's Mushroom Library",
+    "asset": "cartoons-cat-wizard-panorama-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

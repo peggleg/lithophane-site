@@ -1,0 +1,162 @@
+{
+  "flat": [
+    {
+      "id": "cartoons-fox-astronaut-flat-2026-11-16",
+      "name": "Fox Astronaut's Moon Garden",
+      "season": "Cartoons",
+      "description": "Fox Astronaut's Moon Garden cartoon lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "cartoons-fox-astronaut-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-fox-astronaut-flat-2026-11-16.png",
+      "sha256": "dc29b773b5100b277063e191350372ba1a0fc3345f7a9cd333b8b805e3965e68"
+    },
+    {
+      "id": "cartoons-dragon-baker-flat-2026-11-16",
+      "name": "The Dragon's Bakery",
+      "season": "Cartoons",
+      "description": "The Dragon's Bakery cartoon lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "cartoons-dragon-baker-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-dragon-baker-flat-2026-11-16.png",
+      "sha256": "367f117bf61ccc869f10755a74203ff18f22141f5b560b76c685a1870ebd432f"
+    },
+    {
+      "id": "cartoons-rabbit-airship-flat-2026-11-16",
+      "name": "Rabbit's Cloud Voyage",
+      "season": "Cartoons",
+      "description": "Rabbit's Cloud Voyage cartoon lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "cartoons-rabbit-airship-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-rabbit-airship-flat-2026-11-16.png",
+      "sha256": "94360a94221e5687a244989778752725edf9d5ef9f88a837c849d031562bdbb6"
+    },
+    {
+      "id": "cartoons-robot-gardener-flat-2026-11-16",
+      "name": "The Robot Gardener",
+      "season": "Cartoons",
+      "description": "The Robot Gardener cartoon lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "cartoons-robot-gardener-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-robot-gardener-flat-2026-11-16.png",
+      "sha256": "376826db8a95804ad0c5f9b5ad01e94a4ec9db31444a9b3506493e9a4070dddb"
+    },
+    {
+      "id": "cartoons-dinosaur-waterfall-flat-2026-11-16",
+      "name": "Dinosaur's Waterfall",
+      "season": "Cartoons",
+      "description": "Dinosaur's Waterfall cartoon lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "cartoons-dinosaur-waterfall-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-dinosaur-waterfall-flat-2026-11-16.png",
+      "sha256": "07d184d22507d01dd8afefbf5bc1742ff843f8cf0f8c822bcc525bdeedea4e80"
+    },
+    {
+      "id": "cartoons-cat-wizard-flat-2026-11-16",
+      "name": "The Cat Wizard's Library",
+      "season": "Cartoons",
+      "description": "The Cat Wizard's Library cartoon lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "cartoons-cat-wizard-flat-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-cartoons-cat-wizard-flat-2026-11-16.png",
+      "sha256": "3961fda35d833d44cc656de5a7954cbb8c7d3ea6ea88c8d552940f63f1d2afdc"
+    }
+  ],
+  "cylinders": [
+    {
+      "id": "cartoons-fox-astronaut-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Fox Astronaut's Lunar Adventure",
+      "asset": "cartoons-fox-astronaut-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "30bee18cf5abb19fbc24ff24ab3bb72927d03f4e3c9cb2b6191a9955f69a3d57"
+    },
+    {
+      "id": "cartoons-dragon-baker-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Dragon's Pastry Shop",
+      "asset": "cartoons-dragon-baker-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "f16823575483e978366442bb1ba72794f58bf3b4dd5eae29f7dd9d45fbac53d5"
+    },
+    {
+      "id": "cartoons-rabbit-airship-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Rabbit's Airship Adventure",
+      "asset": "cartoons-rabbit-airship-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "557affb5ced55b4eeee63f58e7ab22a67e19ff9117d0712a31f7052cafd8764e"
+    },
+    {
+      "id": "cartoons-robot-gardener-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Robot's Greenhouse Garden",
+      "asset": "cartoons-robot-gardener-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "aaaebf825c07823e8bcf17897b0db2c57cd7475991816d5c7732f5a86290de04"
+    },
+    {
+      "id": "cartoons-dinosaur-waterfall-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Dinosaur Valley Adventure",
+      "asset": "cartoons-dinosaur-waterfall-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "46294153fb6bb191ce5a4d0377ce7e4c9d41423ab53115620717cc9ac20cb42d"
+    },
+    {
+      "id": "cartoons-cat-wizard-panorama-2026-11-16",
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "name": "Cat Wizard's Mushroom Library",
+      "asset": "cartoons-cat-wizard-panorama-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "sha256": "e7d5a3ebd94d1e27c585b7c16961042729946937b3123e3832e432f17a2a73ef"
+    }
+  ]
+}

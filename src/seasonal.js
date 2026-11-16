@@ -1,3 +1,9 @@
+import cartoon20261116_0 from './assets/seasonal-cartoons-fox-astronaut-flat-2026-11-16.png';
+import cartoon20261116_1 from './assets/seasonal-cartoons-dragon-baker-flat-2026-11-16.png';
+import cartoon20261116_2 from './assets/seasonal-cartoons-rabbit-airship-flat-2026-11-16.png';
+import cartoon20261116_3 from './assets/seasonal-cartoons-robot-gardener-flat-2026-11-16.png';
+import cartoon20261116_4 from './assets/seasonal-cartoons-dinosaur-waterfall-flat-2026-11-16.png';
+import cartoon20261116_5 from './assets/seasonal-cartoons-cat-wizard-flat-2026-11-16.png';
 import daily20261115_0 from './assets/seasonal-christmas-lantern-bridge-in-snow-2026-11-15.png';
 import daily20261115_1 from './assets/seasonal-easter-daffodil-garden-gate-2026-11-15.png';
 import daily20261115_2 from './assets/seasonal-halloween-cauldron-in-the-ruins-2026-11-15.png';
@@ -117,6 +123,12 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'cartoons-fox-astronaut-flat-2026-11-16':cartoon20261116_0,
+ 'cartoons-dragon-baker-flat-2026-11-16':cartoon20261116_1,
+ 'cartoons-rabbit-airship-flat-2026-11-16':cartoon20261116_2,
+ 'cartoons-robot-gardener-flat-2026-11-16':cartoon20261116_3,
+ 'cartoons-dinosaur-waterfall-flat-2026-11-16':cartoon20261116_4,
+ 'cartoons-cat-wizard-flat-2026-11-16':cartoon20261116_5,
  'christmas-lantern-bridge-in-snow-2026-11-15':daily20261115_0,
  'easter-daffodil-garden-gate-2026-11-15':daily20261115_1,
  'halloween-cauldron-in-the-ruins-2026-11-15':daily20261115_2,
