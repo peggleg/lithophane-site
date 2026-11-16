@@ -1,3 +1,4 @@
+import gamingGTAVI from './assets/seasonal-gaming-gta-vi-cover-2026-11-16.png';
 import daily20261116_0 from './assets/seasonal-christmas-star-lantern-and-citrus-2026-11-16.png';
 import daily20261116_1 from './assets/seasonal-easter-spring-wheelbarrow-2026-11-16.png';
 import daily20261116_2 from './assets/seasonal-halloween-moonlit-spellbooks-2026-11-16.png';
@@ -134,6 +135,7 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'gaming-gta-vi-cover-2026-11-16':gamingGTAVI,
  'christmas-star-lantern-and-citrus-2026-11-16':daily20261116_0,
  'easter-spring-wheelbarrow-2026-11-16':daily20261116_1,
  'halloween-moonlit-spellbooks-2026-11-16':daily20261116_2,

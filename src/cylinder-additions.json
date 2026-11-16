@@ -988,5 +988,16 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "gaming-gta-vi-action-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "GTA VI — Leonida Action",
+    "asset": "gaming-gta-vi-action-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

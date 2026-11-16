@@ -1688,7 +1688,8 @@ export const seasonalDesigns=[
  ...additionsRun2,
  ...additions20261115,
  ...cartoonAdditions,
- ...daily20261116
+ ...daily20261116,
+ {"id": "gaming-gta-vi-cover-2026-11-16", "name": "GTA VI — Jason & Lucia", "season": "Gaming", "description": "Jason and Lucia surrounded by GTA VI action scenes.", "orientation": "portrait", "atlas": "gaming-gta-vi-cover-2026-11-16", "column": 0, "row": 0, "columns": 1, "rows": 1, "cropToPostcard": true}
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

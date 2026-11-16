@@ -1,0 +1,33 @@
+{
+  "flat": [
+    {
+      "id": "gaming-gta-vi-cover-2026-11-16",
+      "name": "GTA VI — Jason & Lucia",
+      "season": "Gaming",
+      "description": "Jason and Lucia surrounded by GTA VI action scenes.",
+      "orientation": "portrait",
+      "atlas": "gaming-gta-vi-cover-2026-11-16",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "src/assets/seasonal-gaming-gta-vi-cover-2026-11-16.png",
+      "sha256": "50c8256db28801660c95a69a5a5ba104e8e86c6b9e6fd7290515f8e17d187974"
+    }
+  ],
+  "cylinders": [
+    {
+      "id": "gaming-gta-vi-action-2026-11-16",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "GTA VI — Leonida Action",
+      "asset": "gaming-gta-vi-action-2026-11-16.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "4aaf1ed1f9e4d9e973a8ad791ca406cd3fe36834ddb8e19c7e5c1dc6faab6abd"
+    }
+  ]
+}

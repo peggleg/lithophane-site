@@ -11,7 +11,8 @@ const descriptions={
  Thanksgiving:'Autumn harvests, welcoming homes and time to give thanks.',
  Gonk:'Playful gonks, adventures and scenes for every season.',
  Animals:'Wildlife portraits and animal scenes from around the world.',
- Cartoons:'Original characters and playful illustrated adventures.'
+ Cartoons:'Original characters and playful illustrated adventures.',
+ Gaming:'Characters and worlds from favourite games.'
 };
 export function sampleCollections(designs=seasonalDesigns){
  const names=[...new Set(designs.map(d=>d.season))];
