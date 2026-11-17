@@ -1,0 +1,149 @@
+{
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "christmas-grinch-rock-band-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Rockin’ Christmas",
+      "asset": "christmas-grinch-rock-band-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "877f75553543669c7f3ef0663b3ffd1a85049c514bfd85e2ee62bb1db9e8fd29"
+    },
+    {
+      "id": "christmas-grinch-baking-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Gingerbread Meltdown",
+      "asset": "christmas-grinch-baking-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "f4bbdbac1208c159896d572e94937bf1f68d550849c0ab4ee795e067e5ed664e"
+    },
+    {
+      "id": "christmas-grinch-skating-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch on Thin Ice",
+      "asset": "christmas-grinch-skating-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "4a1f3c5a8b4183656bb861a17850e77625909bd341442027fa3aabc7e702ae32"
+    },
+    {
+      "id": "christmas-grinch-ski-lodge-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Après-Ski",
+      "asset": "christmas-grinch-ski-lodge-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "561bde2ce9a7053c133a3ff3e9b855a896301e50840852edf3e38e600cff8ea3"
+    },
+    {
+      "id": "christmas-grinch-toy-workshop-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Wonky Toy Workshop",
+      "asset": "christmas-grinch-toy-workshop-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "cb883c8eff485f3477595903808b2c09cdee520287e6a71916a24adb7de629f3"
+    },
+    {
+      "id": "christmas-grinch-christmas-train-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Christmas Express",
+      "asset": "christmas-grinch-christmas-train-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "c03561de9c846831bd8f3373703a66eaae9a7a749108b7358574ee1879d39a76"
+    },
+    {
+      "id": "christmas-grinch-snowman-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Snowman Showdown",
+      "asset": "christmas-grinch-snowman-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "b11163a34c86f157cb1e7393d35f0945bdf264273e70480fe74f07b2ad55f5f5"
+    },
+    {
+      "id": "christmas-grinch-karaoke-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Christmas Karaoke",
+      "asset": "christmas-grinch-karaoke-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "e14b9a97bc0bb29f68e2c2ee64388105780efc09005eefe3e2396adedc17bec4"
+    },
+    {
+      "id": "christmas-grinch-chimney-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Chimney Mix-Up",
+      "asset": "christmas-grinch-chimney-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "7f435b65b76c374aa5eb6ca344964bae2aaaf8a49ea51fcf6df27d807dce370b"
+    },
+    {
+      "id": "christmas-grinch-hot-tub-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Winter Soak",
+      "asset": "christmas-grinch-hot-tub-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "abf62fc8850f731b97d28e51ebbf6c1220db66a29afad84c4e3e560b47dddc89"
+    },
+    {
+      "id": "christmas-grinch-reading-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Midnight Storytime",
+      "asset": "christmas-grinch-reading-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "bccc09c75bd915cce08f744ed97dc1a7b165422505c53fae738f6ff8f4dbbe45"
+    },
+    {
+      "id": "christmas-grinch-market-2026-11-17",
+      "collection": "christmas",
+      "season": "Christmas",
+      "name": "Grinch’s Merry Market",
+      "asset": "christmas-grinch-market-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "8558b53bdb6e84195de37e28af80bcb68afaad86576ac96885e2c0e610d9bb70"
+    }
+  ]
+}
