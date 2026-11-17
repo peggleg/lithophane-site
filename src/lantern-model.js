@@ -1,7 +1,7 @@
 import {printerKey,assertPrintSize} from './printer-settings.js';
 import {exportEstimate,MIB} from './resolution.js';
 export const lanternFaces=['Front','Right','Back','Left'];
-export const lanternSpec=Object.freeze({width:145,depth:145,height:177.8,panelWidth:105,panelHeight:148,panelMax:3,ledDiameter:59,ledHeight:8,recessDiameter:59.6,recessHeight:8.4});
+export const lanternSpec=Object.freeze({width:145,depth:145,height:177.8,panelWidth:105,panelHeight:148,panelMax:3,ledDiameter:59,ledHeight:8,recessDiameter:60.1,recessHeight:8.4});
 export function readSTL(buffer){
  const view=new DataView(buffer),count=view.getUint32(80,true);if(buffer.byteLength!==84+count*50||count>100000)throw Error('Could not read the lantern frame mesh.');
  const points=[],faces=[],indices=new Map();

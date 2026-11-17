@@ -9,7 +9,7 @@ Two mechanical prototypes for the owner's 59 mm diameter × 8 mm high LED kit. T
 - Panel cavity: 105.4 mm wide, 148.4 mm high, 3.4 mm deep. About 2 mm of each image edge is hidden.
 - Slide the panel into the open top of the U channel. Fit the removable top retainer behind the front mask. The postcard frame has a separate top rail secured by two M3 × 6 mm screws into 2.6 mm pilot holes; the lantern uses its existing loose retainer captured by the top ring.
 - Retainer and sliding fits are deliberately loose prototypes. Actual printer tolerances vary; test a short channel/retainer section before committing to full parts. Do not force or glue the LED into its pocket.
-- LED recess: **Ø59.6 × 8.4 mm**, with finger access and a 5 mm open cable escape. No screw positions or connector size have been assumed.
+- LED recess: **Ø60.1 × 8.4 mm**, with finger access and a 5 mm open cable escape. No screw positions or connector size have been assumed.
 
 ## Frame 1 — slim postcard frame (revised)
 

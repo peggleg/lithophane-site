@@ -16,7 +16,7 @@ W, H = PW + .4 + 2*(BORDER-OVERLAP), PH + .4 + 2*(BORDER-OVERLAP)
 FRONT, LIP = 3.0, 2.4
 T = FRONT + PANEL_GAP + LIP
 LED_D, LED_H = 59.0, 8.0
-RECESS_D, RECESS_H = LED_D+.6, LED_H+.4
+RECESS_D, RECESS_H = LED_D+1.1, LED_H+.4
 records = []
 V = App.Vector
 

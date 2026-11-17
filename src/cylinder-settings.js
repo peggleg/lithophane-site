@@ -4,7 +4,7 @@ import {lanternSpec} from './lantern-model.js';
 export const cylinderSpec=Object.freeze({outerDiameter:90,innerDiameter:84,seatDiameter:90.6,lipHeight:2,tealightDiameter:38,tealightHeight:19,recessDepth:3});
 export const cylinderLightFits=Object.freeze({
  tealight:Object.freeze({name:'LED tealight',diameter:38,height:19,recessDiameter:39,recessDepth:3,minDiameter:38.2,maxDiameter:40,cableWidth:0}),
- bambu001:Object.freeze({name:'Bambu LED Kit 001',diameter:lanternSpec.ledDiameter,height:lanternSpec.ledHeight,recessDiameter:lanternSpec.recessDiameter,recessDepth:5,minDiameter:59.2,maxDiameter:60,cableWidth:5}),
+ bambu001:Object.freeze({name:'Bambu LED Kit 001',diameter:lanternSpec.ledDiameter,height:lanternSpec.ledHeight,recessDiameter:lanternSpec.recessDiameter,recessDepth:5,minDiameter:59.2,maxDiameter:60.5,cableWidth:5}),
 });
 export const tripodFitSpec=Object.freeze({socketWidth:10.4,socketDepth:4,pegDepth:3.8,leadIn:0.4});
 export const cylinderStands=Object.freeze([

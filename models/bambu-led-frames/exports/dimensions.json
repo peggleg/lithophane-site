@@ -10,7 +10,7 @@
   "border_mm": 11.0,
   "panel_slot_mm": 3.4,
   "led_recess_mm": [
-    59.6,
+    60.1,
     8.4
   ],
   "slide_clearance_mm": 0.4,
@@ -90,7 +90,7 @@
         12.0
       ],
       "solid": true,
-      "triangles": 1964
+      "triangles": 1960
     },
     {
       "part": "lantern_top_ring",
@@ -134,7 +134,7 @@
         10.0
       ],
       "solid": true,
-      "triangles": 524
+      "triangles": 516
     },
     {
       "part": "fit_test_stand_socket",

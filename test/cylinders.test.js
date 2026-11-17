@@ -12,14 +12,14 @@ function files(chunks){const b=Buffer.concat(chunks.map(c=>Buffer.from(c))),resu
 test('Bambu LED Kit 001 fits every stand with a clear cable route and unchanged cylinder seat',()=>{
  for(const printer of ['a1-mini','256'])for(const stand of cylinderStands){
   const g=generateCylinderStand(m,{stand:stand.id,printer,lightSource:'bambu001'}),H=g.seatZ,part=g.parts.find(p=>p.role==='stand'||p.role==='stand-deck'),base=restore(part.mesh),solid=base.translate(part.assembly);base.delete();
-  assert.deepEqual(g.fit,{diameter:59.6,depth:5,seatDiameter:90.6});assert.equal(solid.status(),'NoError');const pieces=solid.decompose();assert.equal(pieces.length,1,stand.id+' connected');pieces.forEach(x=>x.delete());
-  const light=m.Manifold.cylinder(8,29.5,29.5,96).translate([0,0,H-5]),lightHit=solid.intersect(light);assert.ok(lightHit.volume()<.001,stand.id+' LED clearance');lightHit.delete();light.delete();
+  assert.deepEqual(g.fit,{diameter:60.1,depth:5,seatDiameter:90.6});assert.equal(solid.status(),'NoError');const pieces=solid.decompose();assert.equal(pieces.length,1,stand.id+' connected');pieces.forEach(x=>x.delete());
+  const light=m.Manifold.cylinder(8,29.95,29.95,96).translate([0,0,H-5]),lightHit=solid.intersect(light);assert.ok(lightHit.volume()<.001,stand.id+' LED clearance');lightHit.delete();light.delete();
   const wire=m.Manifold.cube([60,4,4],true).translate([50,0,H-2.5]).rotate([0,0,60]),wireHit=solid.intersect(wire);assert.ok(wireHit.volume()<.001,stand.id+' cable clearance');wireHit.delete();wire.delete();
   assert.ok(g.parts.every(p=>p.printSize.every(v=>v<=170.001)));assert.match(cylinderGuide(g),/59 mm diameter × 8 mm high/);assert.match(cylinderGuide(g),/5 mm radial channel/);solid.delete();
   if(stand.id==='tall-tripod'){const old=generateCylinderStand(m,{stand:stand.id,printer});for(let i=0;i<3;i++)assert.deepEqual(g.parts[i].mesh,old.parts[i].mesh,'tripod legs remain compatible');}
  }
- for(const diameter of [59.2,59.6,60]){const g=generateCylinderStand(m,{lightSource:'bambu001',fitDiameter:diameter},true);assert.equal(g.fit.depth,5);assert.equal(g.fit.diameter,diameter);assert.match(g.note,/5 mm channel/);}
- assert.throws(()=>cylinderSettings({lightSource:'bambu001',fitDiameter:59}));assert.throws(()=>cylinderSettings({lightSource:'bambu001',fitDiameter:60.1}));
+ for(const diameter of [59.2,59.6,60.1,60.5]){const g=generateCylinderStand(m,{lightSource:'bambu001',fitDiameter:diameter},true);assert.equal(g.fit.depth,5);assert.equal(g.fit.diameter,diameter);assert.match(g.note,/5 mm channel/);}
+ assert.throws(()=>cylinderSettings({lightSource:'bambu001',fitDiameter:59}));assert.throws(()=>cylinderSettings({lightSource:'bambu001',fitDiameter:60.6}));
 });
 test('cylinder-only downloads preserve the kit mesh and selected printer profile',()=>{
  for(const printer of ['a1-mini','256'])for(const stand of ['desktop-plain','tall-tripod']){
