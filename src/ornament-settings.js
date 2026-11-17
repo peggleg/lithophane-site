@@ -1,6 +1,6 @@
 import {ornamentEdges} from './ornament-wreath.js';
 import {printerKey,printLimit,printerSpec} from './printer-settings.js';
-export const releasedOrnamentCollections=['christmas','pets','birthday','baby','wedding','easter','halloween','thanksgiving'];
+export const releasedOrnamentCollections=['christmas','pets','birthday','baby','wedding','easter','halloween','thanksgiving','cartoons'];
 export const ornamentCollections={
  christmas:{name:'Christmas',nameExample:'Lucas',wording:[['Merry','Christmas'],['Merry','Xmas'],['Let It','Snow'],['Joy to','the World']],designs:[['bells','Bells & foliage'],['bow','Bow & holly'],['forest','Winter forest'],['poinsettia','Poinsettia wreath'],['reindeer','Reindeer & stars'],['snowflake','Snowflake branches']]},
  pets:{name:'Pets',nameExample:'Buddy',wording:[['Pawsome',''],['Best','Friend'],['Cat','Lover'],['Forever','Loved']],designs:[['dog','Dog & leaves'],['paw','Paw print & foliage'],['cat','Cat & moon'],['memorial','Memorial heart'],['bone','Bone & foliage']]},
@@ -9,6 +9,7 @@ export const ornamentCollections={
  wedding:{name:'Weddings & Anniversaries',nameExample:'Emma & Jack',wording:[['Just','Married'],['Mr &','Mrs'],['Happy','Anniversary'],['Forever','Together']],designs:[['rings','Rings & roses'],['hearts','Leaf & heart wreath'],['roses','Anniversary flowers'],['linked-hearts','Linked hearts'],['bells','Wedding bells']]},
  easter:{name:'Easter',nameExample:'Lily',wording:[['Happy','Easter'],['Hello','Spring'],['Easter','Wishes'],['Some Bunny','Loves You']],designs:[['bunny','Bunny & tulips'],['eggs','Decorated eggs'],['bunny-hearts','Bunny & hearts'],['butterfly','Butterfly & blossom'],['chick','Chick & flowers']]},
  halloween:{name:'Halloween',nameExample:'Oscar',wording:[['Happy','Halloween'],['Trick or','Treat'],['Boo',''],['Stay','Spooky']],designs:[['pumpkin','Pumpkin & vines'],['ghost','Friendly ghost'],['boo','Ghost, bat & stars'],['forest','Spooky forest'],['house','Haunted cottage']]},
+ cartoons:{name:'Cartoons',nameExample:'',wording:[['','']],designs:[['snoopy-1','Dreaming on the Doghouse'],['snoopy-2','Flying Ace'],['snoopy-3','Happy Dance'],['snoopy-4','Snoopy’s Heart'],['snoopy-5','Reading with Woodstock'],['snoopy-6','Joe Cool Surfer'],['snoopy-7','Gone Fishing'],['snoopy-8','Garden Friends'],['snoopy-9','Snowy Sled Ride'],['snoopy-10','Decorating the Tree'],['snoopy-11','Autumn Pumpkin'],['snoopy-12','Space Explorers'],['snoopy-13','Cookie Baker'],['snoopy-14','Guitar Duet'],['snoopy-15','Bicycle Ride'],['snoopy-16','Camping Friends']]},
  thanksgiving:{name:'Thanksgiving',nameExample:'Family',wording:[['Happy','Thanksgiving'],['Give','Thanks'],['Grateful','Together'],['Gather','Together']],designs:[['maple','Maple & acorns'],['pumpkin','Pumpkin & wheat'],['cornucopia','Cornucopia'],['turkey','Turkey & leaves'],['apples','Apple harvest'],['sunflower','Sunflowers & wheat']]}
 };
 export const ornamentDefaults={kind:'ornament',printer:'a1-mini',collection:'christmas',design:'bells',frameStyle:'ring',centrePlate:false,edgePattern:'auto',diameter:100,thickness:3,line1:'Merry',line2:'Christmas',wording:'0',ams:false,inlayLayers:3,frameColour:'#eee2c9',textColour:'#8a3b2b',palette:'ivory'};
@@ -20,6 +21,7 @@ export function validateOrnament(input={}){
  if(!releasedOrnamentCollections.includes(p.collection))throw Error('Choose an available ornament collection.');
  if(!ornamentCollections[p.collection].designs.some(([id])=>id===p.design))throw Error('Choose a design in this collection.');
  if(!Number.isFinite(p.diameter)||p.diameter<80||p.diameter>ornamentDiameterLimit(p))throw Error(`Ornament diameter: choose 80–${ornamentDiameterLimit(p)} mm, leaving room for ${p.ams?'the AMS purge tower and hanging eyelet':'the hanging eyelet'}.`);
+ if(p.collection==='cartoons'){if(!Number.isFinite(p.thickness)||p.thickness<1.6||p.thickness>2||Math.abs(p.thickness/.2-Math.round(p.thickness/.2))>.001)throw Error('White base: choose 1.6–2.0 mm in 0.2 mm steps.');if(typeof p.ams!=='boolean')throw Error('Choose manual colour change or AMS.');p.frameColour='#ffffff';p.textColour='#111111';return p;}
  if(!Number.isFinite(p.thickness)||p.thickness<2.4||p.thickness>5||Math.abs(p.thickness/.2-Math.round(p.thickness/.2))>.001)throw Error('Thickness: choose 2.4–5 mm in 0.2 mm steps.');
  for(const k of ['line1','line2']){if(typeof p[k]!=='string'||p[k].includes('\n')||p[k].includes('\r')||[...p[k]].length>24)throw Error('Use at most two lines, with up to 24 characters per line.');p[k]=p[k].trim();}
  if(typeof p.centrePlate!=='boolean')throw Error('Choose whether to include a centre plate.');

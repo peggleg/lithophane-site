@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';import init from 'manifold-3d/manifold';import fs from 'node:fs';import {generateOrnament} from '../src/ornament-geometry.js';import {ornament3mf,ornamentZip,ornamentGuide}from'../src/ornament-export.js';import {validateOrnament}from'../src/ornament-settings.js';
+const m=await init();m.setup();const mesh=p=>new m.Manifold(new m.Mesh({numProp:3,vertProperties:p.vertices,triVerts:p.faces}));
+test('sixteen distinct Snoopy ornaments have a connected white base, hanging opening and supported raised black layers',()=>{
+ const seen=new Set();for(let i=1;i<=16;i++){
+  const art=JSON.parse(fs.readFileSync(`src/ornament-artwork/snoopy/${i}.json`));const section=new m.CrossSection(art.base,'EvenOdd');const holes=section.toPolygons().filter(a=>{let sum=0;for(let j=0;j<a.length;j++){const u=a[j],v=a[(j+1)%a.length];sum+=u[0]*v[1]-v[0]*u[1];}return sum<-8&&Math.max(...a.map(x=>x[1]))>30;});assert.ok(holes.length,`hanging hole ${i}`);section.delete();seen.add(JSON.stringify(art.base));
+  for(const thickness of [1.6,1.8,2])for(const ams of [false,true])for(const printer of ['a1-mini','256']){
+   const model=generateOrnament(m,null,{collection:'cartoons',design:`snoopy-${i}`,thickness,ams,printer});assert.ok(Math.abs(model.height-(thickness+.6))<1e-4);assert.ok(model.parts.every(p=>p.printSize.every(v=>v<=170)));const complete=mesh(model.singleColourMesh);const pieces=complete.decompose();assert.equal(pieces.length,1,`connected ${i}`);pieces.forEach(p=>p.delete());complete.delete();
+   if(ams){assert.equal(model.parts.length,2);const [base,ink]=model.parts;assert.equal(base.extruder,1);assert.equal(ink.extruder,2);assert.ok(Math.abs(ink.bounds.min[2]-thickness)<1e-4);assert.ok(Math.abs(ink.bounds.max[2]-(thickness+.6))<1e-4);const b=mesh(base.mesh),v=mesh(ink.mesh),under=v.translate([0,0,-.6]),outside=under.subtract(b);assert.ok(outside.volume()<.05,`ink supported ${i}`);outside.delete();under.delete();v.delete();b.delete();}
+   else assert.equal(model.parts.length,2);
+  }
+ }assert.equal(seen.size,16);for(const t of [1.4,2.2,1.7])assert.throws(()=>validateOrnament({collection:'cartoons',design:'snoopy-1',thickness:t}));
+});
+test('manual and AMS projects preserve face-up geometry and specific colour-change instructions',()=>{for(const ams of [false,true]){const model=generateOrnament(m,null,{collection:'cartoons',design:'snoopy-1',thickness:1.8,ams});assert.match(ornamentGuide(model),/three black layers/);assert.match(ornamentGuide(model),/face up/);assert.ok(ornament3mf(model).length);assert.ok(ornamentZip(model).length);}});
