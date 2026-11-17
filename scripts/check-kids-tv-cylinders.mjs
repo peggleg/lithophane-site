@@ -3,8 +3,9 @@ import {chromium} from 'playwright';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const batchNumber=process.env.BATCH||'1';if(!/^[1-4]$/.test(batchNumber))throw Error('Invalid batch');
-const batch=JSON.parse(await fs.readFile(`src/fixtures/gallery-additions-kids-tv-2026-11-17-batch${batchNumber}.json`,'utf8')).cylinders;
-const dir=`artifacts/cylinders-kids-tv-2026-11-17-batch${batchNumber}`;await fs.mkdir(dir,{recursive:true});
+const batchTag=process.env.REVISION==='1'?'revision1':`batch${batchNumber}`;
+const batch=JSON.parse(await fs.readFile(`src/fixtures/gallery-additions-kids-tv-2026-11-17-${batchTag}.json`,'utf8')).cylinders;
+const dir=`artifacts/cylinders-kids-tv-2026-11-17-${batchTag}`;await fs.mkdir(dir,{recursive:true});
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || (process.platform === 'win32' ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : '/usr/bin/chromium'),args:['--no-sandbox','--enable-unsafe-swiftshader']});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));

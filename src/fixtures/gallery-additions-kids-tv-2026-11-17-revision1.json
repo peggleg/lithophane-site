@@ -1,0 +1,72 @@
+{
+  "requested": [
+    {
+      "slug": "bluey-continuous",
+      "name": "Bluey — Backyard Playtime"
+    },
+    {
+      "slug": "peppa-pig-continuous",
+      "name": "Peppa Pig — Picnic & Puddles"
+    },
+    {
+      "slug": "gabbys-dollhouse-continuous",
+      "name": "Gabby’s Dollhouse — Garden Party"
+    },
+    {
+      "slug": "hey-duggee-continuous",
+      "name": "Hey Duggee — Woodland Trail"
+    }
+  ],
+  "blocked": [],
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "kids-tv-bluey-continuous-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Bluey — Backyard Playtime",
+      "asset": "kids-tv-bluey-continuous-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "7d691646e13fc85bd8874f7e3fd3a3f50b3441f4e462d49cc688ae44fc0e80f2"
+    },
+    {
+      "id": "kids-tv-peppa-pig-continuous-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Peppa Pig — Picnic & Puddles",
+      "asset": "kids-tv-peppa-pig-continuous-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "1a5665e928c3e9931345c01564e0dfc9ff20a7380431d34e2789fdb64bebd45d"
+    },
+    {
+      "id": "kids-tv-gabbys-dollhouse-continuous-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Gabby’s Dollhouse — Garden Party",
+      "asset": "kids-tv-gabbys-dollhouse-continuous-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "fededf90b6d0205489e3977f3b4b9389956d9f3e40cf6fff434a82c4498434c5"
+    },
+    {
+      "id": "kids-tv-hey-duggee-continuous-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Hey Duggee — Woodland Trail",
+      "asset": "kids-tv-hey-duggee-continuous-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "2a093e76a002a8feb9f1dc841c5dac81f51a2e2c1128889ac10dfcf6c71c1113"
+    }
+  ]
+}

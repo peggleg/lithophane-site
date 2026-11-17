@@ -1582,5 +1582,49 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-bluey-continuous-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Bluey — Backyard Playtime",
+    "asset": "kids-tv-bluey-continuous-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-peppa-pig-continuous-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Peppa Pig — Picnic & Puddles",
+    "asset": "kids-tv-peppa-pig-continuous-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-gabbys-dollhouse-continuous-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Gabby’s Dollhouse — Garden Party",
+    "asset": "kids-tv-gabbys-dollhouse-continuous-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-hey-duggee-continuous-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Hey Duggee — Woodland Trail",
+    "asset": "kids-tv-hey-duggee-continuous-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]
