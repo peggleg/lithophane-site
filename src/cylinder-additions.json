@@ -1637,5 +1637,38 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-pj-masks-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "PJ Masks",
+    "asset": "kids-tv-pj-masks-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-fireman-sam-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Fireman Sam",
+    "asset": "kids-tv-fireman-sam-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-thomas-and-friends-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Thomas & Friends",
+    "asset": "kids-tv-thomas-and-friends-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

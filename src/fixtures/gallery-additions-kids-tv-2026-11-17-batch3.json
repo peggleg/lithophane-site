@@ -1,0 +1,75 @@
+{
+  "requested": [
+    {
+      "slug": "pokemon-tv",
+      "name": "Pokémon"
+    },
+    {
+      "slug": "teenage-mutant-ninja-turtles",
+      "name": "Teenage Mutant Ninja Turtles"
+    },
+    {
+      "slug": "pj-masks",
+      "name": "PJ Masks"
+    },
+    {
+      "slug": "fireman-sam",
+      "name": "Fireman Sam"
+    },
+    {
+      "slug": "thomas-and-friends",
+      "name": "Thomas & Friends"
+    }
+  ],
+  "blocked": [
+    {
+      "slug": "pokemon-tv",
+      "name": "Pokémon",
+      "reason": "Image service rejected generation"
+    },
+    {
+      "slug": "teenage-mutant-ninja-turtles",
+      "name": "Teenage Mutant Ninja Turtles",
+      "reason": "Image service rejected generation"
+    }
+  ],
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "kids-tv-pj-masks-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "PJ Masks",
+      "asset": "kids-tv-pj-masks-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "80d1e1cfd9eb947b4facfa1b9af35227e08bf8c24a0e8c2b35bce9e9fcfdeaa2"
+    },
+    {
+      "id": "kids-tv-fireman-sam-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Fireman Sam",
+      "asset": "kids-tv-fireman-sam-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "a7f113fcdcfe3520ff73328cc65279d053e244acdf49de1a2307fcbbd14acb67"
+    },
+    {
+      "id": "kids-tv-thomas-and-friends-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Thomas & Friends",
+      "asset": "kids-tv-thomas-and-friends-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "98c32ee47400c479166330c6cb76820e29763a30eb0452298f795c4fe7ac4739"
+    }
+  ]
+}
