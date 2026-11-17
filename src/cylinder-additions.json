@@ -1670,5 +1670,38 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-blaze-and-the-monster-machines-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Blaze and the Monster Machines",
+    "asset": "kids-tv-blaze-and-the-monster-machines-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-miraculous-ladybug-cat-noir-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Miraculous: Ladybug & Cat Noir",
+    "asset": "kids-tv-miraculous-ladybug-cat-noir-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-cocomelon-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "CoComelon",
+    "asset": "kids-tv-cocomelon-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

@@ -1,0 +1,75 @@
+{
+  "requested": [
+    {
+      "slug": "sesame-street",
+      "name": "Sesame Street"
+    },
+    {
+      "slug": "dora-the-explorer",
+      "name": "Dora the Explorer"
+    },
+    {
+      "slug": "blaze-and-the-monster-machines",
+      "name": "Blaze and the Monster Machines"
+    },
+    {
+      "slug": "miraculous-ladybug-cat-noir",
+      "name": "Miraculous: Ladybug & Cat Noir"
+    },
+    {
+      "slug": "cocomelon",
+      "name": "CoComelon"
+    }
+  ],
+  "blocked": [
+    {
+      "slug": "sesame-street",
+      "name": "Sesame Street",
+      "reason": "Image service rejected generation"
+    },
+    {
+      "slug": "dora-the-explorer",
+      "name": "Dora the Explorer",
+      "reason": "Image service rejected generation"
+    }
+  ],
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "kids-tv-blaze-and-the-monster-machines-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Blaze and the Monster Machines",
+      "asset": "kids-tv-blaze-and-the-monster-machines-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "031cf5defd3dd9b90401246006986bcb0bbe4d6c236f858e44c66100c64b53e5"
+    },
+    {
+      "id": "kids-tv-miraculous-ladybug-cat-noir-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Miraculous: Ladybug & Cat Noir",
+      "asset": "kids-tv-miraculous-ladybug-cat-noir-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "55aad3f8f4e5ce13ddbd9d7802d4b41d7a5a7624b643b02a60ccaefb69ce76e3"
+    },
+    {
+      "id": "kids-tv-cocomelon-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "CoComelon",
+      "asset": "kids-tv-cocomelon-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "7f42fa2a0fae98ce1537a90d3f296c8d6464b2650dbcd93515c24257b569b0d9"
+    }
+  ]
+}
