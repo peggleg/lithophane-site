@@ -1329,5 +1329,49 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "gaming-call-of-duty-2026-11-17",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Call of Duty",
+    "asset": "gaming-call-of-duty-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-ea-sports-fc-27-2026-11-17",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "EA SPORTS FC 27",
+    "asset": "gaming-ea-sports-fc-27-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-counter-strike-2-2026-11-17",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Counter-Strike 2",
+    "asset": "gaming-counter-strike-2-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-arc-raiders-2026-11-17",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "ARC Raiders",
+    "asset": "gaming-arc-raiders-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

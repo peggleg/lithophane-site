@@ -1,0 +1,53 @@
+{
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "gaming-call-of-duty-2026-11-17",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Call of Duty",
+      "asset": "gaming-call-of-duty-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "8e05fafa164d52b40e912812aa9f9114b1518ab898c3f430512e31b62e37b993"
+    },
+    {
+      "id": "gaming-ea-sports-fc-27-2026-11-17",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "EA SPORTS FC 27",
+      "asset": "gaming-ea-sports-fc-27-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "1c353c0052ab966ce7afde7235e2aa01a5b455ab445e76696572f640c32ce133"
+    },
+    {
+      "id": "gaming-counter-strike-2-2026-11-17",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "Counter-Strike 2",
+      "asset": "gaming-counter-strike-2-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "8f8531277e69197f325ee0e1c282e37eabad1ee66af6d4b93f43fb6c8e8ce59b"
+    },
+    {
+      "id": "gaming-arc-raiders-2026-11-17",
+      "collection": "gaming",
+      "season": "Gaming",
+      "name": "ARC Raiders",
+      "asset": "gaming-arc-raiders-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "6259b161d6b15abd9bfef2c2e6c1dca1a06bdfb2f92c6aefd5120cd9a063c780"
+    }
+  ]
+}
