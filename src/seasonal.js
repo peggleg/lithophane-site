@@ -1,3 +1,15 @@
+import daily20261117_0 from './assets/seasonal-daily-christmas-robin-and-the-frosted-bauble-2026-11-17.png';
+import daily20261117_1 from './assets/seasonal-daily-easter-lamb-in-the-easter-orchard-2026-11-17.png';
+import daily20261117_2 from './assets/seasonal-daily-halloween-raven-at-the-apothecary-2026-11-17.png';
+import daily20261117_3 from './assets/seasonal-daily-valentine-foxes-beneath-the-rose-arch-2026-11-17.png';
+import daily20261117_4 from './assets/seasonal-daily-newyear-sailing-into-2027-2026-11-17.png';
+import daily20261117_5 from './assets/seasonal-daily-mother-safe-in-the-foxgloves-2026-11-17.png';
+import daily20261117_6 from './assets/seasonal-daily-father-the-quiet-chess-table-2026-11-17.png';
+import daily20261117_7 from './assets/seasonal-daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17.png';
+import daily20261117_8 from './assets/seasonal-daily-gonk-the-mushroom-forager-gonk-2026-11-17.png';
+import daily20261117_9 from './assets/seasonal-daily-animals-kingfisher-at-the-reed-pool-2026-11-17.png';
+import daily20261117_10 from './assets/seasonal-daily-cartoons-raccoons-clockwork-airfield-2026-11-17.png';
+import daily20261117_11 from './assets/seasonal-daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17.png';
 import gamingGTAVI from './assets/seasonal-gaming-gta-vi-cover-2026-11-16.png';
 import daily20261116_0 from './assets/seasonal-christmas-star-lantern-and-citrus-2026-11-16.png';
 import daily20261116_1 from './assets/seasonal-easter-spring-wheelbarrow-2026-11-16.png';
@@ -135,6 +147,18 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-robin-and-the-frosted-bauble-2026-11-17':daily20261117_0,
+ 'daily-easter-lamb-in-the-easter-orchard-2026-11-17':daily20261117_1,
+ 'daily-halloween-raven-at-the-apothecary-2026-11-17':daily20261117_2,
+ 'daily-valentine-foxes-beneath-the-rose-arch-2026-11-17':daily20261117_3,
+ 'daily-newyear-sailing-into-2027-2026-11-17':daily20261117_4,
+ 'daily-mother-safe-in-the-foxgloves-2026-11-17':daily20261117_5,
+ 'daily-father-the-quiet-chess-table-2026-11-17':daily20261117_6,
+ 'daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17':daily20261117_7,
+ 'daily-gonk-the-mushroom-forager-gonk-2026-11-17':daily20261117_8,
+ 'daily-animals-kingfisher-at-the-reed-pool-2026-11-17':daily20261117_9,
+ 'daily-cartoons-raccoons-clockwork-airfield-2026-11-17':daily20261117_10,
+ 'daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17':daily20261117_11,
  'gaming-gta-vi-cover-2026-11-16':gamingGTAVI,
  'christmas-star-lantern-and-citrus-2026-11-16':daily20261116_0,
  'easter-spring-wheelbarrow-2026-11-16':daily20261116_1,

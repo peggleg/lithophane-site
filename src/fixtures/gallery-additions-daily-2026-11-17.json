@@ -1,0 +1,520 @@
+{
+  "requested": [
+    {
+      "collection": "christmas",
+      "season": "Christmas",
+      "kind": "flat",
+      "name": "Robin and the Frosted Bauble",
+      "id": "daily-christmas-robin-and-the-frosted-bauble-2026-11-17"
+    },
+    {
+      "collection": "easter",
+      "season": "Easter",
+      "kind": "flat",
+      "name": "Lamb in the Easter Orchard",
+      "id": "daily-easter-lamb-in-the-easter-orchard-2026-11-17"
+    },
+    {
+      "collection": "halloween",
+      "season": "Halloween",
+      "kind": "flat",
+      "name": "Raven at the Apothecary",
+      "id": "daily-halloween-raven-at-the-apothecary-2026-11-17"
+    },
+    {
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "kind": "flat",
+      "name": "Foxes beneath the Rose Arch",
+      "id": "daily-valentine-foxes-beneath-the-rose-arch-2026-11-17"
+    },
+    {
+      "collection": "newyear",
+      "season": "New Year 2027",
+      "kind": "flat",
+      "name": "Sailing into 2027",
+      "id": "daily-newyear-sailing-into-2027-2026-11-17"
+    },
+    {
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "kind": "flat",
+      "name": "Safe in the Foxgloves",
+      "id": "daily-mother-safe-in-the-foxgloves-2026-11-17"
+    },
+    {
+      "collection": "father",
+      "season": "Father’s Day",
+      "kind": "flat",
+      "name": "The Quiet Chess Table",
+      "id": "daily-father-the-quiet-chess-table-2026-11-17"
+    },
+    {
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "kind": "flat",
+      "name": "Sunflowers and Winter Squash",
+      "id": "daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17"
+    },
+    {
+      "collection": "gonk",
+      "season": "Gonk",
+      "kind": "flat",
+      "name": "The Mushroom Forager Gonk",
+      "id": "daily-gonk-the-mushroom-forager-gonk-2026-11-17"
+    },
+    {
+      "collection": "animals",
+      "season": "Animals",
+      "kind": "flat",
+      "name": "Kingfisher at the Reed Pool",
+      "id": "daily-animals-kingfisher-at-the-reed-pool-2026-11-17"
+    },
+    {
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "kind": "flat",
+      "name": "Raccoons Clockwork Airfield",
+      "id": "daily-cartoons-raccoons-clockwork-airfield-2026-11-17"
+    },
+    {
+      "collection": "gaming",
+      "season": "Gaming",
+      "kind": "flat",
+      "name": "Stardew Valley — Harvest Greenhouse",
+      "id": "daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17"
+    },
+    {
+      "collection": "christmas",
+      "season": "Christmas",
+      "kind": "cylinder",
+      "name": "The Snowy Toyshop Railway",
+      "id": "daily-christmas-the-snowy-toyshop-railway-2026-11-17"
+    },
+    {
+      "collection": "easter",
+      "season": "Easter",
+      "kind": "cylinder",
+      "name": "Crocus Windmill Meadow",
+      "id": "daily-easter-crocus-windmill-meadow-2026-11-17"
+    },
+    {
+      "collection": "halloween",
+      "season": "Halloween",
+      "kind": "cylinder",
+      "name": "The Bat Conservatory",
+      "id": "daily-halloween-the-bat-conservatory-2026-11-17"
+    },
+    {
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "kind": "cylinder",
+      "name": "Lovebirds along the Wisteria River",
+      "id": "daily-valentine-lovebirds-along-the-wisteria-river-2026-11-17"
+    },
+    {
+      "collection": "newyear",
+      "season": "New Year",
+      "kind": "cylinder",
+      "name": "Midnight over the Alpine Cableway",
+      "id": "daily-newyear-midnight-over-the-alpine-cableway-2026-11-17"
+    },
+    {
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "kind": "cylinder",
+      "name": "Wisteria Cottage Garden",
+      "id": "daily-mother-wisteria-cottage-garden-2026-11-17"
+    },
+    {
+      "collection": "father",
+      "season": "Father’s Day",
+      "kind": "cylinder",
+      "name": "The Model Boat Harbour",
+      "id": "daily-father-the-model-boat-harbour-2026-11-17"
+    },
+    {
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "kind": "cylinder",
+      "name": "Cranberry Harvest Bridge",
+      "id": "daily-thanksgiving-cranberry-harvest-bridge-2026-11-17"
+    },
+    {
+      "collection": "gonk",
+      "season": "Gonk",
+      "kind": "cylinder",
+      "name": "Gonks Woodland Folk Band",
+      "id": "daily-gonk-gonks-woodland-folk-band-2026-11-17"
+    },
+    {
+      "collection": "animals",
+      "season": "Animals",
+      "kind": "cylinder",
+      "name": "Meerkats of the Golden Dunes",
+      "id": "daily-animals-meerkats-of-the-golden-dunes-2026-11-17"
+    },
+    {
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "kind": "cylinder",
+      "name": "Pangolins Balloon Expedition",
+      "id": "daily-cartoons-pangolins-balloon-expedition-2026-11-17"
+    },
+    {
+      "collection": "gaming",
+      "season": "Gaming",
+      "kind": "cylinder",
+      "name": "Stardew Valley — Pelican Town Railway",
+      "id": "daily-gaming-stardew-valley-pelican-town-railway-2026-11-17"
+    },
+    {
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "kind": "cylinder",
+      "name": "Bluey — Creekside Camping",
+      "id": "daily-kids-tv-bluey-creekside-camping-2026-11-17"
+    }
+  ],
+  "blocked": [],
+  "flat": [
+    {
+      "id": "daily-christmas-robin-and-the-frosted-bauble-2026-11-17",
+      "name": "Robin and the Frosted Bauble",
+      "season": "Christmas",
+      "description": "A bright-eyed robin perched beside a large engraved glass Christmas bauble, frosted holly, pinecones and tiny warm fairy lights on a snowy windowsill",
+      "orientation": "portrait",
+      "atlas": "daily-christmas-robin-and-the-frosted-bauble-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-christmas-robin-and-the-frosted-bauble-2026-11-17.png",
+      "sha256": "b28e53369dfc4eaa97c9eadd91957121577b3758161d6e14bcdf0bd91daf3910"
+    },
+    {
+      "id": "daily-easter-lamb-in-the-easter-orchard-2026-11-17",
+      "name": "Lamb in the Easter Orchard",
+      "season": "Easter",
+      "description": "A young woolly lamb asleep beside a wicker basket of intricately decorated Easter eggs under flowering pear trees, dew on grass, distant cottage",
+      "orientation": "landscape",
+      "atlas": "daily-easter-lamb-in-the-easter-orchard-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-easter-lamb-in-the-easter-orchard-2026-11-17.png",
+      "sha256": "2df3da9d82a170c9a44e1de1715086a64eaf0ef3f59279cf463f4034dc7bc44e"
+    },
+    {
+      "id": "daily-halloween-raven-at-the-apothecary-2026-11-17",
+      "name": "Raven at the Apothecary",
+      "season": "Halloween",
+      "description": "An elegant raven on a stack of antique botanical books inside a candlelit apothecary, potion bottles, dried herbs, spiderwebs and a moonlit gothic window, no skulls or faces",
+      "orientation": "portrait",
+      "atlas": "daily-halloween-raven-at-the-apothecary-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-halloween-raven-at-the-apothecary-2026-11-17.png",
+      "sha256": "dcbbd8a76897a8c7ad5910213a557f0ed0ef77963b03828df080fa5dec6f6f6f"
+    },
+    {
+      "id": "daily-valentine-foxes-beneath-the-rose-arch-2026-11-17",
+      "name": "Foxes beneath the Rose Arch",
+      "season": "Valentine’s Day",
+      "description": "Two foxes curled together beneath an intricate climbing-rose arch, scattered petals, heart-shaped ivy leaves and soft afternoon garden light",
+      "orientation": "landscape",
+      "atlas": "daily-valentine-foxes-beneath-the-rose-arch-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-valentine-foxes-beneath-the-rose-arch-2026-11-17.png",
+      "sha256": "90192861e56c6c4f454eef5559c5de569143f5ecf870373befc9341ff6ddb6cf"
+    },
+    {
+      "id": "daily-newyear-sailing-into-2027-2026-11-17",
+      "name": "Sailing into 2027",
+      "season": "New Year 2027",
+      "description": "An ornate brass nautical compass and a small engraved 2027 medallion beside a folded sea chart, distant fireworks reflected in a harbour through a cabin window, no people",
+      "orientation": "landscape",
+      "atlas": "daily-newyear-sailing-into-2027-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-newyear-sailing-into-2027-2026-11-17.png",
+      "sha256": "81b194766a8b6a843ad9cd58c040d1843362ae59a3e0ca18edc46162bb349de9"
+    },
+    {
+      "id": "daily-mother-safe-in-the-foxgloves-2026-11-17",
+      "name": "Safe in the Foxgloves",
+      "season": "Mother’s Day",
+      "description": "A mother fox sheltering two small cubs among tall foxgloves and delicate ferns, dappled light, richly detailed fur",
+      "orientation": "portrait",
+      "atlas": "daily-mother-safe-in-the-foxgloves-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-mother-safe-in-the-foxgloves-2026-11-17.png",
+      "sha256": "9ac9c19faa750afa503f865868317c6e1880a86ff992da2fd0a9c25fd1319888"
+    },
+    {
+      "id": "daily-father-the-quiet-chess-table-2026-11-17",
+      "name": "The Quiet Chess Table",
+      "season": "Father’s Day",
+      "description": "Carved wooden chess pieces on a beautifully worn chessboard beside a leather-bound journal, reading glasses and a brass desk lamp, oak leaves beyond the window, no people",
+      "orientation": "portrait",
+      "atlas": "daily-father-the-quiet-chess-table-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-father-the-quiet-chess-table-2026-11-17.png",
+      "sha256": "ae36f1794973653f5db4554a701773f04444b49c2a76b1363dece327f1bb078b"
+    },
+    {
+      "id": "daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17",
+      "name": "Sunflowers and Winter Squash",
+      "season": "Thanksgiving",
+      "description": "A stoneware pitcher of sunflowers with delicately ribbed winter squash, walnuts, dried corn and wheat on a farmhouse dresser, autumn light",
+      "orientation": "landscape",
+      "atlas": "daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-thanksgiving-sunflowers-and-winter-squash-2026-11-17.png",
+      "sha256": "4d92a6a2120b8d1aa5731a724216710ebbdfb9d7e5ad596410363d17a5ae2ec0"
+    },
+    {
+      "id": "daily-gonk-the-mushroom-forager-gonk-2026-11-17",
+      "name": "The Mushroom Forager Gonk",
+      "season": "Gonk",
+      "description": "One whimsical fictional gonk gathering wild mushrooms with a wicker basket in a fern forest, tall floppy patchwork hat entirely conceals eyes, round nose visible above thick beard, boots and leaf cloak, no other people",
+      "orientation": "portrait",
+      "atlas": "daily-gonk-the-mushroom-forager-gonk-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gonk-the-mushroom-forager-gonk-2026-11-17.png",
+      "sha256": "d9194462e8f64b6a60333a19e880876c1b02b7d825c2841493fecffd011384cd"
+    },
+    {
+      "id": "daily-animals-kingfisher-at-the-reed-pool-2026-11-17",
+      "name": "Kingfisher at the Reed Pool",
+      "season": "Animals",
+      "description": "A kingfisher with exquisitely detailed feathers perched over a reed-fringed pool, ripples, dragonfly, weathered branch and reflected reeds",
+      "orientation": "portrait",
+      "atlas": "daily-animals-kingfisher-at-the-reed-pool-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-animals-kingfisher-at-the-reed-pool-2026-11-17.png",
+      "sha256": "1854796fe54aeb5802bfa0683519a47a667e584b4fe5c91cb35463a835b828f0"
+    },
+    {
+      "id": "daily-cartoons-raccoons-clockwork-airfield-2026-11-17",
+      "name": "Raccoons Clockwork Airfield",
+      "season": "Cartoons",
+      "description": "An original charming cartoon raccoon aviator repairing a whimsical clockwork biplane on a meadow airfield, tool chest, tiny robot assistant, distant hangar and clouds, no humans",
+      "orientation": "landscape",
+      "atlas": "daily-cartoons-raccoons-clockwork-airfield-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-cartoons-raccoons-clockwork-airfield-2026-11-17.png",
+      "sha256": "f7997b01bcbec7feef8b378f51b3a1507696862a9d1445b3eb48f44ae3215b25"
+    },
+    {
+      "id": "daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17",
+      "name": "Stardew Valley — Harvest Greenhouse",
+      "season": "Gaming",
+      "description": "Recognisable Stardew Valley fan artwork: the restored greenhouse beside the farmhouse with giant pumpkins, starfruit vines, ancient fruit and a little farm cat, Pelican Town mountains behind, naturally integrated Stardew Valley title, no humans",
+      "orientation": "landscape",
+      "atlas": "daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gaming-stardew-valley-harvest-greenhouse-2026-11-17.png",
+      "sha256": "033946b4afa6d7dbcf346b903a0c2635518f41a13df581a80f91771f5829c8f3"
+    }
+  ],
+  "cylinders": [
+    {
+      "id": "daily-christmas-the-snowy-toyshop-railway-2026-11-17",
+      "name": "The Snowy Toyshop Railway",
+      "season": "Christmas",
+      "collection": "christmas",
+      "orientation": "landscape",
+      "asset": "daily-christmas-the-snowy-toyshop-railway-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "b199249b6b347dc0f8cd71a08108af6a0736ed3bf9c19880e5e2d2f400009016"
+    },
+    {
+      "id": "daily-easter-crocus-windmill-meadow-2026-11-17",
+      "name": "Crocus Windmill Meadow",
+      "season": "Easter",
+      "collection": "easter",
+      "orientation": "landscape",
+      "asset": "daily-easter-crocus-windmill-meadow-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "0e06e3bc2efc91933c0d0a5077542ebf433a17375395ae9b854549e1cbf53116"
+    },
+    {
+      "id": "daily-halloween-the-bat-conservatory-2026-11-17",
+      "name": "The Bat Conservatory",
+      "season": "Halloween",
+      "collection": "halloween",
+      "orientation": "landscape",
+      "asset": "daily-halloween-the-bat-conservatory-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "a80f5a14e0818c8f487de886b6f5228a8825593ddb373af3040583541444649f"
+    },
+    {
+      "id": "daily-valentine-lovebirds-along-the-wisteria-river-2026-11-17",
+      "name": "Lovebirds along the Wisteria River",
+      "season": "Valentine’s Day",
+      "collection": "valentine",
+      "orientation": "landscape",
+      "asset": "daily-valentine-lovebirds-along-the-wisteria-river-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "de8ad87f1990abb91d9a737f1e6fbb86ea9fc2a7e9c33c7027df584e9105c2e2"
+    },
+    {
+      "id": "daily-newyear-midnight-over-the-alpine-cableway-2026-11-17",
+      "name": "Midnight over the Alpine Cableway",
+      "season": "New Year",
+      "collection": "newyear",
+      "orientation": "landscape",
+      "asset": "daily-newyear-midnight-over-the-alpine-cableway-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "07fa04cdab9839efcb0d52e481665603e28457a34fc47c011c73aacf1977692e"
+    },
+    {
+      "id": "daily-mother-wisteria-cottage-garden-2026-11-17",
+      "name": "Wisteria Cottage Garden",
+      "season": "Mother’s Day",
+      "collection": "mother",
+      "orientation": "landscape",
+      "asset": "daily-mother-wisteria-cottage-garden-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "5de49a2cd4b3bc6d342acb489de16a05f22473b026afef335a3644cd68799245"
+    },
+    {
+      "id": "daily-father-the-model-boat-harbour-2026-11-17",
+      "name": "The Model Boat Harbour",
+      "season": "Father’s Day",
+      "collection": "father",
+      "orientation": "landscape",
+      "asset": "daily-father-the-model-boat-harbour-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "68cd2a14d751d90e6db039cd05cbf651c9c4a9938cc3e80a119edcfed6c29274"
+    },
+    {
+      "id": "daily-thanksgiving-cranberry-harvest-bridge-2026-11-17",
+      "name": "Cranberry Harvest Bridge",
+      "season": "Thanksgiving",
+      "collection": "thanksgiving",
+      "orientation": "landscape",
+      "asset": "daily-thanksgiving-cranberry-harvest-bridge-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "fa9d1a71a5f753eb6eae23060d16175348fe27b3d483bbdf56ca649bf0ad15c7"
+    },
+    {
+      "id": "daily-gonk-gonks-woodland-folk-band-2026-11-17",
+      "name": "Gonks Woodland Folk Band",
+      "season": "Gonk",
+      "collection": "gonk",
+      "orientation": "landscape",
+      "asset": "daily-gonk-gonks-woodland-folk-band-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "52a8fc9c93f1b18bd90749bff5e9696fec7b7f2ff1c41ee16a5befd8ca8b062f"
+    },
+    {
+      "id": "daily-animals-meerkats-of-the-golden-dunes-2026-11-17",
+      "name": "Meerkats of the Golden Dunes",
+      "season": "Animals",
+      "collection": "animals",
+      "orientation": "landscape",
+      "asset": "daily-animals-meerkats-of-the-golden-dunes-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "3663954e1833d9536ee620b771ab419f717aa4131f57005146a3e5b910ccd4e2"
+    },
+    {
+      "id": "daily-cartoons-pangolins-balloon-expedition-2026-11-17",
+      "name": "Pangolins Balloon Expedition",
+      "season": "Cartoons",
+      "collection": "cartoons",
+      "orientation": "landscape",
+      "asset": "daily-cartoons-pangolins-balloon-expedition-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "2312b93a5483244eb118ee3cbad875423faff0873b8165f9117e287d72153532"
+    },
+    {
+      "id": "daily-gaming-stardew-valley-pelican-town-railway-2026-11-17",
+      "name": "Stardew Valley — Pelican Town Railway",
+      "season": "Gaming",
+      "collection": "gaming",
+      "orientation": "landscape",
+      "asset": "daily-gaming-stardew-valley-pelican-town-railway-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "ef1c703d682f20f64fb10e3453cdb18345646552aa9c8ab82f8cadc2253bc64e"
+    },
+    {
+      "id": "daily-kids-tv-bluey-creekside-camping-2026-11-17",
+      "name": "Bluey — Creekside Camping",
+      "season": "Kids TV Shows",
+      "collection": "kids-tv",
+      "orientation": "landscape",
+      "asset": "daily-kids-tv-bluey-creekside-camping-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "seamMode": "divider",
+      "sha256": "926131e13cf83a9fed71378bf9e574f4099850506c3ecae7e7e0458fb20dea90"
+    }
+  ]
+}

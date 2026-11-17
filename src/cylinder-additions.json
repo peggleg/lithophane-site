@@ -1703,5 +1703,148 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "daily-christmas-the-snowy-toyshop-railway-2026-11-17",
+    "name": "The Snowy Toyshop Railway",
+    "season": "Christmas",
+    "collection": "christmas",
+    "orientation": "landscape",
+    "asset": "daily-christmas-the-snowy-toyshop-railway-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-easter-crocus-windmill-meadow-2026-11-17",
+    "name": "Crocus Windmill Meadow",
+    "season": "Easter",
+    "collection": "easter",
+    "orientation": "landscape",
+    "asset": "daily-easter-crocus-windmill-meadow-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-halloween-the-bat-conservatory-2026-11-17",
+    "name": "The Bat Conservatory",
+    "season": "Halloween",
+    "collection": "halloween",
+    "orientation": "landscape",
+    "asset": "daily-halloween-the-bat-conservatory-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-valentine-lovebirds-along-the-wisteria-river-2026-11-17",
+    "name": "Lovebirds along the Wisteria River",
+    "season": "Valentine’s Day",
+    "collection": "valentine",
+    "orientation": "landscape",
+    "asset": "daily-valentine-lovebirds-along-the-wisteria-river-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-newyear-midnight-over-the-alpine-cableway-2026-11-17",
+    "name": "Midnight over the Alpine Cableway",
+    "season": "New Year",
+    "collection": "newyear",
+    "orientation": "landscape",
+    "asset": "daily-newyear-midnight-over-the-alpine-cableway-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-mother-wisteria-cottage-garden-2026-11-17",
+    "name": "Wisteria Cottage Garden",
+    "season": "Mother’s Day",
+    "collection": "mother",
+    "orientation": "landscape",
+    "asset": "daily-mother-wisteria-cottage-garden-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-father-the-model-boat-harbour-2026-11-17",
+    "name": "The Model Boat Harbour",
+    "season": "Father’s Day",
+    "collection": "father",
+    "orientation": "landscape",
+    "asset": "daily-father-the-model-boat-harbour-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-thanksgiving-cranberry-harvest-bridge-2026-11-17",
+    "name": "Cranberry Harvest Bridge",
+    "season": "Thanksgiving",
+    "collection": "thanksgiving",
+    "orientation": "landscape",
+    "asset": "daily-thanksgiving-cranberry-harvest-bridge-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-gonk-gonks-woodland-folk-band-2026-11-17",
+    "name": "Gonks Woodland Folk Band",
+    "season": "Gonk",
+    "collection": "gonk",
+    "orientation": "landscape",
+    "asset": "daily-gonk-gonks-woodland-folk-band-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-animals-meerkats-of-the-golden-dunes-2026-11-17",
+    "name": "Meerkats of the Golden Dunes",
+    "season": "Animals",
+    "collection": "animals",
+    "orientation": "landscape",
+    "asset": "daily-animals-meerkats-of-the-golden-dunes-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-cartoons-pangolins-balloon-expedition-2026-11-17",
+    "name": "Pangolins Balloon Expedition",
+    "season": "Cartoons",
+    "collection": "cartoons",
+    "orientation": "landscape",
+    "asset": "daily-cartoons-pangolins-balloon-expedition-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-gaming-stardew-valley-pelican-town-railway-2026-11-17",
+    "name": "Stardew Valley — Pelican Town Railway",
+    "season": "Gaming",
+    "collection": "gaming",
+    "orientation": "landscape",
+    "asset": "daily-gaming-stardew-valley-pelican-town-railway-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
+  },
+  {
+    "id": "daily-kids-tv-bluey-creekside-camping-2026-11-17",
+    "name": "Bluey — Creekside Camping",
+    "season": "Kids TV Shows",
+    "collection": "kids-tv",
+    "orientation": "landscape",
+    "asset": "daily-kids-tv-bluey-creekside-camping-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "seamMode": "divider"
   }
 ]
