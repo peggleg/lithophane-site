@@ -1373,5 +1373,38 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "christmas-disco-grinch-2026-11-17",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Disco Grinchmas",
+    "asset": "christmas-disco-grinch-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "christmas-grinch-cocoa-2026-11-17",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Grinch’s Cocoa Club",
+    "asset": "christmas-grinch-cocoa-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "christmas-grinch-gift-chaos-2026-11-17",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Grinch’s Gift-Wrap Chaos",
+    "asset": "christmas-grinch-gift-chaos-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]
