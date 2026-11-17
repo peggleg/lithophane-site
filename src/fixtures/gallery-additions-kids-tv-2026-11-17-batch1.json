@@ -1,0 +1,82 @@
+{
+  "requested": [
+    {
+      "slug": "bluey",
+      "name": "Bluey"
+    },
+    {
+      "slug": "paw-patrol",
+      "name": "PAW Patrol"
+    },
+    {
+      "slug": "peppa-pig",
+      "name": "Peppa Pig"
+    },
+    {
+      "slug": "gabbys-dollhouse",
+      "name": "Gabby’s Dollhouse"
+    },
+    {
+      "slug": "hey-duggee",
+      "name": "Hey Duggee"
+    }
+  ],
+  "blocked": [
+    {
+      "slug": "paw-patrol",
+      "name": "PAW Patrol",
+      "reason": "Image service rejected generation"
+    }
+  ],
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "kids-tv-bluey-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Bluey",
+      "asset": "kids-tv-bluey-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "ef84917d19648ead05030f728ff85c723cdbfcda7e403f08cf20323a5459cf40"
+    },
+    {
+      "id": "kids-tv-peppa-pig-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Peppa Pig",
+      "asset": "kids-tv-peppa-pig-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "bc32117bee815adc0ba734603a454ca794723a40e251d7f7f4e5712c2753428b"
+    },
+    {
+      "id": "kids-tv-gabbys-dollhouse-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Gabby’s Dollhouse",
+      "asset": "kids-tv-gabbys-dollhouse-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "290cdc125d2f2274dda4670ce485fb2cd68dd3769d1323617547adee8f1cb2f8"
+    },
+    {
+      "id": "kids-tv-hey-duggee-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Hey Duggee",
+      "asset": "kids-tv-hey-duggee-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "cd6e55adf57e264932b57439e56366f54b27e4d1da4e061a7bc2c86dd600c8e5"
+    }
+  ]
+}
