@@ -1197,5 +1197,137 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "gaming-terraria-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Terraria",
+    "asset": "gaming-terraria-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-sea-of-thieves-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Sea of Thieves",
+    "asset": "gaming-sea-of-thieves-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-subnautica-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Subnautica",
+    "asset": "gaming-subnautica-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-slime-rancher-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Slime Rancher",
+    "asset": "gaming-slime-rancher-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-overcooked-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Overcooked",
+    "asset": "gaming-overcooked-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-untitled-goose-game-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Untitled Goose Game",
+    "asset": "gaming-untitled-goose-game-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-katamari-damacy-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Katamari Damacy",
+    "asset": "gaming-katamari-damacy-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-plants-vs-zombies-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Plants vs. Zombies",
+    "asset": "gaming-plants-vs-zombies-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-bomberman-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Bomberman",
+    "asset": "gaming-bomberman-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-lemmings-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Lemmings",
+    "asset": "gaming-lemmings-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-astro-bot-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Astro Bot",
+    "asset": "gaming-astro-bot-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
+  },
+  {
+    "id": "gaming-unravel-2026-11-16",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Unravel",
+    "asset": "gaming-unravel-2026-11-16.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]
