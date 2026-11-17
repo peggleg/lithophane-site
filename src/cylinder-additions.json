@@ -1626,5 +1626,16 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "divider"
+  },
+  {
+    "id": "kids-tv-numberblocks-2026-11-17",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Numberblocks",
+    "asset": "kids-tv-numberblocks-2026-11-17.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "divider"
   }
 ]

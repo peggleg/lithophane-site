@@ -1,0 +1,61 @@
+{
+  "requested": [
+    {
+      "slug": "spidey",
+      "name": "Spidey and His Amazing Friends"
+    },
+    {
+      "slug": "mickey-mouse-clubhouse",
+      "name": "Mickey Mouse Clubhouse"
+    },
+    {
+      "slug": "numberblocks",
+      "name": "Numberblocks"
+    },
+    {
+      "slug": "octonauts",
+      "name": "Octonauts"
+    },
+    {
+      "slug": "spongebob",
+      "name": "SpongeBob SquarePants"
+    }
+  ],
+  "blocked": [
+    {
+      "slug": "spidey",
+      "name": "Spidey and His Amazing Friends",
+      "reason": "Image service rejected generation"
+    },
+    {
+      "slug": "mickey-mouse-clubhouse",
+      "name": "Mickey Mouse Clubhouse",
+      "reason": "Image service rejected generation"
+    },
+    {
+      "slug": "octonauts",
+      "name": "Octonauts",
+      "reason": "Image service rejected generation"
+    },
+    {
+      "slug": "spongebob",
+      "name": "SpongeBob SquarePants",
+      "reason": "Image service rejected generation"
+    }
+  ],
+  "flat": [],
+  "cylinders": [
+    {
+      "id": "kids-tv-numberblocks-2026-11-17",
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "name": "Numberblocks",
+      "asset": "kids-tv-numberblocks-2026-11-17.webp",
+      "row": 0,
+      "rows": 1,
+      "orientation": "landscape",
+      "seamMode": "divider",
+      "sha256": "05720972363907354904b372799dc6d8d442066a1d138185f708d1ca0d8b2f6d"
+    }
+  ]
+}
