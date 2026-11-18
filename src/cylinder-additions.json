@@ -1846,5 +1846,125 @@
     "row": 0,
     "rows": 1,
     "seamMode": "divider"
+  },
+  {
+    "id": "daily-christmas-the-candlelit-winter-canal-2026-11-18",
+    "name": "The Candlelit Winter Canal",
+    "season": "Christmas",
+    "collection": "christmas",
+    "orientation": "landscape",
+    "asset": "daily-christmas-the-candlelit-winter-canal-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-easter-the-blossom-railway-meadow-2026-11-18",
+    "name": "The Blossom Railway Meadow",
+    "season": "Easter",
+    "collection": "easter",
+    "orientation": "landscape",
+    "asset": "daily-easter-the-blossom-railway-meadow-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-valentine-the-rose-bridge-aviary-2026-11-18",
+    "name": "The Rose Bridge Aviary",
+    "season": "Valentine’s Day",
+    "collection": "valentine",
+    "orientation": "landscape",
+    "asset": "daily-valentine-the-rose-bridge-aviary-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-newyear-midnight-over-the-lighthouse-bay-2026-11-18",
+    "name": "Midnight over the Lighthouse Bay",
+    "season": "New Year",
+    "collection": "newyear",
+    "orientation": "landscape",
+    "asset": "daily-newyear-midnight-over-the-lighthouse-bay-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-mother-the-wildflower-tea-garden-2026-11-18",
+    "name": "The Wildflower Tea Garden",
+    "season": "Mother’s Day",
+    "collection": "mother",
+    "orientation": "landscape",
+    "asset": "daily-mother-the-wildflower-tea-garden-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-father-the-old-workshop-railway-2026-11-18",
+    "name": "The Old Workshop Railway",
+    "season": "Father’s Day",
+    "collection": "father",
+    "orientation": "landscape",
+    "asset": "daily-father-the-old-workshop-railway-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-thanksgiving-the-harvest-barn-railway-2026-11-18",
+    "name": "The Harvest Barn Railway",
+    "season": "Thanksgiving",
+    "collection": "thanksgiving",
+    "orientation": "landscape",
+    "asset": "daily-thanksgiving-the-harvest-barn-railway-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-gonk-gonks-at-the-seaside-lighthouse-2026-11-18",
+    "name": "Gonks at the Seaside Lighthouse",
+    "season": "Gonk",
+    "collection": "gonk",
+    "orientation": "landscape",
+    "asset": "daily-gonk-gonks-at-the-seaside-lighthouse-2026-11-18-v3.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-animals-red-pandas-in-the-bamboo-grove-2026-11-18",
+    "name": "Red Pandas in the Bamboo Grove",
+    "season": "Animals",
+    "collection": "animals",
+    "orientation": "landscape",
+    "asset": "daily-animals-red-pandas-in-the-bamboo-grove-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-halloween-the-owls-pumpkin-shop-2026-11-18",
+    "name": "The Owl’s Pumpkin Shop",
+    "season": "Halloween",
+    "collection": "halloween",
+    "orientation": "landscape",
+    "asset": "daily-halloween-the-owls-pumpkin-shop-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-cartoons-otters-at-the-rainy-day-bookshop-2026-11-18",
+    "name": "Otters at the Rainy-Day Bookshop",
+    "season": "Cartoons",
+    "collection": "cartoons",
+    "orientation": "landscape",
+    "asset": "daily-cartoons-otters-at-the-rainy-day-bookshop-2026-11-18.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-gaming-minecraft-mountain-railway-2026-11-18",
+    "name": "Minecraft — Mountain Railway",
+    "season": "Gaming",
+    "collection": "gaming",
+    "orientation": "landscape",
+    "asset": "daily-gaming-minecraft-mountain-railway-2026-11-18-v4.webp",
+    "row": 0,
+    "rows": 1
   }
 ]

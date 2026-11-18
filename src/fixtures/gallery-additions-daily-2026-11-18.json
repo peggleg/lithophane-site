@@ -1,0 +1,491 @@
+{
+  "requested": [
+    {
+      "kind": "flat",
+      "season": "Christmas",
+      "collection": "christmas",
+      "name": "The Clockmaker’s Christmas Window",
+      "id": "daily-christmas-the-clockmakers-christmas-window-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Easter",
+      "collection": "easter",
+      "name": "Daffodils at the Potting Bench",
+      "id": "daily-easter-daffodils-at-the-potting-bench-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Halloween",
+      "collection": "halloween",
+      "name": "The Owl and the Pumpkin Caravan",
+      "id": "daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Valentine’s Day",
+      "collection": "valentine",
+      "name": "Letters beside the Conservatory",
+      "id": "daily-valentine-letters-beside-the-conservatory-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "New Year 2027",
+      "collection": "newyear",
+      "name": "Midnight at the Snowy Harbour",
+      "id": "daily-newyear-midnight-at-the-snowy-harbour-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Mother’s Day",
+      "collection": "mother",
+      "name": "The Bluebell Garden Nest",
+      "id": "daily-mother-the-bluebell-garden-nest-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Father’s Day",
+      "collection": "father",
+      "name": "The Workbench at Sunrise",
+      "id": "daily-father-the-workbench-at-sunrise-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Thanksgiving",
+      "collection": "thanksgiving",
+      "name": "The Harvest Mill Basket",
+      "id": "daily-thanksgiving-the-harvest-mill-basket-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Gonk",
+      "collection": "gonk",
+      "name": "The Lighthouse Keeper Gonk",
+      "id": "daily-gonk-the-lighthouse-keeper-gonk-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Animals",
+      "collection": "animals",
+      "name": "Red Panda beneath the Maple",
+      "id": "daily-animals-red-panda-beneath-the-maple-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Cartoons",
+      "collection": "cartoons",
+      "name": "Otter’s Rainy-Day Bookshop",
+      "id": "daily-cartoons-otters-rainy-day-bookshop-2026-11-18"
+    },
+    {
+      "kind": "flat",
+      "season": "Gaming",
+      "collection": "gaming",
+      "name": "Minecraft — Snowy Village",
+      "id": "daily-gaming-minecraft-snowy-village-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "christmas",
+      "name": "The Candlelit Winter Canal",
+      "id": "daily-christmas-the-candlelit-winter-canal-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "easter",
+      "name": "The Blossom Railway Meadow",
+      "id": "daily-easter-the-blossom-railway-meadow-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "valentine",
+      "name": "The Rose Bridge Aviary",
+      "id": "daily-valentine-the-rose-bridge-aviary-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "newyear",
+      "name": "Midnight over the Lighthouse Bay",
+      "id": "daily-newyear-midnight-over-the-lighthouse-bay-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "mother",
+      "name": "The Wildflower Tea Garden",
+      "id": "daily-mother-the-wildflower-tea-garden-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "father",
+      "name": "The Old Workshop Railway",
+      "id": "daily-father-the-old-workshop-railway-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "thanksgiving",
+      "name": "The Harvest Barn Railway",
+      "id": "daily-thanksgiving-the-harvest-barn-railway-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "gonk",
+      "name": "Gonks at the Seaside Lighthouse",
+      "id": "daily-gonk-gonks-at-the-seaside-lighthouse-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "animals",
+      "name": "Red Pandas in the Bamboo Grove",
+      "id": "daily-animals-red-pandas-in-the-bamboo-grove-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "halloween",
+      "name": "The Owl’s Pumpkin Shop",
+      "id": "daily-halloween-the-owls-pumpkin-shop-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "cartoons",
+      "name": "Otters at the Rainy-Day Bookshop",
+      "id": "daily-cartoons-otters-at-the-rainy-day-bookshop-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "gaming",
+      "name": "Minecraft — Mountain Railway",
+      "id": "daily-gaming-minecraft-mountain-railway-2026-11-18"
+    },
+    {
+      "kind": "cylinder",
+      "collection": "kids-tv",
+      "name": "Paw Patrol — Winter Rescue",
+      "id": "daily-kids-tv-paw-patrol-winter-rescue-2026-11-18"
+    }
+  ],
+  "flat": [
+    {
+      "id": "daily-christmas-the-clockmakers-christmas-window-2026-11-18",
+      "name": "The Clockmaker’s Christmas Window",
+      "season": "Christmas",
+      "description": "The Clockmaker’s Christmas Window; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-christmas-the-clockmakers-christmas-window-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-christmas-the-clockmakers-christmas-window-2026-11-18.png",
+      "sha256": "ce8c5a7c4ff3aa855e01551ce71d1dbac2df8195160f9f5e4c87a3461566ae38"
+    },
+    {
+      "id": "daily-easter-daffodils-at-the-potting-bench-2026-11-18",
+      "name": "Daffodils at the Potting Bench",
+      "season": "Easter",
+      "description": "Daffodils at the Potting Bench; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-easter-daffodils-at-the-potting-bench-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-easter-daffodils-at-the-potting-bench-2026-11-18.png",
+      "sha256": "8b40f285dece2a01b7ba39f69d6a7f74a6c3dbfea40268e3daaf73722f4fb3ce"
+    },
+    {
+      "id": "daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18",
+      "name": "The Owl and the Pumpkin Caravan",
+      "season": "Halloween",
+      "description": "The Owl and the Pumpkin Caravan; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18.png",
+      "sha256": "528b1352c5906513ef18cc16e9cef888fc790678eed39bd533301a3e38c717fb"
+    },
+    {
+      "id": "daily-valentine-letters-beside-the-conservatory-2026-11-18",
+      "name": "Letters beside the Conservatory",
+      "season": "Valentine’s Day",
+      "description": "Letters beside the Conservatory; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-valentine-letters-beside-the-conservatory-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-valentine-letters-beside-the-conservatory-2026-11-18.png",
+      "sha256": "dd6c8dd8a4e9085c604d2e5650873990679c1f48b86cb770badfed5f0a3188ce"
+    },
+    {
+      "id": "daily-newyear-midnight-at-the-snowy-harbour-2026-11-18",
+      "name": "Midnight at the Snowy Harbour",
+      "season": "New Year 2027",
+      "description": "Midnight at the Snowy Harbour; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-newyear-midnight-at-the-snowy-harbour-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-newyear-midnight-at-the-snowy-harbour-2026-11-18.png",
+      "sha256": "9472327e62a82b3b3337881dc73ef3c938d020265ec9fd24ba37e7af0aa21cbb"
+    },
+    {
+      "id": "daily-mother-the-bluebell-garden-nest-2026-11-18",
+      "name": "The Bluebell Garden Nest",
+      "season": "Mother’s Day",
+      "description": "The Bluebell Garden Nest; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-mother-the-bluebell-garden-nest-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-mother-the-bluebell-garden-nest-2026-11-18.png",
+      "sha256": "69955e9de0244f3333890777dfa1d86c1b151e2b669d71cd5bde06432864a546"
+    },
+    {
+      "id": "daily-father-the-workbench-at-sunrise-2026-11-18",
+      "name": "The Workbench at Sunrise",
+      "season": "Father’s Day",
+      "description": "The Workbench at Sunrise; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-father-the-workbench-at-sunrise-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-father-the-workbench-at-sunrise-2026-11-18.png",
+      "sha256": "d15ebdf776f3d37409941945cbb3466993be0e2eb70563dda323b258d7204f15"
+    },
+    {
+      "id": "daily-thanksgiving-the-harvest-mill-basket-2026-11-18",
+      "name": "The Harvest Mill Basket",
+      "season": "Thanksgiving",
+      "description": "The Harvest Mill Basket; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-thanksgiving-the-harvest-mill-basket-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-thanksgiving-the-harvest-mill-basket-2026-11-18.png",
+      "sha256": "b67d5c783d3f43cd293345d7494f5ef66185d17d2af6addad1ea4b1943b75434"
+    },
+    {
+      "id": "daily-gonk-the-lighthouse-keeper-gonk-2026-11-18",
+      "name": "The Lighthouse Keeper Gonk",
+      "season": "Gonk",
+      "description": "The Lighthouse Keeper Gonk; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-gonk-the-lighthouse-keeper-gonk-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gonk-the-lighthouse-keeper-gonk-2026-11-18.png",
+      "sha256": "1d3dbb58a81afb58df967e4aea100613e099768cab5d05fdf40497f3e8b89cc7"
+    },
+    {
+      "id": "daily-animals-red-panda-beneath-the-maple-2026-11-18",
+      "name": "Red Panda beneath the Maple",
+      "season": "Animals",
+      "description": "Red Panda beneath the Maple; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-animals-red-panda-beneath-the-maple-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-animals-red-panda-beneath-the-maple-2026-11-18.png",
+      "sha256": "80427ec33734cf7cbe716d4b2d25f1e0841ae4bba39d4a404e4c0d157c946a3d"
+    },
+    {
+      "id": "daily-cartoons-otters-rainy-day-bookshop-2026-11-18",
+      "name": "Otter’s Rainy-Day Bookshop",
+      "season": "Cartoons",
+      "description": "Otter’s Rainy-Day Bookshop; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-cartoons-otters-rainy-day-bookshop-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-cartoons-otters-rainy-day-bookshop-2026-11-18.png",
+      "sha256": "efd0f57936370c4aae6c9a18cf85ba3008f42216dff438fc5476e2c738424b22"
+    },
+    {
+      "id": "daily-gaming-minecraft-snowy-village-2026-11-18",
+      "name": "Minecraft — Snowy Village",
+      "season": "Gaming",
+      "description": "Minecraft — Snowy Village; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-gaming-minecraft-snowy-village-2026-11-18",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gaming-minecraft-snowy-village-2026-11-18.png",
+      "sha256": "226ee032578fc2a2e111bdd3113eac74d02051091e51697b73d978212176c0d4"
+    }
+  ],
+  "cylinders": [
+    {
+      "id": "daily-christmas-the-candlelit-winter-canal-2026-11-18",
+      "name": "The Candlelit Winter Canal",
+      "season": "Christmas",
+      "collection": "christmas",
+      "orientation": "landscape",
+      "asset": "daily-christmas-the-candlelit-winter-canal-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "7b4a2081af56182dc95771b59df3d49138d6e13385229904d0351769c3099ec8"
+    },
+    {
+      "id": "daily-easter-the-blossom-railway-meadow-2026-11-18",
+      "name": "The Blossom Railway Meadow",
+      "season": "Easter",
+      "collection": "easter",
+      "orientation": "landscape",
+      "asset": "daily-easter-the-blossom-railway-meadow-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "78de60a24e7276d28af81dff21f99cbae00ae42b17280078c5df271f2e7cbcaf"
+    },
+    {
+      "id": "daily-valentine-the-rose-bridge-aviary-2026-11-18",
+      "name": "The Rose Bridge Aviary",
+      "season": "Valentine’s Day",
+      "collection": "valentine",
+      "orientation": "landscape",
+      "asset": "daily-valentine-the-rose-bridge-aviary-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "55b5ae13d7443d3add10c61a9f370d908905cffe4f048ccc10ddb449bf50633b"
+    },
+    {
+      "id": "daily-newyear-midnight-over-the-lighthouse-bay-2026-11-18",
+      "name": "Midnight over the Lighthouse Bay",
+      "season": "New Year",
+      "collection": "newyear",
+      "orientation": "landscape",
+      "asset": "daily-newyear-midnight-over-the-lighthouse-bay-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "d3e281f0291083ffae196055d670cf167800d4dffd7ef08800acf8b0ba42b672"
+    },
+    {
+      "id": "daily-mother-the-wildflower-tea-garden-2026-11-18",
+      "name": "The Wildflower Tea Garden",
+      "season": "Mother’s Day",
+      "collection": "mother",
+      "orientation": "landscape",
+      "asset": "daily-mother-the-wildflower-tea-garden-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "0727f1407727ff56d12fb308a63b91029bf0c3a5dec85721aebfeb1eb9bb2547"
+    },
+    {
+      "id": "daily-father-the-old-workshop-railway-2026-11-18",
+      "name": "The Old Workshop Railway",
+      "season": "Father’s Day",
+      "collection": "father",
+      "orientation": "landscape",
+      "asset": "daily-father-the-old-workshop-railway-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "9aece5fead21791e7fa4728c2bbe2e6d89d37a829d0ca791b42c1b0f849465ca"
+    },
+    {
+      "id": "daily-thanksgiving-the-harvest-barn-railway-2026-11-18",
+      "name": "The Harvest Barn Railway",
+      "season": "Thanksgiving",
+      "collection": "thanksgiving",
+      "orientation": "landscape",
+      "asset": "daily-thanksgiving-the-harvest-barn-railway-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "9f6a76d128059f1b7efa398539540b5a5cd313ce5ab254eae8e200607c79fe78"
+    },
+    {
+      "id": "daily-gonk-gonks-at-the-seaside-lighthouse-2026-11-18",
+      "name": "Gonks at the Seaside Lighthouse",
+      "season": "Gonk",
+      "collection": "gonk",
+      "orientation": "landscape",
+      "asset": "daily-gonk-gonks-at-the-seaside-lighthouse-2026-11-18-v3.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "42fd00655ed508cb557bbff1861aec2a6c09c72a45800c3937f039c3caedc24c"
+    },
+    {
+      "id": "daily-animals-red-pandas-in-the-bamboo-grove-2026-11-18",
+      "name": "Red Pandas in the Bamboo Grove",
+      "season": "Animals",
+      "collection": "animals",
+      "orientation": "landscape",
+      "asset": "daily-animals-red-pandas-in-the-bamboo-grove-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "7b7c5ce1731db6f24aa724ad26e8a523a8fb775770cc16eca6102524fcba5451"
+    },
+    {
+      "id": "daily-halloween-the-owls-pumpkin-shop-2026-11-18",
+      "name": "The Owl’s Pumpkin Shop",
+      "season": "Halloween",
+      "collection": "halloween",
+      "orientation": "landscape",
+      "asset": "daily-halloween-the-owls-pumpkin-shop-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "d09c4ddcbee4408b36df1863c51ece8441c15e39e2e527ba66159e9c8ab8a0f2"
+    },
+    {
+      "id": "daily-cartoons-otters-at-the-rainy-day-bookshop-2026-11-18",
+      "name": "Otters at the Rainy-Day Bookshop",
+      "season": "Cartoons",
+      "collection": "cartoons",
+      "orientation": "landscape",
+      "asset": "daily-cartoons-otters-at-the-rainy-day-bookshop-2026-11-18.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "d792ba9ced24b16a236b80a6a62eb5f9b6e09aa7a4294d7ef3e5df6b8f9ed8e8"
+    },
+    {
+      "id": "daily-gaming-minecraft-mountain-railway-2026-11-18",
+      "name": "Minecraft — Mountain Railway",
+      "season": "Gaming",
+      "collection": "gaming",
+      "orientation": "landscape",
+      "asset": "daily-gaming-minecraft-mountain-railway-2026-11-18-v4.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "233ed31718026e1368921e146075ee140cb23a78cf33876af86238c69779f583"
+    }
+  ],
+  "blocked": [
+    {
+      "kind": "cylinder",
+      "collection": "kids-tv",
+      "name": "Paw Patrol — Winter Rescue",
+      "id": "daily-kids-tv-paw-patrol-winter-rescue-2026-11-18",
+      "error": "Image generation rejected by the image service."
+    }
+  ]
+}

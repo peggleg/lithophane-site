@@ -1,3 +1,15 @@
+import daily20261118_0 from './assets/seasonal-daily-christmas-the-clockmakers-christmas-window-2026-11-18.png';
+import daily20261118_1 from './assets/seasonal-daily-easter-daffodils-at-the-potting-bench-2026-11-18.png';
+import daily20261118_2 from './assets/seasonal-daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18.png';
+import daily20261118_3 from './assets/seasonal-daily-valentine-letters-beside-the-conservatory-2026-11-18.png';
+import daily20261118_4 from './assets/seasonal-daily-newyear-midnight-at-the-snowy-harbour-2026-11-18.png';
+import daily20261118_5 from './assets/seasonal-daily-mother-the-bluebell-garden-nest-2026-11-18.png';
+import daily20261118_6 from './assets/seasonal-daily-father-the-workbench-at-sunrise-2026-11-18.png';
+import daily20261118_7 from './assets/seasonal-daily-thanksgiving-the-harvest-mill-basket-2026-11-18.png';
+import daily20261118_8 from './assets/seasonal-daily-gonk-the-lighthouse-keeper-gonk-2026-11-18.png';
+import daily20261118_9 from './assets/seasonal-daily-animals-red-panda-beneath-the-maple-2026-11-18.png';
+import daily20261118_10 from './assets/seasonal-daily-cartoons-otters-rainy-day-bookshop-2026-11-18.png';
+import daily20261118_11 from './assets/seasonal-daily-gaming-minecraft-snowy-village-2026-11-18.png';
 import daily20261117_0 from './assets/seasonal-daily-christmas-robin-and-the-frosted-bauble-2026-11-17.png';
 import daily20261117_1 from './assets/seasonal-daily-easter-lamb-in-the-easter-orchard-2026-11-17.png';
 import daily20261117_2 from './assets/seasonal-daily-halloween-raven-at-the-apothecary-2026-11-17.png';
@@ -147,6 +159,18 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-the-clockmakers-christmas-window-2026-11-18':daily20261118_0,
+ 'daily-easter-daffodils-at-the-potting-bench-2026-11-18':daily20261118_1,
+ 'daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18':daily20261118_2,
+ 'daily-valentine-letters-beside-the-conservatory-2026-11-18':daily20261118_3,
+ 'daily-newyear-midnight-at-the-snowy-harbour-2026-11-18':daily20261118_4,
+ 'daily-mother-the-bluebell-garden-nest-2026-11-18':daily20261118_5,
+ 'daily-father-the-workbench-at-sunrise-2026-11-18':daily20261118_6,
+ 'daily-thanksgiving-the-harvest-mill-basket-2026-11-18':daily20261118_7,
+ 'daily-gonk-the-lighthouse-keeper-gonk-2026-11-18':daily20261118_8,
+ 'daily-animals-red-panda-beneath-the-maple-2026-11-18':daily20261118_9,
+ 'daily-cartoons-otters-rainy-day-bookshop-2026-11-18':daily20261118_10,
+ 'daily-gaming-minecraft-snowy-village-2026-11-18':daily20261118_11,
  'daily-christmas-robin-and-the-frosted-bauble-2026-11-17':daily20261117_0,
  'daily-easter-lamb-in-the-easter-orchard-2026-11-17':daily20261117_1,
  'daily-halloween-raven-at-the-apothecary-2026-11-17':daily20261117_2,
