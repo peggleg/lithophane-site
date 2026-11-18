@@ -1,3 +1,4 @@
+import {generateSteampunk} from './steampunk-ornament.js';
 import {generateSnoopy} from './snoopy-ornament.js';
 import {leafyWreath,ornamentEdge,ornamentEdges} from './ornament-wreath.js';
 import opentype from 'opentype.js';
@@ -24,7 +25,7 @@ function connectedSection(C,own,section){
  throw Error('This wording creates too many separate shapes. Shorten the text.');
 }
 export function generateOrnament(module,fontBuffer,input){
- const p=validateOrnament(input);if(p.collection==='cartoons')return generateSnoopy(module,p);const K=productKernel(module,p),{C,own}=K;
+ const p=validateOrnament(input);if(p.collection==='cartoons')return generateSnoopy(module,p);if(p.collection==='steampunk')return generateSteampunk(module,p);const K=productKernel(module,p),{C,own}=K;
  try{
   const font=opentype.parse(fontBuffer);font.variation?.set({wght:700});
   const radius=p.diameter/2,scale=p.diameter/100;
