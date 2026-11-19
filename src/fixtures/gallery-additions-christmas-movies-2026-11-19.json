@@ -1,0 +1,15 @@
+{
+  "cylinders": [
+    {
+      "id": "christmas-movies-die-hard-nakatomi-plaza-2026-11-19",
+      "name": "Die Hard — Christmas at Nakatomi Plaza",
+      "season": "Christmas Movies",
+      "collection": "christmas-movies",
+      "orientation": "landscape",
+      "asset": "christmas-movies-die-hard-nakatomi-plaza-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "8c1ee9258977d04015d5c4691150cf208052f06ce91762beeed6694729842c11"
+    }
+  ]
+}

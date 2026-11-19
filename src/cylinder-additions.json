@@ -1966,5 +1966,15 @@
     "asset": "daily-gaming-minecraft-mountain-railway-2026-11-18-v4.webp",
     "row": 0,
     "rows": 1
+  },
+  {
+    "id": "christmas-movies-die-hard-nakatomi-plaza-2026-11-19",
+    "name": "Die Hard — Christmas at Nakatomi Plaza",
+    "season": "Christmas Movies",
+    "collection": "christmas-movies",
+    "orientation": "landscape",
+    "asset": "christmas-movies-die-hard-nakatomi-plaza-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
   }
 ]

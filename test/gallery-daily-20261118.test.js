@@ -10,7 +10,7 @@ const hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 test('daily 2026-11-18 preserves all earlier IDs, ordered entries, assets, flat crops and atlas rows',()=>{
  assert.deepEqual(seasonalDesigns.slice(0,prior.flat.length),prior.flat);
  assert.deepEqual(cylinderCatalogue.slice(0,prior.cylinders.length),prior.cylinders);
- assert.deepEqual(cylinderCollections,prior.collections);
+ assert.deepEqual(cylinderCollections.slice(0,prior.collections.length),prior.collections);
  for(const d of prior.flat)assert.deepEqual(artworkCell(d,1200,1600),prior.cells[d.id]);
  for(const [path,sha]of Object.entries(prior.assets))assert.equal(hash(path),sha,path);
 });
