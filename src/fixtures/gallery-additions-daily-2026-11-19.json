@@ -1,0 +1,525 @@
+{
+  "requested": [
+    {
+      "collection": "christmas",
+      "season": "Christmas",
+      "kind": "flat",
+      "name": "The Gingerbread Observatory",
+      "id": "daily-christmas-the-gingerbread-observatory-2026-11-19"
+    },
+    {
+      "collection": "easter",
+      "season": "Easter",
+      "kind": "flat",
+      "name": "The Eggshell Submarine",
+      "id": "daily-easter-the-eggshell-submarine-2026-11-19"
+    },
+    {
+      "collection": "halloween",
+      "season": "Halloween",
+      "kind": "flat",
+      "name": "The Raven’s Midnight Carousel",
+      "id": "daily-halloween-the-ravens-midnight-carousel-2026-11-19"
+    },
+    {
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "kind": "flat",
+      "name": "The Clockwork Heart Garden",
+      "id": "daily-valentine-the-clockwork-heart-garden-2026-11-19"
+    },
+    {
+      "collection": "newyear",
+      "season": "New Year 2027",
+      "kind": "flat",
+      "name": "The Midnight Airship Parade",
+      "id": "daily-newyear-the-midnight-airship-parade-2026-11-19"
+    },
+    {
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "kind": "flat",
+      "name": "The Foxglove Quilt Nest",
+      "id": "daily-mother-the-foxglove-quilt-nest-2026-11-19"
+    },
+    {
+      "collection": "father",
+      "season": "Father’s Day",
+      "kind": "flat",
+      "name": "The Inventor’s Mechanical Stag",
+      "id": "daily-father-the-inventors-mechanical-stag-2026-11-19"
+    },
+    {
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "kind": "flat",
+      "name": "The Harvest Balloon Market",
+      "id": "daily-thanksgiving-the-harvest-balloon-market-2026-11-19"
+    },
+    {
+      "collection": "gonk",
+      "season": "Gonk",
+      "kind": "flat",
+      "name": "The Glassblower Gonk",
+      "id": "daily-gonk-the-glassblower-gonk-2026-11-19"
+    },
+    {
+      "collection": "animals",
+      "season": "Animals",
+      "kind": "flat",
+      "name": "The Otter’s Winter Ice Garden",
+      "id": "daily-animals-the-otters-winter-ice-garden-2026-11-19"
+    },
+    {
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "kind": "flat",
+      "name": "The Moonlight Moth Express",
+      "id": "daily-cartoons-the-moonlight-moth-express-2026-11-19"
+    },
+    {
+      "collection": "gaming",
+      "season": "Gaming",
+      "kind": "flat",
+      "name": "Tetris — The Moonlit Block City",
+      "id": "daily-gaming-tetris-the-moonlit-block-city-2026-11-19"
+    },
+    {
+      "collection": "christmas",
+      "season": "Christmas",
+      "kind": "cylinder",
+      "name": "The Clockwork Christmas Sky",
+      "id": "daily-christmas-the-clockwork-christmas-sky-2026-11-19"
+    },
+    {
+      "collection": "easter",
+      "season": "Easter",
+      "kind": "cylinder",
+      "name": "The Great Spring Pond Expedition",
+      "id": "daily-easter-the-great-spring-pond-expedition-2026-11-19"
+    },
+    {
+      "collection": "halloween",
+      "season": "Halloween",
+      "kind": "cylinder",
+      "name": "The Raven’s Moonlit Carnival",
+      "id": "daily-halloween-the-ravens-moonlit-carnival-2026-11-19"
+    },
+    {
+      "collection": "valentine",
+      "season": "Valentine’s Day",
+      "kind": "cylinder",
+      "name": "The Underwater Heart Garden",
+      "id": "daily-valentine-the-underwater-heart-garden-2026-11-19"
+    },
+    {
+      "collection": "newyear",
+      "season": "New Year",
+      "kind": "cylinder",
+      "name": "Midnight Airships Above the City",
+      "id": "daily-newyear-midnight-airships-above-the-city-2026-11-19"
+    },
+    {
+      "collection": "mother",
+      "season": "Mother’s Day",
+      "kind": "cylinder",
+      "name": "The Fox Family’s Patchwork Garden",
+      "id": "daily-mother-the-fox-familys-patchwork-garden-2026-11-19"
+    },
+    {
+      "collection": "father",
+      "season": "Father’s Day",
+      "kind": "cylinder",
+      "name": "The Mechanical Stag Workshop",
+      "id": "daily-father-the-mechanical-stag-workshop-2026-11-19"
+    },
+    {
+      "collection": "thanksgiving",
+      "season": "Thanksgiving",
+      "kind": "cylinder",
+      "name": "The Pumpkin Balloon Harvest",
+      "id": "daily-thanksgiving-the-pumpkin-balloon-harvest-2026-11-19"
+    },
+    {
+      "collection": "gonk",
+      "season": "Gonk",
+      "kind": "cylinder",
+      "name": "The Gonk Glass Garden",
+      "id": "daily-gonk-the-gonk-glass-garden-2026-11-19"
+    },
+    {
+      "collection": "animals",
+      "season": "Animals",
+      "kind": "cylinder",
+      "name": "The Otters’ Frozen River",
+      "id": "daily-animals-the-otters-frozen-river-2026-11-19"
+    },
+    {
+      "collection": "cartoons",
+      "season": "Cartoons",
+      "kind": "cylinder",
+      "name": "The Moonlight Moth Express — Village Flight",
+      "id": "daily-cartoons-the-moonlight-moth-express-village-flight-2026-11-19"
+    },
+    {
+      "collection": "gaming",
+      "season": "Gaming",
+      "kind": "cylinder",
+      "name": "Tetris — The Skyward Block City",
+      "id": "daily-gaming-tetris-the-skyward-block-city-2026-11-19"
+    },
+    {
+      "collection": "kids-tv",
+      "season": "Kids TV Shows",
+      "kind": "cylinder",
+      "name": "Shaun the Sheep — Moonlight Balloon Farm",
+      "id": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19"
+    },
+    {
+      "collection": "christmas-movies",
+      "season": "Christmas Movies",
+      "kind": "cylinder",
+      "name": "Elf — Buddy’s Christmas in New York",
+      "id": "daily-christmas-movies-elf-buddys-christmas-in-new-york-2026-11-19"
+    }
+  ],
+  "flat": [
+    {
+      "id": "daily-christmas-the-gingerbread-observatory-2026-11-19",
+      "name": "The Gingerbread Observatory",
+      "season": "Christmas",
+      "description": "The Gingerbread Observatory; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-christmas-the-gingerbread-observatory-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-christmas-the-gingerbread-observatory-2026-11-19.png",
+      "sha256": "7e912ce07df96d5ec7d2f976c1cf3cd9748b885d87f418245bc1195e2e8ba04f"
+    },
+    {
+      "id": "daily-easter-the-eggshell-submarine-2026-11-19",
+      "name": "The Eggshell Submarine",
+      "season": "Easter",
+      "description": "The Eggshell Submarine; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-easter-the-eggshell-submarine-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-easter-the-eggshell-submarine-2026-11-19.png",
+      "sha256": "a7f6f908c7958c15643ae2077cd5a2276e209351c45e1d15425fad08825bff75"
+    },
+    {
+      "id": "daily-halloween-the-ravens-midnight-carousel-2026-11-19",
+      "name": "The Raven’s Midnight Carousel",
+      "season": "Halloween",
+      "description": "The Raven’s Midnight Carousel; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-halloween-the-ravens-midnight-carousel-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-halloween-the-ravens-midnight-carousel-2026-11-19.png",
+      "sha256": "0be2853ca4117438d3886e344c47bc428469ef8ea2cdd1522f7f18d6c90abc7f"
+    },
+    {
+      "id": "daily-valentine-the-clockwork-heart-garden-2026-11-19",
+      "name": "The Clockwork Heart Garden",
+      "season": "Valentine’s Day",
+      "description": "The Clockwork Heart Garden; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-valentine-the-clockwork-heart-garden-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-valentine-the-clockwork-heart-garden-2026-11-19.png",
+      "sha256": "568aa04f158bd4ae7467a8c9ec8867ae2413cd8b23b0c573b93a8836f80a15d3"
+    },
+    {
+      "id": "daily-newyear-the-midnight-airship-parade-2026-11-19",
+      "name": "The Midnight Airship Parade",
+      "season": "New Year 2027",
+      "description": "The Midnight Airship Parade; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-newyear-the-midnight-airship-parade-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-newyear-the-midnight-airship-parade-2026-11-19.png",
+      "sha256": "6be41ee9ca6d715d1de5a0d436a6fe8b3bf07bde3ac781fd00ccd90016aaead9"
+    },
+    {
+      "id": "daily-mother-the-foxglove-quilt-nest-2026-11-19",
+      "name": "The Foxglove Quilt Nest",
+      "season": "Mother’s Day",
+      "description": "The Foxglove Quilt Nest; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-mother-the-foxglove-quilt-nest-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-mother-the-foxglove-quilt-nest-2026-11-19.png",
+      "sha256": "6509a6547949af862e446dc4592eb9691b51c120c5a37498c476066b7feef33a"
+    },
+    {
+      "id": "daily-father-the-inventors-mechanical-stag-2026-11-19",
+      "name": "The Inventor’s Mechanical Stag",
+      "season": "Father’s Day",
+      "description": "The Inventor’s Mechanical Stag; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-father-the-inventors-mechanical-stag-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-father-the-inventors-mechanical-stag-2026-11-19.png",
+      "sha256": "32cea5fa9eceef0a4d8790e28c5cb7619ae72d9e9873e6b50e558420d5327298"
+    },
+    {
+      "id": "daily-thanksgiving-the-harvest-balloon-market-2026-11-19",
+      "name": "The Harvest Balloon Market",
+      "season": "Thanksgiving",
+      "description": "The Harvest Balloon Market; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-thanksgiving-the-harvest-balloon-market-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-thanksgiving-the-harvest-balloon-market-2026-11-19.png",
+      "sha256": "08737f2217e21b59d4bdde0ff78681df4c900574f2775a38b61318c3cb32d724"
+    },
+    {
+      "id": "daily-gonk-the-glassblower-gonk-2026-11-19",
+      "name": "The Glassblower Gonk",
+      "season": "Gonk",
+      "description": "The Glassblower Gonk; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-gonk-the-glassblower-gonk-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gonk-the-glassblower-gonk-2026-11-19.png",
+      "sha256": "7e6aaa34633d0d35352aee8a5b055e613dda5d2a060ef41b24d9747c4fd5ca94"
+    },
+    {
+      "id": "daily-animals-the-otters-winter-ice-garden-2026-11-19",
+      "name": "The Otter’s Winter Ice Garden",
+      "season": "Animals",
+      "description": "The Otter’s Winter Ice Garden; original lithophane artwork.",
+      "orientation": "portrait",
+      "atlas": "daily-animals-the-otters-winter-ice-garden-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-animals-the-otters-winter-ice-garden-2026-11-19.png",
+      "sha256": "9e82e145ad89b42a8abb7c6b2eb2937ffde4cb9a4e2117b4c93da1843315bdd5"
+    },
+    {
+      "id": "daily-cartoons-the-moonlight-moth-express-2026-11-19",
+      "name": "The Moonlight Moth Express",
+      "season": "Cartoons",
+      "description": "The Moonlight Moth Express; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-cartoons-the-moonlight-moth-express-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-cartoons-the-moonlight-moth-express-2026-11-19.png",
+      "sha256": "03882385652f392422dbd7113f6c64287a5baba223b5950b1f21bf910b059b02"
+    },
+    {
+      "id": "daily-gaming-tetris-the-moonlit-block-city-2026-11-19",
+      "name": "Tetris — The Moonlit Block City",
+      "season": "Gaming",
+      "description": "Tetris — The Moonlit Block City; original lithophane artwork.",
+      "orientation": "landscape",
+      "atlas": "daily-gaming-tetris-the-moonlit-block-city-2026-11-19",
+      "column": 0,
+      "row": 0,
+      "columns": 1,
+      "rows": 1,
+      "cropToPostcard": true,
+      "asset": "seasonal-daily-gaming-tetris-the-moonlit-block-city-2026-11-19.png",
+      "sha256": "a56373dff88c08ebd3a408fbcfdf06f6697be39543154a5dcb9fd5bd633175ab"
+    }
+  ],
+  "cylinders": [
+    {
+      "id": "daily-christmas-the-clockwork-christmas-sky-2026-11-19",
+      "name": "The Clockwork Christmas Sky",
+      "season": "Christmas",
+      "collection": "christmas",
+      "orientation": "landscape",
+      "asset": "daily-christmas-the-clockwork-christmas-sky-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "dd54332ff04ad90f32bbf9876acef98e23e3b76ee280e350bdb5dc0bf8deaf46"
+    },
+    {
+      "id": "daily-easter-the-great-spring-pond-expedition-2026-11-19",
+      "name": "The Great Spring Pond Expedition",
+      "season": "Easter",
+      "collection": "easter",
+      "orientation": "landscape",
+      "asset": "daily-easter-the-great-spring-pond-expedition-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "898cde2165244335de295b3fc6c5d393a1cbf947d01f4d5d3c5fb9a0d03ec5a8"
+    },
+    {
+      "id": "daily-halloween-the-ravens-moonlit-carnival-2026-11-19",
+      "name": "The Raven’s Moonlit Carnival",
+      "season": "Halloween",
+      "collection": "halloween",
+      "orientation": "landscape",
+      "asset": "daily-halloween-the-ravens-moonlit-carnival-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "15faaca515df7124f7e5a512a0a88682e687fbb2272a7a4ac36f6679bb4a553e"
+    },
+    {
+      "id": "daily-valentine-the-underwater-heart-garden-2026-11-19",
+      "name": "The Underwater Heart Garden",
+      "season": "Valentine’s Day",
+      "collection": "valentine",
+      "orientation": "landscape",
+      "asset": "daily-valentine-the-underwater-heart-garden-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "16e389a0f93f659eccce958affc1d65f54d709ba0adb31370173e31aa9a6bbdb"
+    },
+    {
+      "id": "daily-newyear-midnight-airships-above-the-city-2026-11-19",
+      "name": "Midnight Airships Above the City",
+      "season": "New Year",
+      "collection": "newyear",
+      "orientation": "landscape",
+      "asset": "daily-newyear-midnight-airships-above-the-city-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "fd62f0c2fc8fd693ed9314bc6ecf901a2e89b8893696a43aeb77e15ad756e3ca"
+    },
+    {
+      "id": "daily-mother-the-fox-familys-patchwork-garden-2026-11-19",
+      "name": "The Fox Family’s Patchwork Garden",
+      "season": "Mother’s Day",
+      "collection": "mother",
+      "orientation": "landscape",
+      "asset": "daily-mother-the-fox-familys-patchwork-garden-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "4602e35c0762d8524df503110f8549cfb5e77725c19ad5138bf4830451eff098"
+    },
+    {
+      "id": "daily-father-the-mechanical-stag-workshop-2026-11-19",
+      "name": "The Mechanical Stag Workshop",
+      "season": "Father’s Day",
+      "collection": "father",
+      "orientation": "landscape",
+      "asset": "daily-father-the-mechanical-stag-workshop-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "53337d4022a1084d466906ee64c9f1951f913acda4c7b9b44fe27ab237ae6bae"
+    },
+    {
+      "id": "daily-thanksgiving-the-pumpkin-balloon-harvest-2026-11-19",
+      "name": "The Pumpkin Balloon Harvest",
+      "season": "Thanksgiving",
+      "collection": "thanksgiving",
+      "orientation": "landscape",
+      "asset": "daily-thanksgiving-the-pumpkin-balloon-harvest-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "891da9526cebbbe9b81a005926994cf5ec20ba5e5e858dae182a4b25931fad73"
+    },
+    {
+      "id": "daily-gonk-the-gonk-glass-garden-2026-11-19",
+      "name": "The Gonk Glass Garden",
+      "season": "Gonk",
+      "collection": "gonk",
+      "orientation": "landscape",
+      "asset": "daily-gonk-the-gonk-glass-garden-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "7001eb2b8a528720c0bfb7b5d5ae64ef1dad81144dec63cd290aafece0589438"
+    },
+    {
+      "id": "daily-animals-the-otters-frozen-river-2026-11-19",
+      "name": "The Otters’ Frozen River",
+      "season": "Animals",
+      "collection": "animals",
+      "orientation": "landscape",
+      "asset": "daily-animals-the-otters-frozen-river-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "d43ee3316782391ded0ee8f86ffb94dae6a0a543eb6262ecb67909a86c8200ca"
+    },
+    {
+      "id": "daily-cartoons-the-moonlight-moth-express-village-flight-2026-11-19",
+      "name": "The Moonlight Moth Express — Village Flight",
+      "season": "Cartoons",
+      "collection": "cartoons",
+      "orientation": "landscape",
+      "asset": "daily-cartoons-the-moonlight-moth-express-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "e82d95d32f61bd7eb4d50d7f7c5e626a094b8f0196d043178bcd9c33d9f732c1"
+    },
+    {
+      "id": "daily-gaming-tetris-the-skyward-block-city-2026-11-19",
+      "name": "Tetris — The Skyward Block City",
+      "season": "Gaming",
+      "collection": "gaming",
+      "orientation": "landscape",
+      "asset": "daily-gaming-tetris-the-skyward-block-city-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "cc775e3816eb4f0df3919e52c70079be1c9485a95ce1ba21cee246934b33d379"
+    },
+    {
+      "id": "daily-christmas-movies-elf-buddys-christmas-in-new-york-2026-11-19",
+      "name": "Elf — Buddy’s Christmas in New York",
+      "season": "Christmas Movies",
+      "collection": "christmas-movies",
+      "orientation": "landscape",
+      "asset": "daily-christmas-movies-elf-buddys-christmas-in-new-york-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "07d15595645b4d02159f4c6f10eb4672283e3c71faa560afde809d7da0424745"
+    },
+    {
+      "id": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19",
+      "name": "Shaun the Sheep — Moonlight Balloon Farm",
+      "season": "Kids TV Shows",
+      "collection": "kids-tv",
+      "orientation": "landscape",
+      "asset": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19.webp",
+      "row": 0,
+      "rows": 1,
+      "sha256": "e2bdd408ad608c205bc4802185d04662c12f8385b5fb61767a7392d972c25357"
+    }
+  ],
+  "blocked": []
+}

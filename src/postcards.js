@@ -1,3 +1,4 @@
+import daily20261119 from './fixtures/seasonal-additions-2026-11-19.json' with {type:'json'};
 import daily20261118 from './fixtures/seasonal-additions-2026-11-18.json' with {type:'json'};
 import daily20261117 from './fixtures/seasonal-additions-2026-11-17.json' with {type:'json'};
 export const FRAME_URL='https://makerworld.com/en/models/3456935-postcard-lithophane-frame#profileId-3944274';
@@ -1693,7 +1694,8 @@ export const seasonalDesigns=[
  ...daily20261116,
  {"id": "gaming-gta-vi-cover-2026-11-16", "name": "GTA VI — Jason & Lucia", "season": "Gaming", "description": "Jason and Lucia surrounded by GTA VI action scenes.", "orientation": "portrait", "atlas": "gaming-gta-vi-cover-2026-11-16", "column": 0, "row": 0, "columns": 1, "rows": 1, "cropToPostcard": true},
  ...daily20261117,
- ...daily20261118
+ ...daily20261118,
+ ...daily20261119
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

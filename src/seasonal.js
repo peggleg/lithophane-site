@@ -1,3 +1,15 @@
+import daily20261119_0 from './assets/seasonal-daily-christmas-the-gingerbread-observatory-2026-11-19.png';
+import daily20261119_1 from './assets/seasonal-daily-easter-the-eggshell-submarine-2026-11-19.png';
+import daily20261119_2 from './assets/seasonal-daily-halloween-the-ravens-midnight-carousel-2026-11-19.png';
+import daily20261119_3 from './assets/seasonal-daily-valentine-the-clockwork-heart-garden-2026-11-19.png';
+import daily20261119_4 from './assets/seasonal-daily-newyear-the-midnight-airship-parade-2026-11-19.png';
+import daily20261119_5 from './assets/seasonal-daily-mother-the-foxglove-quilt-nest-2026-11-19.png';
+import daily20261119_6 from './assets/seasonal-daily-father-the-inventors-mechanical-stag-2026-11-19.png';
+import daily20261119_7 from './assets/seasonal-daily-thanksgiving-the-harvest-balloon-market-2026-11-19.png';
+import daily20261119_8 from './assets/seasonal-daily-gonk-the-glassblower-gonk-2026-11-19.png';
+import daily20261119_9 from './assets/seasonal-daily-animals-the-otters-winter-ice-garden-2026-11-19.png';
+import daily20261119_10 from './assets/seasonal-daily-cartoons-the-moonlight-moth-express-2026-11-19.png';
+import daily20261119_11 from './assets/seasonal-daily-gaming-tetris-the-moonlit-block-city-2026-11-19.png';
 import daily20261118_0 from './assets/seasonal-daily-christmas-the-clockmakers-christmas-window-2026-11-18.png';
 import daily20261118_1 from './assets/seasonal-daily-easter-daffodils-at-the-potting-bench-2026-11-18.png';
 import daily20261118_2 from './assets/seasonal-daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18.png';
@@ -159,6 +171,18 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-the-gingerbread-observatory-2026-11-19':daily20261119_0,
+ 'daily-easter-the-eggshell-submarine-2026-11-19':daily20261119_1,
+ 'daily-halloween-the-ravens-midnight-carousel-2026-11-19':daily20261119_2,
+ 'daily-valentine-the-clockwork-heart-garden-2026-11-19':daily20261119_3,
+ 'daily-newyear-the-midnight-airship-parade-2026-11-19':daily20261119_4,
+ 'daily-mother-the-foxglove-quilt-nest-2026-11-19':daily20261119_5,
+ 'daily-father-the-inventors-mechanical-stag-2026-11-19':daily20261119_6,
+ 'daily-thanksgiving-the-harvest-balloon-market-2026-11-19':daily20261119_7,
+ 'daily-gonk-the-glassblower-gonk-2026-11-19':daily20261119_8,
+ 'daily-animals-the-otters-winter-ice-garden-2026-11-19':daily20261119_9,
+ 'daily-cartoons-the-moonlight-moth-express-2026-11-19':daily20261119_10,
+ 'daily-gaming-tetris-the-moonlit-block-city-2026-11-19':daily20261119_11,
  'daily-christmas-the-clockmakers-christmas-window-2026-11-18':daily20261118_0,
  'daily-easter-daffodils-at-the-potting-bench-2026-11-18':daily20261118_1,
  'daily-halloween-the-owl-and-the-pumpkin-caravan-2026-11-18':daily20261118_2,

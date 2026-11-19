@@ -1976,5 +1976,145 @@
     "asset": "christmas-movies-die-hard-nakatomi-plaza-2026-11-19.webp",
     "row": 0,
     "rows": 1
+  },
+  {
+    "id": "daily-christmas-the-clockwork-christmas-sky-2026-11-19",
+    "name": "The Clockwork Christmas Sky",
+    "season": "Christmas",
+    "collection": "christmas",
+    "orientation": "landscape",
+    "asset": "daily-christmas-the-clockwork-christmas-sky-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-easter-the-great-spring-pond-expedition-2026-11-19",
+    "name": "The Great Spring Pond Expedition",
+    "season": "Easter",
+    "collection": "easter",
+    "orientation": "landscape",
+    "asset": "daily-easter-the-great-spring-pond-expedition-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-halloween-the-ravens-moonlit-carnival-2026-11-19",
+    "name": "The Raven’s Moonlit Carnival",
+    "season": "Halloween",
+    "collection": "halloween",
+    "orientation": "landscape",
+    "asset": "daily-halloween-the-ravens-moonlit-carnival-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-valentine-the-underwater-heart-garden-2026-11-19",
+    "name": "The Underwater Heart Garden",
+    "season": "Valentine’s Day",
+    "collection": "valentine",
+    "orientation": "landscape",
+    "asset": "daily-valentine-the-underwater-heart-garden-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-newyear-midnight-airships-above-the-city-2026-11-19",
+    "name": "Midnight Airships Above the City",
+    "season": "New Year",
+    "collection": "newyear",
+    "orientation": "landscape",
+    "asset": "daily-newyear-midnight-airships-above-the-city-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-mother-the-fox-familys-patchwork-garden-2026-11-19",
+    "name": "The Fox Family’s Patchwork Garden",
+    "season": "Mother’s Day",
+    "collection": "mother",
+    "orientation": "landscape",
+    "asset": "daily-mother-the-fox-familys-patchwork-garden-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-father-the-mechanical-stag-workshop-2026-11-19",
+    "name": "The Mechanical Stag Workshop",
+    "season": "Father’s Day",
+    "collection": "father",
+    "orientation": "landscape",
+    "asset": "daily-father-the-mechanical-stag-workshop-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-thanksgiving-the-pumpkin-balloon-harvest-2026-11-19",
+    "name": "The Pumpkin Balloon Harvest",
+    "season": "Thanksgiving",
+    "collection": "thanksgiving",
+    "orientation": "landscape",
+    "asset": "daily-thanksgiving-the-pumpkin-balloon-harvest-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-gonk-the-gonk-glass-garden-2026-11-19",
+    "name": "The Gonk Glass Garden",
+    "season": "Gonk",
+    "collection": "gonk",
+    "orientation": "landscape",
+    "asset": "daily-gonk-the-gonk-glass-garden-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-animals-the-otters-frozen-river-2026-11-19",
+    "name": "The Otters’ Frozen River",
+    "season": "Animals",
+    "collection": "animals",
+    "orientation": "landscape",
+    "asset": "daily-animals-the-otters-frozen-river-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-cartoons-the-moonlight-moth-express-village-flight-2026-11-19",
+    "name": "The Moonlight Moth Express — Village Flight",
+    "season": "Cartoons",
+    "collection": "cartoons",
+    "orientation": "landscape",
+    "asset": "daily-cartoons-the-moonlight-moth-express-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-gaming-tetris-the-skyward-block-city-2026-11-19",
+    "name": "Tetris — The Skyward Block City",
+    "season": "Gaming",
+    "collection": "gaming",
+    "orientation": "landscape",
+    "asset": "daily-gaming-tetris-the-skyward-block-city-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-christmas-movies-elf-buddys-christmas-in-new-york-2026-11-19",
+    "name": "Elf — Buddy’s Christmas in New York",
+    "season": "Christmas Movies",
+    "collection": "christmas-movies",
+    "orientation": "landscape",
+    "asset": "daily-christmas-movies-elf-buddys-christmas-in-new-york-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
+  },
+  {
+    "id": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19",
+    "name": "Shaun the Sheep — Moonlight Balloon Farm",
+    "season": "Kids TV Shows",
+    "collection": "kids-tv",
+    "orientation": "landscape",
+    "asset": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19.webp",
+    "row": 0,
+    "rows": 1
   }
 ]
