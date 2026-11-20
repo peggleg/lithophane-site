@@ -2316,5 +2316,181 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "gaming-hollow-knight-stairway-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Hollow Knight — Stairway Through Hallownest",
+    "asset": "gaming-hollow-knight-stairway-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-minecraft-mountain-and-mine-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Minecraft — Mountain and Mine",
+    "asset": "gaming-minecraft-mountain-and-mine-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-fortnite-battle-bus-plaza-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Fortnite — Battle Bus over the Plaza",
+    "asset": "gaming-fortnite-battle-bus-plaza-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-sonic-green-hill-loop-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Sonic — Green Hill Loop",
+    "asset": "gaming-sonic-green-hill-loop-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-pac-man-arcade-maze-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Pac-Man — Arcade Maze",
+    "asset": "gaming-pac-man-arcade-maze-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-stardew-farm-from-above-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Stardew Valley — Farm from Above",
+    "asset": "gaming-stardew-farm-from-above-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-pingu-skating-pond-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Pingu — Skating Pond",
+    "asset": "kids-tv-pingu-skating-pond-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-thundercats-journey-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "ThunderCats — Journey to Cats Lair",
+    "asset": "kids-tv-thundercats-journey-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-peter-rabbit-garden-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Peter Rabbit — Garden Gate",
+    "asset": "kids-tv-peter-rabbit-garden-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-zelda-lake-voyage-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Zelda — Lake Voyage",
+    "asset": "gaming-zelda-lake-voyage-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-ninja-turtles-rooftops-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Teenage Mutant Ninja Turtles — Rooftop Watch",
+    "asset": "kids-tv-ninja-turtles-rooftops-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-maya-bee-meadow-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Maya the Bee — Meadow Adventure",
+    "asset": "kids-tv-maya-bee-meadow-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-tetris-block-valley-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Tetris — Block Valley",
+    "asset": "gaming-tetris-block-valley-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-rabbids-invasion-town-square-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Rabbids Invasion — Town Square Chaos",
+    "asset": "kids-tv-rabbids-invasion-town-square-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "gaming-rayman-jungle-swing-2026-11-20",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "Rayman — Jungle Swing",
+    "asset": "gaming-rayman-jungle-swing-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "kids-tv-shaun-sheep-picnic-2026-11-20",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "Shaun the Sheep — Picnic Mayhem",
+    "asset": "kids-tv-shaun-sheep-picnic-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
   }
 ]
