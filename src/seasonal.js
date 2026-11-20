@@ -1,3 +1,13 @@
+import daily20261120_0 from './assets/seasonal-daily-christmas-nutcrackers-music-box-2026-11-20.png';
+import daily20261120_1 from './assets/seasonal-daily-easter-easter-eggs-in-the-mosaic-fountain-2026-11-20.png';
+import daily20261120_2 from './assets/seasonal-daily-halloween-the-bat-wing-candlestick-2026-11-20.png';
+import daily20261120_3 from './assets/seasonal-daily-valentine-the-rosewater-perfume-cabinet-2026-11-20.png';
+import daily20261120_4 from './assets/seasonal-daily-newyear-new-year-2027-on-the-letterpress-2026-11-20.png';
+import daily20261120_5 from './assets/seasonal-daily-mother-the-camellia-writing-desk-2026-11-20.png';
+import daily20261120_6 from './assets/seasonal-daily-father-the-vintage-reel-to-reel-2026-11-20.png';
+import daily20261120_7 from './assets/seasonal-daily-thanksgiving-the-cranberry-copper-kettle-2026-11-20.png';
+import daily20261120_8 from './assets/seasonal-daily-gonk-the-kite-maker-gonk-2026-11-20.png';
+import daily20261120_9 from './assets/seasonal-daily-animals-pangolin-under-the-moon-ferns-2026-11-20.png';
 import daily20261119_0 from './assets/seasonal-daily-christmas-the-gingerbread-observatory-2026-11-19.png';
 import daily20261119_1 from './assets/seasonal-daily-easter-the-eggshell-submarine-2026-11-19.png';
 import daily20261119_2 from './assets/seasonal-daily-halloween-the-ravens-midnight-carousel-2026-11-19.png';
@@ -171,6 +181,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-nutcrackers-music-box-2026-11-20':daily20261120_0,
+ 'daily-easter-easter-eggs-in-the-mosaic-fountain-2026-11-20':daily20261120_1,
+ 'daily-halloween-the-bat-wing-candlestick-2026-11-20':daily20261120_2,
+ 'daily-valentine-the-rosewater-perfume-cabinet-2026-11-20':daily20261120_3,
+ 'daily-newyear-new-year-2027-on-the-letterpress-2026-11-20':daily20261120_4,
+ 'daily-mother-the-camellia-writing-desk-2026-11-20':daily20261120_5,
+ 'daily-father-the-vintage-reel-to-reel-2026-11-20':daily20261120_6,
+ 'daily-thanksgiving-the-cranberry-copper-kettle-2026-11-20':daily20261120_7,
+ 'daily-gonk-the-kite-maker-gonk-2026-11-20':daily20261120_8,
+ 'daily-animals-pangolin-under-the-moon-ferns-2026-11-20':daily20261120_9,
  'daily-christmas-the-gingerbread-observatory-2026-11-19':daily20261119_0,
  'daily-easter-the-eggshell-submarine-2026-11-19':daily20261119_1,
  'daily-halloween-the-ravens-midnight-carousel-2026-11-19':daily20261119_2,

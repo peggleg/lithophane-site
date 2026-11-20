@@ -2116,5 +2116,105 @@
     "asset": "daily-kids-tv-shaun-the-sheep-moonlight-balloon-farm-2026-11-19.webp",
     "row": 0,
     "rows": 1
+  },
+  {
+    "id": "daily-christmas-the-frosted-christmas-canal-2026-11-20",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Frosted Christmas Canal",
+    "asset": "daily-christmas-the-frosted-christmas-canal-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-easter-the-easter-iris-terraces-2026-11-20",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Easter Iris Terraces",
+    "asset": "daily-easter-the-easter-iris-terraces-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-halloween-the-haunted-salt-flats-2026-11-20",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Haunted Salt Flats",
+    "asset": "daily-halloween-the-haunted-salt-flats-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-valentine-the-ribbon-bridges-2026-11-20",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Ribbon Bridges",
+    "asset": "daily-valentine-the-ribbon-bridges-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-newyear-the-new-year-2027-ice-regatta-2026-11-20",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "The New Year 2027 Ice Regatta",
+    "asset": "daily-newyear-the-new-year-2027-ice-regatta-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-mother-the-primrose-glasshouses-2026-11-20",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Primrose Glasshouses",
+    "asset": "daily-mother-the-primrose-glasshouses-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-father-the-model-railway-workshop-2026-11-20",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Model Railway Workshop",
+    "asset": "daily-father-the-model-railway-workshop-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-thanksgiving-the-cider-press-harvest-2026-11-20",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Cider Press Harvest",
+    "asset": "daily-thanksgiving-the-cider-press-harvest-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-gonk-the-sandcastle-surveyor-gonk-2026-11-20",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Sandcastle Surveyor Gonk",
+    "asset": "daily-gonk-the-sandcastle-surveyor-gonk-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-animals-pangolins-of-the-rainforest-floor-2026-11-20",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Pangolins of the Rainforest Floor",
+    "asset": "daily-animals-pangolins-of-the-rainforest-floor-2026-11-20.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]
