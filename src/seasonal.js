@@ -1,3 +1,13 @@
+import daily20261120Run2_0 from './assets/seasonal-daily-christmas-christmas-shortbread-by-the-frosted-window-2026-11-20-run2.png';
+import daily20261120Run2_1 from './assets/seasonal-daily-easter-eggs-on-the-alpine-rack-2026-11-20-run2.png';
+import daily20261120Run2_2 from './assets/seasonal-daily-halloween-the-spiderweb-hourglass-2026-11-20-run2.png';
+import daily20261120Run2_3 from './assets/seasonal-daily-valentine-a-duet-on-the-music-stand-2026-11-20-run2.png';
+import daily20261120Run2_4 from './assets/seasonal-daily-newyear-the-first-dawn-calendar-2026-11-20-run2.png';
+import daily20261120Run2_5 from './assets/seasonal-daily-mother-mums-recipe-box-2026-11-20-run2.png';
+import daily20261120Run2_6 from './assets/seasonal-daily-father-the-brass-fly-tying-vice-2026-11-20-run2.png';
+import daily20261120Run2_7 from './assets/seasonal-daily-thanksgiving-the-acorn-squash-bake-2026-11-20-run2.png';
+import daily20261120Run2_8 from './assets/seasonal-daily-gonk-the-bookbinder-gonk-2026-11-20-run2.png';
+import daily20261120Run2_9 from './assets/seasonal-daily-animals-axolotl-in-the-water-garden-2026-11-20-run2.png';
 import daily20261120_0 from './assets/seasonal-daily-christmas-nutcrackers-music-box-2026-11-20.png';
 import daily20261120_1 from './assets/seasonal-daily-easter-easter-eggs-in-the-mosaic-fountain-2026-11-20.png';
 import daily20261120_2 from './assets/seasonal-daily-halloween-the-bat-wing-candlestick-2026-11-20.png';
@@ -181,6 +191,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-christmas-shortbread-by-the-frosted-window-2026-11-20-run2':daily20261120Run2_0,
+ 'daily-easter-eggs-on-the-alpine-rack-2026-11-20-run2':daily20261120Run2_1,
+ 'daily-halloween-the-spiderweb-hourglass-2026-11-20-run2':daily20261120Run2_2,
+ 'daily-valentine-a-duet-on-the-music-stand-2026-11-20-run2':daily20261120Run2_3,
+ 'daily-newyear-the-first-dawn-calendar-2026-11-20-run2':daily20261120Run2_4,
+ 'daily-mother-mums-recipe-box-2026-11-20-run2':daily20261120Run2_5,
+ 'daily-father-the-brass-fly-tying-vice-2026-11-20-run2':daily20261120Run2_6,
+ 'daily-thanksgiving-the-acorn-squash-bake-2026-11-20-run2':daily20261120Run2_7,
+ 'daily-gonk-the-bookbinder-gonk-2026-11-20-run2':daily20261120Run2_8,
+ 'daily-animals-axolotl-in-the-water-garden-2026-11-20-run2':daily20261120Run2_9,
  'daily-christmas-nutcrackers-music-box-2026-11-20':daily20261120_0,
  'daily-easter-easter-eggs-in-the-mosaic-fountain-2026-11-20':daily20261120_1,
  'daily-halloween-the-bat-wing-candlestick-2026-11-20':daily20261120_2,
