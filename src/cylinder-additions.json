@@ -3196,5 +3196,181 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-snowfort-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "The Snow Fort",
+    "asset": "snoopy-xmas-snowfort-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-lanterns-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Lantern Walk",
+    "asset": "snoopy-xmas-lanterns-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-snowball-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Snowball Fun",
+    "asset": "snoopy-xmas-snowball-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-wreath-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Making Wreaths",
+    "asset": "snoopy-xmas-wreath-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-gingerbread-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Gingerbread Village",
+    "asset": "snoopy-xmas-gingerbread-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-sweaters-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Festive Sweaters",
+    "asset": "snoopy-xmas-sweaters-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-xmas-lights-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Holiday Lights",
+    "asset": "snoopy-xmas-lights-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-beach-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Beach Day",
+    "asset": "snoopy-random-beach-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-camp-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Lakeside Camping",
+    "asset": "snoopy-random-camp-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-garden-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Garden Helpers",
+    "asset": "snoopy-random-garden-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-film-peanuts-movie-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "The Peanuts Movie",
+    "asset": "snoopy-film-peanuts-movie-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-film-short-summer-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "It Was a Short Summer, Charlie Brown",
+    "asset": "snoopy-film-short-summer-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-film-play-it-again-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Play It Again, Charlie Brown",
+    "asset": "snoopy-film-play-it-again-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-bowling-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Bowling Day",
+    "asset": "snoopy-random-bowling-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-football-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Football Match",
+    "asset": "snoopy-random-football-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "snoopy-random-workshop-2026-11-21",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Inventor's Workshop",
+    "asset": "snoopy-random-workshop-2026-11-21.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
   }
 ]
