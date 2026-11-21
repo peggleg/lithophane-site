@@ -1,0 +1,41 @@
+[
+  {
+    "id": "christmas-snoopy-snow-angel-2026-11-21",
+    "name": "Snoopy’s Snow Angel",
+    "season": "Christmas",
+    "description": "Snoopy’s Snow Angel lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "christmas-snoopy-snow-angel-2026-11-21",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "christmas-snoopy-winter-skating-2026-11-21",
+    "name": "Snoopy’s Winter Skating",
+    "season": "Christmas",
+    "description": "Snoopy’s Winter Skating lithophane artwork.",
+    "orientation": "landscape",
+    "atlas": "christmas-snoopy-winter-skating-2026-11-21",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  },
+  {
+    "id": "christmas-snoopy-christmas-stargazing-2026-11-21",
+    "name": "Snoopy’s Christmas Stargazing",
+    "season": "Christmas",
+    "description": "Snoopy’s Christmas Stargazing lithophane artwork.",
+    "orientation": "portrait",
+    "atlas": "christmas-snoopy-christmas-stargazing-2026-11-21",
+    "column": 0,
+    "row": 0,
+    "columns": 1,
+    "rows": 1,
+    "cropToPostcard": true
+  }
+]

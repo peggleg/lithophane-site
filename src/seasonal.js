@@ -1,3 +1,6 @@
+import christmasSnoopy20261121_0 from './assets/seasonal-christmas-snoopy-snow-angel-2026-11-21.png';
+import christmasSnoopy20261121_1 from './assets/seasonal-christmas-snoopy-winter-skating-2026-11-21.png';
+import christmasSnoopy20261121_2 from './assets/seasonal-christmas-snoopy-christmas-stargazing-2026-11-21.png';
 import daily20261120Run2_0 from './assets/seasonal-daily-christmas-christmas-shortbread-by-the-frosted-window-2026-11-20-run2.png';
 import daily20261120Run2_1 from './assets/seasonal-daily-easter-eggs-on-the-alpine-rack-2026-11-20-run2.png';
 import daily20261120Run2_2 from './assets/seasonal-daily-halloween-the-spiderweb-hourglass-2026-11-20-run2.png';
@@ -191,6 +194,9 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'christmas-snoopy-snow-angel-2026-11-21':christmasSnoopy20261121_0,
+ 'christmas-snoopy-winter-skating-2026-11-21':christmasSnoopy20261121_1,
+ 'christmas-snoopy-christmas-stargazing-2026-11-21':christmasSnoopy20261121_2,
  'daily-christmas-christmas-shortbread-by-the-frosted-window-2026-11-20-run2':daily20261120Run2_0,
  'daily-easter-eggs-on-the-alpine-rack-2026-11-20-run2':daily20261120Run2_1,
  'daily-halloween-the-spiderweb-hourglass-2026-11-20-run2':daily20261120Run2_2,
