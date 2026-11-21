@@ -1,5 +1,5 @@
 import './style.css';import './theme.js';import './cylinder.css';
-import {cylinderSettings,cylinderDefaults,cylinderStands,cylinderLightFits} from './cylinder-settings.js';
+import {cylinderSettings,cylinderDefaults,cylinderStands,cylinderLightFits,cylinderImageGrid} from './cylinder-settings.js';
 import {cylinderCollections,cylinderDesigns,cylinderArtwork} from './cylinder-artwork.js';
 import {cylinderPreview} from './cylinder-preview.js';
 import {mountPrinterPicker} from './printer-picker.js';
@@ -32,7 +32,7 @@ function generate(){
  let settings;try{settings={...cylinderSettings(state),designId:design.id,designName:design.name};}catch(e){$('feedback').textContent=e.message;return;}
  $('feedback').textContent='Preparing your panorama and print parts…';busy=true;controls();
  timer=setTimeout(async()=>{try{
-  const cols=512,rows=Math.round(settings.height/.55)+1;
+  const {cols,rows}=cylinderImageGrid(settings);
   const [full,grid]=await Promise.all([cylinderArtwork(design,1536,512,settings.brightness),cylinderArtwork(design,cols,rows,settings.brightness)]);
   if(token!==revision)return;art=full;drawArt(full);
   const w=workerFor(token);w.onmessage=({data})=>{if(token!==revision)return;if(data.error){stop();$('feedback').textContent=data.error;return;}model=data.model;stop();preview.setModel(model);
@@ -67,11 +67,12 @@ $('collection').oninput=()=>selectCollection($('collection').value);
 $('design').oninput=()=>{design=cylinderDesigns.find(d=>d.id===$('design').value);if($('cylinder-older-gallery').querySelector(`[data-design="${design.id}"]`))toggleOlder(true);showStand(false);generate();};
 $('stand').oninput=()=>{state.stand=$('stand').value;showStand(true);generate();};
 $('lightSource').oninput=()=>{state.lightSource=$('lightSource').value;state.fitDiameter=cylinderLightFits[state.lightSource].recessDiameter;showLightFit();generate();};
+$('detail').onchange=()=>{state.detail=$('detail').value;generate();};
 for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation'])$(id).oninput=()=>{state[id]=Number($(id).value);generate();};
 $('stand-only').onchange=()=>{$('lit').disabled=$('stand-only').checked;preview.setStandOnly($('stand-only').checked);};
 $('lit').onchange=()=>preview.setLit($('lit').checked);$('parts-view').onchange=()=>preview.setParts($('parts-view').checked);$('reset-view').onclick=()=>preview.reset();
 $('cancel').onclick=()=>{++revision;stop();model=null;art=null;controls();$('feedback').textContent='Cancelled. Change a setting to rebuild.';};
-$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand','lightSource'])$(id).value=state[id];showLightFit();$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
+$('reset').onclick=()=>{state={...cylinderDefaults};picker.reset();for(const id of ['height','min','max','fitDiameter','tripodPegWidth','brightness','rotation','stand','lightSource','detail'])$(id).value=state[id];showLightFit();$('parts-view').checked=false;$('lit').checked=true;preview.setParts(false);preview.setLit(true);selectCollection('christmas');};
 function exportFile(format,{standOnly=false,cylinderOnly:onlyCylinder=false,test=false,tripodTest=false,legsOnly=false}={}){
  if(!model||busy)return;const token=revision,original=model;stop();busy=true;controls();$('export-status').textContent='Preparing your download…';
  const w=workerFor(token);const send=m=>w.postMessage({action:'export',format,model:m});
