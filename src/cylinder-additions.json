@@ -3372,5 +3372,105 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "daily-christmas-evergreen-carousel-2026-11-22",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Evergreen Carousel",
+    "asset": "daily-christmas-evergreen-carousel-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-easter-spring-river-meadow-2026-11-22",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Spring River Meadow",
+    "asset": "daily-easter-spring-river-meadow-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-halloween-lanterns-of-the-moonlit-marsh-2026-11-22",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Lanterns of the Moonlit Marsh",
+    "asset": "daily-halloween-lanterns-of-the-moonlit-marsh-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-valentine-moonlit-rose-trellis-2026-11-22",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Moonlit Rose Trellis",
+    "asset": "daily-valentine-moonlit-rose-trellis-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-newyear-midnight-waterfront-lanterns-2026-11-22",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Midnight Waterfront Lanterns",
+    "asset": "daily-newyear-midnight-waterfront-lanterns-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-mother-the-flower-conservatory-2026-11-22",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Flower Conservatory",
+    "asset": "daily-mother-the-flower-conservatory-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-father-the-river-workshop-2026-11-22",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The River Workshop",
+    "asset": "daily-father-the-river-workshop-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-thanksgiving-the-orchard-harvest-2026-11-22",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Orchard Harvest",
+    "asset": "daily-thanksgiving-the-orchard-harvest-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-gonk-the-mushroom-gardener-gonks-2026-11-22",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Mushroom Gardener Gonks",
+    "asset": "daily-gonk-the-mushroom-gardener-gonks-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-animals-marmots-of-the-alpine-meadow-2026-11-22",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Marmots of the Alpine Meadow",
+    "asset": "daily-animals-marmots-of-the-alpine-meadow-2026-11-22.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

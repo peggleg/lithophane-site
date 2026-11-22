@@ -1,3 +1,13 @@
+import daily20261122_0 from './assets/seasonal-daily-christmas-frosted-carol-bells-2026-11-22.png';
+import daily20261122_1 from './assets/seasonal-daily-easter-springtime-quail-eggs-2026-11-22.png';
+import daily20261122_2 from './assets/seasonal-daily-halloween-the-enchanted-lantern-2026-11-22.png';
+import daily20261122_3 from './assets/seasonal-daily-valentine-the-woven-heart-2026-11-22.png';
+import daily20261122_4 from './assets/seasonal-daily-newyear-midnight-music-box-2026-11-22.png';
+import daily20261122_5 from './assets/seasonal-daily-mother-the-petal-press-2026-11-22.png';
+import daily20261122_6 from './assets/seasonal-daily-father-the-compass-cabinet-2026-11-22.png';
+import daily20261122_7 from './assets/seasonal-daily-thanksgiving-the-harvest-weathervane-2026-11-22.png';
+import daily20261122_8 from './assets/seasonal-daily-gonk-the-moonlit-watchmaker-gonk-2026-11-22.png';
+import daily20261122_9 from './assets/seasonal-daily-animals-the-alpine-marmot-2026-11-22.png';
 import christmasSnoopy20261121_0 from './assets/seasonal-christmas-snoopy-snow-angel-2026-11-21.png';
 import christmasSnoopy20261121_1 from './assets/seasonal-christmas-snoopy-winter-skating-2026-11-21.png';
 import christmasSnoopy20261121_2 from './assets/seasonal-christmas-snoopy-christmas-stargazing-2026-11-21.png';
@@ -194,6 +204,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-frosted-carol-bells-2026-11-22':daily20261122_0,
+ 'daily-easter-springtime-quail-eggs-2026-11-22':daily20261122_1,
+ 'daily-halloween-the-enchanted-lantern-2026-11-22':daily20261122_2,
+ 'daily-valentine-the-woven-heart-2026-11-22':daily20261122_3,
+ 'daily-newyear-midnight-music-box-2026-11-22':daily20261122_4,
+ 'daily-mother-the-petal-press-2026-11-22':daily20261122_5,
+ 'daily-father-the-compass-cabinet-2026-11-22':daily20261122_6,
+ 'daily-thanksgiving-the-harvest-weathervane-2026-11-22':daily20261122_7,
+ 'daily-gonk-the-moonlit-watchmaker-gonk-2026-11-22':daily20261122_8,
+ 'daily-animals-the-alpine-marmot-2026-11-22':daily20261122_9,
  'christmas-snoopy-snow-angel-2026-11-21':christmasSnoopy20261121_0,
  'christmas-snoopy-winter-skating-2026-11-21':christmasSnoopy20261121_1,
  'christmas-snoopy-christmas-stargazing-2026-11-21':christmasSnoopy20261121_2,

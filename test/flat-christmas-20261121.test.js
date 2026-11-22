@@ -7,7 +7,8 @@ import added from '../src/fixtures/flat-christmas-additions-2026-11-21.json' wit
 
 test('new Christmas postcards accumulate without changing previous entries',()=>{
  assert.deepEqual(seasonalDesigns.slice(0,baseline.length),baseline);
- assert.deepEqual(seasonalDesigns.slice(baseline.length),added);
+ assert.ok(seasonalDesigns.length>=baseline.length+added.length);
+ assert.deepEqual(seasonalDesigns.slice(baseline.length,baseline.length+added.length),added);
  assert.equal(new Set(seasonalDesigns.map(d=>d.id)).size,seasonalDesigns.length);
  assert.deepEqual(new Set(added.map(d=>d.orientation)),new Set(['portrait','landscape']));
  const mappings=fs.readFileSync('src/seasonal.js','utf8');
