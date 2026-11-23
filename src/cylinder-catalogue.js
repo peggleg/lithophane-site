@@ -10,7 +10,7 @@ const collections=[
  ['father','Father’s Day','The Lakeside Canoe','The Mountain Railway'],
  ['thanksgiving','Thanksgiving','Harvest Farm','The Autumn Watermill'],
 ];
-export const cylinderCollections=[...collections.map(([id,name])=>({id,name})),{id:'gonk',name:'Gonk'},{id:'animals',name:'Animals'},{id:'cartoons',name:'Cartoons'},{id:'gaming',name:'Gaming'},{id:'kids-tv',name:'Kids TV Shows'},{id:'christmas-movies',name:'Christmas Movies'},{id:'movies',name:'Movies'},{id:'sport',name:'Sport'},{id:'snoopy',name:'Snoopy'}];
+export const cylinderCollections=[...collections.map(([id,name])=>({id,name})),{id:'gonk',name:'Gonk'},{id:'animals',name:'Animals'},{id:'cartoons',name:'Cartoons'},{id:'gaming',name:'Gaming'},{id:'kids-tv',name:'Kids TV Shows'},{id:'christmas-movies',name:'Christmas Movies'},{id:'movies',name:'Movies'},{id:'sport',name:'Sport'},{id:'snoopy',name:'Snoopy'},{id:"fantasy",name:"Fantasy Worlds"},{id:"vehicles",name:"Vehicles"},{id:"space",name:"Space Exploration"},{id:"underwater",name:"Underwater Life"},{id:"superheroes",name:"Superheroes"},{id:"tv-comedy",name:"TV Comedy"}];
 export const cylinderCatalogue=[
  ...collections.flatMap(([collection,season,...names])=>names.map((name,row)=>({id:collection+'-'+(row+1),collection,season,name,row,rows:2,orientation:'landscape',asset:collection+'.webp'}))),
  ...additions,

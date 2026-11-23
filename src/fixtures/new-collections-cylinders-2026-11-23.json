@@ -1,0 +1,189 @@
+[
+  {
+    "id": "collection-fantasy-moonlit-dragon-library-cylinder-2026-11-23",
+    "collection": "fantasy",
+    "season": "Fantasy Worlds",
+    "name": "Moonlit Dragon Library",
+    "asset": "collection-fantasy-moonlit-dragon-library-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-fantasy-the-crystal-griffin-cylinder-2026-11-23",
+    "collection": "fantasy",
+    "season": "Fantasy Worlds",
+    "name": "The Crystal Griffin",
+    "asset": "collection-fantasy-the-crystal-griffin-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-vehicles-the-airship-hangar-cylinder-2026-11-23",
+    "collection": "vehicles",
+    "season": "Vehicles",
+    "name": "The Airship Hangar",
+    "asset": "collection-vehicles-the-airship-hangar-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-space-the-lunar-rover-cylinder-2026-11-23",
+    "collection": "space",
+    "season": "Space Exploration",
+    "name": "The Lunar Rover",
+    "asset": "collection-space-the-lunar-rover-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-space-the-ringed-planet-observatory-cylinder-2026-11-23",
+    "collection": "space",
+    "season": "Space Exploration",
+    "name": "The Ringed Planet Observatory",
+    "asset": "collection-space-the-ringed-planet-observatory-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-space-the-mars-research-base-cylinder-2026-11-23",
+    "collection": "space",
+    "season": "Space Exploration",
+    "name": "The Mars Research Base",
+    "asset": "collection-space-the-mars-research-base-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-space-the-comet-explorer-cylinder-2026-11-23",
+    "collection": "space",
+    "season": "Space Exploration",
+    "name": "The Comet Explorer",
+    "asset": "collection-space-the-comet-explorer-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-underwater-the-sea-turtle-garden-cylinder-2026-11-23",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Sea Turtle Garden",
+    "asset": "collection-underwater-the-sea-turtle-garden-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-underwater-the-octopus-hideaway-cylinder-2026-11-23",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Octopus Hideaway",
+    "asset": "collection-underwater-the-octopus-hideaway-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-underwater-the-manta-passage-cylinder-2026-11-23",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Manta Passage",
+    "asset": "collection-underwater-the-manta-passage-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-underwater-the-seahorse-meadow-cylinder-2026-11-23",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Seahorse Meadow",
+    "asset": "collection-underwater-the-seahorse-meadow-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-underwater-the-whale-song-cylinder-2026-11-23",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Whale Song",
+    "asset": "collection-underwater-the-whale-song-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-superheroes-the-sky-sentinel-cylinder-2026-11-23",
+    "collection": "superheroes",
+    "season": "Superheroes",
+    "name": "The Sky Sentinel",
+    "asset": "collection-superheroes-the-sky-sentinel-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-superheroes-the-night-rescuer-cylinder-2026-11-23",
+    "collection": "superheroes",
+    "season": "Superheroes",
+    "name": "The Night Rescuer",
+    "asset": "collection-superheroes-the-night-rescuer-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-fantasy-the-phoenix-garden-riverside-passage-cylinder-2026-11-23",
+    "collection": "fantasy",
+    "season": "Fantasy Worlds",
+    "name": "The Phoenix Garden — Riverside Passage",
+    "asset": "collection-fantasy-the-phoenix-garden-riverside-passage-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-fantasy-the-mermaid-observatory-ocean-crossing-cylinder-2026-11-23",
+    "collection": "fantasy",
+    "season": "Fantasy Worlds",
+    "name": "The Mermaid Observatory — Ocean Crossing",
+    "asset": "collection-fantasy-the-mermaid-observatory-ocean-crossing-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-tv-comedy-blackadder-cylinder-2026-11-23",
+    "collection": "tv-comedy",
+    "season": "TV Comedy",
+    "name": "Blackadder",
+    "asset": "collection-tv-comedy-blackadder-cylinder-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  }
+]

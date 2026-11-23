@@ -1,3 +1,30 @@
+import newCollections20261123_0 from './assets/seasonal-collection-fantasy-moonlit-dragon-library-flat-2026-11-23.png';
+import newCollections20261123_1 from './assets/seasonal-collection-fantasy-the-crystal-griffin-flat-2026-11-23.png';
+import newCollections20261123_2 from './assets/seasonal-collection-fantasy-clockwork-wizard-tower-flat-2026-11-23.png';
+import newCollections20261123_3 from './assets/seasonal-collection-fantasy-the-phoenix-garden-flat-2026-11-23.png';
+import newCollections20261123_4 from './assets/seasonal-collection-fantasy-the-mermaid-observatory-flat-2026-11-23.png';
+import newCollections20261123_5 from './assets/seasonal-collection-vehicles-the-vintage-roadster-flat-2026-11-23.png';
+import newCollections20261123_6 from './assets/seasonal-collection-vehicles-the-mountain-locomotive-flat-2026-11-23.png';
+import newCollections20261123_7 from './assets/seasonal-collection-vehicles-the-coastal-camper-flat-2026-11-23.png';
+import newCollections20261123_8 from './assets/seasonal-collection-vehicles-the-harbor-tugboat-flat-2026-11-23.png';
+import newCollections20261123_9 from './assets/seasonal-collection-vehicles-the-airship-hangar-flat-2026-11-23.png';
+import newCollections20261123_10 from './assets/seasonal-collection-space-the-lunar-rover-flat-2026-11-23.png';
+import newCollections20261123_11 from './assets/seasonal-collection-space-the-ringed-planet-observatory-flat-2026-11-23.png';
+import newCollections20261123_12 from './assets/seasonal-collection-space-the-orbital-workshop-flat-2026-11-23.png';
+import newCollections20261123_13 from './assets/seasonal-collection-space-the-mars-research-base-flat-2026-11-23.png';
+import newCollections20261123_14 from './assets/seasonal-collection-space-the-comet-explorer-flat-2026-11-23.png';
+import newCollections20261123_15 from './assets/seasonal-collection-underwater-the-sea-turtle-garden-flat-2026-11-23.png';
+import newCollections20261123_16 from './assets/seasonal-collection-underwater-the-octopus-hideaway-flat-2026-11-23.png';
+import newCollections20261123_17 from './assets/seasonal-collection-underwater-the-manta-passage-flat-2026-11-23.png';
+import newCollections20261123_18 from './assets/seasonal-collection-underwater-the-seahorse-meadow-flat-2026-11-23.png';
+import newCollections20261123_19 from './assets/seasonal-collection-underwater-the-whale-song-flat-2026-11-23.png';
+import newCollections20261123_20 from './assets/seasonal-collection-superheroes-the-solar-guardian-flat-2026-11-23.png';
+import newCollections20261123_21 from './assets/seasonal-collection-superheroes-the-tide-protector-flat-2026-11-23.png';
+import newCollections20261123_22 from './assets/seasonal-collection-superheroes-the-sky-sentinel-flat-2026-11-23.png';
+import newCollections20261123_23 from './assets/seasonal-collection-superheroes-the-forest-defender-flat-2026-11-23.png';
+import newCollections20261123_24 from './assets/seasonal-collection-superheroes-the-night-rescuer-flat-2026-11-23.png';
+import newCollections20261123_25 from './assets/seasonal-collection-tv-comedy-blackadder-flat-2026-11-23.png';
+import newCollections20261123_26 from './assets/seasonal-collection-tv-comedy-frasier-flat-2026-11-23.png';
 import daily20261123_0 from './assets/seasonal-daily-christmas-candlelit-star-quilt-2026-11-23.png';
 import daily20261123_1 from './assets/seasonal-daily-easter-the-painted-egg-lantern-2026-11-23.png';
 import daily20261123_2 from './assets/seasonal-daily-halloween-the-moth-collector-s-lantern-2026-11-23.png';
@@ -214,6 +241,33 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'collection-fantasy-moonlit-dragon-library-flat-2026-11-23':newCollections20261123_0,
+ 'collection-fantasy-the-crystal-griffin-flat-2026-11-23':newCollections20261123_1,
+ 'collection-fantasy-clockwork-wizard-tower-flat-2026-11-23':newCollections20261123_2,
+ 'collection-fantasy-the-phoenix-garden-flat-2026-11-23':newCollections20261123_3,
+ 'collection-fantasy-the-mermaid-observatory-flat-2026-11-23':newCollections20261123_4,
+ 'collection-vehicles-the-vintage-roadster-flat-2026-11-23':newCollections20261123_5,
+ 'collection-vehicles-the-mountain-locomotive-flat-2026-11-23':newCollections20261123_6,
+ 'collection-vehicles-the-coastal-camper-flat-2026-11-23':newCollections20261123_7,
+ 'collection-vehicles-the-harbor-tugboat-flat-2026-11-23':newCollections20261123_8,
+ 'collection-vehicles-the-airship-hangar-flat-2026-11-23':newCollections20261123_9,
+ 'collection-space-the-lunar-rover-flat-2026-11-23':newCollections20261123_10,
+ 'collection-space-the-ringed-planet-observatory-flat-2026-11-23':newCollections20261123_11,
+ 'collection-space-the-orbital-workshop-flat-2026-11-23':newCollections20261123_12,
+ 'collection-space-the-mars-research-base-flat-2026-11-23':newCollections20261123_13,
+ 'collection-space-the-comet-explorer-flat-2026-11-23':newCollections20261123_14,
+ 'collection-underwater-the-sea-turtle-garden-flat-2026-11-23':newCollections20261123_15,
+ 'collection-underwater-the-octopus-hideaway-flat-2026-11-23':newCollections20261123_16,
+ 'collection-underwater-the-manta-passage-flat-2026-11-23':newCollections20261123_17,
+ 'collection-underwater-the-seahorse-meadow-flat-2026-11-23':newCollections20261123_18,
+ 'collection-underwater-the-whale-song-flat-2026-11-23':newCollections20261123_19,
+ 'collection-superheroes-the-solar-guardian-flat-2026-11-23':newCollections20261123_20,
+ 'collection-superheroes-the-tide-protector-flat-2026-11-23':newCollections20261123_21,
+ 'collection-superheroes-the-sky-sentinel-flat-2026-11-23':newCollections20261123_22,
+ 'collection-superheroes-the-forest-defender-flat-2026-11-23':newCollections20261123_23,
+ 'collection-superheroes-the-night-rescuer-flat-2026-11-23':newCollections20261123_24,
+ 'collection-tv-comedy-blackadder-flat-2026-11-23':newCollections20261123_25,
+ 'collection-tv-comedy-frasier-flat-2026-11-23':newCollections20261123_26,
  'daily-christmas-candlelit-star-quilt-2026-11-23':daily20261123_0,
  'daily-easter-the-painted-egg-lantern-2026-11-23':daily20261123_1,
  'daily-halloween-the-moth-collector-s-lantern-2026-11-23':daily20261123_2,
