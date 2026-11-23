@@ -16,8 +16,10 @@ test('daily gallery pictures accumulate without altering any prior entry or asse
  const seasons=['Christmas','Easter','Halloween','Valentine’s Day','New Year 2027','Mother’s Day','Father’s Day','Thanksgiving','Gonk','Animals'];
  const groups=['christmas','easter','halloween','valentine','newyear','mother','father','thanksgiving','gonk','animals'];
  assert.deepEqual(additions.map(x=>x.season),seasons);
- assert.deepEqual(seasonalDesigns.slice(baseline.flat.length),additions);
- const cylinder=cylinderCatalogue.slice(baseline.cylinders.length);assert.deepEqual(cylinder.map(x=>x.collection),groups);
+ assert.ok(seasonalDesigns.length>=baseline.flat.length+additions.length);
+ assert.deepEqual(seasonalDesigns.slice(baseline.flat.length,baseline.flat.length+additions.length),additions);
+ assert.ok(cylinderCatalogue.length>=baseline.cylinders.length+groups.length);
+ const cylinder=cylinderCatalogue.slice(baseline.cylinders.length,baseline.cylinders.length+groups.length);assert.deepEqual(cylinder.map(x=>x.collection),groups);
  assert.deepEqual(new Set(additions.map(x=>x.orientation)),new Set(['portrait','landscape']));
  const mappings=fs.readFileSync('src/seasonal.js','utf8');
  for(const d of additions){assert.equal(d.rows,1);assert.equal(d.columns,1);assert.equal(d.row,0);assert.equal(d.column,0);assert.ok(mappings.includes(`'${d.atlas}':`));assert.ok(fs.existsSync(`src/assets/seasonal-${d.atlas}.png`));const size=sampleSize(d);const crop=artworkCell(d,1536,1024);assert.ok(Math.abs(crop.width/crop.height-size.width/size.height)<1e-9);}

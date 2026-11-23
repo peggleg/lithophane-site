@@ -3472,5 +3472,105 @@
     "row": 0,
     "rows": 1,
     "orientation": "landscape"
+  },
+  {
+    "id": "daily-christmas-the-frosted-bell-foundry-2026-11-23",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Frosted Bell Foundry",
+    "asset": "daily-christmas-the-frosted-bell-foundry-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-easter-the-daffodil-orchard-2026-11-23",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Daffodil Orchard",
+    "asset": "daily-easter-the-daffodil-orchard-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-halloween-the-raven-s-windmill-2026-11-23",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Raven’s Windmill",
+    "asset": "daily-halloween-the-raven-s-windmill-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-valentine-the-lovebird-rosewalk-2026-11-23",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Lovebird Rosewalk",
+    "asset": "daily-valentine-the-lovebird-rosewalk-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-newyear-midnight-mountain-celebration-2026-11-23",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "Midnight Mountain Celebration",
+    "asset": "daily-newyear-midnight-mountain-celebration-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-mother-the-water-lily-footbridge-2026-11-23",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Water Lily Footbridge",
+    "asset": "daily-mother-the-water-lily-footbridge-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-father-the-mountain-timber-railway-2026-11-23",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Mountain Timber Railway",
+    "asset": "daily-father-the-mountain-timber-railway-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-thanksgiving-the-orchard-cider-mill-2026-11-23",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Orchard Cider Mill",
+    "asset": "daily-thanksgiving-the-orchard-cider-mill-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-gonk-the-gonk-potters-garden-2026-11-23",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonk Potters’ Garden",
+    "asset": "daily-gonk-the-gonk-potters-garden-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
+  },
+  {
+    "id": "daily-animals-platypuses-of-the-creek-2026-11-23",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Platypuses of the Creek",
+    "asset": "daily-animals-platypuses-of-the-creek-2026-11-23.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape"
   }
 ]

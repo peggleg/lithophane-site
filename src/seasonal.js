@@ -1,3 +1,13 @@
+import daily20261123_0 from './assets/seasonal-daily-christmas-candlelit-star-quilt-2026-11-23.png';
+import daily20261123_1 from './assets/seasonal-daily-easter-the-painted-egg-lantern-2026-11-23.png';
+import daily20261123_2 from './assets/seasonal-daily-halloween-the-moth-collector-s-lantern-2026-11-23.png';
+import daily20261123_3 from './assets/seasonal-daily-valentine-a-heart-in-the-ivy-2026-11-23.png';
+import daily20261123_4 from './assets/seasonal-daily-newyear-the-hourglass-of-stars-2026-11-23.png';
+import daily20261123_5 from './assets/seasonal-daily-mother-the-embroidered-bouquet-2026-11-23.png';
+import daily20261123_6 from './assets/seasonal-daily-father-the-brass-telescope-2026-11-23.png';
+import daily20261123_7 from './assets/seasonal-daily-thanksgiving-the-harvest-scale-2026-11-23.png';
+import daily20261123_8 from './assets/seasonal-daily-gonk-the-raincoat-gonk-2026-11-23.png';
+import daily20261123_9 from './assets/seasonal-daily-animals-the-creekside-platypus-2026-11-23.png';
 import daily20261122_0 from './assets/seasonal-daily-christmas-frosted-carol-bells-2026-11-22.png';
 import daily20261122_1 from './assets/seasonal-daily-easter-springtime-quail-eggs-2026-11-22.png';
 import daily20261122_2 from './assets/seasonal-daily-halloween-the-enchanted-lantern-2026-11-22.png';
@@ -204,6 +214,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-candlelit-star-quilt-2026-11-23':daily20261123_0,
+ 'daily-easter-the-painted-egg-lantern-2026-11-23':daily20261123_1,
+ 'daily-halloween-the-moth-collector-s-lantern-2026-11-23':daily20261123_2,
+ 'daily-valentine-a-heart-in-the-ivy-2026-11-23':daily20261123_3,
+ 'daily-newyear-the-hourglass-of-stars-2026-11-23':daily20261123_4,
+ 'daily-mother-the-embroidered-bouquet-2026-11-23':daily20261123_5,
+ 'daily-father-the-brass-telescope-2026-11-23':daily20261123_6,
+ 'daily-thanksgiving-the-harvest-scale-2026-11-23':daily20261123_7,
+ 'daily-gonk-the-raincoat-gonk-2026-11-23':daily20261123_8,
+ 'daily-animals-the-creekside-platypus-2026-11-23':daily20261123_9,
  'daily-christmas-frosted-carol-bells-2026-11-22':daily20261122_0,
  'daily-easter-springtime-quail-eggs-2026-11-22':daily20261122_1,
  'daily-halloween-the-enchanted-lantern-2026-11-22':daily20261122_2,
