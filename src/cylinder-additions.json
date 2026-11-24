@@ -3759,5 +3759,115 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "daily-christmas-the-winter-sleigh-trail-cylinder-2026-11-24",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Winter Sleigh Trail",
+    "asset": "daily-christmas-the-winter-sleigh-trail-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-easter-the-spring-rabbit-meadow-cylinder-2026-11-24",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Spring Rabbit Meadow",
+    "asset": "daily-easter-the-spring-rabbit-meadow-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-halloween-the-moonlit-pumpkin-greenhouse-cylinder-2026-11-24",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Pumpkin Greenhouse",
+    "asset": "daily-halloween-the-moonlit-pumpkin-greenhouse-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-valentine-the-rose-garden-gazebo-cylinder-2026-11-24",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Rose Garden Gazebo",
+    "asset": "daily-valentine-the-rose-garden-gazebo-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-newyear-the-midnight-bell-tower-cylinder-2026-11-24",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "The Midnight Bell Tower",
+    "asset": "daily-newyear-the-midnight-bell-tower-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-mother-the-wisteria-tea-garden-cylinder-2026-11-24",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Wisteria Tea Garden",
+    "asset": "daily-mother-the-wisteria-tea-garden-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-father-the-cedar-canoe-yard-cylinder-2026-11-24",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Cedar Canoe Yard",
+    "asset": "daily-father-the-cedar-canoe-yard-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-thanksgiving-the-golden-wheat-mill-cylinder-2026-11-24",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Golden Wheat Mill",
+    "asset": "daily-thanksgiving-the-golden-wheat-mill-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-gonk-the-gonks-spring-picnic-cylinder-2026-11-24",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonks’ Spring Picnic",
+    "asset": "daily-gonk-the-gonks-spring-picnic-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-animals-red-pandas-in-the-forest-canopy-cylinder-2026-11-24",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Red Pandas in the Forest Canopy",
+    "asset": "daily-animals-red-pandas-in-the-forest-canopy-cylinder-2026-11-24.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
   }
 ]

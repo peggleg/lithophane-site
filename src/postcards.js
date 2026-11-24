@@ -1,3 +1,4 @@
+import daily20261124 from './fixtures/seasonal-additions-2026-11-24.json' with {type:'json'};
 import newCollections20261123 from './fixtures/new-collections-flat-2026-11-23.json' with {type:'json'};
 import daily20261123 from './fixtures/seasonal-additions-2026-11-23.json' with {type:'json'};
 import daily20261122 from './fixtures/seasonal-additions-2026-11-22.json' with {type:'json'};
@@ -1708,6 +1709,7 @@ export const seasonalDesigns=[
  ...daily20261122,
  ...daily20261123,
  ...newCollections20261123,
+ ...daily20261124,
 ];
 export function sampleSize(design){return postcardSize(design.orientation);}
 

@@ -1,3 +1,13 @@
+import daily20261124_0 from './assets/seasonal-daily-christmas-the-holly-sleigh-bell-flat-2026-11-24.png';
+import daily20261124_1 from './assets/seasonal-daily-easter-the-porcelain-egg-workshop-flat-2026-11-24.png';
+import daily20261124_2 from './assets/seasonal-daily-halloween-the-witch-s-key-cabinet-flat-2026-11-24.png';
+import daily20261124_3 from './assets/seasonal-daily-valentine-the-heart-shaped-birdhouse-flat-2026-11-24.png';
+import daily20261124_4 from './assets/seasonal-daily-newyear-the-midnight-orrery-flat-2026-11-24.png';
+import daily20261124_5 from './assets/seasonal-daily-mother-the-pressed-violet-teacup-flat-2026-11-24.png';
+import daily20261124_6 from './assets/seasonal-daily-father-the-carpenter-s-plane-flat-2026-11-24.png';
+import daily20261124_7 from './assets/seasonal-daily-thanksgiving-the-braided-harvest-loaf-flat-2026-11-24.png';
+import daily20261124_8 from './assets/seasonal-daily-gonk-the-gonk-mapmaker-flat-2026-11-24.png';
+import daily20261124_9 from './assets/seasonal-daily-animals-the-red-panda-bamboo-grove-flat-2026-11-24.png';
 import newCollections20261123_0 from './assets/seasonal-collection-fantasy-moonlit-dragon-library-flat-2026-11-23.png';
 import newCollections20261123_1 from './assets/seasonal-collection-fantasy-the-crystal-griffin-flat-2026-11-23.png';
 import newCollections20261123_2 from './assets/seasonal-collection-fantasy-clockwork-wizard-tower-flat-2026-11-23.png';
@@ -241,6 +251,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-the-holly-sleigh-bell-flat-2026-11-24':daily20261124_0,
+ 'daily-easter-the-porcelain-egg-workshop-flat-2026-11-24':daily20261124_1,
+ 'daily-halloween-the-witch-s-key-cabinet-flat-2026-11-24':daily20261124_2,
+ 'daily-valentine-the-heart-shaped-birdhouse-flat-2026-11-24':daily20261124_3,
+ 'daily-newyear-the-midnight-orrery-flat-2026-11-24':daily20261124_4,
+ 'daily-mother-the-pressed-violet-teacup-flat-2026-11-24':daily20261124_5,
+ 'daily-father-the-carpenter-s-plane-flat-2026-11-24':daily20261124_6,
+ 'daily-thanksgiving-the-braided-harvest-loaf-flat-2026-11-24':daily20261124_7,
+ 'daily-gonk-the-gonk-mapmaker-flat-2026-11-24':daily20261124_8,
+ 'daily-animals-the-red-panda-bamboo-grove-flat-2026-11-24':daily20261124_9,
  'collection-fantasy-moonlit-dragon-library-flat-2026-11-23':newCollections20261123_0,
  'collection-fantasy-the-crystal-griffin-flat-2026-11-23':newCollections20261123_1,
  'collection-fantasy-clockwork-wizard-tower-flat-2026-11-23':newCollections20261123_2,
