@@ -1,0 +1,112 @@
+[
+  {
+    "id": "daily-christmas-snowbound-christmas-railway-cylinder-2026-11-25",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Snowbound Christmas Railway",
+    "asset": "daily-christmas-snowbound-christmas-railway-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-easter-the-springtime-meadow-stream-cylinder-2026-11-25",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Springtime Meadow Stream",
+    "asset": "daily-easter-the-springtime-meadow-stream-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-halloween-the-lantern-pumpkin-forest-cylinder-2026-11-25",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Lantern Pumpkin Forest",
+    "asset": "daily-halloween-the-lantern-pumpkin-forest-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-valentine-the-valentine-swan-lake-cylinder-2026-11-25",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Valentine Swan Lake",
+    "asset": "daily-valentine-the-valentine-swan-lake-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-newyear-the-midnight-mountain-fireworks-cylinder-2026-11-25",
+    "collection": "newyear",
+    "season": "New Year",
+    "name": "The Midnight Mountain Fireworks",
+    "asset": "daily-newyear-the-midnight-mountain-fireworks-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-mother-the-blossom-garden-path-cylinder-2026-11-25",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Blossom Garden Path",
+    "asset": "daily-mother-the-blossom-garden-path-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-father-the-woodland-fishing-lake-cylinder-2026-11-25",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Woodland Fishing Lake",
+    "asset": "daily-father-the-woodland-fishing-lake-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-thanksgiving-the-harvest-windmill-cylinder-2026-11-25",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Harvest Windmill",
+    "asset": "daily-thanksgiving-the-harvest-windmill-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-gonk-the-gonk-garden-railway-cylinder-2026-11-25",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonk Garden Railway",
+    "asset": "daily-gonk-the-gonk-garden-railway-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-animals-hedgehogs-in-the-woodland-garden-cylinder-2026-11-25",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Hedgehogs in the Woodland Garden",
+    "asset": "daily-animals-hedgehogs-in-the-woodland-garden-cylinder-2026-11-25.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  }
+]

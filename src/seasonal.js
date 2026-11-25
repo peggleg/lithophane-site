@@ -1,3 +1,13 @@
+import daily20261125_0 from './assets/seasonal-daily-christmas-the-wooden-star-lantern-flat-2026-11-25.png';
+import daily20261125_1 from './assets/seasonal-daily-easter-the-bluebell-egg-basket-flat-2026-11-25.png';
+import daily20261125_2 from './assets/seasonal-daily-halloween-the-crow-feather-apothecary-flat-2026-11-25.png';
+import daily20261125_3 from './assets/seasonal-daily-valentine-the-heart-lock-and-key-flat-2026-11-25.png';
+import daily20261125_4 from './assets/seasonal-daily-newyear-midnight-clockwork-fireworks-flat-2026-11-25.png';
+import daily20261125_5 from './assets/seasonal-daily-mother-the-lavender-sewing-basket-flat-2026-11-25.png';
+import daily20261125_6 from './assets/seasonal-daily-father-the-brass-workshop-compass-flat-2026-11-25.png';
+import daily20261125_7 from './assets/seasonal-daily-thanksgiving-the-autumn-cornucopia-flat-2026-11-25.png';
+import daily20261125_8 from './assets/seasonal-daily-gonk-the-gonk-stargazer-flat-2026-11-25.png';
+import daily20261125_9 from './assets/seasonal-daily-animals-the-hedgehog-s-fern-shelter-flat-2026-11-25.png';
 import daily20261124_0 from './assets/seasonal-daily-christmas-the-holly-sleigh-bell-flat-2026-11-24.png';
 import daily20261124_1 from './assets/seasonal-daily-easter-the-porcelain-egg-workshop-flat-2026-11-24.png';
 import daily20261124_2 from './assets/seasonal-daily-halloween-the-witch-s-key-cabinet-flat-2026-11-24.png';
@@ -251,6 +261,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-the-wooden-star-lantern-flat-2026-11-25':daily20261125_0,
+ 'daily-easter-the-bluebell-egg-basket-flat-2026-11-25':daily20261125_1,
+ 'daily-halloween-the-crow-feather-apothecary-flat-2026-11-25':daily20261125_2,
+ 'daily-valentine-the-heart-lock-and-key-flat-2026-11-25':daily20261125_3,
+ 'daily-newyear-midnight-clockwork-fireworks-flat-2026-11-25':daily20261125_4,
+ 'daily-mother-the-lavender-sewing-basket-flat-2026-11-25':daily20261125_5,
+ 'daily-father-the-brass-workshop-compass-flat-2026-11-25':daily20261125_6,
+ 'daily-thanksgiving-the-autumn-cornucopia-flat-2026-11-25':daily20261125_7,
+ 'daily-gonk-the-gonk-stargazer-flat-2026-11-25':daily20261125_8,
+ 'daily-animals-the-hedgehog-s-fern-shelter-flat-2026-11-25':daily20261125_9,
  'daily-christmas-the-holly-sleigh-bell-flat-2026-11-24':daily20261124_0,
  'daily-easter-the-porcelain-egg-workshop-flat-2026-11-24':daily20261124_1,
  'daily-halloween-the-witch-s-key-cabinet-flat-2026-11-24':daily20261124_2,
