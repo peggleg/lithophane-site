@@ -292,5 +292,89 @@
     "orientation": "portrait",
     "width": 105,
     "height": 148
+  },
+  {
+    "id": "colouring-43",
+    "name": "Snoopy Snow Angel",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-44",
+    "name": "Snoopy Garden Helpers",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-45",
+    "name": "Snoopy Lakeside Camping",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-46",
+    "name": "Snoopy Snow Fort",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-47",
+    "name": "Snoopy Bowling Day",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-48",
+    "name": "Snoopy Snowball Fun",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-49",
+    "name": "Snoopy Festive Sweaters",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-50",
+    "name": "Snoopy Football Match",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-51",
+    "name": "Snoopy Christmas Tree Farm",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-52",
+    "name": "Snoopy Lantern Walk",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-53",
+    "name": "Snoopy Christmas Train",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-54",
+    "name": "Snoopy Christmas Gifts",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
   }
 ]
