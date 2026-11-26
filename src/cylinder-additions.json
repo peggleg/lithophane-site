@@ -4397,5 +4397,115 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "daily-christmas-the-christmas-toy-woodland-cylinder-2026-11-26",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Christmas Toy Woodland",
+    "asset": "daily-christmas-the-christmas-toy-woodland-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-easter-the-easter-garden-bridge-cylinder-2026-11-26",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Easter Garden Bridge",
+    "asset": "daily-easter-the-easter-garden-bridge-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-halloween-the-moonlit-halloween-village-cylinder-2026-11-26",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Halloween Village",
+    "asset": "daily-halloween-the-moonlit-halloween-village-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-valentine-the-rose-garden-fountain-cylinder-2026-11-26",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Rose Garden Fountain",
+    "asset": "daily-valentine-the-rose-garden-fountain-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-newyear-midnight-waterfront-celebration-cylinder-2026-11-26",
+    "collection": "newyear",
+    "season": "New Year 2027",
+    "name": "Midnight Waterfront Celebration",
+    "asset": "daily-newyear-midnight-waterfront-celebration-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-mother-the-flower-glasshouse-cylinder-2026-11-26",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Flower Glasshouse",
+    "asset": "daily-mother-the-flower-glasshouse-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-father-the-mountain-workshop-cylinder-2026-11-26",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Mountain Workshop",
+    "asset": "daily-father-the-mountain-workshop-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-thanksgiving-the-harvest-barns-cylinder-2026-11-26",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Harvest Barns",
+    "asset": "daily-thanksgiving-the-harvest-barns-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "daily-gonk-gonks-at-the-summer-allotment-cylinder-2026-11-26",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "Gonks at the Summer Allotment",
+    "asset": "daily-gonk-gonks-at-the-summer-allotment-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-animals-wombats-in-the-eucalyptus-woodland-cylinder-2026-11-26",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Wombats in the Eucalyptus Woodland",
+    "asset": "daily-animals-wombats-in-the-eucalyptus-woodland-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
   }
 ]

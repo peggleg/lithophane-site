@@ -1,3 +1,13 @@
+import daily20261126_0 from './assets/seasonal-daily-christmas-the-gingerbread-bakery-flat-2026-11-26.png';
+import daily20261126_1 from './assets/seasonal-daily-easter-spring-egg-basket-flat-2026-11-26.png';
+import daily20261126_2 from './assets/seasonal-daily-halloween-the-haunted-greenhouse-flat-2026-11-26.png';
+import daily20261126_3 from './assets/seasonal-daily-valentine-heirloom-heart-lockets-flat-2026-11-26.png';
+import daily20261126_4 from './assets/seasonal-daily-newyear-fireworks-over-the-harbour-flat-2026-11-26.png';
+import daily20261126_5 from './assets/seasonal-daily-mother-the-floral-teapot-flat-2026-11-26.png';
+import daily20261126_6 from './assets/seasonal-daily-father-the-wooden-sailboat-workshop-flat-2026-11-26.png';
+import daily20261126_7 from './assets/seasonal-daily-thanksgiving-the-thanksgiving-orchard-pie-flat-2026-11-26.png';
+import daily20261126_8 from './assets/seasonal-daily-gonk-the-herb-garden-gonk-flat-2026-11-26.png';
+import daily20261126_9 from './assets/seasonal-daily-animals-the-wombat-burrow-flat-2026-11-26.png';
 import animal20261126_0 from './assets/seasonal-collection-highland-cows-calf-beside-a-highland-loch-flat-2026-11-26.png';
 import animal20261126_1 from './assets/seasonal-collection-highland-cows-cow-splashing-in-rain-boots-flat-2026-11-26.png';
 import animal20261126_2 from './assets/seasonal-collection-highland-cows-cow-family-by-a-snowy-cottage-flat-2026-11-26.png';
@@ -276,6 +286,17 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-the-gingerbread-bakery-flat-2026-11-26':daily20261126_0,
+ 'daily-easter-spring-egg-basket-flat-2026-11-26':daily20261126_1,
+ 'daily-halloween-the-haunted-greenhouse-flat-2026-11-26':daily20261126_2,
+ 'daily-valentine-heirloom-heart-lockets-flat-2026-11-26':daily20261126_3,
+ 'daily-newyear-fireworks-over-the-harbour-flat-2026-11-26':daily20261126_4,
+ 'daily-mother-the-floral-teapot-flat-2026-11-26':daily20261126_5,
+ 'daily-father-the-wooden-sailboat-workshop-flat-2026-11-26':daily20261126_6,
+ 'daily-thanksgiving-the-thanksgiving-orchard-pie-flat-2026-11-26':daily20261126_7,
+ 'daily-gonk-the-herb-garden-gonk-flat-2026-11-26':daily20261126_8,
+ 'daily-animals-the-wombat-burrow-flat-2026-11-26':daily20261126_9,
+
  'collection-highland-cows-calf-beside-a-highland-loch-flat-2026-11-26':animal20261126_0,
  'collection-highland-cows-cow-splashing-in-rain-boots-flat-2026-11-26':animal20261126_1,
  'collection-highland-cows-cow-family-by-a-snowy-cottage-flat-2026-11-26':animal20261126_2,
