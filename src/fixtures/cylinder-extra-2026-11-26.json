@@ -1,0 +1,222 @@
+[
+  {
+    "id": "extra-christmas-the-gingerbread-tram-full-2026-11-26",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "The Gingerbread Tram",
+    "asset": "extra-christmas-the-gingerbread-tram-full-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-easter-the-tulip-bunny-railway-full-2026-11-26",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "The Tulip Bunny Meadow",
+    "asset": "extra-easter-the-tulip-bunny-railway-full-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-mother-the-lilac-bird-garden-full-2026-11-26",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "The Lilac Bird Garden",
+    "asset": "extra-mother-the-lilac-bird-garden-full-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-father-the-mountain-workshop-full-2026-11-26",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Mountain Workshop",
+    "asset": "extra-father-the-mountain-workshop-full-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-thanksgiving-the-autumn-harvest-barn-2026-11-26",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "The Autumn Harvest Barn",
+    "asset": "extra-thanksgiving-the-autumn-harvest-barn-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-gonk-the-gonk-observatory-2026-11-26",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonk Observatory",
+    "asset": "extra-gonk-the-gonk-observatory-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-animals-foxes-in-the-autumn-woods-full-2026-11-26",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Foxes in the Autumn Woods",
+    "asset": "extra-animals-foxes-in-the-autumn-woods-full-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-cartoons-the-woodland-bakery-2026-11-26",
+    "collection": "cartoons",
+    "season": "Cartoons",
+    "name": "The Woodland Bakery",
+    "asset": "extra-cartoons-the-woodland-bakery-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-gaming-the-neon-racing-circuit-2026-11-26",
+    "collection": "gaming",
+    "season": "Gaming",
+    "name": "The Neon Racing Circuit",
+    "asset": "extra-gaming-the-neon-racing-circuit-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-kids-tv-the-woodland-story-train-2026-11-26",
+    "collection": "kids-tv",
+    "season": "Kids TV Shows",
+    "name": "The Woodland Story Train",
+    "asset": "extra-kids-tv-the-woodland-story-train-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-movies-the-moonlit-adventure-cinema-2026-11-26",
+    "collection": "movies",
+    "season": "Movies",
+    "name": "The Moonlit Adventure Cinema",
+    "asset": "extra-movies-the-moonlit-adventure-cinema-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-sport-mountain-cycling-2026-11-26",
+    "collection": "sport",
+    "season": "Sport",
+    "name": "Mountain Cycling",
+    "asset": "extra-sport-mountain-cycling-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-snoopy-snoopy-s-garden-adventure-2026-11-26",
+    "collection": "snoopy",
+    "season": "Snoopy",
+    "name": "Snoopy’s Garden Adventure",
+    "asset": "extra-snoopy-snoopy-s-garden-adventure-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-fantasy-the-moonlit-dragon-harbor-2026-11-26",
+    "collection": "fantasy",
+    "season": "Fantasy Worlds",
+    "name": "The Moonlit Dragon Harbor",
+    "asset": "extra-fantasy-the-moonlit-dragon-harbor-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-space-the-asteroid-observatory-2026-11-26",
+    "collection": "space",
+    "season": "Space Exploration",
+    "name": "The Asteroid Observatory",
+    "asset": "extra-space-the-asteroid-observatory-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-underwater-the-coral-reef-dolphins-2026-11-26",
+    "collection": "underwater",
+    "season": "Underwater Life",
+    "name": "The Coral Reef Dolphins",
+    "asset": "extra-underwater-the-coral-reef-dolphins-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-superheroes-the-midnight-sky-guardian-2026-11-26",
+    "collection": "superheroes",
+    "season": "Superheroes",
+    "name": "The Midnight Sky Guardian",
+    "asset": "extra-superheroes-the-midnight-sky-guardian-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-tv-comedy-the-space-station-sitcom-2026-11-26",
+    "collection": "tv-comedy",
+    "season": "TV Comedy",
+    "name": "The Space Station Sitcom",
+    "asset": "extra-tv-comedy-the-space-station-sitcom-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-highland-cows-the-highland-cow-music-festival-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "The Highland Cow Music Festival",
+    "asset": "extra-highland-cows-the-highland-cow-music-festival-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-capybaras-the-capybara-riverside-cafe-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "The Capybara Riverside Cafe",
+    "asset": "extra-capybaras-the-capybara-riverside-cafe-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  }
+]
