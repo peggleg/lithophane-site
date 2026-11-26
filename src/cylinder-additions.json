@@ -4364,5 +4364,38 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "extra-halloween-moonlit-pumpkin-river-2026-11-26",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Moonlit Pumpkin River",
+    "asset": "extra-halloween-moonlit-pumpkin-river-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-valentine-rose-archway-lake-2026-11-26",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "Rose Archway Lake",
+    "asset": "extra-valentine-rose-archway-lake-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "extra-christmas-movies-the-christmas-picture-house-2026-11-26",
+    "collection": "christmas-movies",
+    "season": "Christmas Movies",
+    "name": "The Christmas Picture House",
+    "asset": "extra-christmas-movies-the-christmas-picture-house-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
   }
 ]
