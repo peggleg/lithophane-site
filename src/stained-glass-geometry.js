@@ -2,7 +2,7 @@ import {productKernel} from './product-kernel.js';
 // Colour regions are traced from the sampled image, then inset so the black
 // framework follows their contours. Bridges connect enclosed outline islands.
 export function stainedGlassGeometry(module,seg,{orientation='landscape',mode='assembly',printer='a1-mini'}={}){
- if(!['portrait','landscape'].includes(orientation)||!['assembly','ams'].includes(mode)||!['a1-mini','256'].includes(printer)||!seg||seg.labels.length!==seg.width*seg.height||seg.palette.length>3)throw Error('Invalid stained-glass design.');
+ if(!['portrait','landscape'].includes(orientation)||!['assembly','ams'].includes(mode)||!['a1-mini','256'].includes(printer)||!seg||seg.labels.length!==seg.width*seg.height||seg.palette.length>7)throw Error('Invalid stained-glass design.');
  const width=orientation==='landscape'?148:105,height=orientation==='landscape'?105:148,cols=seg.width,rows=seg.height,border=2,web=.9,clearance=mode==='assembly'?.18:0,thickness=2,cw=(width-2*border)/cols,ch=(height-2*border)/rows;
  const K=productKernel(module,{kind:'stained-glass',printer}),{C,own}=K;
  try{
