@@ -7,6 +7,7 @@ export function siteOrigin(value){
  return u.origin+u.pathname.replace(/\/$/,'')+'/';
 }
 export const pageInfo={
+ 'stained-glass':{path:'stained-glass/',title:'Stained Glass Mosaic Maker · Design Studio',description:'Turn an image into a printable postcard-sized stained-glass mosaic with separate tiles or AMS.'},
  cylinders:{path:'cylinders/',title:'Seamless Lithophane Cylinders & Stands · Design Studio',description:'Create open-top 360-degree landscape lithophane cylinders with seamless seasonal panoramas, eight interchangeable desktop and elevated stands and a 38 mm LED tealight holder. STL, Bambu 3MF and a small fit-test print.'},
  hooks:{path:'hooks/',title:'Character Wall Hooks · Design Studio',description:'Build one to five compact character hooks. Mix designs on modular wall rails, print colour pieces separately or choose AMS. Reinforced Bambu A1 mini and A1 projects, STL and matching inserts.'},
 
