@@ -152,5 +152,145 @@
     "orientation": "portrait",
     "width": 105,
     "height": 148
+  },
+  {
+    "id": "colouring-23",
+    "name": "Surfing Capybara Beach",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-24",
+    "name": "Dinosaur Jungle Birthday",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-25",
+    "name": "Space Cats Adventure",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-26",
+    "name": "Ocean Creature Disco",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-27",
+    "name": "Dragon Castle Picnic",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-28",
+    "name": "Frog Pirate Treasure Island",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-29",
+    "name": "Monster Carnival",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-30",
+    "name": "Highland Cow Flower Farm",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-31",
+    "name": "Robot Kitchen",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-32",
+    "name": "Penguin Snowy Sledding",
+    "orientation": "landscape",
+    "width": 148,
+    "height": 105
+  },
+  {
+    "id": "colouring-33",
+    "name": "Giraffe Jungle Disco",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-34",
+    "name": "Unicorn Candy Wonderland",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-35",
+    "name": "Octopus Sunken Ship",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-36",
+    "name": "Koala Space Adventure",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-37",
+    "name": "Raccoon Ice Cream Shop",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-38",
+    "name": "Sloth Treetop Party",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-39",
+    "name": "Yeti Snowy Mountains",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-40",
+    "name": "Duck Knights Castle",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-41",
+    "name": "Panda Cupcake Bakery",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
+  },
+  {
+    "id": "colouring-42",
+    "name": "Frog Wizard Mushroom Forest",
+    "orientation": "portrait",
+    "width": 105,
+    "height": 148
   }
 ]
