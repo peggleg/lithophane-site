@@ -1,3 +1,18 @@
+import animal20261126_0 from './assets/seasonal-collection-highland-cows-calf-beside-a-highland-loch-flat-2026-11-26.png';
+import animal20261126_1 from './assets/seasonal-collection-highland-cows-cow-splashing-in-rain-boots-flat-2026-11-26.png';
+import animal20261126_2 from './assets/seasonal-collection-highland-cows-cow-family-by-a-snowy-cottage-flat-2026-11-26.png';
+import animal20261126_3 from './assets/seasonal-collection-highland-cows-cow-eating-an-apple-in-an-orchard-flat-2026-11-26.png';
+import animal20261126_4 from './assets/seasonal-collection-highland-cows-cow-among-wildflowers-and-butterflies-flat-2026-11-26.png';
+import animal20261126_5 from './assets/seasonal-collection-highland-cows-cow-baker-making-shortbread-flat-2026-11-26.png';
+import animal20261126_6 from './assets/seasonal-collection-highland-cows-calf-celebrating-a-birthday-picnic-flat-2026-11-26.png';
+import animal20261126_7 from './assets/seasonal-collection-highland-cows-two-cows-camping-beside-a-lantern-flat-2026-11-26.png';
+import animal20261126_8 from './assets/seasonal-collection-highland-cows-cow-playing-in-autumn-leaves-flat-2026-11-26.png';
+import animal20261126_9 from './assets/seasonal-collection-highland-cows-cow-riding-in-a-flower-filled-bicycle-basket-flat-2026-11-26.png';
+import animal20261126_10 from './assets/seasonal-collection-capybaras-family-soaking-in-a-snowy-hot-spring-flat-2026-11-26.png';
+import animal20261126_11 from './assets/seasonal-collection-capybaras-capybaras-decorating-a-christmas-tree-flat-2026-11-26.png';
+import animal20261126_12 from './assets/seasonal-collection-capybaras-baby-capybara-watching-butterflies-at-a-pond-flat-2026-11-26.png';
+import animal20261126_13 from './assets/seasonal-collection-capybaras-capybara-garden-picnic-flat-2026-11-26.png';
+import animal20261126_14 from './assets/seasonal-collection-capybaras-capybara-family-at-tropical-river-sunset-flat-2026-11-26.png';
 import daily20261125_0 from './assets/seasonal-daily-christmas-the-wooden-star-lantern-flat-2026-11-25.png';
 import daily20261125_1 from './assets/seasonal-daily-easter-the-bluebell-egg-basket-flat-2026-11-25.png';
 import daily20261125_2 from './assets/seasonal-daily-halloween-the-crow-feather-apothecary-flat-2026-11-25.png';
@@ -261,6 +276,21 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'collection-highland-cows-calf-beside-a-highland-loch-flat-2026-11-26':animal20261126_0,
+ 'collection-highland-cows-cow-splashing-in-rain-boots-flat-2026-11-26':animal20261126_1,
+ 'collection-highland-cows-cow-family-by-a-snowy-cottage-flat-2026-11-26':animal20261126_2,
+ 'collection-highland-cows-cow-eating-an-apple-in-an-orchard-flat-2026-11-26':animal20261126_3,
+ 'collection-highland-cows-cow-among-wildflowers-and-butterflies-flat-2026-11-26':animal20261126_4,
+ 'collection-highland-cows-cow-baker-making-shortbread-flat-2026-11-26':animal20261126_5,
+ 'collection-highland-cows-calf-celebrating-a-birthday-picnic-flat-2026-11-26':animal20261126_6,
+ 'collection-highland-cows-two-cows-camping-beside-a-lantern-flat-2026-11-26':animal20261126_7,
+ 'collection-highland-cows-cow-playing-in-autumn-leaves-flat-2026-11-26':animal20261126_8,
+ 'collection-highland-cows-cow-riding-in-a-flower-filled-bicycle-basket-flat-2026-11-26':animal20261126_9,
+ 'collection-capybaras-family-soaking-in-a-snowy-hot-spring-flat-2026-11-26':animal20261126_10,
+ 'collection-capybaras-capybaras-decorating-a-christmas-tree-flat-2026-11-26':animal20261126_11,
+ 'collection-capybaras-baby-capybara-watching-butterflies-at-a-pond-flat-2026-11-26':animal20261126_12,
+ 'collection-capybaras-capybara-garden-picnic-flat-2026-11-26':animal20261126_13,
+ 'collection-capybaras-capybara-family-at-tropical-river-sunset-flat-2026-11-26':animal20261126_14,
  'daily-christmas-the-wooden-star-lantern-flat-2026-11-25':daily20261125_0,
  'daily-easter-the-bluebell-egg-basket-flat-2026-11-25':daily20261125_1,
  'daily-halloween-the-crow-feather-apothecary-flat-2026-11-25':daily20261125_2,

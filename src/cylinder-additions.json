@@ -3979,5 +3979,170 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-calf-beside-a-highland-loch-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Calf beside a Highland loch",
+    "asset": "collection-highland-cows-calf-beside-a-highland-loch-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-splashing-in-rain-boots-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow splashing in rain boots",
+    "asset": "collection-highland-cows-cow-splashing-in-rain-boots-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-family-by-a-snowy-cottage-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow family by a snowy cottage",
+    "asset": "collection-highland-cows-cow-family-by-a-snowy-cottage-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-eating-an-apple-in-an-orchard-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow eating an apple in an orchard",
+    "asset": "collection-highland-cows-cow-eating-an-apple-in-an-orchard-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-among-wildflowers-and-butterflies-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow among wildflowers and butterflies",
+    "asset": "collection-highland-cows-cow-among-wildflowers-and-butterflies-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-baker-making-shortbread-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow baker making shortbread",
+    "asset": "collection-highland-cows-cow-baker-making-shortbread-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-calf-celebrating-a-birthday-picnic-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Calf celebrating a birthday picnic",
+    "asset": "collection-highland-cows-calf-celebrating-a-birthday-picnic-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-two-cows-camping-beside-a-lantern-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Two cows camping beside a lantern",
+    "asset": "collection-highland-cows-two-cows-camping-beside-a-lantern-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-playing-in-autumn-leaves-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow playing in autumn leaves",
+    "asset": "collection-highland-cows-cow-playing-in-autumn-leaves-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-highland-cows-cow-riding-in-a-flower-filled-bicycle-basket-cylinder-2026-11-26",
+    "collection": "highland-cows",
+    "season": "Highland Cows",
+    "name": "Cow riding in a flower-filled bicycle basket",
+    "asset": "collection-highland-cows-cow-riding-in-a-flower-filled-bicycle-basket-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-capybaras-family-soaking-in-a-snowy-hot-spring-cylinder-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "Family soaking in a snowy hot spring",
+    "asset": "collection-capybaras-family-soaking-in-a-snowy-hot-spring-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-capybaras-capybaras-decorating-a-christmas-tree-cylinder-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "Capybaras decorating a Christmas tree",
+    "asset": "collection-capybaras-capybaras-decorating-a-christmas-tree-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-capybaras-baby-capybara-watching-butterflies-at-a-pond-cylinder-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "Baby capybara watching butterflies at a pond",
+    "asset": "collection-capybaras-baby-capybara-watching-butterflies-at-a-pond-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-capybaras-capybara-garden-picnic-cylinder-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "Capybara garden picnic",
+    "asset": "collection-capybaras-capybara-garden-picnic-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
+  },
+  {
+    "id": "collection-capybaras-capybara-family-at-tropical-river-sunset-cylinder-2026-11-26",
+    "collection": "capybaras",
+    "season": "Capybaras",
+    "name": "Capybara family at tropical river sunset",
+    "asset": "collection-capybaras-capybara-family-at-tropical-river-sunset-cylinder-2026-11-26.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "narrow"
   }
 ]
