@@ -1,11 +1,12 @@
 import {productKernel} from './product-kernel.js';
-export function colouringGeometry(module, artwork, {printer='a1-mini', ams=true, base=2.4}={}) {
+export function colouringGeometry(module, artwork, {printer='a1-mini', ams=true, base=2.4, lineExpansion=.15}={}) {
  if(![1.6,1.8,2,2.2,2.4].includes(base))throw Error('Choose a supported base thickness.');
  if(!artwork || ![105,148].includes(artwork.width)||![105,148].includes(artwork.height)||artwork.width===artwork.height||!Array.isArray(artwork.paths)||!artwork.paths.length)throw Error('Invalid postcard artwork.');
  const p={kind:'colouring-postcard',printer},K=productKernel(module,p),{C,own}=K;
  try {
   const plate=own(C.square([artwork.width,artwork.height]));
-  const detail=own(own(new C(artwork.paths,'EvenOdd')).intersect(plate));
+  const source=own(new C(artwork.paths,'EvenOdd'));
+  const detail=own(own(source.offset(lineExpansion,'Round',2,16)).intersect(plate));
   if(detail.isEmpty())throw Error('The artwork has no printable lines.');
   const white=own(plate.extrude(base)),black=own(detail.extrude(.6).translate([0,0,base])),complete=own(white.add(black));
   if(complete.decompose().length!==1)throw Error('The image is not joined to the base.');
