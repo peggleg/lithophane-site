@@ -4507,5 +4507,115 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "periodic"
+  },
+  {
+    "id": "daily-christmas-winter-toyland-railway-cylinder-2026-11-27",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Winter Toyland Railway",
+    "asset": "daily-christmas-winter-toyland-railway-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-easter-spring-egg-garden-cylinder-2026-11-27",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Spring Egg Garden",
+    "asset": "daily-easter-spring-egg-garden-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-halloween-moonlit-carnival-cylinder-2026-11-27",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "Moonlit Carnival",
+    "asset": "daily-halloween-moonlit-carnival-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-valentine-the-rose-garden-maze-cylinder-2026-11-27",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Rose Garden Maze",
+    "asset": "daily-valentine-the-rose-garden-maze-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-newyear-midnight-fireworks-square-cylinder-2026-11-27",
+    "collection": "newyear",
+    "season": "New Year 2027",
+    "name": "Midnight Fireworks Square",
+    "asset": "daily-newyear-midnight-fireworks-square-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-mother-birdhouse-in-bloom-cylinder-2026-11-27",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "Birdhouse in Bloom",
+    "asset": "daily-mother-birdhouse-in-bloom-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-father-tackle-by-the-mountain-lake-cylinder-2026-11-27",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "Tackle by the Mountain Lake",
+    "asset": "daily-father-tackle-by-the-mountain-lake-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-thanksgiving-harvest-barn-and-fields-cylinder-2026-11-27",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Harvest Barn and Fields",
+    "asset": "daily-thanksgiving-harvest-barn-and-fields-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-gonk-the-gonk-lakeside-camp-cylinder-2026-11-27",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonk Lakeside Camp",
+    "asset": "daily-gonk-the-gonk-lakeside-camp-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-animals-quokkas-by-the-sea-cylinder-2026-11-27",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Quokkas by the Sea",
+    "asset": "daily-animals-quokkas-by-the-sea-cylinder-2026-11-27.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
   }
 ]

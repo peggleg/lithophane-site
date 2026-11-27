@@ -1,3 +1,13 @@
+import daily20261127_0 from './assets/seasonal-daily-christmas-snowbound-toy-railway-flat-2026-11-27.png';
+import daily20261127_1 from './assets/seasonal-daily-easter-blossom-egg-island-flat-2026-11-27.png';
+import daily20261127_2 from './assets/seasonal-daily-halloween-midnight-carnival-flat-2026-11-27.png';
+import daily20261127_3 from './assets/seasonal-daily-valentine-garden-of-heart-roses-flat-2026-11-27.png';
+import daily20261127_4 from './assets/seasonal-daily-newyear-town-square-at-midnight-flat-2026-11-27.png';
+import daily20261127_5 from './assets/seasonal-daily-mother-wisteria-garden-swing-flat-2026-11-27.png';
+import daily20261127_6 from './assets/seasonal-daily-father-lakeside-tackle-box-flat-2026-11-27.png';
+import daily20261127_7 from './assets/seasonal-daily-thanksgiving-barn-door-harvest-flat-2026-11-27.png';
+import daily20261127_8 from './assets/seasonal-daily-gonk-lakeside-fishing-gonk-flat-2026-11-27.png';
+import daily20261127_9 from './assets/seasonal-daily-animals-quokkas-in-coastal-woodland-flat-2026-11-27.png';
 import daily20261126_0 from './assets/seasonal-daily-christmas-the-gingerbread-bakery-flat-2026-11-26.png';
 import daily20261126_1 from './assets/seasonal-daily-easter-spring-egg-basket-flat-2026-11-26.png';
 import daily20261126_2 from './assets/seasonal-daily-halloween-the-haunted-greenhouse-flat-2026-11-26.png';
@@ -286,6 +296,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-snowbound-toy-railway-flat-2026-11-27':daily20261127_0,
+ 'daily-easter-blossom-egg-island-flat-2026-11-27':daily20261127_1,
+ 'daily-halloween-midnight-carnival-flat-2026-11-27':daily20261127_2,
+ 'daily-valentine-garden-of-heart-roses-flat-2026-11-27':daily20261127_3,
+ 'daily-newyear-town-square-at-midnight-flat-2026-11-27':daily20261127_4,
+ 'daily-mother-wisteria-garden-swing-flat-2026-11-27':daily20261127_5,
+ 'daily-father-lakeside-tackle-box-flat-2026-11-27':daily20261127_6,
+ 'daily-thanksgiving-barn-door-harvest-flat-2026-11-27':daily20261127_7,
+ 'daily-gonk-lakeside-fishing-gonk-flat-2026-11-27':daily20261127_8,
+ 'daily-animals-quokkas-in-coastal-woodland-flat-2026-11-27':daily20261127_9,
  'daily-christmas-the-gingerbread-bakery-flat-2026-11-26':daily20261126_0,
  'daily-easter-spring-egg-basket-flat-2026-11-26':daily20261126_1,
  'daily-halloween-the-haunted-greenhouse-flat-2026-11-26':daily20261126_2,
