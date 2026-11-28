@@ -1,3 +1,11 @@
+import santa1 from './ornament-artwork/santa/1.json' with {type:'json'};
+import santa2 from './ornament-artwork/santa/2.json' with {type:'json'};
+import santa3 from './ornament-artwork/santa/3.json' with {type:'json'};
+import santa4 from './ornament-artwork/santa/4.json' with {type:'json'};
+import santa5 from './ornament-artwork/santa/5.json' with {type:'json'};
+import santa6 from './ornament-artwork/santa/6.json' with {type:'json'};
+import santa7 from './ornament-artwork/santa/7.json' with {type:'json'};
+import santa8 from './ornament-artwork/santa/8.json' with {type:'json'};
 import {productKernel} from './product-kernel.js';
 import art0_1 from './ornament-artwork/winter-illustrated/1.json' with {type:'json'};
 import art0_2 from './ornament-artwork/winter-illustrated/2.json' with {type:'json'};
@@ -63,7 +71,7 @@ import art3_13 from './ornament-artwork/gaming/13.json' with {type:'json'};
 import art3_14 from './ornament-artwork/gaming/14.json' with {type:'json'};
 import art3_15 from './ornament-artwork/gaming/15.json' with {type:'json'};
 import art3_16 from './ornament-artwork/gaming/16.json' with {type:'json'};
-const sheets={'winter-illustrated':[art0_1,art0_2,art0_3,art0_4,art0_5,art0_6,art0_7,art0_8,art0_9,art0_10,art0_11,art0_12,art0_13,art0_14,art0_15,art0_16],'pet-illustrated':[art1_1,art1_2,art1_3,art1_4,art1_5,art1_6,art1_7,art1_8,art1_9,art1_10,art1_11,art1_12,art1_13,art1_14,art1_15,art1_16],'funky':[art2_1,art2_2,art2_3,art2_4,art2_5,art2_6,art2_7,art2_8,art2_9,art2_10,art2_11,art2_12,art2_13,art2_14,art2_15,art2_16],'gaming':[art3_1,art3_2,art3_3,art3_4,art3_5,art3_6,art3_7,art3_8,art3_9,art3_10,art3_11,art3_12,art3_13,art3_14,art3_15,art3_16]};
+const sheets={'santa':[santa1,santa2,santa3,santa4,santa5,santa6,santa7,santa8],'winter-illustrated':[art0_1,art0_2,art0_3,art0_4,art0_5,art0_6,art0_7,art0_8,art0_9,art0_10,art0_11,art0_12,art0_13,art0_14,art0_15,art0_16],'pet-illustrated':[art1_1,art1_2,art1_3,art1_4,art1_5,art1_6,art1_7,art1_8,art1_9,art1_10,art1_11,art1_12,art1_13,art1_14,art1_15,art1_16],'funky':[art2_1,art2_2,art2_3,art2_4,art2_5,art2_6,art2_7,art2_8,art2_9,art2_10,art2_11,art2_12,art2_13,art2_14,art2_15,art2_16],'gaming':[art3_1,art3_2,art3_3,art3_4,art3_5,art3_6,art3_7,art3_8,art3_9,art3_10,art3_11,art3_12,art3_13,art3_14,art3_15,art3_16]};
 export function generateIllustrated(module,p){
  const source=sheets[p.collection]?.[Number(p.design.slice(p.collection.length+1))-1];if(!source)throw Error('Ornament artwork not found.');
  const K=productKernel(module,p),{C,own}=K;
@@ -77,7 +85,7 @@ export function generateIllustrated(module,p){
   for(let i=2;i<ink.mesh.vertices.length;i+=3)ink.mesh.vertices[i]+=p.thickness;
   ink.bounds.min[2]+=p.thickness;ink.bounds.max[2]+=p.thickness;ink.assembly=[0,0,0];
   if(p.ams)for(const [part,extruder]of [[body,1],[ink,2]]){part.colourGroup='illustrated-ornament';part.extruder=extruder;}
-  const model=K.finish({previewDirection:[0,-.15,1],printPlates:true,filamentColours:['#ffffff','#111111'],productFit:{connected:true,whiteBase:p.thickness,raisedDetail:.6},note:`White base ${p.thickness.toFixed(1)} mm; raised black details 0.6 mm (three 0.2 mm layers). Print face up.`,guide:`Print face up at 0.2 mm layer height. The white base is ${p.thickness.toFixed(1)} mm thick. Change from white to black at the first layer above ${p.thickness.toFixed(1)} mm, then print three black layers. ${p.ams?'The 3MF assigns white to filament 1 and black to filament 2.':'Set the colour change in your slicer; it is not embedded in the STL.'}`});
+  const model=K.finish({previewDirection:[0,-.15,1],printPlates:true,filamentColours:['#ffffff','#111111'],productFit:{connected:true,whiteBase:p.thickness,raisedDetail:.6},note:`White base ${p.thickness.toFixed(1)} mm; raised black details 0.6 mm (three 0.2 mm layers). Print face up.${source.blankPlate?' Blank plate: add text in your slicer.':''}`,guide:`Print face up at 0.2 mm layer height. The white base is ${p.thickness.toFixed(1)} mm thick. Change from white to black at the first layer above ${p.thickness.toFixed(1)} mm, then print three black layers.${source.blankPlate?' Add custom text to the blank plate in your slicer.':''} ${p.ams?'The 3MF assigns white to filament 1 and black to filament 2.':'Set the colour change in your slicer; it is not embedded in the STL.'}`});
   for(const part of model.parts){part.x=model.parts[0].x;part.y=model.parts[0].y;}
   const mesh=complete.getMesh(),vertices=new Float32Array(mesh.vertProperties.length/mesh.numProp*3);for(let i=0;i<vertices.length/3;i++)for(let a=0;a<3;a++)vertices[i*3+a]=mesh.vertProperties[i*mesh.numProp+a];model.singleColourMesh={vertices,faces:new Uint32Array(mesh.triVerts)};return model;
  }finally{K.dispose();}

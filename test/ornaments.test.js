@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 import {generateOrnament} from '../src/ornament-geometry.js';import {ornamentCollections,releasedOrnamentCollections,validateOrnament,ornamentDesignDefault} from '../src/ornament-settings.js';import {solid3mf} from '../src/ornament-export.js';import {printProfile} from '../src/print-profile.js';
 const m=await init();m.setup();const bytes=fs.readFileSync('src/fonts/Lobster-Regular.ttf'),font=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
 // Cartoon ornaments have separate raised-colour tests; these cover every traditional lettering template.
-const testedCollections=(process.env.ORN_COLLECTION?[process.env.ORN_COLLECTION]:releasedOrnamentCollections).filter(id=>!['cartoons','steampunk','winter-illustrated','pet-illustrated','funky','gaming'].includes(id));
+const testedCollections=(process.env.ORN_COLLECTION?[process.env.ORN_COLLECTION]:releasedOrnamentCollections).filter(id=>!['cartoons','steampunk','winter-illustrated','pet-illustrated','funky','gaming','santa'].includes(id));
 for(const id of testedCollections)assert.ok(releasedOrnamentCollections.includes(id));
 const build=p=>generateOrnament(m,font,p),restore=p=>new m.Manifold(new m.Mesh({numProp:3,vertProperties:p.mesh.vertices,triVerts:p.mesh.faces}));
 function files(chunks){const b=Buffer.concat(chunks.map(c=>Buffer.from(c))),result={};for(let i=0;b.readUInt32LE(i)===0x04034b50;){const size=b.readUInt32LE(i+18),n=b.readUInt16LE(i+26),extra=b.readUInt16LE(i+28),start=i+30+n+extra;result[b.subarray(i+30,i+30+n).toString()]=b.subarray(start,start+size);i=start+size;}return result;}
