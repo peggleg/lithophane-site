@@ -4617,5 +4617,115 @@
     "rows": 1,
     "orientation": "landscape",
     "seamMode": "periodic"
+  },
+  {
+    "id": "daily-christmas-christmas-on-the-frozen-lake-cylinder-2026-11-28",
+    "collection": "christmas",
+    "season": "Christmas",
+    "name": "Christmas on the Frozen Lake",
+    "asset": "daily-christmas-christmas-on-the-frozen-lake-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-easter-easter-meadow-and-streams-cylinder-2026-11-28",
+    "collection": "easter",
+    "season": "Easter",
+    "name": "Easter Meadow and Streams",
+    "asset": "daily-easter-easter-meadow-and-streams-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-halloween-the-moonlit-graveyard-cylinder-2026-11-28",
+    "collection": "halloween",
+    "season": "Halloween",
+    "name": "The Moonlit Graveyard",
+    "asset": "daily-halloween-the-moonlit-graveyard-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-valentine-the-lakeside-rose-garden-cylinder-2026-11-28",
+    "collection": "valentine",
+    "season": "Valentine’s Day",
+    "name": "The Lakeside Rose Garden",
+    "asset": "daily-valentine-the-lakeside-rose-garden-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-newyear-alpine-midnight-fireworks-cylinder-2026-11-28",
+    "collection": "newyear",
+    "season": "New Year 2027",
+    "name": "Alpine Midnight Fireworks",
+    "asset": "daily-newyear-alpine-midnight-fireworks-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-mother-cherry-blossom-garden-cylinder-2026-11-28",
+    "collection": "mother",
+    "season": "Mother’s Day",
+    "name": "Cherry Blossom Garden",
+    "asset": "daily-mother-cherry-blossom-garden-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-father-the-lakeside-campsite-cylinder-2026-11-28",
+    "collection": "father",
+    "season": "Father’s Day",
+    "name": "The Lakeside Campsite",
+    "asset": "daily-father-the-lakeside-campsite-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-thanksgiving-autumn-farm-and-orchard-cylinder-2026-11-28",
+    "collection": "thanksgiving",
+    "season": "Thanksgiving",
+    "name": "Autumn Farm and Orchard",
+    "asset": "daily-thanksgiving-autumn-farm-and-orchard-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-gonk-the-gonk-treehouse-library-cylinder-2026-11-28",
+    "collection": "gonk",
+    "season": "Gonk",
+    "name": "The Gonk Treehouse Library",
+    "asset": "daily-gonk-the-gonk-treehouse-library-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
+  },
+  {
+    "id": "daily-animals-fennec-fox-desert-oasis-cylinder-2026-11-28",
+    "collection": "animals",
+    "season": "Animals",
+    "name": "Fennec Fox Desert Oasis",
+    "asset": "daily-animals-fennec-fox-desert-oasis-cylinder-2026-11-28.webp",
+    "row": 0,
+    "rows": 1,
+    "orientation": "landscape",
+    "seamMode": "periodic"
   }
 ]

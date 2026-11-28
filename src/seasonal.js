@@ -1,3 +1,13 @@
+import daily20261128_0 from './assets/seasonal-daily-christmas-sleigh-beneath-the-fir-flat-2026-11-28.png';
+import daily20261128_1 from './assets/seasonal-daily-easter-eggs-beside-the-spring-bridge-flat-2026-11-28.png';
+import daily20261128_2 from './assets/seasonal-daily-halloween-the-witchs-apothecary-flat-2026-11-28.png';
+import daily20261128_3 from './assets/seasonal-daily-valentine-roses-and-love-letters-flat-2026-11-28.png';
+import daily20261128_4 from './assets/seasonal-daily-newyear-clock-strikes-midnight-flat-2026-11-28.png';
+import daily20261128_5 from './assets/seasonal-daily-mother-the-patchwork-garden-bench-flat-2026-11-28.png';
+import daily20261128_6 from './assets/seasonal-daily-father-the-woodworkers-tools-flat-2026-11-28.png';
+import daily20261128_7 from './assets/seasonal-daily-thanksgiving-the-harvest-door-wreath-flat-2026-11-28.png';
+import daily20261128_8 from './assets/seasonal-daily-gonk-the-accordion-gonk-flat-2026-11-28.png';
+import daily20261128_9 from './assets/seasonal-daily-animals-fennec-fox-in-the-dunes-flat-2026-11-28.png';
 import daily20261127_0 from './assets/seasonal-daily-christmas-snowbound-toy-railway-flat-2026-11-27.png';
 import daily20261127_1 from './assets/seasonal-daily-easter-blossom-egg-island-flat-2026-11-27.png';
 import daily20261127_2 from './assets/seasonal-daily-halloween-midnight-carnival-flat-2026-11-27.png';
@@ -296,6 +306,16 @@ import {seasonalDesigns,sampleSize,artworkCell} from './postcards.js';
 export {seasonalDesigns} from './postcards.js';
 
 const atlases={
+ 'daily-christmas-sleigh-beneath-the-fir-flat-2026-11-28':daily20261128_0,
+ 'daily-easter-eggs-beside-the-spring-bridge-flat-2026-11-28':daily20261128_1,
+ 'daily-halloween-the-witchs-apothecary-flat-2026-11-28':daily20261128_2,
+ 'daily-valentine-roses-and-love-letters-flat-2026-11-28':daily20261128_3,
+ 'daily-newyear-clock-strikes-midnight-flat-2026-11-28':daily20261128_4,
+ 'daily-mother-the-patchwork-garden-bench-flat-2026-11-28':daily20261128_5,
+ 'daily-father-the-woodworkers-tools-flat-2026-11-28':daily20261128_6,
+ 'daily-thanksgiving-the-harvest-door-wreath-flat-2026-11-28':daily20261128_7,
+ 'daily-gonk-the-accordion-gonk-flat-2026-11-28':daily20261128_8,
+ 'daily-animals-fennec-fox-in-the-dunes-flat-2026-11-28':daily20261128_9,
  'daily-christmas-snowbound-toy-railway-flat-2026-11-27':daily20261127_0,
  'daily-easter-blossom-egg-island-flat-2026-11-27':daily20261127_1,
  'daily-halloween-midnight-carnival-flat-2026-11-27':daily20261127_2,
